@@ -22,8 +22,8 @@ void main() async{
   });
 
   AdaptiveLayout.setBreakpoints(
-    mediumScreenMinWidth: 700,
-    largeScreenMinWidth: 1008,
+    mediumScreenMinWidth: 1008,
+    largeScreenMinWidth: 1300,
   );
 
   runApp(const MyApp());
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const MainScreensManager(),
+      child: MainScreensManager(screen: 0),
     );
   }
 }
