@@ -101,11 +101,6 @@ class _MainScreensManagerState extends State<MainScreensManager> {
               color: AppColors.primary,
             )),
 
-            PaneItem(icon: SvgPicture.asset(AppIcons.user, color: AppColors.rouge,height: 20),
-                title: Text('Mon Compte', style: AppTextStyle.navBarTexte),
-                body: Container(
-              color: AppColors.rouge,
-            )),
 
             PaneItem(icon: SvgPicture.asset(AppIcons.mobileVr, color: AppColors.rouge,height: 20),
                 title: Text('Mobile VR', style: AppTextStyle.navBarTexte),
@@ -118,6 +113,12 @@ class _MainScreensManagerState extends State<MainScreensManager> {
                 body: Container(
               color: AppColors.primary,
             )),
+
+            PaneItem(icon: SvgPicture.asset(AppIcons.user, color: AppColors.rouge,height: 20),
+                title: Text('Mon Compte', style: AppTextStyle.navBarTexte),
+                body: Container(
+                  color: AppColors.rouge,
+                )),
 
 
           ]

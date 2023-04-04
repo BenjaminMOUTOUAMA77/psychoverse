@@ -30,7 +30,7 @@ class _MainMenuButtonState extends State<MainMenuButton> {
           color: widget.bgColor,
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFFBBBBBB),
+              color: AppColors.grisLite,
               blurRadius: 1,
             ),
           ],

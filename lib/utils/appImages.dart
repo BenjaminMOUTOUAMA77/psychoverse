@@ -15,7 +15,7 @@ class AppIcons{
   static String user = 'assets/icons/myCompte.svg';
   static String prices = 'assets/icons/prices.svg';
   static String mobileVr = 'assets/icons/psychoverseVRAP.svg';
-  static String quote = 'assets/icons/quotes.svg';
+  static String quote = 'assets/icons/quote.svg';
   static String save = 'assets/icons/sauvegarde.svg';
   static String sms = 'assets/icons/sms.svg';
 
