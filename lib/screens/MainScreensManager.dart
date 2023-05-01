@@ -23,7 +23,7 @@ class _MainScreensManagerState extends State<MainScreensManager> {
 
   screenChangeCallBack(screen) {
     setState(() {
-      indexPage=screen;
+      indexPage = screen;
     });
   }
 
@@ -44,21 +44,28 @@ class _MainScreensManagerState extends State<MainScreensManager> {
         header: Image.asset(AppImages.logo),
         footerItems: [
           PaneItem(
-              icon: Icon(FluentIcons.plug_disconnected,
-                  size: 23, color: AppColors.noire),
-              title: Text('Déconnexion',
-                  style: AppTextStyle.navBarTexte
-                      .copyWith(color: AppColors.noire)),
-              body: Container(
-                color: AppColors.rouge,
-              )),
+            icon: Icon(FluentIcons.plug_disconnected,
+                size: 23, color: AppColors.noire),
+            title: Text('Déconnexion',
+                style:
+                    AppTextStyle.navBarTexte.copyWith(color: AppColors.noire)),
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
+            ),
+          ),
           PaneItem(
             icon: Icon(FluentIcons.archive, size: 23, color: AppColors.noire),
             title: Text('À propos',
                 style:
                     AppTextStyle.navBarTexte.copyWith(color: AppColors.noire)),
             body: Container(
-              color: AppColors.primary,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
             ),
           ),
         ],
@@ -67,98 +74,129 @@ class _MainScreensManagerState extends State<MainScreensManager> {
             icon: SvgPicture.asset(AppIcons.home,
                 color: AppColors.primary, height: 20),
             title: Text('Home', style: AppTextStyle.navBarTexte),
-            body:  Home(changeScreen: screenChangeCallBack),
+            body: Home(changeScreen: screenChangeCallBack),
           ),
           PaneItem(
-              icon: SvgPicture.asset(AppIcons.folder,
-                  color: AppColors.rouge, height: 20),
-              title: Text('Dossiers Patients', style: AppTextStyle.navBarTexte),
-              body: Container(
-                  color: AppColors.rouge,
-                  child: Button(
-                    onPressed: () {
-                      setState(() {
-                        indexPage=6;
-                      });
-                    },
-                    child: Center(
-                      child: Text("Navigation",
-                          style: AppTextStyle.navBarTexte.copyWith(
-                            fontSize: 50,
-                            color: AppColors.blanc,
-                          )),
-                    ),
-                  ))),
+            icon: SvgPicture.asset(AppIcons.folder,
+                color: AppColors.rouge, height: 20),
+            title: Text('Dossiers Patients', style: AppTextStyle.navBarTexte),
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
+            ),
+          ),
           PaneItem(
-              icon: SvgPicture.asset(AppIcons.agenda,
-                  color: AppColors.primary, height: 20),
-              title: Text('Agenda', style: AppTextStyle.navBarTexte),
-              body: Container(
-                color: AppColors.primary,
-              )),
+            icon: SvgPicture.asset(AppIcons.agenda,
+                color: AppColors.primary, height: 20),
+            title: Text('Agenda', style: AppTextStyle.navBarTexte),
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
+            ),
+          ),
           PaneItem(
-              icon: SvgPicture.asset(AppIcons.architecture,
-                  color: AppColors.rouge, height: 20),
-              title: Text('Architecture', style: AppTextStyle.navBarTexte),
-              body: Container(
-                color: AppColors.rouge,
-              )),
+            icon: SvgPicture.asset(AppIcons.architecture,
+                color: AppColors.rouge, height: 20),
+            title: Text('Architecture', style: AppTextStyle.navBarTexte),
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
+            ),
+          ),
           PaneItem(
-              icon: SvgPicture.asset(AppIcons.save,
-                  color: AppColors.primary, height: 20),
-              title: Text('Sauvegarde', style: AppTextStyle.navBarTexte),
-              body: Container(
-                color: AppColors.primary,
-              )),
+            icon: SvgPicture.asset(AppIcons.save,
+                color: AppColors.primary, height: 20),
+            title: Text('Sauvegarde', style: AppTextStyle.navBarTexte),
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
+            ),
+          ),
           PaneItem(
-              icon: SvgPicture.asset(AppIcons.sms,
-                  color: AppColors.rouge, height: 20),
-              title: Text('SMS Rappel', style: AppTextStyle.navBarTexte),
-              body: Container(
-                color: AppColors.rouge,
-              )),
+            icon: SvgPicture.asset(AppIcons.sms,
+                color: AppColors.rouge, height: 20),
+            title: Text('SMS Rappel', style: AppTextStyle.navBarTexte),
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
+            ),
+          ),
           PaneItem(
-              icon: SvgPicture.asset(AppIcons.quote,
-                  color: AppColors.primary, height: 20),
-              title: Text('Quote', style: AppTextStyle.navBarTexte),
-              body: Container(
-                color: AppColors.primary,
-              )),
+            icon: SvgPicture.asset(AppIcons.quote,
+                color: AppColors.primary, height: 20),
+            title: Text('Quote', style: AppTextStyle.navBarTexte),
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
+            ),
+          ),
           PaneItem(
-              icon: SvgPicture.asset(AppIcons.diagnostic,
-                  color: AppColors.rouge, height: 20),
-              title: Text('Diagnostique', style: AppTextStyle.navBarTexte),
-              body: Container(
-                color: AppColors.rouge,
-              )),
+            icon: SvgPicture.asset(AppIcons.diagnostic,
+                color: AppColors.rouge, height: 20),
+            title: Text('Diagnostique', style: AppTextStyle.navBarTexte),
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
+            ),
+          ),
           PaneItem(
-              icon: SvgPicture.asset(AppIcons.prices,
-                  color: AppColors.primary, height: 20),
-              title: Text('Abonnements', style: AppTextStyle.navBarTexte),
-              body: Container(
-                color: AppColors.primary,
-              )),
+            icon: SvgPicture.asset(AppIcons.prices,
+                color: AppColors.primary, height: 20),
+            title: Text('Abonnements', style: AppTextStyle.navBarTexte),
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
+            ),
+          ),
           PaneItem(
-              icon: SvgPicture.asset(AppIcons.mobileVr,
-                  color: AppColors.rouge, height: 20),
-              title: Text('Mobile VR', style: AppTextStyle.navBarTexte),
-              body: Container(
-                color: AppColors.primary,
-              )),
+            icon: SvgPicture.asset(AppIcons.mobileVr,
+                color: AppColors.rouge, height: 20),
+            title: Text('Mobile VR', style: AppTextStyle.navBarTexte),
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
+            ),
+          ),
           PaneItem(
-              icon: SvgPicture.asset(AppIcons.logoSymbole,
-                  color: AppColors.primary, height: 20),
-              title: Text('Psychoverse', style: AppTextStyle.navBarTexte),
-              body: Container(
-                color: AppColors.primary,
-              )),
+            icon: SvgPicture.asset(AppIcons.logoSymbole,
+                color: AppColors.primary, height: 20),
+            title: Text('Psychoverse', style: AppTextStyle.navBarTexte),
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
+            ),
+          ),
           PaneItem(
-              icon: SvgPicture.asset(AppIcons.user,
-                  color: AppColors.rouge, height: 20),
-              title: Text('Mon Compte', style: AppTextStyle.navBarTexte),
-              body: Container(
-                color: AppColors.rouge,
-              )),
+            icon: SvgPicture.asset(AppIcons.user,
+                color: AppColors.rouge, height: 20),
+            title: Text('Mon Compte', style: AppTextStyle.navBarTexte),
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.quoteIm1), fit: BoxFit.cover),
+              ),
+            ),
+          ),
         ],
       ),
     );
