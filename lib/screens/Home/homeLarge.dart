@@ -9,8 +9,7 @@ import 'package:psychoverse/widgets/mainMenuBotton.dart';
 import '../../utils/appImages.dart';
 
 class HomeLarge extends StatefulWidget {
-  Function changeScreen;
-  HomeLarge({Key? key, required this.changeScreen}) : super(key: key);
+  const HomeLarge({Key? key}) : super(key: key);
 
   @override
   State<HomeLarge> createState() => _HomeLargeState();
@@ -22,7 +21,7 @@ class _HomeLargeState extends State<HomeLarge> {
   @override
   void initState() {
     super.initState();
-    menu = getMainMenu(widget.changeScreen);
+    menu = getMainMenu();
   }
 
   @override

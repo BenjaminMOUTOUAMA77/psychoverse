@@ -8,8 +8,7 @@ import 'package:psychoverse/utils/appTexteStyle.dart';
 import 'package:psychoverse/widgets/mainMenuBotton.dart';
 
 class HomeSmall extends StatefulWidget {
-  Function changeScreen;
-  HomeSmall({Key? key, required this.changeScreen}) : super(key: key);
+  const HomeSmall({Key? key}) : super(key: key);
 
   @override
   State<HomeSmall> createState() => _HomeSmallState();
@@ -21,7 +20,7 @@ class _HomeSmallState extends State<HomeSmall> {
   @override
   void initState() {
     super.initState();
-    menu = getMainMenu(widget.changeScreen);
+    menu = getMainMenu();
   }
 
   @override

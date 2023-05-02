@@ -1,45 +1,42 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:psychoverse/providers/mainScreensPagesManagerProvider.dart';
 import 'package:psychoverse/screens/Home/home.dart';
 import 'package:psychoverse/utils/appColors.dart';
 import 'package:psychoverse/utils/appImages.dart';
 import 'package:psychoverse/utils/appTexteStyle.dart';
 
 class MainScreensManager extends StatefulWidget {
-  int screen;
-  MainScreensManager({Key? key, required this.screen}) : super(key: key);
+  const MainScreensManager({Key? key}) : super(key: key);
 
   @override
   State<MainScreensManager> createState() => _MainScreensManagerState();
 }
 
 class _MainScreensManagerState extends State<MainScreensManager> {
-  int indexPage = 0;
+
+  late int indexPage;
+
   @override
   void initState() {
     super.initState();
-    indexPage = widget.screen;
-  }
-
-  screenChangeCallBack(screen) {
-    setState(() {
-      indexPage = screen;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+
+    MainScreenPagesManagerProvider pagesManager = Provider.of<MainScreenPagesManagerProvider>(context);
+    indexPage = pagesManager.page;
     return NavigationView(
       pane: NavigationPane(
         size: const NavigationPaneSize(
           openMaxWidth: 230,
           headerHeight: 70,
         ),
-        selected: indexPage,
+        selected: pagesManager.page,
         onChanged: (index) {
-          setState(() {
-            indexPage = index;
-          });
+          pagesManager.set(index);
         },
         header: Image.asset(AppImages.logo),
         footerItems: [
@@ -74,7 +71,7 @@ class _MainScreensManagerState extends State<MainScreensManager> {
             icon: SvgPicture.asset(AppIcons.home,
                 color: AppColors.primary, height: 20),
             title: Text('Home', style: AppTextStyle.navBarTexte),
-            body: Home(changeScreen: screenChangeCallBack),
+            body: const Home(),
           ),
           PaneItem(
             icon: SvgPicture.asset(AppIcons.folder,

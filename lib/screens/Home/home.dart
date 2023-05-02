@@ -5,8 +5,8 @@ import 'package:psychoverse/screens/Home/homeMedium.dart';
 import 'package:psychoverse/screens/Home/homeSmall.dart';
 
 class Home extends StatefulWidget {
-  final Function changeScreen;
-  const Home({Key? key, required this.changeScreen}) : super(key: key);
+
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -16,9 +16,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return AdaptiveLayout(
-      smallLayout: HomeSmall(changeScreen: widget.changeScreen),
-      mediumLayout: HomeMedium(changeScreen: widget.changeScreen),
-      largeLayout:HomeLarge(changeScreen: widget.changeScreen),
+      smallLayout: const HomeSmall(),
+      mediumLayout: const HomeMedium(),
+      largeLayout:const HomeLarge(),
     );
   }
 }
