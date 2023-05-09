@@ -3,13 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:psychoverse/screens/mainScreensManager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/delocalisation/initialisation.dart';
-import 'MainProviders/mainScreensPagesManagerProvider.dart';
+import 'Providers/mainScreensPagesManagerProvider.dart';
 
 void main() async{
   initialisation();
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

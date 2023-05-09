@@ -1,16 +1,15 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
-import 'package:psychoverse/MainProviders/mainScreensPagesManagerProvider.dart';
+import 'package:psychoverse/Providers/mainScreensPagesManagerProvider.dart';
 import 'package:psychoverse/UI/Components/menus.dart';
+import 'package:psychoverse/Ui/Components/backgroungImage.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
 
 class MainScreensManager extends StatefulWidget {
   const MainScreensManager({Key? key}) : super(key: key);
-
   @override
   State<MainScreensManager> createState() => _MainScreensManagerState();
 }
-
 class _MainScreensManagerState extends State<MainScreensManager> {
   @override
   Widget build(BuildContext context) {

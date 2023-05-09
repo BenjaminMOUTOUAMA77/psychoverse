@@ -1,21 +1,15 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:psychoverse/screens/Home/home.dart';
+import 'package:psychoverse/Screens/Patients/patients.dart';
+import 'package:psychoverse/Ui/Components/backgroungImage.dart';
+import 'package:psychoverse/screens/home.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 final Widget defaultPage = Stack(children: [
-  Container(
-    decoration: BoxDecoration(
-      image: DecorationImage(
-          image: AssetImage(AppImages.pattern),
-          fit: BoxFit.fitWidth,
-          opacity: 0.1),
-    ),
-  )
+  const MakeBackgroundImage(),
 ]);
-
 List<PaneItem> appNavMenu() => [
       PaneItem(
         icon: SvgPicture.asset(AppIcons.home,
@@ -27,7 +21,7 @@ List<PaneItem> appNavMenu() => [
         icon: SvgPicture.asset(AppIcons.folder,
             color: AppColors.rouge, height: 20),
         title: Text('Dossiers Patients', style: AppTextStyle.navBarTexte),
-        body: defaultPage,
+        body: const Patients(),
       ),
       PaneItem(
         icon: SvgPicture.asset(AppIcons.agenda,
@@ -90,7 +84,6 @@ List<PaneItem> appNavMenu() => [
         body: defaultPage,
       ),
     ];
-
 List<PaneItem> appDownMenu() => [
       PaneItem(
         icon: Icon(FluentIcons.plug_disconnected,
