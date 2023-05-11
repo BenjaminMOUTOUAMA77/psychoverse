@@ -1,3 +1,4 @@
+import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,7 +71,7 @@ class _MakeQuotesSliderState extends State<MakeQuotesSlider> {
     return CarouselSlider(
       items: getItems(),
       options: CarouselOptions(
-        height: 340.h,
+        height: double.infinity,
         initialPage: sliderItem.slide,
         autoPlay: true,
         autoPlayInterval: const Duration(seconds: 60),
@@ -105,99 +106,120 @@ class _QuoteSlideState extends State<QuoteSlide> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: 700.w,
-          clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10.r)),
-            boxShadow: [
-              BoxShadow(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(child: Container(
+            width: double.infinity,
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10.r)),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.grisLite,
+                  blurRadius: 1,
+                  spreadRadius: 0.5,
+                ),
+              ],
+            ),
+            child: ImageFade(
+              width: double.infinity,
+              height: double.infinity,
+              image: AssetImage(widget.image),
+              // slow fade for newly loaded images:
+              duration: const Duration(milliseconds: 900),
+              syncDuration: const Duration(milliseconds: 150),
+              alignment: Alignment.center,
+              fit: BoxFit.cover,
+              placeholder: Container(
                 color: AppColors.grisLite,
-                blurRadius: 1,
-                spreadRadius: 0.5,
+                alignment: Alignment.center,
+                child: Opacity(
+                  opacity: 0.5,
+                  child: SvgPicture.asset(AppIcons.logoSymbole, height: 250.h),
+                ),
+              ),
+              errorBuilder: (context, error) => Container(
+                color: AppColors.blanc,
+                alignment: Alignment.center,
+                child: SvgPicture.asset(AppIcons.logoSymbole,
+                    color: AppColors.primary, height: 20),
+              ),
+            ),
+          ),),
+          Gap(15.w),
+          Expanded(child: Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(70.w),
+                alignment: AlignmentDirectional.center,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                  color: AppColors.primary,
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary,
+                      blurRadius: 1,
+                      spreadRadius: 0.5,
+                    ),
+                  ],
+                ),
+                child: AdaptiveLayout(
+                  smallLayout: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "« ${widget.texte} »",
+                        style: AppTextStyle.quoteTexte.copyWith(fontSize: 45.sp),
+                        textAlign: TextAlign.justify,
+                      ),
+                      Gap(60.h),
+                      Text(
+                        widget.author,
+                        style: AppTextStyle.quoteTexte.copyWith(
+                            fontSize: 30.sp,
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.grisLite),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ],
+                  ),
+                  mediumLayout: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "« ${widget.texte} »",
+                        style: AppTextStyle.quoteTexte.copyWith(fontSize: 30.sp),
+                        textAlign: TextAlign.justify,
+                      ),
+                      Gap(50.h),
+                      Text(
+                        widget.author,
+                        style: AppTextStyle.quoteTexte.copyWith(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.grisLite),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                height: 30.h,
+                top: 20.h,
+                child: Opacity(
+                  opacity: 0.4,
+                  child: Transform.rotate(
+                      angle: pi,
+                      child: SvgPicture.asset(AppIcons.quote,
+                          color: AppColors.blanc)),
+                ),
               ),
             ],
-          ),
-          child: ImageFade(
-            width: double.infinity,
-            height: double.infinity,
-            image: AssetImage(widget.image),
-            // slow fade for newly loaded images:
-            duration: const Duration(milliseconds: 900),
-            syncDuration: const Duration(milliseconds: 150),
-            alignment: Alignment.center,
-            fit: BoxFit.cover,
-            placeholder: Container(
-              color: AppColors.grisLite,
-              alignment: Alignment.center,
-              child: Opacity(
-                opacity: 0.5,
-                child: SvgPicture.asset(AppIcons.logoSymbole, height: 250.h),
-              ),
-            ),
-            errorBuilder: (context, error) => Container(
-              color: AppColors.blanc,
-              alignment: Alignment.center,
-              child: SvgPicture.asset(AppIcons.logoSymbole,
-                  color: AppColors.primary, height: 20),
-            ),
-          ),
-        ),
-        Gap(30.w),
-        Stack(
-          alignment: AlignmentDirectional.center,
-          children: [
-            Container(
-              padding: EdgeInsets.all(30.w),
-              alignment: AlignmentDirectional.center,
-              width: 700.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                color: AppColors.primary,
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primary,
-                    blurRadius: 1,
-                    spreadRadius: 0.5,
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "« ${widget.texte} »",
-                    style: AppTextStyle.quoteTexte.copyWith(fontSize: 28.sp),
-                    textAlign: TextAlign.justify,
-                  ),
-                  Gap(20.h),
-                  Text(
-                    widget.author,
-                    style: AppTextStyle.quoteTexte.copyWith(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w900,
-                        color: AppColors.grisLite),
-                    textAlign: TextAlign.justify,
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              height: 30.h,
-              top: 20.h,
-              child: Opacity(
-                opacity: 0.4,
-                child: Transform.rotate(
-                    angle: pi,
-                    child: SvgPicture.asset(AppIcons.quote,
-                        color: AppColors.blanc)),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
+          ),),
+        ],
+      );
   }
 }

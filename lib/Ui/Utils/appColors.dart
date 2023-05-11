@@ -8,6 +8,7 @@ class AppColors{
   static Color bleu = const Color(0xFF0ED4E6);
   static Color violet = const Color(0xFF2D006B);
   static Color violetLite = const Color(0xFFDFC8FF);
+
   static Color grisTexte = const Color(0xFF333333);
   static Color gris = const Color(0xFF555555);
   static Color grisLite = const Color(0xFFBBBBBB);

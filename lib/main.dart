@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
           // You can use the library anywhere in the app even in theme
           theme: FluentThemeData(
             accentColor: Colors.purple,
+            fontFamily: "BeVietnamPro",
           ),
           home: child,
         );

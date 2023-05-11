@@ -22,15 +22,20 @@ class _HomeState extends State<Home> {
       child: Stack(
         children: [
           const MakeBackgroundImage(),
-          Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Gap(30.h),
-                const MakeQuotesSlider(),
-                const Gap(30),
-                const MakeHomeMenu(),
-              ],
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.w,horizontal: 50.h),
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Expanded(child: MakeQuotesSlider()),
+                  const Gap(30),
+                  Expanded(child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 200.w),
+                    child: const MakeHomeMenu(),
+                  )),
+                ],
+              ),
             ),
           ),
         ],

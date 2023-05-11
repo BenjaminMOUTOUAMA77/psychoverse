@@ -32,10 +32,9 @@ class _MakeHomeMenuState extends State<MakeHomeMenu> {
     ];
   @override
   Widget build(BuildContext context) {
-    return AdaptiveLayout(
-      smallLayout: SizedBox(
-        width: 1450.w,
-        height: 550.h,
+    return SizedBox(
+        width: double.infinity,
+        height: double.infinity,
         child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
@@ -48,24 +47,7 @@ class _MakeHomeMenuState extends State<MakeHomeMenu> {
               return menu[index];
             }
         ),
-      ),
-      mediumLayout: SizedBox(
-        width: 1425.w,
-        height: 600.h,
-        child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              crossAxisSpacing: 10.h,
-              mainAxisSpacing: 10.h,
-              childAspectRatio: 10.w/5.h,
-            ),
-            itemCount: menu.length,
-            itemBuilder: (BuildContext context, int index) {
-              return menu[index];
-            }
-        ),
-      ),
-    );
+      );
   }
 }
 
@@ -93,14 +75,13 @@ class _HomeMenuButtonState extends State<HomeMenuButton> {
     MainScreenPagesManagerProvider pagesManager = Provider.of<MainScreenPagesManagerProvider>(context);
     return AdaptiveLayout(
       smallLayout: GestureDetector(
-
         onTap: (){
           pagesManager.set(widget.screen);
         },
         child: Container(
           alignment: AlignmentDirectional.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
             color: widget.bgColor,
             boxShadow: [
               BoxShadow(
@@ -112,7 +93,7 @@ class _HomeMenuButtonState extends State<HomeMenuButton> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(widget.icon, color: widget.writeColor, height: 100.w),
+              SvgPicture.asset(widget.icon, color: widget.writeColor, height: 80.w),
               Gap(20.h),
               Text(widget.title,style: AppTextStyle.mainMenuTexte.copyWith(color: widget.writeColor, fontSize: 30.sp)),
             ],
@@ -120,14 +101,13 @@ class _HomeMenuButtonState extends State<HomeMenuButton> {
         ),
       ),
       mediumLayout: GestureDetector(
-
         onTap: (){
           pagesManager.set(widget.screen);
         },
         child: Container(
           alignment: AlignmentDirectional.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
             color: widget.bgColor,
             boxShadow: [
               BoxShadow(
@@ -139,8 +119,8 @@ class _HomeMenuButtonState extends State<HomeMenuButton> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(widget.icon, color: widget.writeColor, height: 60.w),
-              Gap(30.h),
+              SvgPicture.asset(widget.icon, color: widget.writeColor, height: 40.w),
+              Gap(20.h),
               Text(widget.title,style: AppTextStyle.mainMenuTexte.copyWith(color: widget.writeColor, fontSize: 20.sp)),
             ],
           ),
