@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:psychoverse/Ui/Components/appNavBar.dart';
 import 'package:psychoverse/Ui/Components/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/homeMenu.dart';
 import 'package:psychoverse/Ui/Components/quotesSlider.dart';
@@ -26,8 +29,12 @@ class _HomeState extends State<Home> {
             padding: EdgeInsets.symmetric(vertical: 10.w,horizontal: 50.h),
             child: Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const Gap(20),
+                  AppNavBar(links: [NavLink(title: "...",function: (){})]),
+                  const Gap(20),
                   const Expanded(child: MakeQuotesSlider()),
                   const Gap(30),
                   Expanded(child: Padding(

@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
-import 'package:psychoverse/Providers/mainScreensPagesManagerProvider.dart';
+import 'package:psychoverse/Providers/changeScreenProvider.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';

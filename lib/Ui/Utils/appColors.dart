@@ -12,5 +12,6 @@ class AppColors{
   static Color grisTexte = const Color(0xFF333333);
   static Color gris = const Color(0xFF555555);
   static Color grisLite = const Color(0xFFBBBBBB);
-  static Color grisLitePlus = const Color(0xFFFAFAFA);
+  static Color grisLitePlus = const Color(0xFFEAEAEA);
+  static Color blancGrise = const Color(0xFFF3F3F3);
 }

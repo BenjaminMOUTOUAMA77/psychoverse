@@ -11,7 +11,7 @@ class MakeToggleMenu extends StatefulWidget {
   List<String> menu;
   List<int> selectedMenuNums;
   int selectedMenuNum;
-  Function(List<String>) onChanged;
+  Function({bool mode,List<String> menu,List<int> selectedMenuNums,int selectedMenuNum,List<String> getSelectedOnString}) onChanged;
 
   MakeToggleMenu({
     Key? key,
@@ -27,6 +27,13 @@ class MakeToggleMenu extends StatefulWidget {
   @override
   State<MakeToggleMenu> createState() => _MakeToggleMenuState();
 
+  int get getType => type;
+  bool get getShowModeControle => showModeControle;
+  bool get getMode=>mode;
+  List<String> get getMenu=>menu;
+  List<int> get getSelectedMenuNums=>selectedMenuNums;
+  int get getSelectedMenuNum=>selectedMenuNum;
+
   List<String> selectedMenus() {
     List<String> menus = [];
     for (int i in selectedMenuNums) {
@@ -34,7 +41,6 @@ class MakeToggleMenu extends StatefulWidget {
     }
     return menus;
   }
-
   String selectedMenu() => menu[selectedMenuNum];
 
   List<String> getSelected() {
@@ -76,7 +82,7 @@ class _MakeToggleMenuState extends State<MakeToggleMenu> {
           widget.selectedMenuNum = active;
         }
         initBoolStock();
-        widget.onChanged(widget.getSelected());
+        widget.onChanged(mode: widget.getMode,menu:widget.getMenu,selectedMenuNums:widget.selectedMenuNums,selectedMenuNum : widget.getSelectedMenuNum,getSelectedOnString:widget.getSelected());
       });
     }
 
@@ -107,7 +113,7 @@ class _MakeToggleMenuState extends State<MakeToggleMenu> {
                         Gap(10.w),
                       ],
                     ),
-                  )),
+                  ),),
             ),
           ),
         ),
@@ -135,7 +141,7 @@ class _MakeToggleMenuState extends State<MakeToggleMenu> {
                           color: AppColors.blanc,
                         )
                       : Icon(
-                          FluentIcons.list,
+                          FluentIcons.slider_handle_size,
                           color: AppColors.blanc,
                         ),
                   Gap(10.w),
@@ -193,8 +199,8 @@ class _AppToggleButtonState extends State<AppToggleButton> {
           padding: ButtonState.all(
               EdgeInsets.symmetric(horizontal: 30, vertical: 10)),
           textStyle: ButtonState.all(
-              TextStyle(color: AppColors.gris, fontSize: 18.sp+5)),
-          backgroundColor: ButtonState.all(AppColors.grisLitePlus),
+              TextStyle(color: AppColors.gris, fontSize: 7.sp+10)),
+          backgroundColor: ButtonState.all(AppColors.blancGrise),
         ),
         checkedButtonStyle: ButtonStyle(
           shape: ButtonState.all<OutlinedBorder>(
@@ -211,7 +217,7 @@ class _AppToggleButtonState extends State<AppToggleButton> {
           padding: ButtonState.all(
               EdgeInsets.symmetric(horizontal: 30, vertical: 10)),
           textStyle: ButtonState.all(
-              TextStyle(color: AppColors.blanc, fontSize: 18.sp+5)),
+              TextStyle(color: AppColors.blanc, fontSize: 7.sp+10)),
           backgroundColor: ButtonState.all(AppColors.rouge),
         ),
       ),
@@ -249,17 +255,39 @@ class _AppToggleMenuButtonState extends State<AppToggleMenuButton> {
     return ToggleButton(
       style: ToggleButtonThemeData(
         uncheckedButtonStyle: ButtonStyle(
+          shape: ButtonState.all<OutlinedBorder>(
+            RoundedRectangleBorder(
+              side: BorderSide(
+                  color: AppColors.grisLite.withOpacity(0.3),
+                  width: 1,
+                  strokeAlign: BorderSide.strokeAlignCenter),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+          ),
           padding: ButtonState.all(
-              EdgeInsets.symmetric(horizontal: 30.w, vertical: 16.h)),
+              EdgeInsets.symmetric(horizontal: 20.w+5, vertical: 10.h+5)),
           textStyle: ButtonState.all(
-              TextStyle(color: AppColors.gris, fontSize: 18.sp)),
-          backgroundColor: ButtonState.all(AppColors.grisLitePlus),
+              TextStyle(color: AppColors.gris, fontSize: 7.sp+10, fontWeight: FontWeight.bold)),
+          backgroundColor: ButtonState.all(AppColors.blancGrise),
         ),
         checkedButtonStyle: ButtonStyle(
+          shape: ButtonState.all<OutlinedBorder>(
+            RoundedRectangleBorder(
+              side: BorderSide(
+                  color: AppColors.grisLite.withOpacity(0.3),
+                  width: 1,
+                  strokeAlign: BorderSide.strokeAlignCenter),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+          ),
           padding: ButtonState.all(
-              EdgeInsets.symmetric(horizontal: 30.w, vertical: 16.h)),
+              EdgeInsets.symmetric(horizontal: 20.w+5, vertical: 10.h+5)),
           textStyle: ButtonState.all(
-              TextStyle(color: AppColors.blanc, fontSize: 18.sp)),
+              TextStyle(color: AppColors.blanc, fontSize: 7.sp+10, fontWeight: FontWeight.bold)),
           backgroundColor: ButtonState.all(AppColors.primary),
         ),
       ),

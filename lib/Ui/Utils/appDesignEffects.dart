@@ -3,7 +3,7 @@ import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class AppDesignEffects{
   static BoxShadow shadow0 = BoxShadow(
-    color: AppColors.grisLitePlus,
+    color: AppColors.blancGrise,
     blurRadius: 0.5,
     spreadRadius: 0.5,
   );
@@ -14,7 +14,7 @@ class AppDesignEffects{
     spreadRadius: 0.5,
   );
   static BoxShadow shadow2 = BoxShadow(
-    color: AppColors.grisLite,
+    color: AppColors.grisLite.withOpacity(0.5),
     blurRadius: 2,
     spreadRadius: 2,
   );

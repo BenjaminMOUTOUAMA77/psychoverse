@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:psychoverse/screens/mainScreensManager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/delocalisation/initialisation.dart';
-import 'Providers/mainScreensPagesManagerProvider.dart';
+import 'Providers/changeScreenProvider.dart';
 
 void main() async{
   initialisation();
