@@ -82,8 +82,8 @@ class _MakeToggleMenuState extends State<MakeToggleMenu> {
           widget.selectedMenuNum = active;
         }
         initBoolStock();
-        widget.onChanged(mode: widget.getMode,menu:widget.getMenu,selectedMenuNums:widget.selectedMenuNums,selectedMenuNum : widget.getSelectedMenuNum,getSelectedOnString:widget.getSelected());
       });
+      widget.onChanged(mode: widget.getMode,menu:widget.getMenu,selectedMenuNums:widget.selectedMenuNums,selectedMenuNum : widget.getSelectedMenuNum,getSelectedOnString:widget.getSelected());
     }
 
     return Row(
@@ -124,6 +124,8 @@ class _MakeToggleMenuState extends State<MakeToggleMenu> {
             onTap: () {
               setState(() {
                 widget.mode = !widget.mode;
+                initBoolStock();
+                widget.onChanged(mode: widget.mode,menu:widget.menu,selectedMenuNums:widget.selectedMenuNums,selectedMenuNum : widget.getSelectedMenuNum,getSelectedOnString:widget.getSelected());
               });
             },
             child: Container(

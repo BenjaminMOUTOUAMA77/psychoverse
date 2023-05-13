@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Models/patient.dart';
+import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Providers/changeScreenProvider.dart';
 import 'package:psychoverse/Ui/Components/appNavBar.dart';
 import 'package:psychoverse/Ui/Components/togleButton.dart';
@@ -18,47 +19,12 @@ class PatientDetail extends StatefulWidget {
 }
 
 class _PatientDetailState extends State<PatientDetail> {
+  late ChangePatientPageProvider page;
+  late ChangeSectionsProvider sections;
   @override
   Widget build(BuildContext context) {
-    ChangePatientPageProvider page =
-        Provider.of<ChangePatientPageProvider>(context);
-    List<int> selected=[];
-
-
-    late MakeToggleMenu myToglemenu;
-    changeSections(List<int> balue){
-      setState(() {
-        selected=myToglemenu.getSelectedMenuNums;
-      });
-    }
-    myToglemenu =MakeToggleMenu(
-      type: 2,
-      menu: [
-        "Identité",
-        "Historique",
-        "Suivis",
-        "Testes",
-        "Relations",
-        "SMS",
-      ],
-      selectedMenuNums: [0],
-      onChanged: (
-          {mode = true,
-            menu = const [],
-            selectedMenuNums = const [2,4],
-            selectedMenuNum = 0,
-            getSelectedOnString = const []}) {
-        print("Mode = " + mode.toString());
-        print("menu = " + menu.toString());
-        print("selectedMenuNums = " + selectedMenuNums.toString());
-        print("selectedMenuNum = " + selectedMenuNum.toString());
-        print("getSelectedOnString = " +
-            getSelectedOnString.toString());
-        print(
-            "*********************************************************************");
-      },
-    );
-    
+    page = Provider.of<ChangePatientPageProvider>(context);
+    sections = Provider.of<ChangeSectionsProvider>(context);
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 50.h),
       child: Center(
@@ -80,6 +46,8 @@ class _PatientDetailState extends State<PatientDetail> {
             Row(
               children: [
                 GestureDetector(
+                  onTap: (){
+                  },
                   child: Container(
                     child: Row(
                       children: [
@@ -92,76 +60,139 @@ class _PatientDetailState extends State<PatientDetail> {
                 ),
                 Gap(50.w),
                 Expanded(
-                    child: myToglemenu,),
+                    child: MakeToggleMenu(
+                      type: 2,
+                      menu: const [
+                        "Identité",
+                        "Historique",
+                        "Suivis",
+                        "Testes",
+                        "Relations",
+                        "SMS",
+                      ],
+                      selectedMenuNums: sections.slected,
+                      mode: sections.mode,
+                      selectedMenuNum: sections.selectedMenuNum,
+                      onChanged: (
+                          {mode = true,
+                            menu = const [],
+                            selectedMenuNums = const [2,4],
+                            selectedMenuNum = 0,
+                            getSelectedOnString = const []}) {
+                        sections.setMode(mode);
+                        sections.setSelectedNum(selectedMenuNum);
+                        if(mode){
+                          sections.setSelected(selectedMenuNums);
+                        }else{
+                          sections.setSelected([selectedMenuNum]);
+                        }
+                        /*print("Selected : "+sections.slected.toString());
+        print("Mode = " + mode.toString());
+        print("menu = " + menu.toString());
+        print("selectedMenuNums = " + selectedMenuNums.toString());
+        print("selectedMenuNum = " + selectedMenuNum.toString());
+        print("getSelectedOnString = " +
+            getSelectedOnString.toString());
+        print("Selected : "+sections.slected.toString());
+        print(
+            "*********************************************************************");*/
+                      },
+                    ),),
               ],
             ),
             Gap(20.h),
             Expanded(child: SingleChildScrollView(
+
               child: Column(
                 children: [
-                  Gap(20.h),
                   Visibility(
-                    visible: selected.contains(0)? true:false,
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(10),
+                    visible: sections.slected.contains(0)? true:false,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text("Identité",style: AppTextStyle.buttonStyleTexte,),
                       ),
-                      child: Text("Identité",style: AppTextStyle.buttonStyleTexte,),
                     ),
                   ),
-                  Gap(20.h),
                   Visibility(
-                    visible: selected.contains(1)? true:false,
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(10),
+                    visible: sections.slected.contains(1)? true:false,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text("Historique",style: AppTextStyle.buttonStyleTexte,),
                       ),
-                      child: Text("Historique",style: AppTextStyle.buttonStyleTexte,),
                     ),
                   ),
-                  Gap(20.h),
                   Visibility(
-                    visible: selected.contains(2)? true:false,
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(10),
+                    visible: sections.slected.contains(2)? true:false,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text("Suivis",style: AppTextStyle.buttonStyleTexte,),
                       ),
-                      child: Text("Testes",style: AppTextStyle.buttonStyleTexte,),
                     ),
                   ),
-                  Gap(20.h),
                   Visibility(
-                    visible: selected.contains(3)? true:false,
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(10),
+                    visible: sections.slected.contains(3)? true:false,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text("Testes",style: AppTextStyle.buttonStyleTexte,),
                       ),
-                      child: Text("Relations",style: AppTextStyle.buttonStyleTexte,),
                     ),
                   ),
-                  Gap(20.h),
                   Visibility(
-                    visible: selected.contains(4)? true:false,
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(10),
+                    visible: sections.slected.contains(4)? true:false,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text("Relations",style: AppTextStyle.buttonStyleTexte,),
                       ),
-                      child: Text("SMS",style: AppTextStyle.buttonStyleTexte,),
+                    ),
+                  ),
+                  Visibility(
+                    visible: sections.slected.contains(5)? true:false,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text("SMS",style: AppTextStyle.buttonStyleTexte,),
+                      ),
                     ),
                   ),
                 ],

@@ -41,16 +41,7 @@ class _PatientListState extends State<PatientList> {
                     menu = const [],
                     selectedMenuNums = const [],
                     selectedMenuNum = 0,
-                    getSelectedOnString = const []}) {
-                  print("Mode = " + mode.toString());
-                  print("menu = " + menu.toString());
-                  print("selectedMenuNums = " + selectedMenuNums.toString());
-                  print("selectedMenuNum = " + selectedMenuNum.toString());
-                  print("getSelectedOnString = " +
-                      getSelectedOnString.toString());
-                  print(
-                      "*********************************************************************");
-                },
+                    getSelectedOnString = const []}) {},
                 mode: false,
                 menu: [
                   "Tout",
