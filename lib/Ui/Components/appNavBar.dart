@@ -1,3 +1,4 @@
+import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -62,28 +63,52 @@ class _AppNavBarState extends State<AppNavBar> {
           ),
         ),
         Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text("Oscard ZOHOUNGBOGBO",style: AppTextStyle.filedTexte,overflow: TextOverflow.ellipsis,),
-              Gap(20.w),
-              Container(
-                height: 50.r,
-                width: 50.r,
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    AppDesignEffects.shadow2,
-                  ],
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage("assets/images/im2.jpg"),
+          child: AdaptiveLayout(
+            smallLayout: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Gap(20.w),
+                Container(
+                  height: 75.r+10,
+                  width: 75.r+10,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      AppDesignEffects.shadow2,
+                    ],
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage("assets/images/im2.jpg"),
+                    ),
+                    border: Border.all(width: 1, color: AppColors.blancGrise),
+                    shape: BoxShape.circle,
                   ),
-                  border: Border.all(width: 1, color: AppColors.blancGrise),
-                  shape: BoxShape.circle,
                 ),
-              ),
-            ],
+              ],
+            ),
+            mediumLayout: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text("Oscard ZOHOUNGBOGBO",style: AppTextStyle.filedTexte.copyWith(fontSize: 10.sp+3),overflow: TextOverflow.ellipsis,),
+                Gap(20.w),
+                Container(
+                  height: 62.r-5,
+                  width: 62.r-5,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      AppDesignEffects.shadow2,
+                    ],
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage("assets/images/im2.jpg"),
+                    ),
+                    border: Border.all(width: 1, color: AppColors.blancGrise),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
