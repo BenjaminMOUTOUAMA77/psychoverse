@@ -79,7 +79,7 @@ class _PatientDetailState extends State<PatientDetail> {
     sections = Provider.of<ChangeSectionsProvider>(context);
     bodys = getBodys();
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 50.h),
+      padding: EdgeInsets.only(left: 50.w, right: 50.w, top: 10.h),
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -136,7 +136,7 @@ class _PatientDetailState extends State<PatientDetail> {
             ),
             Gap(20.h),
             Expanded(
-              child: SingleChildScrollView(
+              child: sections.mode?SingleChildScrollView(
                 child: Column(
                   children: List.generate(
                     bodys.length,
@@ -146,7 +146,7 @@ class _PatientDetailState extends State<PatientDetail> {
                     ),
                   ),
                 ),
-              ),
+              ):bodys[sections.selectedMenuNum],
             ),
           ],
         ),

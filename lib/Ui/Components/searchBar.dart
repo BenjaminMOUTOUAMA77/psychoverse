@@ -6,7 +6,13 @@ import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class MakeSearchBar extends StatefulWidget {
-  const MakeSearchBar({Key? key}) : super(key: key);
+  var formKey = GlobalKey<FormState>();
+  var controller = TextEditingController();
+  Function(String) onChanged;
+  MakeSearchBar({Key? key, required this.onChanged}) : super(key: key);
+
+  GlobalKey getFormKey()=>formKey;
+  TextEditingController getController()=>controller;
 
   @override
   State<MakeSearchBar> createState() => _MakeSearchBarState();
@@ -14,6 +20,7 @@ class MakeSearchBar extends StatefulWidget {
 
 class _MakeSearchBarState extends State<MakeSearchBar> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +56,8 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
             child: Form(
               key: _formKey,
               child: TextFormBox(
+                onChanged: (value)=>widget.onChanged(value),
+                controller: controller,
                 unfocusedColor: Colors.transparent,
                 autofocus: true,
                 decoration: BoxDecoration(

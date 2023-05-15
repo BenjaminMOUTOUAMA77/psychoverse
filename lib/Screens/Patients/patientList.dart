@@ -32,7 +32,7 @@ class _PatientListState extends State<PatientList> {
               links: [NavLink(title: "Dossiers", function: () {})],
             ),
             Gap(20.h),
-            MakeSearchBar(),
+            MakeSearchBar(onChanged: (value){},),
             Gap(20.h),
             Center(
               child: MakeToggleMenu(

@@ -25,4 +25,14 @@ class AppDesignEffects{
     width: 5,
     strokeAlign: BorderSide.strokeAlignCenter,
   );
+
+  static Border BorderAll1 = Border.all(
+    color: AppColors.grisLitePlus,
+  );
+  
+  static Border BorderAll0 = Border.all(
+    color: AppColors.grisLitePlus,
+    width: 2,
+  );
+
 }
