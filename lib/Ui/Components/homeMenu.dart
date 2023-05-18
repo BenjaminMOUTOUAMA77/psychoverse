@@ -1,6 +1,4 @@
-import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -73,58 +71,31 @@ class _HomeMenuButtonState extends State<HomeMenuButton> {
   Widget build(BuildContext context) {
 
     MainScreenPagesManagerProvider pagesManager = Provider.of<MainScreenPagesManagerProvider>(context);
-    return AdaptiveLayout(
-      smallLayout: GestureDetector(
-        onTap: (){
-          pagesManager.set(widget.screen);
-        },
-        child: Container(
-          alignment: AlignmentDirectional.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.r),
-            color: widget.bgColor,
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.grisLite,
-                blurRadius: 1,
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(widget.icon, color: widget.writeColor, height: 80.w),
-              Gap(20.h),
-              Text(widget.title,style: AppTextStyle.mainMenuTexte.copyWith(color: widget.writeColor, fontSize: 30.sp)),
-            ],
+    return FilledButton(
+      onPressed: (){
+        pagesManager.set(widget.screen);
+      },
+      style: ButtonStyle(
+        shape: ButtonState.all<OutlinedBorder>(
+          RoundedRectangleBorder(
+            side: BorderSide(
+                color: AppColors.grisLitePlus,
+                width: 1,
+                strokeAlign: BorderSide.strokeAlignCenter),
+            borderRadius: BorderRadius.all(
+              Radius.circular(5.r+5),
+            ),
           ),
         ),
+        backgroundColor: ButtonState.all(widget.bgColor),
       ),
-      mediumLayout: GestureDetector(
-        onTap: (){
-          pagesManager.set(widget.screen);
-        },
-        child: Container(
-          alignment: AlignmentDirectional.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.r),
-            color: widget.bgColor,
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.grisLite,
-                blurRadius: 1,
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(widget.icon, color: widget.writeColor, height: 40.w),
-              Gap(20.h),
-              Text(widget.title,style: AppTextStyle.mainMenuTexte.copyWith(color: widget.writeColor, fontSize: 20.sp)),
-            ],
-          ),
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(widget.icon, color: widget.writeColor, height: 20.w+10),
+          Gap(20.h),
+          Text(widget.title, style: AppTextStyle.mainMenuTexte.copyWith(color: widget.writeColor, fontSize: 10.sp+10, fontWeight: FontWeight.bold),),
+        ],
       ),
     );
   }

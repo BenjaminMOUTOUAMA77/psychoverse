@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:psychoverse/Ui/Components/titre2.dart';
+import 'package:psychoverse/Ui/Components/Titles/titre2.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class Bloc2 extends StatefulWidget {

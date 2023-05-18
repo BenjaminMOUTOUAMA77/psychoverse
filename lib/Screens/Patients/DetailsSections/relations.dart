@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:psychoverse/Ui/Components/bloc1.dart';
-import 'package:psychoverse/Ui/Components/titre1.dart';
+import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
+import 'package:psychoverse/Ui/Components/Titles/titre1.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 

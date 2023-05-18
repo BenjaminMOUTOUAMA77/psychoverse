@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/changeScreenProvider.dart';
-import 'package:psychoverse/Ui/Components/appNavBar.dart';
+import 'package:psychoverse/Ui/Components/appNav/appNavBar.dart';
 import 'package:psychoverse/Ui/Components/patientTile.dart';
 import 'package:psychoverse/Ui/Components/searchBar.dart';
 import 'package:psychoverse/Ui/Components/simpleAppButton.dart';

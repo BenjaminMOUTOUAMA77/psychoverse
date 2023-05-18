@@ -12,8 +12,8 @@ import 'package:psychoverse/Screens/Patients/DetailsSections/relations.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/sms.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/suivis.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/testes.dart';
-import 'package:psychoverse/Ui/Components/appNavBar.dart';
-import 'package:psychoverse/Ui/Components/appNavMenuPane.dart';
+import 'package:psychoverse/Ui/Components/appNav/appNavBar.dart';
+import 'package:psychoverse/Ui/Components/appNav/appNavMenuPane.dart';
 import 'package:psychoverse/Ui/Components/togleButton.dart';
 
 class PatientDetail extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:psychoverse/Ui/Components/bloc1.dart';
+import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class Sms extends StatefulWidget {

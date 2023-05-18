@@ -21,7 +21,7 @@ class _Titre2State extends State<Titre2> {
         Expanded(child: Gap(1.w)),
         Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 15.h),
+          padding: EdgeInsets.symmetric(horizontal: 5.w+7,vertical: 15.h),
           decoration: BoxDecoration(
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(5.r+5),

@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
-import 'package:psychoverse/Ui/Components/titre1.dart';
+import 'package:psychoverse/Ui/Components/Titles/titre1.dart';
 
 class Bloc1 extends StatefulWidget {
   final String title;

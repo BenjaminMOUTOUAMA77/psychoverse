@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
+import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/screens/mainScreensManager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/delocalisation/initialisation.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
           title: 'Psychoverse',
           // You can use the library anywhere in the app even in theme
           theme: FluentThemeData(
+            activeColor: AppColors.primary,
             accentColor: Colors.purple,
             fontFamily: "BeVietnamPro",
           ),
