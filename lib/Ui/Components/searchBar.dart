@@ -6,10 +6,25 @@ import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class MakeSearchBar extends StatefulWidget {
+
+  String? value;
+  String? selected;
+  List<String> list;
+  String? comboSelected;
+  List<String> comboList;
+  TextEditingController controller = TextEditingController();
+  Function(String?) onChanged;
+  Function(String?) onFieldSubmitted;
+
   var formKey = GlobalKey<FormState>();
-  var controller = TextEditingController();
-  Function(String) onChanged;
-  MakeSearchBar({Key? key, required this.onChanged}) : super(key: key);
+  MakeSearchBar({Key? key,
+    this.selected,
+    this.comboSelected,
+    this.value,
+    this.list = const [],
+    this.comboList = const [],
+    required this.onChanged,
+    required this.onFieldSubmitted,}) : super(key: key);
 
   GlobalKey getFormKey()=>formKey;
   TextEditingController getController()=>controller;
@@ -38,53 +53,63 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
         children: [
           SizedBox(
             height: 50.h,
-            child: DropDownButton(
-              title: const Text('Par Nom'),
-              items: [
-                MenuFlyoutItem(text: const Text('Nom'), onPressed: () {}),
-                const MenuFlyoutSeparator(),
-                MenuFlyoutItem(
-                    text: const Text('Numero de dossier'), onPressed: () {}),
-                const MenuFlyoutSeparator(),
-                MenuFlyoutItem(
-                    text: const Text('Traitement'), onPressed: () {}),
-              ],
+            child: ComboBox<String>(
+              value: widget.comboSelected,
+              items: widget.comboList.map((e) {
+                return ComboBoxItem(
+                  child: Text(e),
+                  value: e,
+                );
+              }).toList(),
+              style: AppTextStyle.filedTexte
+                  .copyWith(fontWeight: FontWeight.bold),
+              onChanged:(value) {
+                setState(() => widget.comboSelected = value);
+              },
+              icon: Icon(FluentIcons.chevron_down_small),
+              iconEnabledColor: AppColors.rouge,
+              iconDisabledColor: AppColors.gris,
+              focusColor: AppColors.rouge,
+              placeholder: Text("Trier par"),
             ),
           ),
           Gap(10.w),
           Expanded(
             child: Form(
               key: _formKey,
-              child: TextFormBox(
-                onChanged: (value)=>widget.onChanged(value),
-                controller: controller,
-                unfocusedColor: Colors.transparent,
-                autofocus: true,
+              child: AutoSuggestBox<String>(
+                controller: widget.controller,
+                items: widget.list.map((e) {
+                  return AutoSuggestBoxItem<String>(
+                      value: e,
+                      label: e,
+                      onFocusChange: (focused) {
+                        if (focused) {
+                          debugPrint(e);
+                        }
+                      });
+                }).toList(),
+                onSelected: (value) {
+                  setState(() => widget.selected = value.value);
+                },
+                style: AppTextStyle.formStyleTexte,
                 decoration: BoxDecoration(
-                  boxShadow: [
-                    AppDesignEffects.shadow0,
-                  ],
-                  color: Colors.transparent,
                   border: Border.all(
-                    color: Colors.transparent,
                     style: BorderStyle.none,
                   ),
                 ),
-                keyboardType: TextInputType.text,
-                highlightColor: Colors.transparent,
-                placeholder: "Rechercher ...",
-                placeholderStyle:
-                    AppTextStyle.filedTexte.copyWith(color: AppColors.grisLite),
-                padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 20.h),
+                unfocusedColor: Colors.transparent,
                 cursorColor: AppColors.rouge,
-                textAlignVertical: TextAlignVertical.center,
-                style: AppTextStyle.filedTexte,
+                placeholder: "Rechercher ...",
+                clearButtonEnabled: false,
+                showCursor: true,
+                placeholderStyle: AppTextStyle.filedTexte.copyWith(fontWeight: FontWeight.bold,color: AppColors.grisLitePlus,),
               ),
             ),
           ),
           Gap(10.w),
           GestureDetector(
-            onTap: ()=>print("tapped"),
+            onTap: ()=>widget.onFieldSubmitted(widget.controller.text),
             child: Container(
               padding: EdgeInsets.all(15.h),
               decoration: BoxDecoration(

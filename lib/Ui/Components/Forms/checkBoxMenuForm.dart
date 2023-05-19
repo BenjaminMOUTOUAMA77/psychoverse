@@ -10,29 +10,30 @@ class CheckBoxMenu extends StatefulWidget {
   List<CheckBoxUnit> value;
   String placeHolder;
   bool readOnly = true;
-  List<CheckBoxUnit> list;
+  List<CheckBoxUnit> list=[];
   Function(List<CheckBoxUnit>) onChanged;
   Function(List<CheckBoxUnit>) onFieldSubmitted;
 
   CheckBoxMenu({
     Key? key,
     this.title = "TextFormBox Title",
-    this.value = const [],
+    required this.value,
     this.placeHolder = "Slectionnez ici",
-    this.list = const [],
+    required this.list,
     required this.onChanged,
     required this.onFieldSubmitted,
   }) : super(key: key);
 
   List<String> getSelected() {
-    List<String> list = [];
+    List<String> liste = [];
     for (var i in value) {
       if (i.checked != null && i.checked == true) {
-        list.add(i.element);
+        liste.add(i.element);
       }
     }
-    return list;
+    return liste;
   }
+
 
   @override
   State<CheckBoxMenu> createState() => _CheckBoxMenuState();
@@ -96,7 +97,15 @@ class _CheckBoxMenuState extends State<CheckBoxMenu> {
                                   size: 20.h,
                                 ),
                                 onPressed: () {
-                                  widget.value = widget.list;
+                                  if(widget.value.length==0){
+                                    for(int i=0; i<widget.list.length;i++){
+                                      widget.value.add(CheckBoxUnit(element: widget.list[i].element,checked: widget.list[i].checked));
+                                    }
+                                  }else{
+                                    for(int i=0; i<widget.list.length;i++){
+                                      widget.value[i].checked=widget.list[i].checked;
+                                    }
+                                  }
                                   widget.onFieldSubmitted(widget.value);
                                   setState(() {
                                     widget.readOnly = true;
@@ -153,9 +162,7 @@ class _CheckBoxMenuState extends State<CheckBoxMenu> {
                             checked: i.checked,
                             onChanged: (value) {
                               setState(() {
-                                i.checked == false
-                                    ? i.checked = true
-                                    : i.checked = false;
+                               i.checked = value;
                               });
                             },
                             content: Text(i.element,style: AppTextStyle.filedTexte,),
