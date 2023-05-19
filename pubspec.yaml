@@ -47,6 +47,7 @@ dependencies:
   image_fade: ^0.6.2
   intl: ^0.17.0
   flutter_quill: ^6.4.2
+  country_calling_code_picker: ^2.0.1
 
 dev_dependencies:
   flutter_test:

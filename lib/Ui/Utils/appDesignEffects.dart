@@ -28,11 +28,13 @@ class AppDesignEffects{
 
   static Border BorderAll1 = Border.all(
     color: AppColors.grisLitePlus,
+    strokeAlign: BorderSide.strokeAlignOutside,
   );
   
   static Border BorderAll0 = Border.all(
     color: AppColors.grisLitePlus,
     width: 2,
+    strokeAlign: BorderSide.strokeAlignOutside,
   );
 
 }

@@ -6,6 +6,7 @@ import 'package:psychoverse/Ui/Components/Forms/checkBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/menuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/numberTextForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/phoneForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/progessionForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/radioMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
@@ -33,6 +34,7 @@ class _IdentiteState extends State<Identite> {
           Bloc2(
             body: Column(
               children: [
+                  PhoneForm(onChanged: ({String country="",String numero=""}){print("Pays = $country    and    num = $numero");}, onFieldSubmitted: ({String country="",String numero=""}){print("Pays = $country    and    num = $numero");}),
                   BigTextForm(onFieldSubmitted: (value){print(value);}),
                   SuggestTextForm(title: "MenuForm",list: ["Choix 1","Choix 2","Choix 3","Choix 4","Choix 5","Choix 6","Choix 7","Choix 8",],onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
                   RadioMenuForm(title: "Radio Menu",list: ["Choix 1","Choix 2","Choix 3","Choix 4","Choix 5","Choix 6","Choix 7","Choix 8",],onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
