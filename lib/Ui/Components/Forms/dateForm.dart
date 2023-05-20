@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
@@ -12,13 +12,16 @@ class AppDateForm extends StatefulWidget {
   String placeHolder;
   DateTime? value;
   DateTime? selected;
-  bool readOnly = true;
+  bool readOnly;
+  bool managers;
 
   Function(DateTime?) onChanged;
   Function(DateTime?) onFieldSubmitted;
 
   AppDateForm({Key? key,
-    this.title = "TextFormBox Title",
+    this.title = "Date Form",
+    this.readOnly=true,
+    this.managers=true,
     this.value,
     this.placeHolder="01/01/0000",
     this.selected,
@@ -43,7 +46,7 @@ class _AppDateFormState extends State<AppDateForm> {
                 widget.title,
                 style: AppTextStyle.formLabelStyleTexte,
               ),
-              Row(
+              widget.managers?Row(
                 children: [
                   widget.readOnly
                       ? Padding(
@@ -98,7 +101,7 @@ class _AppDateFormState extends State<AppDateForm> {
                     ],
                   ),
                 ],
-              ),
+              ): const Gap(0),
             ],
           ),
           widget.readOnly

@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -9,13 +10,16 @@ class MenuForm extends StatefulWidget {
   String? selected;
   String? value;
   String placeHolder;
-  bool readOnly = true;
+  bool readOnly;
+  bool managers;
   List<String> list;
   Function(String?) onChanged;
   Function(String?) onFieldSubmitted;
   MenuForm({
     Key? key,
-    this.title = "TextFormBox Title",
+    this.title = "ComboBox Form",
+    this.readOnly=true,
+    this.managers=true,
     this.selected,
     this.value,
     this.placeHolder = "Slectionnez ici",
@@ -42,7 +46,7 @@ class _MenuFormState extends State<MenuForm> {
                 widget.title,
                 style: AppTextStyle.formLabelStyleTexte,
               ),
-              Row(
+              widget.managers?Row(
                 children: [
                   widget.readOnly
                       ? Padding(
@@ -97,7 +101,7 @@ class _MenuFormState extends State<MenuForm> {
                           ],
                         ),
                 ],
-              ),
+              ):const Gap(0),
             ],
           ),
           widget.readOnly

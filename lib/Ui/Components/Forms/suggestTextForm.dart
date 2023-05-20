@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -9,7 +10,8 @@ class SuggestTextForm extends StatefulWidget {
   String? value;
   String? selected;
   String placeHolder;
-  bool readOnly = false;
+  bool readOnly;
+  bool managers;
   List<String> list;
   TextEditingController controller = TextEditingController();
   Function(String?) onChanged;
@@ -17,7 +19,9 @@ class SuggestTextForm extends StatefulWidget {
 
   SuggestTextForm({
     Key? key,
-    this.title = "TextFormBox Title",
+    this.title = "SuggestForm",
+    this.readOnly=true,
+    this.managers=true,
     this.selected,
     this.value,
     this.placeHolder = "Slectionnez ici",
@@ -44,9 +48,9 @@ class _SuggestTextFormState extends State<SuggestTextForm> {
                 widget.title,
                 style: AppTextStyle.formLabelStyleTexte,
               ),
-              Row(
+              widget.managers?Row(
                 children: [
-                  !widget.readOnly
+                  widget.readOnly
                       ? Padding(
                           padding: EdgeInsets.symmetric(horizontal: 5.w),
                           child: IconButton(
@@ -57,7 +61,7 @@ class _SuggestTextFormState extends State<SuggestTextForm> {
                             ),
                             onPressed: () {
                               setState(() {
-                                widget.readOnly = true;
+                                widget.readOnly = false;
                               });
                             },
                           ),
@@ -76,7 +80,7 @@ class _SuggestTextFormState extends State<SuggestTextForm> {
                                   setState(() {
                                     widget.value==null?widget.controller.clear()
                                     :widget.controller.value=TextEditingValue(text:widget.value.toString());
-                                    widget.readOnly = false;
+                                    widget.readOnly = true;
                                   });
                                 },
                               ),
@@ -97,7 +101,7 @@ class _SuggestTextFormState extends State<SuggestTextForm> {
                                   widget.value=widget.selected;
                                   widget.onFieldSubmitted(widget.value);
                                   setState(() {
-                                    widget.readOnly = false;
+                                    widget.readOnly = true;
                                   });
                                 },
                               ),
@@ -105,10 +109,18 @@ class _SuggestTextFormState extends State<SuggestTextForm> {
                           ],
                         ),
                 ],
-              ),
+              ):const Gap(0),
             ],
           ),
-          AutoSuggestBox<String>(
+          widget.readOnly
+              ? Text(
+            widget.value == null
+                ? widget.placeHolder
+                : widget.value.toString(),
+            style:widget.value == null
+                ?AppTextStyle.formPlaceHolderStyleTexte: AppTextStyle.formStyleTexte,
+          )
+              :AutoSuggestBox<String>(
             controller: widget.controller,
             items: widget.list.map((e) {
               return AutoSuggestBoxItem<String>(
@@ -132,7 +144,6 @@ class _SuggestTextFormState extends State<SuggestTextForm> {
             unfocusedColor: Colors.transparent,
             cursorColor: AppColors.rouge,
             placeholder: widget.placeHolder,
-            enabled: widget.readOnly,
             clearButtonEnabled: false,
             placeholderStyle: AppTextStyle.formPlaceHolderStyleTexte,
           ),

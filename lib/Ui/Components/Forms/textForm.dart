@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -8,7 +9,6 @@ import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 class TextForm extends StatefulWidget {
 
   bool email;
-  bool tel;
   bool addresse;
   bool password;
 
@@ -17,19 +17,21 @@ class TextForm extends StatefulWidget {
   final String title;
   String placehholder;
   String? value;
-  bool readOnly = true;
+  bool readOnly;
+  bool managers;
   TextEditingController controller = TextEditingController();
   Function(String) onChanged;
   Function(String) onFieldSubmitted;
   TextForm({
     Key? key,
     this.email=false,
-    this.tel=false,
     this.addresse=false,
     this.password=false,
 
-    this.title = "TextFormBox Title",
+    this.title = "TextFormBox",
     this.value,
+    this.readOnly=true,
+    this.managers=true,
     this.placehholder = "...",
     required this.onChanged,
     required this.onFieldSubmitted,
@@ -40,8 +42,6 @@ class TextForm extends StatefulWidget {
   TextInputType getKeyboardType(){
     if(email){
       return TextInputType.emailAddress;
-    }else if(tel){
-      return TextInputType.phone;
     }else if(addresse){
       return TextInputType.streetAddress;
     }else if(password){
@@ -53,8 +53,6 @@ class TextForm extends StatefulWidget {
   IconData getIcon(){
     if(email){
       return FluentIcons.mail;
-    }else if(tel){
-      return FluentIcons.cell_phone;
     }else if(addresse){
       return FluentIcons.location;
     }else if(password){
@@ -64,7 +62,7 @@ class TextForm extends StatefulWidget {
     }
   }
   bool notSimpleWidget(){
-    if(email||tel||addresse||password){
+    if(email||addresse||password){
       return true;
     }else{
       return false;
@@ -72,8 +70,6 @@ class TextForm extends StatefulWidget {
   }
   String? getValidator(value){
     if(email){
-      return null;
-    }else if(tel){
       return null;
     }else if(addresse){
 
@@ -104,7 +100,7 @@ class _TextFormState extends State<TextForm> {
                 widget.title,
                 style: AppTextStyle.formLabelStyleTexte,
               ),
-              Row(
+              widget.managers?Row(
                 children: [
                   widget.readOnly
                       ? Padding(
@@ -161,7 +157,7 @@ class _TextFormState extends State<TextForm> {
                     ],
                   ),
                 ],
-              ),
+              ):const Gap(0),
             ],
           ),
           TextFormBox(
@@ -195,7 +191,7 @@ class _TextFormState extends State<TextForm> {
               ),
             ),
             highlightColor: Colors.transparent,
-            obscureText: !widget.showPassword,
+            obscureText: widget.showPassword,
             obscuringCharacter: "*",
             prefix: widget.notSimpleWidget()?Padding(
               padding: EdgeInsets.only(right: 30.w),

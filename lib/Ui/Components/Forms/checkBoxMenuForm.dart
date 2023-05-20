@@ -9,14 +9,17 @@ class CheckBoxMenu extends StatefulWidget {
   final String title;
   List<CheckBoxUnit> value;
   String placeHolder;
-  bool readOnly = true;
+  bool readOnly;
+  bool managers;
   List<CheckBoxUnit> list=[];
   Function(List<CheckBoxUnit>) onChanged;
   Function(List<CheckBoxUnit>) onFieldSubmitted;
 
   CheckBoxMenu({
     Key? key,
-    this.title = "TextFormBox Title",
+    this.title = "CheckBox Menu Form",
+    this.readOnly=true,
+    this.managers=true,
     required this.value,
     this.placeHolder = "Slectionnez ici",
     required this.list,
@@ -53,7 +56,7 @@ class _CheckBoxMenuState extends State<CheckBoxMenu> {
                 widget.title,
                 style: AppTextStyle.formLabelStyleTexte,
               ),
-              Row(
+              widget.managers? Row(
                 children: [
                   widget.readOnly
                       ? Padding(
@@ -116,7 +119,7 @@ class _CheckBoxMenuState extends State<CheckBoxMenu> {
                           ],
                         ),
                 ],
-              ),
+              ):const Gap(0),
             ],
           ),
           widget.readOnly

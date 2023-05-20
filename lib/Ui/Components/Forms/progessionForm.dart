@@ -10,7 +10,8 @@ class ProgressionForm extends StatefulWidget {
   String placeHolder;
   double? value;
   double? selected;
-  bool readOnly = true;
+  bool readOnly;
+  bool managers;
   TextEditingController controller = TextEditingController();
   Function(double?) onChanged;
   Function(double?) onFieldSubmitted;
@@ -18,6 +19,8 @@ class ProgressionForm extends StatefulWidget {
   ProgressionForm({
     Key? key,
     this.title = "TextFormBox Title",
+    this.readOnly=true,
+    this.managers=true,
     this.value,
     this.placeHolder = "0",
     this.selected,
@@ -42,7 +45,7 @@ class _ProgressionFormState extends State<ProgressionForm> {
                 widget.title,
                 style: AppTextStyle.formLabelStyleTexte,
               ),
-              Row(
+              widget.managers?Row(
                 children: [
                   widget.readOnly
                       ? Padding(
@@ -97,7 +100,7 @@ class _ProgressionFormState extends State<ProgressionForm> {
                           ],
                         ),
                 ],
-              ),
+              ):const Gap(0),
             ],
           ),
           widget.readOnly

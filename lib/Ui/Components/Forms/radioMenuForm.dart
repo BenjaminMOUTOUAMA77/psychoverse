@@ -11,13 +11,16 @@ class RadioMenuForm extends StatefulWidget {
   String? value;
   int selected;
   String placeHolder;
-  bool readOnly = true;
+  bool readOnly;
+  bool managers;
   List<String> list=[];
   Function(String?) onChanged;
   Function(String?) onFieldSubmitted;
 
   RadioMenuForm({Key? key,
     this.title = "Radio Menu",
+    this.readOnly=true,
+    this.managers=true,
     this.value,
     this.selected=0,
     this.placeHolder = "...",
@@ -44,7 +47,7 @@ class _RadioMenuFormState extends State<RadioMenuForm> {
                 widget.title,
                 style: AppTextStyle.formLabelStyleTexte,
               ),
-              Row(
+              widget.managers?Row(
                 children: [
                   widget.readOnly
                       ? Padding(
@@ -99,7 +102,7 @@ class _RadioMenuFormState extends State<RadioMenuForm> {
                     ],
                   ),
                 ],
-              ),
+              ):const Gap(0),
             ],
           ),
           widget.readOnly

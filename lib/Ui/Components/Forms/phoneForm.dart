@@ -2,7 +2,9 @@ import 'package:country_calling_code_picker/picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
+import 'package:psychoverse/Ui/Components/appProgressRing.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -12,7 +14,8 @@ class PhoneForm extends StatefulWidget {
   String placehholder;
   String country;
   String? value;
-  bool readOnly = true;
+  bool readOnly;
+  bool managers;
   TextEditingController controller = TextEditingController();
   Function({String numero, String country}) onChanged;
   Function({String numero, String country}) onFieldSubmitted;
@@ -20,6 +23,8 @@ class PhoneForm extends StatefulWidget {
   PhoneForm({
     Key? key,
     this.title = "Phone Form",
+    this.readOnly=true,
+    this.managers=true,
     this.country = "BJ",
     this.value,
     this.placehholder = "...",
@@ -70,7 +75,7 @@ class _PhoneFormState extends State<PhoneForm> {
                 widget.title,
                 style: AppTextStyle.formLabelStyleTexte,
               ),
-              Row(
+              widget.managers?Row(
                 children: [
                   widget.readOnly
                       ? Padding(
@@ -139,7 +144,7 @@ class _PhoneFormState extends State<PhoneForm> {
                           ],
                         ),
                 ],
-              ),
+              ):const Gap(0),
             ],
           ),
           TextFormBox(
@@ -183,7 +188,7 @@ class _PhoneFormState extends State<PhoneForm> {
                       color: AppColors.rouge,
                     ),
                   ),
-                  GestureDetector(
+                  _selectedCountry?.flag==null? AppProgressRing():GestureDetector(
                     onTap: () => widget.readOnly ? null : _showCountryPicker(),
                     child: Padding(
                       padding: EdgeInsets.only(right: 10.w),
@@ -198,7 +203,7 @@ class _PhoneFormState extends State<PhoneForm> {
                                 AppDesignEffects.shadow2,
                               ],
                             ),
-                            child: Image.asset(
+                            child:Image.asset(
                               _selectedCountry!.flag,
                               package: countryCodePackageName,
                               fit: BoxFit.cover,

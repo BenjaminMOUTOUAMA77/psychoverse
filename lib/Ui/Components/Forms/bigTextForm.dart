@@ -13,12 +13,15 @@ class BigTextForm extends StatefulWidget {
   final String title;
   String data;
   String placehholder;
-  bool readOnly = true;
+  bool readOnly;
+  bool managers;
   Function(String) onFieldSubmitted;
 
   BigTextForm({
     Key? key,
     this.title = "Big Texte Form",
+    this.readOnly=true,
+    this.managers=true,
     this.data = "",
     this.placehholder = "...",
     required this.onFieldSubmitted,
@@ -56,7 +59,7 @@ class _BigTextFormState extends State<BigTextForm> {
                 texte: widget.title,
                 style: AppTextStyle.formLabelStyleTexte,
               ),
-              Row(
+              widget.managers? Row(
                 children: [
                   widget.readOnly
                       ? Padding(
@@ -112,7 +115,7 @@ class _BigTextFormState extends State<BigTextForm> {
                           ],
                         ),
                 ],
-              ),
+              ):const Gap(0),
             ],
           ),
           Column(

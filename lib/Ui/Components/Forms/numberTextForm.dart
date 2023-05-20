@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -10,11 +11,15 @@ class NumberTextForm extends StatefulWidget {
   String placeHolder;
   int? value;
   int? selected;
-  bool readOnly = true;
+  bool readOnly;
+  bool managers;
   TextEditingController controller = TextEditingController();
   Function(int?) onChanged;
   Function(int?) onFieldSubmitted;
-  NumberTextForm({Key? key,this.title = "TextFormBox Title",
+  NumberTextForm({Key? key,
+    this.title = "Number Text Form",
+    this.readOnly=true,
+    this.managers=true,
     this.value,
     this.placeHolder="0",
     this.selected,
@@ -39,7 +44,7 @@ class _NumberTextFormState extends State<NumberTextForm> {
                 widget.title,
                 style: AppTextStyle.formLabelStyleTexte,
               ),
-              Row(
+              widget.managers?Row(
                 children: [
                   widget.readOnly
                       ? Padding(
@@ -94,7 +99,7 @@ class _NumberTextFormState extends State<NumberTextForm> {
                     ],
                   ),
                 ],
-              ),
+              ):const Gap(0),
             ],
           ),
           widget.readOnly

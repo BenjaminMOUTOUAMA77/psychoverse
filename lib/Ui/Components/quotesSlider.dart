@@ -150,60 +150,76 @@ class _QuoteSlideState extends State<QuoteSlide> {
           Expanded(child: Stack(
             alignment: AlignmentDirectional.center,
             children: [
-              Container(
-                padding: EdgeInsets.all(70.w),
-                alignment: AlignmentDirectional.center,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                  color: AppColors.primary,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.primary,
-                      blurRadius: 1,
-                      spreadRadius: 0.5,
+              SizedBox(
+                height: double.infinity,
+                width:double.infinity,
+                child: Acrylic(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                  ),
+                  tintAlpha: 2,
+                  blurAmount: 5,
+                  luminosityAlpha: 2,
+                  tint: AppColors.primary,
+                  elevation: 2,
+                  child: Container(
+                    padding: EdgeInsets.all(70.w),
+                    alignment: AlignmentDirectional.center,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                      color: Colors.transparent,
                     ),
-                  ],
+                    child: AdaptiveLayout(
+                      smallLayout: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "« ${widget.texte} »",
+                            style: AppTextStyle.quoteTexte.copyWith(fontSize: 45.sp),
+                            textAlign: TextAlign.justify,
+                          ),
+                          Gap(60.h),
+                          Text(
+                            widget.author,
+                            style: AppTextStyle.quoteTexte.copyWith(
+                                fontSize: 30.sp,
+                                fontWeight: FontWeight.w900,
+                                color: AppColors.grisLite),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ],
+                      ),
+                      mediumLayout: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "« ${widget.texte} »",
+                            style: AppTextStyle.quoteTexte.copyWith(fontSize: 30.sp),
+                            textAlign: TextAlign.justify,
+                          ),
+                          Gap(50.h),
+                          Text(
+                            widget.author,
+                            style: AppTextStyle.quoteTexte.copyWith(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w900,
+                                color: AppColors.grisLite),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-                child: AdaptiveLayout(
-                  smallLayout: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "« ${widget.texte} »",
-                        style: AppTextStyle.quoteTexte.copyWith(fontSize: 45.sp),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Gap(60.h),
-                      Text(
-                        widget.author,
-                        style: AppTextStyle.quoteTexte.copyWith(
-                            fontSize: 30.sp,
-                            fontWeight: FontWeight.w900,
-                            color: AppColors.grisLite),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ],
+              ),
+              Container(
+                width: double.infinity,height: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(widget.image),fit: BoxFit.cover,opacity: 0.07,
                   ),
-                  mediumLayout: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "« ${widget.texte} »",
-                        style: AppTextStyle.quoteTexte.copyWith(fontSize: 30.sp),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Gap(50.h),
-                      Text(
-                        widget.author,
-                        style: AppTextStyle.quoteTexte.copyWith(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w900,
-                            color: AppColors.grisLite),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ],
-                  ),
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
               ),
               Positioned(
