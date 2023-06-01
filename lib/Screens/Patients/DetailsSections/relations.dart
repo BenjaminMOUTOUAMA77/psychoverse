@@ -19,7 +19,7 @@ class _RelationsState extends State<Relations> {
       icon: FluentIcons.relationship,
       title: "Relations",
       number: 10,
-      body: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(

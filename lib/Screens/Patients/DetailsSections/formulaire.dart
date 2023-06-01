@@ -18,7 +18,7 @@ class _FormulaireState extends State<Formulaire> {
       icon: FluentIcons.form_library,
       title: "Formulaire",
       number: 10,
-      body: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(

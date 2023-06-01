@@ -13,8 +13,8 @@ class MakeSearchBar extends StatefulWidget {
   String? comboSelected;
   List<String> comboList;
   TextEditingController controller = TextEditingController();
-  Function(String?) onChanged;
-  Function(String?) onFieldSubmitted;
+  Function({String? filtre, String? text}) onChanged;
+  Function({String? filtre, String? text}) onFieldSubmitted;
 
   var formKey = GlobalKey<FormState>();
   MakeSearchBar({Key? key,
@@ -109,7 +109,7 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
           ),
           Gap(10.w),
           GestureDetector(
-            onTap: ()=>widget.onFieldSubmitted(widget.controller.text),
+            onTap: ()=>widget.onFieldSubmitted(filtre: widget.comboSelected,text: widget.controller.text),
             child: Container(
               padding: EdgeInsets.all(15.h),
               decoration: BoxDecoration(

@@ -32,7 +32,7 @@ class _PatientListState extends State<PatientList> {
               links: [NavLink(title: "Dossiers", function: () {})],
             ),
             Gap(20.h),
-            MakeSearchBar(comboList: ["Nom","Ville","Numero dossier"],list: ["Patient 1","Patient 2","Patient 3","Patient 4","Patient 5","Patient 6",],onChanged: (value){}, onFieldSubmitted: (value){print(value);}),
+            MakeSearchBar(comboList: ["Nom","Ville","Numero dossier"],list: ["Patient 1","Patient 2","Patient 3","Patient 4","Patient 5","Patient 6",],onChanged: ({filtre="",text=""}){}, onFieldSubmitted: ({filtre="",text=""}){print("Filtre = $filtre  |  Text = $text");}),
             Gap(20.h),
             Center(
               child: MakeToggleMenu(
@@ -57,7 +57,7 @@ class _PatientListState extends State<PatientList> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 50.w),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   MakeSimpleButon(
                     texte: "Nouveau Patient",

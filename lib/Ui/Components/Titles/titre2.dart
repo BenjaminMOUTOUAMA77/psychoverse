@@ -20,8 +20,17 @@ class _Titre2State extends State<Titre2> {
       children: [
         Expanded(child: Gap(1.w)),
         Container(
+          height:40.h,
+          width: 10.w,
+          decoration: BoxDecoration(
+            color: AppColors.primary.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(20.r+20),
+          ),
+        ),
+        Gap(10.w),
+        Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(horizontal: 5.w+7,vertical: 15.h),
+          padding: EdgeInsets.symmetric(horizontal: 5.w+7,vertical: 18.h),
           decoration: BoxDecoration(
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(5.r+5),
@@ -30,32 +39,25 @@ class _Titre2State extends State<Titre2> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                height:20.h,
-                width: 5.w,
-                decoration: BoxDecoration(
-                  color: AppColors.blanc.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(20.r+20),
-                ),
-              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 50.w),
                 child: Text(
                   widget.title,
                   style:
-                  AppTextStyle.bigFilledTexte.copyWith(fontSize: 10.sp + 5, color: AppColors.blanc, fontWeight: FontWeight.bold),
+                  AppTextStyle.bigFilledTexte.copyWith(fontSize: 10.sp + 10, color: AppColors.blanc, fontWeight: FontWeight.w900),
                   textAlign: TextAlign.center,
                 ),
               ),
-              Container(
-                height:20.h,
-                width: 5.w,
-                decoration: BoxDecoration(
-                  color: AppColors.blanc.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(20.r+20),
-                ),
-              ),
             ],
+          ),
+        ),
+        Gap(10.w),
+        Container(
+          height:40.h,
+          width: 10.w,
+          decoration: BoxDecoration(
+            color: AppColors.primary.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(20.r+20),
           ),
         ),
         Expanded(child: Gap(1.w)),

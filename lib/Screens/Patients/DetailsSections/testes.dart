@@ -19,7 +19,7 @@ class _TestesState extends State<Testes> {
       icon: FluentIcons.test_plan,
       title: "Testes",
       number: 10,
-      body: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(

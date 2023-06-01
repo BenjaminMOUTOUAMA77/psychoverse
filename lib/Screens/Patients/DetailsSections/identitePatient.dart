@@ -1,6 +1,11 @@
 import 'dart:convert';
 
+import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
+import 'package:image_fade/image_fade.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/checkBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
@@ -13,6 +18,9 @@ import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Utils/appColors.dart';
+import 'package:psychoverse/Ui/Utils/appImages.dart';
+import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class Identite extends StatefulWidget {
   const Identite({Key? key}) : super(key: key);
@@ -28,43 +36,169 @@ class _IdentiteState extends State<Identite> {
       icon: FluentIcons.user_clapper,
       title: "Identité",
       number: 10,
-      body: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Bloc2(
-            body: Column(
-              children: [
-                PhoneForm(onChanged: ({String country="",String numero=""}){print("Pays = $country    and    num = $numero");}, onFieldSubmitted: ({String country="",String numero=""}){print("Pays = $country    and    num = $numero");}),
-                BigTextForm(onFieldSubmitted: (value){print(value);}),
-                SuggestTextForm(title: "MenuForm",list: ["Choix 1","Choix 2","Choix 3","Choix 4","Choix 5","Choix 6","Choix 7","Choix 8",],onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-                RadioMenuForm(title: "Radio Menu",list: ["Choix 1","Choix 2","Choix 3","Choix 4","Choix 5","Choix 6","Choix 7","Choix 8",],onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-                CheckBoxMenu(title: "Checkbox",value: [],list: [CheckBoxUnit(),CheckBoxUnit(),CheckBoxUnit(),CheckBoxUnit(),CheckBoxUnit(),CheckBoxUnit(),CheckBoxUnit(),],onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-                AppDateForm(title: "Date",onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-                NumberTextForm(title: "Number",onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-                ProgressionForm(title: "Progression Form",onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-                TextForm(title: "Simple Texte",onChanged: (value){}, onFieldSubmitted:(value){print("Simple Text : $value");},),
-                TextForm(title: "Email",email: true,onChanged: (value){}, onFieldSubmitted:(value){print("Email : $value");},),
-                TextForm(title: "Adresse",addresse: true,onChanged: (value){}, onFieldSubmitted:(value){print("Adresse : $value");},),
-                TextForm(title: "Mot de passe",password: true,onChanged: (value){}, onFieldSubmitted:(value){print("Password : $value");},),
-                MenuForm(title: "MenuForm",list: ["Choix 1","Choix 2","Choix 3","Choix 4","Choix 5","Choix 6","Choix 7","Choix 8",],onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-
-
-                  PhoneForm(managers: false,onChanged: ({String country="",String numero=""}){print("Pays = $country    and    num = $numero");}, onFieldSubmitted: ({String country="",String numero=""}){print("Pays = $country    and    num = $numero");}),
-                  BigTextForm(managers: false,onFieldSubmitted: (value){print(value);}),
-                  SuggestTextForm(managers: false,title: "MenuForm",list: ["Choix 1","Choix 2","Choix 3","Choix 4","Choix 5","Choix 6","Choix 7","Choix 8",],onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-                  RadioMenuForm(managers: false,title: "Radio Menu",list: ["Choix 1","Choix 2","Choix 3","Choix 4","Choix 5","Choix 6","Choix 7","Choix 8",],onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-                  CheckBoxMenu(managers: false,title: "Checkbox",value: [],list: [CheckBoxUnit(),CheckBoxUnit(),CheckBoxUnit(),CheckBoxUnit(),CheckBoxUnit(),CheckBoxUnit(),CheckBoxUnit(),],onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-                  AppDateForm(managers: false,title: "Date",onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-                  NumberTextForm(managers: false,title: "Number",onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-                  ProgressionForm(managers: false,title: "Progression Form",onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-                  TextForm(managers: false,title: "Simple Texte",onChanged: (value){}, onFieldSubmitted:(value){print("Simple Text : $value");},),
-                  TextForm(managers: false,title: "Email",email: true,onChanged: (value){}, onFieldSubmitted:(value){print("Email : $value");},),
-                  TextForm(managers: false,title: "Adresse",addresse: true,onChanged: (value){}, onFieldSubmitted:(value){print("Adresse : $value");},),
-                  TextForm(managers: false,title: "Mot de passe",password: true,onChanged: (value){}, onFieldSubmitted:(value){print("Password : $value");},),
-                  MenuForm(managers: false,title: "MenuForm",list: ["Choix 1","Choix 2","Choix 3","Choix 4","Choix 5","Choix 6","Choix 7","Choix 8",],onChanged: (value){}, onFieldSubmitted:(value){print("Menu Form : $value");},),
-
-              ],
-            ),
+          Gap(30.h),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        AdaptiveLayout(
+                          smallLayout: Padding(
+                            padding: EdgeInsets.only(right: 13.w),
+                            child: Icon(
+                              FluentIcons.navigate_back,
+                              color: AppColors.rouge,
+                              size: 25.h,
+                            ),
+                          ),
+                          mediumLayout: Text(
+                            "Dernière rencontre : ",
+                            style: AppTextStyle.bigFilledTexte,
+                          ),
+                        ),
+                        Text(
+                          "20 Mai 2023 ",
+                          style: AppTextStyle.bigFilledTexte
+                              .copyWith(fontWeight: FontWeight.w900),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "N :",
+                        style: AppTextStyle.buttonStyleTexte.copyWith(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.w100),
+                      ),
+                      Text(
+                        "54",
+                        style: AppTextStyle.buttonStyleTexte.copyWith(
+                            color: AppColors.primary, fontSize: 10.sp + 15),
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        AdaptiveLayout(
+                          smallLayout: Padding(
+                            padding: EdgeInsets.only(left: 13.w),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "20 Juin 2023 ",
+                                  style: AppTextStyle.bigFilledTexte
+                                      .copyWith(fontWeight: FontWeight.w900),
+                                ),
+                                Icon(
+                                  FluentIcons.navigate_back_mirrored,
+                                  color: AppColors.rouge,
+                                  size: 25.h,
+                                ),
+                              ],
+                            ),
+                          ),
+                          mediumLayout: Row(
+                            children: [
+                              Text(
+                                "Prochaine rencontre : ",
+                                style: AppTextStyle.bigFilledTexte,
+                              ),
+                              Text(
+                                "20 Juin 2023 ",
+                                style: AppTextStyle.bigFilledTexte
+                                    .copyWith(fontWeight: FontWeight.w900),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Gap(20.h),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 500.w,
+                    height: 465.h,
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.grisLite,
+                          blurRadius: 1,
+                          spreadRadius: 0.5,
+                        ),
+                      ],
+                    ),
+                    child: ImageFade(
+                      width: double.infinity,
+                      height: double.infinity,
+                      image: const AssetImage("assets/images/im4.jpg"),
+                      // slow fade for newly loaded images:
+                      duration: const Duration(milliseconds: 900),
+                      syncDuration: const Duration(milliseconds: 150),
+                      alignment: Alignment.center,
+                      fit: BoxFit.cover,
+                      placeholder: Container(
+                        color: AppColors.grisLite,
+                        alignment: Alignment.center,
+                        child: Opacity(
+                          opacity: 0.5,
+                          child: SvgPicture.asset(AppIcons.logoSymbole,
+                              height: 250.h),
+                        ),
+                      ),
+                      errorBuilder: (context, error) => Container(
+                        color: AppColors.blanc,
+                        alignment: Alignment.center,
+                        child: SvgPicture.asset(AppIcons.logoSymbole,
+                            color: AppColors.primary, height: 20),
+                      ),
+                    ),
+                  ),
+                  Gap(20.w),
+                  Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                        TextForm(title: "Nom prénoms",onChanged: (value){}, onFieldSubmitted: (value){}),
+                        PhoneForm(title: "Téléphone",onChanged: ({country="",numero=""}){}, onFieldSubmitted: ({country="",numero=""}){}),
+                        TextForm(title: "Email",email: true,onChanged: (value){}, onFieldSubmitted: (value){}),
+                        TextForm(title: "Adresse",addresse: true,onChanged: (value){}, onFieldSubmitted: (value){}),
+                    ],
+                  ))
+                ],
+              ),
+              Gap(20.h),
+              SuggestTextForm(title: "Genre",list: ["Masculin","Féminin","Trans","Autre"],onChanged: (value){}, onFieldSubmitted: (value){}),
+              NumberTextForm(title: "Âge",onChanged: (value){}, onFieldSubmitted: (value){}),
+              SuggestTextForm(title: "Condition de résidence",list: ["Placé","Exil","Prison","Location","Maison propre"],onChanged: (value){}, onFieldSubmitted: (value){}),
+              SuggestTextForm(title: "Èthnie",list: ["Placé","Exil","Prison","Location","Maison propre"],onChanged: (value){}, onFieldSubmitted: (value){}),
+              AppDateForm(title: "Date de naissance",onChanged: (value){}, onFieldSubmitted: (value){}),
+              SuggestTextForm(title: "Lieu de naissance",list: ["Calavi","Cotonou","Natitingou",],onChanged: (value){}, onFieldSubmitted: (value){}),
+              SuggestTextForm(title: "Niveau d'étude",list: ["Analphabet","Maternelle","CEP","Doctorat","Mater",],onChanged: (value){}, onFieldSubmitted: (value){}),
+              SuggestTextForm(title: "Profession",list: ["Analphabet","Maternelle","CEP","Doctorat","Mater",],onChanged: (value){}, onFieldSubmitted: (value){}),
+              SuggestTextForm(title: "Réligion",list: ["Analphabet","Maternelle","CEP","Doctorat","Mater",],onChanged: (value){}, onFieldSubmitted: (value){}),
+              NumberTextForm(title: "Ordre de naissance chez le père",onChanged: (value){}, onFieldSubmitted: (value){}),
+              NumberTextForm(title: "Ordre de naissance chez la mère",onChanged: (value){}, onFieldSubmitted: (value){}),
+              CheckBoxMenu(title: "Loisirs", value: [],list: [CheckBoxUnit(element: "Loisir 1"),CheckBoxUnit(element: "Loisir 2"),CheckBoxUnit(element: "Loisir 3"),CheckBoxUnit(element: "Loisir 4"),CheckBoxUnit(element: "Loisir 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+              BigTextForm(
+                  title: "Commentaire", onFieldSubmitted: (value) {}),
+            ],
           ),
         ],
       ),

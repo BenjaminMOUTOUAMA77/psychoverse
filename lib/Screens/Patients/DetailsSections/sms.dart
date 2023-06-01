@@ -13,10 +13,10 @@ class _SmsState extends State<Sms> {
   @override
   Widget build(BuildContext context) {
     return Bloc1(
-      icon: FluentIcons.message,
+      icon: FluentIcons.skype_message,
       title: "SMS",
       number: 10,
-      body: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(

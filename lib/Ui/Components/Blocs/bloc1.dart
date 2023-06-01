@@ -8,8 +8,8 @@ class Bloc1 extends StatefulWidget {
   final String title;
   final IconData? icon;
   final int number;
-  final Widget? body;
-  const Bloc1({Key? key,this.title = "Title", this.icon, this.number=0, this.body}) : super(key: key);
+  final Widget? child;
+  const Bloc1({Key? key,this.title = "Title", this.icon, this.number=0, this.child}) : super(key: key);
 
   @override
   State<Bloc1> createState() => _Bloc1State();
@@ -31,7 +31,7 @@ class _Bloc1State extends State<Bloc1> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-            child: widget.body,
+            child: widget.child,
           ),
         ],
       ),
@@ -45,7 +45,7 @@ class _Bloc1State extends State<Bloc1> {
         Expanded(
           child: SizedBox(
             child: SingleChildScrollView(
-              child: widget.body,
+              child: widget.child,
             ),
           ),
         ),

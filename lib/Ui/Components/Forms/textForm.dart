@@ -214,7 +214,7 @@ class _TextFormState extends State<TextForm> {
                   widget.showPassword=!widget.showPassword;
                 });
               },
-              icon: Icon(FluentIcons.red_eye,color: widget.showPassword?AppColors.rouge:AppColors.gris,size: 30.h,),
+              icon: Icon(widget.showPassword?FluentIcons.red_eye:FluentIcons.visually_impaired,color: widget.showPassword?AppColors.rouge:AppColors.gris,size: 30.h,),
             ):null,
           ),
         ],

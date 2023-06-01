@@ -5,8 +5,8 @@ import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class Bloc2 extends StatefulWidget {
   final String title;
-  final Widget? body;
-  const Bloc2({Key? key,this.title = "Title",this.body}) : super(key: key);
+  final Widget? child;
+  const Bloc2({Key? key,this.title = "Title",this.child}) : super(key: key);
 
   @override
   State<Bloc2> createState() => _Bloc2State();
@@ -16,7 +16,7 @@ class _Bloc2State extends State<Bloc2> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.h),
+      padding: EdgeInsets.symmetric(vertical: 40.h),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.h),
         decoration: BoxDecoration(
@@ -30,7 +30,7 @@ class _Bloc2State extends State<Bloc2> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-              child: widget.body,
+              child: widget.child,
             ),
           ],
         ),
