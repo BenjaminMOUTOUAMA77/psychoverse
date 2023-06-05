@@ -7,7 +7,6 @@ import 'package:psychoverse/Ui/Components/appNav/appNavBar.dart';
 import 'package:psychoverse/Ui/Components/patientTile.dart';
 import 'package:psychoverse/Ui/Components/searchBar.dart';
 import 'package:psychoverse/Ui/Components/simpleAppButton.dart';
-import 'package:psychoverse/Ui/Components/togleButton.dart';
 
 class PatientList extends StatefulWidget {
   const PatientList({Key? key}) : super(key: key);
@@ -32,28 +31,36 @@ class _PatientListState extends State<PatientList> {
               links: [NavLink(title: "Dossiers", function: () {})],
             ),
             Gap(20.h),
-            MakeSearchBar(comboList: ["Nom","Ville","Numero dossier"],list: ["Patient 1","Patient 2","Patient 3","Patient 4","Patient 5","Patient 6",],onChanged: ({filtre="",text=""}){}, onFieldSubmitted: ({filtre="",text=""}){print("Filtre = $filtre  |  Text = $text");}),
-            Gap(20.h),
-            Center(
-              child: MakeToggleMenu(
-                onChanged: (
-                    {mode = true,
-                    menu = const [],
-                    selectedMenuNums = const [],
-                    selectedMenuNum = 0,
-                    getSelectedOnString = const []}) {},
-                mode: false,
-                menu: [
+            MakeSearchBar(
+                withComboFilter: true,
+                withToggleFilter: true,
+                comboFilterList: [
+                  "Nom",
+                  "Ville",
+                  "Numero dossier"
+                ],
+                textList: [
+                  "Patient 1",
+                  "Patient 2",
+                  "Patient 3",
+                  "Patient 4",
+                  "Patient 5",
+                  "Patient 6",
+                ],
+                toggleFilterList: [
                   "Tout",
-                  "En cours",
-                  "En pause",
+                  "En Cours",
+                  "En Pause",
                   "Archivés",
                 ],
-                selectedMenuNums: [1],
-                showModeControle: false,
-              ),
-            ),
-            Gap(20.h),
+                onChanged: (
+                    {toggleFilter = "", comboFilter = "", text = ""}) {},
+                onFieldSubmitted: (
+                    {toggleFilter = "", comboFilter = "", text = ""}) {
+                  print(
+                      "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
+                }),
+            Gap(60.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 50.w),
               child: Row(

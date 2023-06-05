@@ -199,7 +199,7 @@ class _AppToggleButtonState extends State<AppToggleButton> {
             ),
           ),
           padding: ButtonState.all(
-              EdgeInsets.symmetric(horizontal: 30, vertical: 10)),
+              EdgeInsets.symmetric(horizontal: 15.w+10, vertical: 5.h+3)),
           textStyle: ButtonState.all(
               TextStyle(color: AppColors.gris, fontSize: 7.sp+10)),
           backgroundColor: ButtonState.all(AppColors.blancGrise),
@@ -217,7 +217,7 @@ class _AppToggleButtonState extends State<AppToggleButton> {
             ),
           ),
           padding: ButtonState.all(
-              EdgeInsets.symmetric(horizontal: 30, vertical: 10)),
+              EdgeInsets.symmetric(horizontal: 15.w+10, vertical: 5.h+3)),
           textStyle: ButtonState.all(
               TextStyle(color: AppColors.blanc, fontSize: 7.sp+10)),
           backgroundColor: ButtonState.all(AppColors.rouge),

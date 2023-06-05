@@ -9,8 +9,8 @@ initialisation() async{
 
   WindowOptions windowOptions = const WindowOptions(
     title: 'psychoverse',
-    size: Size(1500, 800),
-    minimumSize: Size(700, 800),
+    size: Size(700, 500),
+    minimumSize: Size(700, 400),
     center: true,
     skipTaskbar: false,
     titleBarStyle: TitleBarStyle.normal,
