@@ -5,6 +5,7 @@ import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 import 'package:psychoverse/Ui/Components/patientTile.dart';
 import 'package:psychoverse/Ui/Components/searchBar.dart';
 import 'package:psychoverse/Ui/Components/simpleAppButton.dart';
+import 'package:psychoverse/Ui/Components/suivisTile.dart';
 
 class Suivis extends StatefulWidget {
   const Suivis({Key? key}) : super(key: key);
@@ -38,36 +39,41 @@ class _SuivisState extends State<Suivis> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            MakeSearchBar(
-              withComboFilter: true,
-                withToggleFilter: true,
-                comboFilterList: [
-                  "Nom",
-                  "Ville",
-                  "Numero dossier"
-                ],
-                textList: [
-                  "Patient 1",
-                  "Patient 2",
-                  "Patient 3",
-                  "Patient 4",
-                  "Patient 5",
-                  "Patient 6",
-                ],
-                toggleFilterList: [
-                  "Tout",
-                  "En Cours",
-                  "En Pause",
-                  "Archivés",
-                ],
-                onChanged: (
-                    {toggleFilter = "", comboFilter = "", text = ""}) {},
-                onFieldSubmitted: (
-                    {toggleFilter = "", comboFilter = "", text = ""}) {
-                  print(
-                      "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
-                }),
-            Gap(70.h),
+            suivis.length>20? Column(
+              children: [
+                MakeSearchBar(
+                  withComboFilter: true,
+                    withToggleFilter: true,
+                    comboFilterList: [
+                      "Nom",
+                      "Ville",
+                      "Numero dossier"
+                    ],
+                    textList: [
+                      "Patient 1",
+                      "Patient 2",
+                      "Patient 3",
+                      "Patient 4",
+                      "Patient 5",
+                      "Patient 6",
+                    ],
+                    toggleFilterList: [
+                      "Tout",
+                      "En Cours",
+                      "En Pause",
+                      "Archivés",
+                    ],
+                    onChanged: (
+                        {toggleFilter = "", comboFilter = "", text = ""}) {},
+                    onFieldSubmitted: (
+                        {toggleFilter = "", comboFilter = "", text = ""}) {
+                      print(
+                          "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
+                    }),
+                Gap(70.h),
+              ],
+            ):const Gap(0),
+
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 50.w),
               child: Row(
@@ -75,7 +81,7 @@ class _SuivisState extends State<Suivis> {
                 children: [
                   MakeSimpleButon(
                     texte: "Nouveau Suivi",
-                    icon: FluentIcons.add_friend,
+                    icon: FluentIcons.dependency_add,
                     function: () {},
                   ),
                 ],
@@ -87,7 +93,7 @@ class _SuivisState extends State<Suivis> {
                 suivis.length,
                 (i) => Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.h),
-                  child: GestureDetector(onTap: () {}, child: PatientTile()),
+                  child: GestureDetector(onTap: () {}, child: SuivisTile()),
                 ),
               ),
             ),

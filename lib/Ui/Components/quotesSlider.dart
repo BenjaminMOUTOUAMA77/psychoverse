@@ -157,9 +157,8 @@ class _QuoteSlideState extends State<QuoteSlide> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.r)),
                   ),
-                  tintAlpha: 2,
                   blurAmount: 5,
-                  luminosityAlpha: 2,
+                  luminosityAlpha: 5,
                   tint: AppColors.primary,
                   elevation: 2,
                   child: Container(
@@ -176,10 +175,12 @@ class _QuoteSlideState extends State<QuoteSlide> {
                         children: [
                           Text(
                             "« ${widget.texte} »",
-                            style: AppTextStyle.quoteTexte.copyWith(fontSize: 45.sp),
+                            softWrap: true,
+                            overflow: TextOverflow.fade,
+                            style: AppTextStyle.quoteTexte.copyWith(fontSize: 30.sp),
                             textAlign: TextAlign.justify,
                           ),
-                          Gap(60.h),
+                          Gap(30.h),
                           Text(
                             widget.author,
                             style: AppTextStyle.quoteTexte.copyWith(
@@ -213,18 +214,9 @@ class _QuoteSlideState extends State<QuoteSlide> {
                   ),
                 ),
               ),
-              Container(
-                width: double.infinity,height: double.infinity,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(widget.image),fit: BoxFit.cover,opacity: 0.07,
-                  ),
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-              ),
               Positioned(
                 height: 30.h,
-                top: 20.h,
+                top: 10.h,
                 child: Opacity(
                   opacity: 0.4,
                   child: Transform.rotate(

@@ -55,7 +55,7 @@ class _PatientTileState extends State<PatientTile> {
                     ),
                   ),
                   Gap(20.w),
-                  Expanded(child: Text("TOUMOUDAGOU Josiane", style: AppTextStyle.bigFilledTexte,overflow: TextOverflow.ellipsis,)),
+                  Expanded(child: Text("TOUMOUDAGOU Josiane", style: AppTextStyle.bigFilledTexte.copyWith(fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,)),
                   Gap(20.w),
                   Text("Depuis le",style: AppTextStyle.smallTexte,),
                   Gap(10.w),

@@ -36,7 +36,7 @@ class _MakeSimpleButonState extends State<MakeSimpleButon> {
               color: AppColors.grisLitePlus,
               size: 30.h,
             ),
-            Gap(10.w),
+            Gap(30.w),
             Text(widget.texte, style: AppTextStyle.buttonStyleTexte),
           ],
         ),

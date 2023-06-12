@@ -66,31 +66,34 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
           ),
           child: Row(
             children: [
-              SizedBox(
-                height: 55.h,
-                child: widget.withComboFilter? ComboBox<String>(
-                  value: widget.comboFilterSelected,
-                  items: widget.comboFilterList.map((e) {
-                    return ComboBoxItem(
-                      value: e,
-                      child: Text(e),
-                    );
-                  }).toList(),
-                  style:
-                      AppTextStyle.filedTexte.copyWith(fontWeight: FontWeight.bold),
-                  onChanged: (value) {
-                    setState(() => widget.comboFilterSelected = value);
-                  },
-                  icon: Icon(
-                    FluentIcons.chevron_down_small,
-                    size: 20.h,
+              GestureDetector(
+                onTap: () {
+                  if(!widget.comboFilterList.contains(widget.controller.text)){
+                    widget.comboFilterList.add(widget.controller.text);
+                  }
+                  widget.onFieldSubmitted(
+                      toggleFilter: widget.toggleFilterSelected,
+                      comboFilter: widget.comboFilterSelected,
+                      text: widget.controller.text);
+                },
+                child: Container(
+                  padding: EdgeInsets.all(15.h),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.rouge,
+                    boxShadow: [
+                      AppDesignEffects.shadow2,
+                    ],
                   ),
-                  iconEnabledColor: AppColors.rouge,
-                  iconDisabledColor: AppColors.gris,
-                  focusColor: AppColors.rouge,
-                  placeholder: const Text("Trier par"),
-                  elevation: 1,
-                ):const Gap(0),
+                  child: Transform.rotate(
+                    angle: 30,
+                    child: Icon(
+                      FluentIcons.search_art64,
+                      color: AppColors.blanc,
+                      size: 30.h,
+                    ),
+                  ),
+                ),
               ),
               Gap(10.w),
               Expanded(
@@ -129,34 +132,31 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
                 ),
               ),
               Gap(10.w),
-              GestureDetector(
-                onTap: () {
-                  if(!widget.comboFilterList.contains(widget.controller.text)){
-                    widget.comboFilterList.add(widget.controller.text);
-                  }
-                  widget.onFieldSubmitted(
-                      toggleFilter: widget.toggleFilterSelected,
-                      comboFilter: widget.comboFilterSelected,
-                      text: widget.controller.text);
-                },
-                child: Container(
-                  padding: EdgeInsets.all(15.h),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.rouge,
-                    boxShadow: [
-                      AppDesignEffects.shadow2,
-                    ],
+              SizedBox(
+                height: 55.h,
+                child: widget.withComboFilter? ComboBox<String>(
+                  value: widget.comboFilterSelected,
+                  items: widget.comboFilterList.map((e) {
+                    return ComboBoxItem(
+                      value: e,
+                      child: Text(e),
+                    );
+                  }).toList(),
+                  style:
+                  AppTextStyle.filedTexte.copyWith(fontWeight: FontWeight.bold),
+                  onChanged: (value) {
+                    setState(() => widget.comboFilterSelected = value);
+                  },
+                  icon: Icon(
+                    FluentIcons.chevron_down_small,
+                    size: 20.h,
                   ),
-                  child: Transform.rotate(
-                    angle: 30,
-                    child: Icon(
-                      FluentIcons.search_art64,
-                      color: AppColors.blanc,
-                      size: 30.h,
-                    ),
-                  ),
-                ),
+                  iconEnabledColor: AppColors.rouge,
+                  iconDisabledColor: AppColors.gris,
+                  focusColor: AppColors.rouge,
+                  placeholder: const Text("Trier par"),
+                  elevation: 1,
+                ):const Gap(0),
               ),
             ],
           ),

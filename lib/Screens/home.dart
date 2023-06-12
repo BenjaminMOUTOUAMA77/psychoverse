@@ -32,13 +32,13 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Gap(20),
+                  Gap(10.h),
                   AppNavBar(links: [NavLink(title: "...",function: (){})]),
-                  const Gap(20),
+                  Gap(10.h),
                   const Expanded(child: MakeQuotesSlider()),
-                  const Gap(30),
+                  Gap(10.h),
                   Expanded(child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 200.w),
+                    padding: EdgeInsets.symmetric(horizontal: 250.w),
                     child: const MakeHomeMenu(),
                   )),
                 ],

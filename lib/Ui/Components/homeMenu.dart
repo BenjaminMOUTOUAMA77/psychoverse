@@ -92,9 +92,9 @@ class _HomeMenuButtonState extends State<HomeMenuButton> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(widget.icon, color: widget.writeColor, height: 20.w+10),
+          SvgPicture.asset(widget.icon, color: widget.writeColor, height: 20.w+7),
           Gap(20.h),
-          Text(widget.title, style: AppTextStyle.mainMenuTexte.copyWith(color: widget.writeColor, fontSize: 10.sp+10, fontWeight: FontWeight.bold),),
+          Text(widget.title, style: AppTextStyle.mainMenuTexte.copyWith(color: widget.writeColor, fontSize: 10.sp+7, fontWeight: FontWeight.bold),),
         ],
       ),
     );
