@@ -16,12 +16,14 @@ class _AppFormBoxState extends State<AppFormBox> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 20.h),
+      margin: EdgeInsets.symmetric(vertical: 5.h),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.blanc,
         boxShadow: [
           AppDesignEffects.shadow1,
         ],
+        borderRadius: BorderRadius.circular(5),
       ),
       child: widget.child,
     );

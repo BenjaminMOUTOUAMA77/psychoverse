@@ -3,7 +3,8 @@ import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class Sms extends StatefulWidget {
-  const Sms({Key? key}) : super(key: key);
+  final int uiIndex;
+  const Sms({Key? key,this.uiIndex=0}) : super(key: key);
 
   @override
   State<Sms> createState() => _SmsState();

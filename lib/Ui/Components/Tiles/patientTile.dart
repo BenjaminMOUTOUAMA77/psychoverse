@@ -22,7 +22,7 @@ class _PatientTileState extends State<PatientTile> {
         clipBehavior: Clip.none,
         children:[
           Container(
-            height: 70.h,
+            height: 100.h,
             padding: EdgeInsets.only(right:5.w),
             decoration: BoxDecoration(
               color: AppColors.rouge.withOpacity(0.8),

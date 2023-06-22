@@ -105,6 +105,9 @@ class QuoteSlide extends StatefulWidget {
 class _QuoteSlideState extends State<QuoteSlide> {
   @override
   Widget build(BuildContext context) {
+    ScrollController myScrolController=ScrollController(
+      keepScrollOffset: false,
+    );
     return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -162,7 +165,7 @@ class _QuoteSlideState extends State<QuoteSlide> {
                   tint: AppColors.primary,
                   elevation: 2,
                   child: Container(
-                    padding: EdgeInsets.all(70.w),
+                    padding: EdgeInsets.only(top: 50.h,bottom: 10.h, left: 70.w,right: 70.w),
                     alignment: AlignmentDirectional.center,
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -170,28 +173,33 @@ class _QuoteSlideState extends State<QuoteSlide> {
                       color: Colors.transparent,
                     ),
                     child: AdaptiveLayout(
-                      smallLayout: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "« ${widget.texte} »",
-                            softWrap: true,
-                            overflow: TextOverflow.fade,
-                            style: AppTextStyle.quoteTexte.copyWith(fontSize: 30.sp),
-                            textAlign: TextAlign.justify,
-                          ),
-                          Gap(30.h),
-                          Text(
-                            widget.author,
-                            style: AppTextStyle.quoteTexte.copyWith(
-                                fontSize: 30.sp,
-                                fontWeight: FontWeight.w900,
-                                color: AppColors.grisLite),
-                            textAlign: TextAlign.justify,
-                          ),
-                        ],
+                      smallLayout: SingleChildScrollView(
+                        controller: myScrolController,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "« ${widget.texte} »",
+                              softWrap: true,
+                              overflow: TextOverflow.fade,
+                              style: AppTextStyle.quoteTexte.copyWith(fontSize: 30.sp+5),
+                              textAlign: TextAlign.justify,
+                            ),
+                            Gap(30.h),
+                            Text(
+                              widget.author,
+                              style: AppTextStyle.quoteTexte.copyWith(
+                                  fontSize: 30.sp,
+                                  fontWeight: FontWeight.w900,
+                                  color: AppColors.grisLite),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ],
+                        ),
                       ),
-                      mediumLayout: Column(
+                      mediumLayout: SingleChildScrollView(
+                        controller: myScrolController,
+                        child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
@@ -199,7 +207,7 @@ class _QuoteSlideState extends State<QuoteSlide> {
                             style: AppTextStyle.quoteTexte.copyWith(fontSize: 30.sp),
                             textAlign: TextAlign.justify,
                           ),
-                          Gap(50.h),
+                          Gap(40.h),
                           Text(
                             widget.author,
                             style: AppTextStyle.quoteTexte.copyWith(
@@ -209,6 +217,7 @@ class _QuoteSlideState extends State<QuoteSlide> {
                             textAlign: TextAlign.justify,
                           ),
                         ],
+                        ),
                       ),
                     ),
                   ),
@@ -216,7 +225,7 @@ class _QuoteSlideState extends State<QuoteSlide> {
               ),
               Positioned(
                 height: 30.h,
-                top: 10.h,
+                top: 20.h,
                 child: Opacity(
                   opacity: 0.4,
                   child: Transform.rotate(

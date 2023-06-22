@@ -55,8 +55,8 @@ class _AppNavBarState extends State<AppNavBar> {
                   ),
                   Gap(30.w),
                   i != widget.links.length - 1
-                      ? const Icon(FluentIcons.next)
-                      : const Gap(1),
+                      ? Icon(FluentIcons.chevron_right_small,size: 20.h,)
+                      : const Gap(0),
                 ],
               ),
             ),

@@ -8,7 +8,8 @@ import 'package:psychoverse/Screens/Patients/patientList.dart';
 import 'package:psychoverse/Ui/Components/backgroungImage.dart';
 
 class Patients extends StatefulWidget {
-  const Patients({Key? key})
+  int uiIndex;
+  Patients({Key? key,this.uiIndex=0})
       : super(key: key);
 
   @override
@@ -18,7 +19,7 @@ class Patients extends StatefulWidget {
 class _PatientsState extends State<Patients> {
   @override
   Widget build(BuildContext context) {
-    ChangePatientPageProvider page=Provider.of<ChangePatientPageProvider>(context);
+    ChangeSectionsProvider page=Provider.of<ChangeSectionsProvider>(context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ChangeSectionsProvider()),
@@ -27,10 +28,11 @@ class _PatientsState extends State<Patients> {
           children: [
             const MakeBackgroundImage(),
             PageView(
-              controller: page.pageController,
+              controller: page.getPage(widget.uiIndex),
+              onPageChanged: (value){page.setPage(value, widget.uiIndex);},
               children: <Widget>[
-                const PatientList(),
-                PatientDetail(patient: Patient(),),
+                PatientList(uiIndex: widget.uiIndex,),
+                PatientDetail(uiIndex: widget.uiIndex,),
               ],
             ),
           ],

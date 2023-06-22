@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:psychoverse/Screens/Patients/patients.dart';
+import 'package:psychoverse/Screens/Patients/mainPatient.dart';
 import 'package:psychoverse/Ui/Components/backgroungImage.dart';
 import 'package:psychoverse/screens/home.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
@@ -21,7 +21,7 @@ List<PaneItem> appNavMenu() => [
         icon: SvgPicture.asset(AppIcons.folder,
             color: AppColors.rouge, height: 20),
         title: Text('Dossiers Patients', style: AppTextStyle.navBarTexte),
-        body: const Patients(),
+        body: const MainPatient(),
       ),
       PaneItem(
         icon: SvgPicture.asset(AppIcons.agenda,

@@ -23,7 +23,7 @@ class _Titre2State extends State<Titre2> {
           height:40.h,
           width: 10.w,
           decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.5),
+            color: AppColors.rouge,
             borderRadius: BorderRadius.circular(20.r+20),
           ),
         ),
@@ -38,6 +38,7 @@ class _Titre2State extends State<Titre2> {
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 50.w),
@@ -46,6 +47,8 @@ class _Titre2State extends State<Titre2> {
                   style:
                   AppTextStyle.bigFilledTexte.copyWith(fontSize: 10.sp + 10, color: AppColors.blanc, fontWeight: FontWeight.w900),
                   textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
                 ),
               ),
             ],
@@ -56,7 +59,7 @@ class _Titre2State extends State<Titre2> {
           height:40.h,
           width: 10.w,
           decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.5),
+            color: AppColors.rouge,
             borderRadius: BorderRadius.circular(20.r+20),
           ),
         ),

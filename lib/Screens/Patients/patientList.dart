@@ -2,14 +2,15 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
-import 'package:psychoverse/Providers/changeScreenProvider.dart';
+import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/appNav/appNavBar.dart';
-import 'package:psychoverse/Ui/Components/patientTile.dart';
+import 'package:psychoverse/Ui/Components/Tiles/patientTile.dart';
 import 'package:psychoverse/Ui/Components/searchBar.dart';
 import 'package:psychoverse/Ui/Components/simpleAppButton.dart';
 
 class PatientList extends StatefulWidget {
-  const PatientList({Key? key}) : super(key: key);
+  int uiIndex;
+  PatientList({Key? key,this.uiIndex=0}) : super(key: key);
 
   @override
   State<PatientList> createState() => _PatientListState();
@@ -18,8 +19,8 @@ class PatientList extends StatefulWidget {
 class _PatientListState extends State<PatientList> {
   @override
   Widget build(BuildContext context) {
-    ChangePatientPageProvider page =
-        Provider.of<ChangePatientPageProvider>(context);
+    ChangeSectionsProvider page =
+        Provider.of<ChangeSectionsProvider>(context);
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 50.h),
       child: Center(
@@ -70,7 +71,7 @@ class _PatientListState extends State<PatientList> {
                     texte: "Nouveau Patient",
                     icon: FluentIcons.add_friend,
                     function: () => print("Initiale page : " +
-                        page.pageController.initialPage.toString()),
+                        page.getPage(widget.uiIndex).initialPage.toString()),
                   ),
                 ],
               ),
@@ -82,10 +83,7 @@ class _PatientListState extends State<PatientList> {
                 itemCount: 50,
                 itemBuilder: (context, i) => GestureDetector(
                     onTap: () {
-                      page.jump(1);
-                      print("Active page : " + page.activePage.toString());
-                      print("Initiale page : " +
-                          page.pageController.initialPage.toString());
+                      page.setPage(1, widget.uiIndex);
                     },
                     child: PatientTile()),
                 separatorBuilder: (context, i) => Gap(20.h),

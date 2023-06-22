@@ -6,7 +6,8 @@ import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class Relations extends StatefulWidget {
-  const Relations({Key? key}) : super(key: key);
+  final int uiIndex;
+  const Relations({Key? key,this.uiIndex=0}) : super(key: key);
 
   @override
   State<Relations> createState() => _RelationsState();

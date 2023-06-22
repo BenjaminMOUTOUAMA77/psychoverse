@@ -5,7 +5,8 @@ import 'package:psychoverse/Ui/Components/Titles/titre1.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class Formulaire extends StatefulWidget {
-  const Formulaire({Key? key}) : super(key: key);
+  final int uiIndex;
+  const Formulaire({Key? key,this.uiIndex=0}) : super(key: key);
 
   @override
   State<Formulaire> createState() => _FormulaireState();

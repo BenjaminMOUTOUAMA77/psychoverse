@@ -2,13 +2,13 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
-import 'package:psychoverse/Ui/Components/patientTile.dart';
 import 'package:psychoverse/Ui/Components/searchBar.dart';
 import 'package:psychoverse/Ui/Components/simpleAppButton.dart';
-import 'package:psychoverse/Ui/Components/suivisTile.dart';
+import 'package:psychoverse/Ui/Components/Tiles/suivisTile.dart';
 
 class Suivis extends StatefulWidget {
-  const Suivis({Key? key}) : super(key: key);
+  final int uiIndex;
+  const Suivis({Key? key,this.uiIndex=0}) : super(key: key);
 
   @override
   State<Suivis> createState() => _SuivisState();
@@ -73,7 +73,6 @@ class _SuivisState extends State<Suivis> {
                 Gap(70.h),
               ],
             ):const Gap(0),
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 50.w),
               child: Row(
