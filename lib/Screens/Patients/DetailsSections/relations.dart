@@ -1,13 +1,10 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
-import 'package:psychoverse/Ui/Components/Titles/titre1.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
-import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class Relations extends StatefulWidget {
-  final int uiIndex;
-  const Relations({Key? key,this.uiIndex=0}) : super(key: key);
+  final int uiKey;
+  const Relations({Key? key,this.uiKey=0}) : super(key: key);
 
   @override
   State<Relations> createState() => _RelationsState();
@@ -17,6 +14,7 @@ class _RelationsState extends State<Relations> {
   @override
   Widget build(BuildContext context) {
     return Bloc1(
+      uiKey: widget.uiKey,
       icon: FluentIcons.relationship,
       title: "Relations",
       number: 10,

@@ -6,8 +6,8 @@ import 'package:psychoverse/Ui/Components/Forms/checkBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 
 class Historique extends StatefulWidget {
-  final int uiIndex;
-  const Historique({Key? key,this.uiIndex=0}) : super(key: key);
+  final int uiKey;
+  const Historique({Key? key,this.uiKey=0}) : super(key: key);
 
   @override
   State<Historique> createState() => _HistoriqueState();
@@ -17,6 +17,7 @@ class _HistoriqueState extends State<Historique> {
   @override
   Widget build(BuildContext context) {
     return Bloc1(
+      uiKey: widget.uiKey,
       icon: FluentIcons.storyboard,
       title: "Historique",
       number: 10,

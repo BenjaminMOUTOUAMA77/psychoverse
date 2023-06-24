@@ -19,8 +19,8 @@ import 'package:psychoverse/Ui/Utils/appImages.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class Identite extends StatefulWidget {
-  final int uiIndex;
-  const Identite({Key? key,this.uiIndex=0}) : super(key: key);
+  final int uiKey;
+  const Identite({Key? key,this.uiKey=0}) : super(key: key);
 
   @override
   State<Identite> createState() => _IdentiteState();
@@ -30,6 +30,7 @@ class _IdentiteState extends State<Identite> {
   @override
   Widget build(BuildContext context) {
     return Bloc1(
+      uiKey: widget.uiKey,
       icon: FluentIcons.user_clapper,
       title: "Identité",
       number: 10,

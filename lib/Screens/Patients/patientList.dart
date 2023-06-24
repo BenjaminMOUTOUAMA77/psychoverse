@@ -9,8 +9,8 @@ import 'package:psychoverse/Ui/Components/searchBar.dart';
 import 'package:psychoverse/Ui/Components/simpleAppButton.dart';
 
 class PatientList extends StatefulWidget {
-  int uiIndex;
-  PatientList({Key? key,this.uiIndex=0}) : super(key: key);
+  int uiKey;
+  PatientList({Key? key,this.uiKey=0}) : super(key: key);
 
   @override
   State<PatientList> createState() => _PatientListState();
@@ -71,7 +71,7 @@ class _PatientListState extends State<PatientList> {
                     texte: "Nouveau Patient",
                     icon: FluentIcons.add_friend,
                     function: () => print("Initiale page : " +
-                        page.getPage(widget.uiIndex).initialPage.toString()),
+                        page.getPage(widget.uiKey).initialPage.toString()),
                   ),
                 ],
               ),
@@ -83,7 +83,7 @@ class _PatientListState extends State<PatientList> {
                 itemCount: 50,
                 itemBuilder: (context, i) => GestureDetector(
                     onTap: () {
-                      page.setPage(1, widget.uiIndex);
+                      page.setPage(1, widget.uiKey);
                     },
                     child: PatientTile()),
                 separatorBuilder: (context, i) => Gap(20.h),

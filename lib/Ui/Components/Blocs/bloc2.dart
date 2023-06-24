@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/Ui/Components/Titles/titre2.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
+import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 
 class Bloc2 extends StatefulWidget {
   final String title;
@@ -18,9 +19,9 @@ class _Bloc2State extends State<Bloc2> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 40.h),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 30.h),
         decoration: BoxDecoration(
-          color: AppColors.blanc.withOpacity(0.5),
+          color: AppColors.blanc.withOpacity(0.7),
           borderRadius: BorderRadius.circular(5.r+5),
         ),
         child: Column(

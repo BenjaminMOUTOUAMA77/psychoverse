@@ -4,8 +4,8 @@ import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 
 class Testes extends StatefulWidget {
-  final int uiIndex;
-  const Testes({Key? key,this.uiIndex=0}) : super(key: key);
+  final int uiKey;
+  const Testes({Key? key,this.uiKey=0}) : super(key: key);
 
   @override
   State<Testes> createState() => _TestesState();
@@ -15,6 +15,7 @@ class _TestesState extends State<Testes> {
   @override
   Widget build(BuildContext context) {
     return Bloc1(
+      uiKey: widget.uiKey,
       icon: FluentIcons.test_plan,
       title: "Testes",
       number: 10,

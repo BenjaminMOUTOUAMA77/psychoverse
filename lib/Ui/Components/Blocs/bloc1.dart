@@ -5,13 +5,13 @@ import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Titles/titre1.dart';
 
 class Bloc1 extends StatefulWidget {
-  int uiIndex;
+  int uiKey;
   
   final String title;
   final IconData? icon;
   final int number;
   final Widget? child;
-  Bloc1({Key? key,this.uiIndex=0,this.title = "Title", this.icon, this.number=0, this.child}) : super(key: key);
+  Bloc1({Key? key,required this.uiKey,this.title = "Title", this.icon, this.number=0, this.child}) : super(key: key);
 
   @override
   State<Bloc1> createState() => _Bloc1State();
@@ -22,7 +22,7 @@ class _Bloc1State extends State<Bloc1> {
   @override
   Widget build(BuildContext context) {
     sections = Provider.of<ChangeSectionsProvider>(context);
-    return sections.getMode(widget.uiIndex)?Padding(
+    return sections.getMode(widget.uiKey)?Padding(
       padding: EdgeInsets.symmetric(vertical: 20.h),
       child: Column(
         children: [

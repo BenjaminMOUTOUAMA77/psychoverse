@@ -8,15 +8,16 @@ import 'package:psychoverse/Screens/Patients/DetailsSections/historique.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/identitePatient.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/relations.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/sms.dart';
-import 'package:psychoverse/Screens/Patients/DetailsSections/suivis.dart';
+import 'package:psychoverse/Screens/Patients/DetailsSections/Suivis/mainSuivis.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/testes.dart';
 import 'package:psychoverse/Ui/Components/appNav/appNavBar.dart';
 import 'package:psychoverse/Ui/Components/appNav/appNavMenuPane.dart';
 import 'package:psychoverse/Ui/Components/togleButton.dart';
 
 class PatientDetail extends StatefulWidget {
-  final int uiIndex;
-  const PatientDetail({Key? key, this.uiIndex=0}) : super(key: key);
+  final int uiKey;
+  PatientDetail({Key? key, this.uiKey=0}) : super(key: key);
+
 
   @override
   State<PatientDetail> createState() => _PatientDetailState();
@@ -31,31 +32,31 @@ class _PatientDetailState extends State<PatientDetail> {
     List<AppNavMenuPane> menu = [
       AppNavMenuPane(
         title: "Identité",
-        body: Identite(uiIndex: widget.uiIndex,),
+        body: Identite(uiKey: widget.uiKey,),
       ),
       AppNavMenuPane(
         title: "Historique",
-        body: Historique(uiIndex: widget.uiIndex,),
+        body: Historique(uiKey: widget.uiKey,),
       ),
       AppNavMenuPane(
         title: "Suivis",
-        body: Suivis(uiIndex: widget.uiIndex,),
+        body: MainSuivis(uiKey: widget.uiKey,),
       ),
       AppNavMenuPane(
         title: "Testes",
-        body:Testes(uiIndex: widget.uiIndex,),
+        body:Testes(uiKey: widget.uiKey,),
       ),
       AppNavMenuPane(
         title: "Relations",
-        body: Relations(uiIndex: widget.uiIndex,),
+        body: Relations(uiKey: widget.uiKey,),
       ),
       AppNavMenuPane(
         title: "Formulaire",
-        body: Formulaire(uiIndex: widget.uiIndex,),
+        body: Formulaire(uiKey: widget.uiKey,),
       ),
       AppNavMenuPane(
         title: "SMS",
-        body: Sms(uiIndex: widget.uiIndex,),
+        body: Sms(uiKey: widget.uiKey,),
       ),
     ];
     List<String> getTitles() {
@@ -76,6 +77,9 @@ class _PatientDetailState extends State<PatientDetail> {
 
     sections = Provider.of<ChangeSectionsProvider>(context);
     bodys = getBodys();
+
+
+
     return Padding(
       padding: EdgeInsets.only(left: 50.w, right: 50.w, top: 10.h),
       child: Center(
@@ -88,7 +92,7 @@ class _PatientDetailState extends State<PatientDetail> {
                 NavLink(
                     title: "Dossiers",
                     function: () {
-                      sections.setPage(0, widget.uiIndex);
+                      sections.setPage(0, widget.uiKey);
                     }),
                 NavLink(title: "TOUMOUDAGOU Jeanne", function: () {})
               ],
@@ -111,22 +115,26 @@ class _PatientDetailState extends State<PatientDetail> {
                   child: MakeToggleMenu(
                     type: 2,
                     menu: getTitles(),
-                    selectedMenuNums: sections.getSelected(widget.uiIndex),
-                    mode: sections.getMode(widget.uiIndex),
-                    selectedMenuNum: sections.getSelectedMenuNum(widget.uiIndex),
+                    selectedMenuNums: sections.getSelected(widget.uiKey),
+                    mode: sections.getMode(widget.uiKey),
+                    selectedMenuNum: sections.getSelectedMenuNum(widget.uiKey),
                     onChanged: (
                         {mode = true,
                         menu = const [],
                         selectedMenuNums = const [2, 4],
                         selectedMenuNum = 0,
                         getSelectedOnString = const []}) {
-                      sections.setMode(mode, widget.uiIndex);
-                      sections.setSelectedNum(selectedMenuNum, widget.uiIndex);
-                      if (mode) {
-                        sections.setSelected(selectedMenuNums, widget.uiIndex);
-                      } else {
-                        sections.setSelectedNum(selectedMenuNum, widget.uiIndex);
-                      }
+
+                      setState(() {
+                        sections.setMode(mode, widget.uiKey);
+                        if (mode) {
+                          sections.setSelected(selectedMenuNums, widget.uiKey);
+                        } else {
+                          sections.setSelectedNum(selectedMenuNum, widget.uiKey);
+                        }
+
+                      });
+
                     },
                   ),
                 ),
@@ -134,17 +142,17 @@ class _PatientDetailState extends State<PatientDetail> {
             ),
             Gap(20.h),
             Expanded(
-              child: sections.getMode(widget.uiIndex)?SingleChildScrollView(
+              child: sections.getMode(widget.uiKey)?SingleChildScrollView(
                 child: Column(
                   children: List.generate(
                     bodys.length,
                     (i) => Visibility(
-                      visible: sections.getSelected(widget.uiIndex).contains(i) ? true : false,
+                      visible: sections.getSelected(widget.uiKey).contains(i) ? true : false,
                       child: bodys[i],
                     ),
                   ),
                 ),
-              ):bodys[sections.getSelectedMenuNum(widget.uiIndex)],
+              ):bodys[sections.getSelectedMenuNum(widget.uiKey)],
             ),
           ],
         ),

@@ -3,8 +3,8 @@ import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class Sms extends StatefulWidget {
-  final int uiIndex;
-  const Sms({Key? key,this.uiIndex=0}) : super(key: key);
+  final int uiKey;
+  const Sms({Key? key,this.uiKey=0}) : super(key: key);
 
   @override
   State<Sms> createState() => _SmsState();
@@ -14,6 +14,7 @@ class _SmsState extends State<Sms> {
   @override
   Widget build(BuildContext context) {
     return Bloc1(
+      uiKey: widget.uiKey,
       icon: FluentIcons.skype_message,
       title: "SMS",
       number: 10,

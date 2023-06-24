@@ -5,7 +5,8 @@ class AppImages{
 }
 
 class AppIcons{
-  static String logoSymbole = 'assets/images/lsymbSFBlanc.svg';
+  static String logoSymboleV = 'assets/images/lsymbSFBlanc.svg';
+  static String logoSymbole = 'assets/images/LSFBlanc.png';
   static String logoSymboleNB = 'assets/images/lsymbnuanceBlanc.svg';
   static String agenda = 'assets/icons/agenda.svg';
   static String ap = 'assets/icons/ap.svg';

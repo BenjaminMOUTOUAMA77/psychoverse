@@ -30,7 +30,7 @@ class _Titre2State extends State<Titre2> {
         Gap(10.w),
         Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(horizontal: 5.w+7,vertical: 18.h),
+          padding: EdgeInsets.symmetric(horizontal: 5.w+7,vertical: 12.h),
           decoration: BoxDecoration(
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(5.r+5),

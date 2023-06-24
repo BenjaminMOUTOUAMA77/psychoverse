@@ -111,7 +111,7 @@ class _ProgressionFormState extends State<ProgressionForm> {
               Gap(50.w),
               SizedBox(
                 width: 700.w,
-                child: ProgressBar(value: widget.value,
+                child: ProgressBar(value: widget.value!<0? 0:widget.value!>100? 100:widget.value,
                 strokeWidth: 10,
                   activeColor: AppColors.rouge,
                 ),
