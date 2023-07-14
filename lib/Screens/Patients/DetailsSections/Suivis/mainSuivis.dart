@@ -1,13 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/Suivis/suivis.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
-import 'package:psychoverse/Ui/Components/searchBar.dart';
-import 'package:psychoverse/Ui/Components/simpleAppButton.dart';
-import 'package:psychoverse/Ui/Components/Tiles/suivisTile.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class MainSuivis extends StatefulWidget {

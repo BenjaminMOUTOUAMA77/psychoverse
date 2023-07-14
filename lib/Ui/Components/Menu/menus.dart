@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:psychoverse/Screens/Patients/mainPatient.dart';
-import 'package:psychoverse/Ui/Components/backgroungImage.dart';
+import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
 import 'package:psychoverse/screens/home.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';

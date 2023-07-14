@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
+import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Tiles/suivisTile.dart';
-import 'package:psychoverse/Ui/Components/searchBar.dart';
-import 'package:psychoverse/Ui/Components/simpleAppButton.dart';
+import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
 
 class SuivisList extends StatefulWidget {
   final int uiKey;

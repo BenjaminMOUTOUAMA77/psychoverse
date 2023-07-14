@@ -1,12 +1,17 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/menuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/progessionForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
+import 'package:psychoverse/Ui/Components/seance.dart';
+import 'package:psychoverse/Ui/Components/Buttons/smallButton.dart';
 
 class SuiviDetail extends StatefulWidget {
   final int uiKey;
@@ -77,6 +82,39 @@ class _SuiviDetailState extends State<SuiviDetail> {
                   BigTextForm(title: "WICS",onFieldSubmitted: (value){}),
                   BigTextForm(title: "Anamnèse",onFieldSubmitted: (value){}),
                   BigTextForm(title: "Compte rendu",onFieldSubmitted: (value){}),
+                ],
+              ),
+            ),
+            Bloc2(
+              title: "Séances",
+              child: Column(
+                children: [
+                  Gap(20.h),
+                  Row(
+                    children: [
+                      Expanded(child:const Gap(0)),
+                      MakeSimpleButon(texte: "Nouvelle Séance",icon: FluentIcons.circle_addition_solid,function: (){},),
+                      Expanded(child:const Gap(0)),
+                    ],
+                  ),
+                  Seance(numero: -1,dateActuelle: DateTime.now(), dateProchaine: null),
+                  SmallButton(texte: "Autres séances",function: (){}),
+                ],
+              ),
+            ),
+            Bloc2(
+              title: "Fichiers",
+              child: Column(
+                children: [
+                  Gap(20.h),
+                  Row(
+                    children: [
+                      Expanded(child:const Gap(0)),
+                      MakeSimpleButon(texte: "Ajouter un fichier",icon: FluentIcons.circle_addition_solid,function: (){},),
+                      Expanded(child:const Gap(0)),
+                    ],
+                  ),
+
                 ],
               ),
             ),

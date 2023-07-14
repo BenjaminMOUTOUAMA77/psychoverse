@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Providers/changeScreenProvider.dart';
-import 'package:psychoverse/UI/Components/menus.dart';
+import 'package:psychoverse/Ui/Components/Menu/menus.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
 
 class MainScreensManager extends StatefulWidget {

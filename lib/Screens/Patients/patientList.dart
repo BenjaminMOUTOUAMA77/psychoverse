@@ -3,10 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
+import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/appNav/appNavBar.dart';
 import 'package:psychoverse/Ui/Components/Tiles/patientTile.dart';
-import 'package:psychoverse/Ui/Components/searchBar.dart';
-import 'package:psychoverse/Ui/Components/simpleAppButton.dart';
+import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
+import 'package:psychoverse/Ui/Generators/tilesGenerator.dart';
 
 class PatientList extends StatefulWidget {
   int uiKey;
@@ -78,7 +79,10 @@ class _PatientListState extends State<PatientList> {
             ),
             Gap(20.h),
             Expanded(
-              child: ListView.separated(
+              child:/* TilesGenerator(number: 50, tile: PatientTile(),onTap: (
+                  {index=0}){page.setPage(1, widget.uiKey);},),*/
+
+              ListView.separated(
                 padding: EdgeInsets.only(left: 50.w, right: 50.w, top: 10.h),
                 itemCount: 50,
                 itemBuilder: (context, i) => GestureDetector(

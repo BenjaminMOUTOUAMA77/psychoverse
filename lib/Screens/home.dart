@@ -4,10 +4,10 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:psychoverse/Ui/Components/Slides/quotesSlider.dart';
+import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/appNav/appNavBar.dart';
-import 'package:psychoverse/Ui/Components/backgroungImage.dart';
-import 'package:psychoverse/Ui/Components/homeMenu.dart';
-import 'package:psychoverse/Ui/Components/quotesSlider.dart';
+import 'package:psychoverse/Ui/Components/Menu/homeMenu.dart';
 import 'package:psychoverse/Providers/HomeProviders/sliderItemProvider.dart';
 
 class Home extends StatefulWidget {

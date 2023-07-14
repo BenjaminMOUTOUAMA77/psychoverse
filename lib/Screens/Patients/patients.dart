@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Screens/Patients/patientDetail.dart';
 import 'package:psychoverse/Screens/Patients/patientList.dart';
-import 'package:psychoverse/Ui/Components/backgroungImage.dart';
+import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
 
 class Patients extends StatefulWidget {
   int uiKey;
