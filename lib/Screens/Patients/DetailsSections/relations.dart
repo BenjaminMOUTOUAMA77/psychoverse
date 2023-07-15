@@ -3,9 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
+import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Tiles/relationTile.dart';
+import 'package:psychoverse/Ui/Components/TilesGroupe/relationTilesGroupe.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
-import 'package:psychoverse/Ui/Utils/appColors.dart';
+import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
 
 class Relations extends StatefulWidget {
   final int uiKey;
@@ -32,14 +34,103 @@ class _RelationsState extends State<Relations> {
               children: [
                 Row(
                   children: [
-                    Expanded(child:const Gap(0)),
-                    MakeSimpleButon(texte: "Ajouter une personne",icon: FluentIcons.circle_addition_solid,function: (){},),
-                    Expanded(child:const Gap(0)),
+                    Expanded(child: const Gap(0)),
+                    MakeSimpleButon(
+                      texte: "Ajouter une personne",
+                      icon: FluentIcons.circle_addition_solid,
+                      function: () {},
+                    ),
+                    Expanded(child: const Gap(0)),
                   ],
                 ),
                 Gap(30.h),
-                Relation(),
-                Relation(),
+                RelationTilesGroupe(list: ["","",],),
+              ],
+            ),
+          ),
+          Gap(20.h),
+          Bloc2(
+            title: "Conjoint(s)",
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(child: const Gap(0)),
+                    MakeSimpleButon(
+                      texte: "Ajouter un(e) conjoint(e)",
+                      icon: FluentIcons.circle_addition_solid,
+                      function: () {},
+                    ),
+                    Expanded(child: const Gap(0)),
+                  ],
+                ),
+                Gap(30.h),
+                RelationTilesGroupe(list: ["","",],),
+              ],
+            ),
+          ),
+          Gap(20.h),
+          Bloc2(
+            title: "Parents",
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(child: const Gap(0)),
+                    MakeSimpleButon(
+                      texte: "Ajouter un parent",
+                      icon: FluentIcons.circle_addition_solid,
+                      function: () {},
+                    ),
+                    Expanded(child: const Gap(0)),
+                  ],
+                ),
+                Gap(30.h),
+                RelationTilesGroupe(list: ["","",],),
+                Gap(20.h),
+                BigTextForm(title: "Commentaire", onFieldSubmitted: (value) {}),
+              ],
+            ),
+          ),
+          Gap(20.h),
+          Bloc2(
+            title: "Fratrie",
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(child: const Gap(0)),
+                    MakeSimpleButon(
+                      texte: "Ajouter un(e) frère/sœur",
+                      icon: FluentIcons.circle_addition_solid,
+                      function: () {},
+                    ),
+                    Expanded(child: const Gap(0)),
+                  ],
+                ),
+                Gap(30.h),
+                RelationTilesGroupe(list: ["","","","","",],),
+              ],
+            ),
+          ),
+          Gap(20.h),
+          Bloc2(
+            title: "Autres",
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(child: const Gap(0)),
+                    MakeSimpleButon(
+                      texte: "Ajouter une relation",
+                      icon: FluentIcons.circle_addition_solid,
+                      function: () {},
+                    ),
+                    Expanded(child: const Gap(0)),
+                  ],
+                ),
+                Gap(30.h),
+                RelationTilesGroupe(list: ["","",],),
               ],
             ),
           ),

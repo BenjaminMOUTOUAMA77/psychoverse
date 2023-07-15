@@ -7,11 +7,11 @@ import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/appNav/appNavBar.dart';
 import 'package:psychoverse/Ui/Components/Tiles/patientTile.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
-import 'package:psychoverse/Ui/Generators/tilesGenerator.dart';
+import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
 
 class PatientList extends StatefulWidget {
   int uiKey;
-  PatientList({Key? key,this.uiKey=0}) : super(key: key);
+  PatientList({Key? key, this.uiKey = 0}) : super(key: key);
 
   @override
   State<PatientList> createState() => _PatientListState();
@@ -20,8 +20,7 @@ class PatientList extends StatefulWidget {
 class _PatientListState extends State<PatientList> {
   @override
   Widget build(BuildContext context) {
-    ChangeSectionsProvider page =
-        Provider.of<ChangeSectionsProvider>(context);
+    ChangeSectionsProvider page = Provider.of<ChangeSectionsProvider>(context);
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 50.h),
       child: Center(
@@ -36,11 +35,7 @@ class _PatientListState extends State<PatientList> {
             MakeSearchBar(
                 withComboFilter: true,
                 withToggleFilter: true,
-                comboFilterList: [
-                  "Nom",
-                  "Ville",
-                  "Numero dossier"
-                ],
+                comboFilterList: ["Nom", "Ville", "Numero dossier"],
                 textList: [
                   "Patient 1",
                   "Patient 2",
@@ -79,18 +74,14 @@ class _PatientListState extends State<PatientList> {
             ),
             Gap(20.h),
             Expanded(
-              child:/* TilesGenerator(number: 50, tile: PatientTile(),onTap: (
-                  {index=0}){page.setPage(1, widget.uiKey);},),*/
-
-              ListView.separated(
-                padding: EdgeInsets.only(left: 50.w, right: 50.w, top: 10.h),
-                itemCount: 50,
-                itemBuilder: (context, i) => GestureDetector(
-                    onTap: () {
-                      page.setPage(1, widget.uiKey);
-                    },
-                    child: PatientTile()),
-                separatorBuilder: (context, i) => Gap(20.h),
+              child: ListViewTilesGenerator(
+                number: 50,
+                onTap: ({index = 0}) {
+                  page.setPage(1, widget.uiKey);
+                },
+                getTile: ({index = 0}) {
+                  return PatientTile();
+                },
               ),
             ),
           ],
