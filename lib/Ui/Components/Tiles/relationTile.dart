@@ -15,70 +15,64 @@ class RelationTile extends StatefulWidget {
 class _RelationTileState extends State<RelationTile> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.blanc,
-        boxShadow: [
-          AppDesignEffects.shadow1,
-        ],
-        borderRadius: BorderRadius.circular(10.r),
-      ),
-      child: Row(
-        children: [
-          Container(
-            height: 70.h,
-            width: 70.h,
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              boxShadow: [
-                AppDesignEffects.shadow2,
-              ],
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage("assets/images/im1.jpg"),
-              ),
-              border: Border.all(width: 2, color: AppColors.grisLitePlus),
-              shape: BoxShape.circle,
-            ),
-          ),
-          Gap(30.w),
-          Column(
-            children: [
-              Text(
-                "Nom et Prénom",
-                style: AppTextStyle.formStyleTexte,
-              ),
-              Gap(10.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    FluentIcons.cell_phone,
-                    size: 25.h,
-                    color: AppColors.rouge,
-                  ),
-                  Gap(20.w),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "(+229)",
-                        style: AppTextStyle.smallTexte,
-                      ),
-                      Gap(10.w),
-                      Text(
-                        "679 567 90",
-                        style: AppTextStyle.filedTexte,
-                      ),
-                    ],
-                  ),
+    return Tooltip(
+      message: "(+229) 967 856 78",
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.blanc,
+          boxShadow: [
+            AppDesignEffects.shadow1,
+          ],
+          borderRadius: BorderRadius.circular(10.r),
+        ),
+        child: Row(
+          children: [
+            Container(
+              height: 70.h,
+              width: 70.h,
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  AppDesignEffects.shadow2,
                 ],
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/images/im1.jpg"),
+                ),
+                border: Border.all(width: 2, color: AppColors.grisLitePlus),
+                shape: BoxShape.circle,
               ),
-            ],
-          ),
-        ],
+            ),
+            Gap(30.w),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Nom et Prénom",
+                  style: AppTextStyle.formStyleTexte,
+                ),
+                Gap(10.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      FluentIcons.link12,
+                      size: 25.h,
+                      color: AppColors.rouge,
+                    ),
+                    Gap(20.w),
+                    Text(
+                      "Maman biologique",
+                      style: AppTextStyle.filedTexte,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

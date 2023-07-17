@@ -18,6 +18,11 @@ class AppDesignEffects{
     blurRadius: 2,
     spreadRadius: 2,
   );
+  static BoxShadow shadow3 = BoxShadow(
+    color: AppColors.gris,
+    blurRadius: 2,
+    spreadRadius: 2,
+  );
 
 
   static BorderSide bordure1 = BorderSide(

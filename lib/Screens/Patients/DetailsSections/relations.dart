@@ -4,10 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
-import 'package:psychoverse/Ui/Components/Tiles/relationTile.dart';
 import 'package:psychoverse/Ui/Components/TilesGroupe/relationTilesGroupe.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
-import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
 
 class Relations extends StatefulWidget {
   final int uiKey;
