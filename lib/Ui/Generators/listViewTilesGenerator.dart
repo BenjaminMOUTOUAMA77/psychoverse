@@ -22,10 +22,7 @@ class _ListViewTilesGeneratorState extends State<ListViewTilesGenerator> {
         itemCount: widget.number,
         itemBuilder: (context, i) => GestureDetector(
             onTap: ()=>widget.onTap(index: i),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.w),
-              child: widget.getTile(index: i),
-            )),
+            child: widget.getTile(index: i)),
         separatorBuilder: (context, i) => Gap(20.h),
       ),
     );

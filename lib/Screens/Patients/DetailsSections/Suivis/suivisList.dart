@@ -75,7 +75,7 @@ class _SuivisListState extends State<SuivisList> {
                 )
               : const Gap(0),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50.w),
+            padding: EdgeInsets.symmetric(horizontal: 30.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -96,27 +96,12 @@ class _SuivisListState extends State<SuivisList> {
                 sections.setSuiviPage(1, widget.uiKey, widget.suiviUiKey);
               },
               getTile: ({index = 0}) {
-                return SuivisTile();
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40.w),
+                  child: SuivisTile(),
+                );
               },
             )
-            /*
-            SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 50.w),
-              child: Column(
-                children: List.generate(
-                  suivis.length,
-                  (i) => Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.h),
-                    child: GestureDetector(
-                        onTap: () {
-                          sections.setSuiviPage(
-                              1, widget.uiKey, widget.suiviUiKey);
-                        },
-                        child: SuivisTile()),
-                  ),
-                ),
-              ),
-            )*/
             ,
           ),
         ],

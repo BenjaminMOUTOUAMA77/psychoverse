@@ -14,7 +14,7 @@ class SmallButton extends StatefulWidget {
 class _SmallButtonState extends State<SmallButton> {
   @override
   Widget build(BuildContext context) {
-    return Button(child: Text(widget.texte), onPressed: ()=>widget.function,
+    return Button(child: Text(widget.texte), onPressed: widget.function,
     style: ButtonStyle(
       padding: ButtonState.all(EdgeInsets.symmetric(horizontal: 50.w,vertical: 15.h)),
       shape: ButtonState.all<OutlinedBorder>(

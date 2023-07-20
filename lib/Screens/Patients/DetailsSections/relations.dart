@@ -3,7 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
-import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
+import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/parentsPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/relationPopup.dart';
+import 'package:psychoverse/Ui/Components/Tiles/parentsTile.dart';
+import 'package:psychoverse/Ui/Components/TilesGroupe/parentsTilesGroupe.dart';
 import 'package:psychoverse/Ui/Components/TilesGroupe/relationTilesGroupe.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 
@@ -16,6 +20,8 @@ class Relations extends StatefulWidget {
 }
 
 class _RelationsState extends State<Relations> {
+  List<String> ParentList=["",""];
+
   @override
   Widget build(BuildContext context) {
     return Bloc1(
@@ -36,7 +42,7 @@ class _RelationsState extends State<Relations> {
                     MakeSimpleButon(
                       texte: "Ajouter une personne",
                       icon: FluentIcons.circle_addition_solid,
-                      function: () {},
+                      function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau contact d'urgence",save: true,child: RelationPopUp(),)),
                     ),
                     Expanded(child: const Gap(0)),
                   ],
@@ -57,7 +63,7 @@ class _RelationsState extends State<Relations> {
                     MakeSimpleButon(
                       texte: "Ajouter un(e) conjoint(e)",
                       icon: FluentIcons.circle_addition_solid,
-                      function: () {},
+                      function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau(lle) conjoint(e)",save: true,child: RelationPopUp(),)),
                     ),
                     Expanded(child: const Gap(0)),
                   ],
@@ -72,21 +78,21 @@ class _RelationsState extends State<Relations> {
             title: "Parents",
             child: Column(
               children: [
+                ParentsTilesGroupe(list: [""],qualite: "Biologiques",),
+                Gap(50.h),
                 Row(
                   children: [
                     Expanded(child: const Gap(0)),
                     MakeSimpleButon(
-                      texte: "Ajouter un parent",
+                      texte: "Ajouter des tuteurs",
                       icon: FluentIcons.circle_addition_solid,
-                      function: () {},
+                      function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau tuteurs",save: true,child: ParentsPopUp(),)),
                     ),
                     Expanded(child: const Gap(0)),
                   ],
                 ),
                 Gap(30.h),
-                RelationTilesGroupe(list: ["","",],),
-                Gap(20.h),
-                BigTextForm(title: "Commentaire", onFieldSubmitted: (value) {}),
+                ParentsTilesGroupe(list: ["","",],qualite: "Tuteurs",),
               ],
             ),
           ),
@@ -101,7 +107,7 @@ class _RelationsState extends State<Relations> {
                     MakeSimpleButon(
                       texte: "Ajouter un(e) frère/sœur",
                       icon: FluentIcons.circle_addition_solid,
-                      function: () {},
+                      function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Ajouter un(e) frère/sœur",save: true,child: RelationPopUp(),)),
                     ),
                     Expanded(child: const Gap(0)),
                   ],
@@ -122,7 +128,7 @@ class _RelationsState extends State<Relations> {
                     MakeSimpleButon(
                       texte: "Ajouter une relation",
                       icon: FluentIcons.circle_addition_solid,
-                      function: () {},
+                      function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouvelle relation",save: true,child: RelationPopUp(),)),
                     ),
                     Expanded(child: const Gap(0)),
                   ],

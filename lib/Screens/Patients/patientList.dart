@@ -4,6 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
+import 'package:psychoverse/Ui/Components/PopUps/addPatientPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 import 'package:psychoverse/Ui/Components/appNav/appNavBar.dart';
 import 'package:psychoverse/Ui/Components/Tiles/patientTile.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
@@ -59,13 +61,18 @@ class _PatientListState extends State<PatientList> {
                 }),
             Gap(60.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50.w),
+              padding: EdgeInsets.symmetric(horizontal: 40.w),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   MakeSimpleButon(
-                    texte: "Nouveau Patient",
+                    texte: "Nouveau Dossier",
                     icon: FluentIcons.add_friend,
+                    function: () => showDialog(context: context, builder:(context)=>BigPopUp(title: "Nouveau Dossier",child: AddPatientPopUp(),save: true,)),
+                  ),
+                  MakeSimpleButon(
+                    texte: "Importer / Exporter",
+                    icon: FluentIcons.save_and_close,
                     function: () => print("Initiale page : " +
                         page.getPage(widget.uiKey).initialPage.toString()),
                   ),
@@ -80,7 +87,10 @@ class _PatientListState extends State<PatientList> {
                   page.setPage(1, widget.uiKey);
                 },
                 getTile: ({index = 0}) {
-                  return PatientTile();
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40.w),
+                    child: PatientTile(),
+                  );
                 },
               ),
             ),

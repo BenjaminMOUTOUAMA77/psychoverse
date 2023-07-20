@@ -1,6 +1,14 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/checkBoxMenuForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
+import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/rorsharchPopUp.dart';
+import 'package:psychoverse/Ui/Components/TilesGroupe/rorsharchTileGroupe.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 
 class Testes extends StatefulWidget {
@@ -23,11 +31,25 @@ class _TestesState extends State<Testes> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Bloc2(
+            title: "Énnéagramme",
+            child: Column(
+              children: [
+                CheckBoxMenu(title: "Ailes 1", value: [],list: [CheckBoxUnit(element: "1"),CheckBoxUnit(element: "2"),CheckBoxUnit(element: "3"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                CheckBoxMenu(title: "Ailes 2", value: [],list: [CheckBoxUnit(element: "1"),CheckBoxUnit(element: "2"),CheckBoxUnit(element: "3"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                BigTextForm(
+                    title: "Commentaire", onFieldSubmitted: (value) {}),
+              ],
+            ),
+          ),
+          Bloc2(
             title: "Analyse Transactionnelle",
             child: Column(
               children: [
-                BigTextForm(title: "Analyse", onFieldSubmitted: (value) {}),
-                BigTextForm(title: "Résultat", onFieldSubmitted: (value) {}),
+                CheckBoxMenu(title: "Parent", value: [],list: [CheckBoxUnit(element: "Protecteur /Nourricier"),CheckBoxUnit(element: "Normatif / Dominateur"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                SuggestTextForm(title: "Adulte", list: ["Suggest1","Suggest2","Suggest3","Suggest4",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                CheckBoxMenu(title: "Enfant", value: [],list: [CheckBoxUnit(element: "Soumis"),CheckBoxUnit(element: "Adapté"),CheckBoxUnit(element: "Rebel"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                CheckBoxMenu(title: "Triangle de Karpman", value: [],list: [CheckBoxUnit(element: "Persécuteur"),CheckBoxUnit(element: "Victime"),CheckBoxUnit(element: "Sauveteur"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                BigTextForm(title: "Commentaire", onFieldSubmitted: (value) {}),
               ],
             ),
           ),
@@ -35,7 +57,7 @@ class _TestesState extends State<Testes> {
             title: "Jeux Psychologique",
             child: Column(
               children: [
-                BigTextForm(title: "Analyse", onFieldSubmitted: (value) {}),
+                BigTextForm(title: "Description", onFieldSubmitted: (value) {}),
                 BigTextForm(title: "Résultat", onFieldSubmitted: (value) {}),
               ],
             ),
@@ -44,17 +66,26 @@ class _TestesState extends State<Testes> {
             title: "Trais de personnalité",
             child: Column(
               children: [
-                BigTextForm(title: "Analyse", onFieldSubmitted: (value) {}),
-                BigTextForm(title: "Résultat", onFieldSubmitted: (value) {}),
+                CheckBoxMenu(title: "Trait", value: [],list: [CheckBoxUnit(element: "Névrotique"),CheckBoxUnit(element: "Psychotique"),CheckBoxUnit(element: "Borderline"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                SuggestTextForm(title: "Autre", list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                BigTextForm(
+                    title: "Commentaire", onFieldSubmitted: (value) {}),
               ],
             ),
           ),
           Bloc2(
-            title: "Énéagramme",
+            title: "Rorshard",
             child: Column(
               children: [
-                BigTextForm(title: "Analyse", onFieldSubmitted: (value) {}),
-                BigTextForm(title: "Résultat", onFieldSubmitted: (value) {}),
+                Gap(20.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    MakeSimpleButon(texte: "Ajouter un nouveau Rorshard",icon: FluentIcons.circle_addition_solid,function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Rorsharch",child: RorsharchPopUp(),save: true,)),),
+                  ],
+                ),
+                Gap(40.h),
+                RorsharchTileGroupe(list: ["","","","","","","","","","","","","",],),
               ],
             ),
           ),

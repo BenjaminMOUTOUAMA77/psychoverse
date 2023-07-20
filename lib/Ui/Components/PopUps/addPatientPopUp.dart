@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:image_fade/image_fade.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/checkBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/numberTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/phoneForm.dart';
@@ -13,14 +14,14 @@ import 'package:psychoverse/Ui/Components/PopUps/imagePopUp.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
 
-class RelationPopUp extends StatefulWidget {
-  const RelationPopUp({Key? key}) : super(key: key);
+class AddPatientPopUp extends StatefulWidget {
+  const AddPatientPopUp({Key? key}) : super(key: key);
 
   @override
-  State<RelationPopUp> createState() => _RelationPopUpState();
+  State<AddPatientPopUp> createState() => _AddPatientPopUpState();
 }
 
-class _RelationPopUpState extends State<RelationPopUp> {
+class _AddPatientPopUpState extends State<AddPatientPopUp> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -181,6 +182,9 @@ class _RelationPopUpState extends State<RelationPopUp> {
             ],
             onChanged: (value) {},
             onFieldSubmitted: (value) {}),
+        NumberTextForm(title: "Ordre de naissance chez le père",onChanged: (value){}, onFieldSubmitted: (value){}),
+        NumberTextForm(title: "Ordre de naissance chez la mère",onChanged: (value){}, onFieldSubmitted: (value){}),
+        CheckBoxMenu(title: "Loisirs", value: [],list: [CheckBoxUnit(element: "Loisir 1"),CheckBoxUnit(element: "Loisir 2"),CheckBoxUnit(element: "Loisir 3"),CheckBoxUnit(element: "Loisir 4"),CheckBoxUnit(element: "Loisir 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
         BigTextForm(
             title: "Commentaire", onFieldSubmitted: (value) {}),
         const Gap(30),

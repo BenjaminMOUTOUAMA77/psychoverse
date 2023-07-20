@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
@@ -10,6 +9,10 @@ import 'package:psychoverse/Ui/Components/Forms/menuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/progessionForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
+import 'package:psychoverse/Ui/Components/PopUps/SeancesListPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/addSeancePopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/middlePopUp.dart';
 import 'package:psychoverse/Ui/Components/seance.dart';
 import 'package:psychoverse/Ui/Components/Buttons/smallButton.dart';
 
@@ -79,7 +82,10 @@ class _SuiviDetailState extends State<SuiviDetail> {
                 children: [
                   SuggestTextForm(title: "Stratégie thérapeutique",list: ["Masculin","Féminin","Trans","Autre"],onChanged: (value){}, onFieldSubmitted: (value){}),
                   SuggestTextForm(title: "Analyse fonctionnelle",list: ["Masculin","Féminin","Trans","Autre"],onChanged: (value){}, onFieldSubmitted: (value){}),
+                  BigTextForm(title: "Objectif du travail",onFieldSubmitted: (value){}),
+                  BigTextForm(title: "Hypothèse",onFieldSubmitted: (value){}),
                   BigTextForm(title: "WICS",onFieldSubmitted: (value){}),
+                  MenuForm(title: "Trame d'Anamnèse",list: ["Autre","Féminin","Trans","Autre"],onChanged: (value){}, onFieldSubmitted: (value){}),
                   BigTextForm(title: "Anamnèse",onFieldSubmitted: (value){}),
                   BigTextForm(title: "Compte rendu",onFieldSubmitted: (value){}),
                 ],
@@ -91,14 +97,16 @@ class _SuiviDetailState extends State<SuiviDetail> {
                 children: [
                   Gap(20.h),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(child:const Gap(0)),
-                      MakeSimpleButon(texte: "Nouvelle Séance",icon: FluentIcons.circle_addition_solid,function: (){},),
-                      Expanded(child:const Gap(0)),
+                      MakeSimpleButon(texte: "Nouvelle Séance",icon: FluentIcons.circle_addition_solid,function: ()=> showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouvelle séance",child: AddSeancePopUp(),save: true,),),),
                     ],
                   ),
                   Seance(numero: -1,dateActuelle: DateTime.now(), dateProchaine: null),
-                  SmallButton(texte: "Autres séances",function: (){}),
+                  SmallButton(texte: "Autres séances",function: ()=>showDialog(
+                    context: context,
+                    builder: (context) => MiddlePopUp(title: "Séances",child: SeanceListPopUp(list: ["","","","","","","","","","",],),),
+                  ),),
                 ],
               ),
             ),
@@ -108,10 +116,9 @@ class _SuiviDetailState extends State<SuiviDetail> {
                 children: [
                   Gap(20.h),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(child:const Gap(0)),
                       MakeSimpleButon(texte: "Ajouter un fichier",icon: FluentIcons.circle_addition_solid,function: (){},),
-                      Expanded(child:const Gap(0)),
                     ],
                   ),
 
