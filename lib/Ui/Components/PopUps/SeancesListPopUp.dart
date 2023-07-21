@@ -22,7 +22,7 @@ class _SeanceListPopUpState extends State<SeanceListPopUp> {
         Navigator.pop(context);
         showDialog(
           context: context,
-          builder: (context) => BigPopUp(title: "Séances du Samedi 14 Avril 2023",child: SeanceDetailPopUp(),),
+          builder: (context) => BigPopUp(title: "Séances du Samedi 14 Avril 2023",delete: true,child: SeanceDetailPopUp(),),
         );
       },
       getTile: ({index = 0}) {

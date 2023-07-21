@@ -24,7 +24,7 @@ class _RorsharchTileGroupeState extends State<RorsharchTileGroupe> {
         onTap: ({index = 0}) {
           showDialog(
             context: context,
-            builder: (context) => BigPopUp(title: "Rorsharch",child: RorsharchPopUp(),),
+            builder: (context) => BigPopUp(title: "Rorsharch",delete: true,child: RorsharchPopUp(),),
           );
         },
         getTile: ({index = 0}) {
