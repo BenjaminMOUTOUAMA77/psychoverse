@@ -1,3 +1,4 @@
+import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -105,86 +106,232 @@ class _AddPatientPopUpState extends State<AddPatientPopUp> {
           ],
         ),
         Gap(20.h),
-        SuggestTextForm(
-            title: "Genre",
-            list: ["Masculin", "Féminin", "Trans", "Autre"],
-            onChanged: (value) {},
-            onFieldSubmitted: (value) {}),
-        NumberTextForm(
-            title: "Âge",
-            onChanged: (value) {},
-            onFieldSubmitted: (value) {}),
-        SuggestTextForm(
-            title: "Condition de résidence",
-            list: [
-              "Placé",
-              "Exil",
-              "Prison",
-              "Location",
-              "Maison propre"
+        AdaptiveLayout(
+          mediumLayout: Row(
+            children: [
+              Expanded(child: SuggestTextForm(
+                  title: "Genre",
+                  list: ["Masculin", "Féminin", "Trans", "Autre"],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),),
+              Gap(20.w),
+              Expanded(child: NumberTextForm(
+                  title: "Âge",
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),),
             ],
-            onChanged: (value) {},
-            onFieldSubmitted: (value) {}),
-        SuggestTextForm(
-            title: "Èthnie",
-            list: [
-              "Placé",
-              "Exil",
-              "Prison",
-              "Location",
-              "Maison propre"
+          ),
+          smallLayout: Column(
+            children: [
+              SuggestTextForm(
+                  title: "Genre",
+                  list: ["Masculin", "Féminin", "Trans", "Autre"],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
+              NumberTextForm(
+                  title: "Âge",
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
             ],
-            onChanged: (value) {},
-            onFieldSubmitted: (value) {}),
-        AppDateForm(
-            title: "Date de naissance",
-            onChanged: (value) {},
-            onFieldSubmitted: (value) {}),
-        SuggestTextForm(
-            title: "Lieu de naissance",
-            list: [
-              "Calavi",
-              "Cotonou",
-              "Natitingou",
+          ),
+        ),
+        AdaptiveLayout(
+          mediumLayout: Row(
+            children: [
+              Expanded(child: SuggestTextForm(
+                  title: "Condition de résidence",
+                  list: [
+                    "Placé",
+                    "Exil",
+                    "Prison",
+                    "Location",
+                    "Maison propre"
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),),
+              Gap(20.w),
+              Expanded(child: SuggestTextForm(
+                  title: "Èthnie",
+                  list: [
+                    "Placé",
+                    "Exil",
+                    "Prison",
+                    "Location",
+                    "Maison propre"
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),),
             ],
-            onChanged: (value) {},
-            onFieldSubmitted: (value) {}),
-        SuggestTextForm(
-            title: "Niveau d'étude",
-            list: [
-              "Analphabet",
-              "Maternelle",
-              "CEP",
-              "Doctorat",
-              "Mater",
+          ),
+          smallLayout: Column(
+            children: [
+              SuggestTextForm(
+                  title: "Condition de résidence",
+                  list: [
+                    "Placé",
+                    "Exil",
+                    "Prison",
+                    "Location",
+                    "Maison propre"
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
+              SuggestTextForm(
+                  title: "Èthnie",
+                  list: [
+                    "Placé",
+                    "Exil",
+                    "Prison",
+                    "Location",
+                    "Maison propre"
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
             ],
-            onChanged: (value) {},
-            onFieldSubmitted: (value) {}),
-        SuggestTextForm(
-            title: "Profession",
-            list: [
-              "Analphabet",
-              "Maternelle",
-              "CEP",
-              "Doctorat",
-              "Mater",
+          ),
+        ),
+        AdaptiveLayout(
+          mediumLayout: Row(
+            children: [
+              Expanded(child: AppDateForm(
+                  title: "Date de naissance",
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),),
+              Gap(20.w),
+              Expanded(child: SuggestTextForm(
+                  title: "Lieu de naissance",
+                  list: [
+                    "Calavi",
+                    "Cotonou",
+                    "Natitingou",
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),),
             ],
-            onChanged: (value) {},
-            onFieldSubmitted: (value) {}),
-        SuggestTextForm(
-            title: "Réligion",
-            list: [
-              "Analphabet",
-              "Maternelle",
-              "CEP",
-              "Doctorat",
-              "Mater",
+          ),
+          smallLayout: Column(
+            children: [
+              AppDateForm(
+                  title: "Date de naissance",
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
+              SuggestTextForm(
+                  title: "Lieu de naissance",
+                  list: [
+                    "Calavi",
+                    "Cotonou",
+                    "Natitingou",
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
             ],
-            onChanged: (value) {},
-            onFieldSubmitted: (value) {}),
-        NumberTextForm(title: "Ordre de naissance chez le père",onChanged: (value){}, onFieldSubmitted: (value){}),
-        NumberTextForm(title: "Ordre de naissance chez la mère",onChanged: (value){}, onFieldSubmitted: (value){}),
-        CheckBoxMenu(title: "Loisirs", value: [],list: [CheckBoxUnit(element: "Loisir 1"),CheckBoxUnit(element: "Loisir 2"),CheckBoxUnit(element: "Loisir 3"),CheckBoxUnit(element: "Loisir 4"),CheckBoxUnit(element: "Loisir 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+          ),
+        ),
+        AdaptiveLayout(
+          mediumLayout: Row(
+            children: [
+              Expanded(child: SuggestTextForm(
+                  title: "Niveau d'étude",
+                  list: [
+                    "Analphabet",
+                    "Maternelle",
+                    "CEP",
+                    "Doctorat",
+                    "Mater",
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),),
+              Gap(20.w),
+              Expanded(child: SuggestTextForm(
+                  title: "Profession",
+                  list: [
+                    "Analphabet",
+                    "Maternelle",
+                    "CEP",
+                    "Doctorat",
+                    "Mater",
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),),
+            ],
+          ),
+          smallLayout: Column(
+            children: [
+              SuggestTextForm(
+                  title: "Niveau d'étude",
+                  list: [
+                    "Analphabet",
+                    "Maternelle",
+                    "CEP",
+                    "Doctorat",
+                    "Mater",
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
+              SuggestTextForm(
+                  title: "Profession",
+                  list: [
+                    "Analphabet",
+                    "Maternelle",
+                    "CEP",
+                    "Doctorat",
+                    "Mater",
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
+            ],
+          ),
+        ),
+        AdaptiveLayout(
+          mediumLayout: Row(
+            children: [
+              Expanded(child: SuggestTextForm(
+                  title: "Réligion",
+                  list: [
+                    "Analphabet",
+                    "Maternelle",
+                    "CEP",
+                    "Doctorat",
+                    "Mater",
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),),
+              Gap(20.w),
+              Expanded(child: NumberTextForm(title: "Ordre de naissance chez le père",onChanged: (value){}, onFieldSubmitted: (value){}),),
+            ],
+          ),
+          smallLayout: Column(
+            children: [
+              SuggestTextForm(
+                  title: "Réligion",
+                  list: [
+                    "Analphabet",
+                    "Maternelle",
+                    "CEP",
+                    "Doctorat",
+                    "Mater",
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
+              NumberTextForm(title: "Ordre de naissance chez le père",onChanged: (value){}, onFieldSubmitted: (value){}),
+            ],
+          ),
+        ),
+        AdaptiveLayout(
+          mediumLayout: Row(
+            children: [
+              Expanded(child: NumberTextForm(title: "Ordre de naissance chez la mère",onChanged: (value){}, onFieldSubmitted: (value){}),),
+              Gap(20.w),
+              Expanded(child: CheckBoxMenu(title: "Loisirs", value: [],list: [CheckBoxUnit(element: "Loisir 1"),CheckBoxUnit(element: "Loisir 2"),CheckBoxUnit(element: "Loisir 3"),CheckBoxUnit(element: "Loisir 4"),CheckBoxUnit(element: "Loisir 5"),],onChanged: (value){},onFieldSubmitted: (value){},),),
+            ],
+          ),
+          smallLayout: Column(
+            children: [
+              NumberTextForm(title: "Ordre de naissance chez la mère",onChanged: (value){}, onFieldSubmitted: (value){}),
+              CheckBoxMenu(title: "Loisirs", value: [],list: [CheckBoxUnit(element: "Loisir 1"),CheckBoxUnit(element: "Loisir 2"),CheckBoxUnit(element: "Loisir 3"),CheckBoxUnit(element: "Loisir 4"),CheckBoxUnit(element: "Loisir 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+            ],
+          ),
+        ),
         BigTextForm(
             title: "Commentaire", onFieldSubmitted: (value) {}),
         const Gap(30),

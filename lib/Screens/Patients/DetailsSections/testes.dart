@@ -81,7 +81,7 @@ class _TestesState extends State<Testes> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    MakeSimpleButon(texte: "Ajouter un nouveau Rorshard",icon: FluentIcons.circle_addition_solid,function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Rorsharch",child: RorsharchPopUp(),save: true,)),),
+                    SimpleAppButon(texte: "Ajouter un nouveau Rorshard",icon: FluentIcons.circle_addition_solid,function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Rorsharch",child: RorsharchPopUp(),save: true,)),),
                   ],
                 ),
                 Gap(40.h),

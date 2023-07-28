@@ -65,12 +65,12 @@ class _PatientListState extends State<PatientList> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  MakeSimpleButon(
+                  SimpleAppButon(
                     texte: "Nouveau Dossier",
                     icon: FluentIcons.add_friend,
                     function: () => showDialog(context: context, builder:(context)=>BigPopUp(title: "Nouveau Dossier",child: AddPatientPopUp(),save: true,)),
                   ),
-                  MakeSimpleButon(
+                  SimpleAppButon(
                     texte: "Importer / Exporter",
                     icon: FluentIcons.save_and_close,
                     function: () => print("Initiale page : " +

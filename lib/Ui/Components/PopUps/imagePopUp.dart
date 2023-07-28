@@ -1,11 +1,12 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:open_file/open_file.dart';
+import 'package:psychoverse/Functions/pickFiles.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class ImagePopUp extends StatefulWidget {
   String image;
-
   ImagePopUp({Key? key,this.image="assets/images/im7.jpg"}) : super(key: key);
 
   @override
@@ -13,6 +14,7 @@ class ImagePopUp extends StatefulWidget {
 }
 
 class _ImagePopUpState extends State<ImagePopUp> {
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,19 +39,36 @@ class _ImagePopUpState extends State<ImagePopUp> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Tooltip(
+                    message: "Agrandire",
+                    child: IconButton(
+                      style: ButtonStyle(
+                        elevation: ButtonState.all(1),
+                        backgroundColor: ButtonState.all(AppColors.rouge),
+                      ),
+                      icon: Icon(
+                        FluentIcons.picture_position,
+                        color: AppColors.blancGrise,
+                        size: 30.h,
+                        weight: 100,
+                      ),
+                      onPressed: () => OpenFile.open("C:/Users/Utilisateur/StudioProjects/psychoverse/"+widget.image),
+                    ),
+                  ),
+                  Gap(30.w),
+                  Tooltip(
                     message: "Modifier",
                     child: IconButton(
                       style: ButtonStyle(
                         elevation: ButtonState.all(1),
-                        backgroundColor: ButtonState.all(AppColors.blancGrise),
+                        backgroundColor: ButtonState.all(AppColors.rouge),
                       ),
                       icon: Icon(
                         FluentIcons.page_header_edit,
-                        color: AppColors.primary,
+                        color: AppColors.blancGrise,
                         size: 30.h,
                         weight: 100,
                       ),
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => pickFile(context),
                     ),
                   ),
                   Gap(30.w),

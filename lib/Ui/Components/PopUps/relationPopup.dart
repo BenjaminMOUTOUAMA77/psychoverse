@@ -107,6 +107,7 @@ class _RelationPopUpState extends State<RelationPopUp> {
         Gap(20.h),
         AdaptiveLayout(
           mediumLayout: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: SuggestTextForm(
@@ -140,6 +141,7 @@ class _RelationPopUpState extends State<RelationPopUp> {
         ),
         AdaptiveLayout(
           mediumLayout: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: SuggestTextForm(
@@ -199,6 +201,7 @@ class _RelationPopUpState extends State<RelationPopUp> {
         ),
         AdaptiveLayout(
           mediumLayout: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: AppDateForm(
@@ -240,6 +243,7 @@ class _RelationPopUpState extends State<RelationPopUp> {
         ),
         AdaptiveLayout(
           mediumLayout: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: SuggestTextForm(

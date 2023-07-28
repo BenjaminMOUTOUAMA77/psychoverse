@@ -5,23 +5,23 @@ import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
-class MakeSimpleButon extends StatefulWidget {
+class SimpleAppButon extends StatefulWidget {
   VoidCallback function;
   final IconData icon;
   final String texte;
-  MakeSimpleButon({Key? key, this.texte="Button", this.icon=FluentIcons.app_icon_default,required this.function}) : super(key: key);
+  SimpleAppButon({Key? key, this.texte="Button", this.icon=FluentIcons.app_icon_default,required this.function}) : super(key: key);
 
   @override
-  State<MakeSimpleButon> createState() => _MakeSimpleButonState();
+  State<SimpleAppButon> createState() => _SimpleAppButonState();
 }
 
-class _MakeSimpleButonState extends State<MakeSimpleButon> {
+class _SimpleAppButonState extends State<SimpleAppButon> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.function,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 12.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
           color: AppColors.primary,
@@ -36,7 +36,7 @@ class _MakeSimpleButonState extends State<MakeSimpleButon> {
               color: AppColors.grisLitePlus,
               size: 30.h,
             ),
-            Gap(30.w),
+            Gap(20.w),
             Text(widget.texte, style: AppTextStyle.buttonStyleTexte),
           ],
         ),

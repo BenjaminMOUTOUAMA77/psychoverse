@@ -79,7 +79,7 @@ class _SuivisListState extends State<SuivisList> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                MakeSimpleButon(
+                SimpleAppButon(
                   texte: "Nouveau Suivi",
                   icon: FluentIcons.dependency_add,
                   function: () {},

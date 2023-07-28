@@ -1,9 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
+import 'package:psychoverse/Functions/initialisation.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/screens/mainScreensManager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:psychoverse/delocalisation/initialisation.dart';
 import 'Providers/changeScreenProvider.dart';
 
 void main() async{

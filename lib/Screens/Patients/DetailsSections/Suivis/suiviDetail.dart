@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Functions/pickFiles.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
@@ -19,7 +20,8 @@ import 'package:psychoverse/Ui/Components/Buttons/smallButton.dart';
 class SuiviDetail extends StatefulWidget {
   final int uiKey;
   final int suiviUiKey;
-  const SuiviDetail({Key? key,this.uiKey=0,required this.suiviUiKey}) : super(key: key);
+  const SuiviDetail({Key? key, this.uiKey = 0, required this.suiviUiKey})
+      : super(key: key);
 
   @override
   State<SuiviDetail> createState() => _SuiviDetailState();
@@ -36,15 +38,43 @@ class _SuiviDetailState extends State<SuiviDetail> {
               title: "À Propos",
               child: Column(
                 children: [
-                  TextForm(title: "Pseudonyme",onChanged: (value){}, onFieldSubmitted: (value){}),
-                  SuggestTextForm(title: "Type de Suivi",list: ["Masculin","Féminin","Trans","Autre"],onChanged: (value){}, onFieldSubmitted: (value){}),
-                  TextForm(title: "Sujet",onChanged: (value){}, onFieldSubmitted: (value){}),
-                  BigTextForm(title: "Motif",onFieldSubmitted: (value){}),
-                  AppDateForm(title: "Date de début",onChanged: (value){}, onFieldSubmitted: (value){}),
-                  MenuForm(title: "Degré de manifestation",list: ["Élevé","Moyen","Faible"],onChanged: (value){}, onFieldSubmitted: (value){}),
-                  MenuForm(title: "Fréquence d'apparition",list: ["Très souvent","Rarement","Très rarement"],onChanged: (value){}, onFieldSubmitted: (value){}),
-                  MenuForm(title: "Évolution",list: ["S'améliore","Stagne","Empire"],onChanged: (value){}, onFieldSubmitted: (value){}),
-                  ProgressionForm(title: "Degré d'implication",onChanged: (value){}, onFieldSubmitted: (value){}),
+                  TextForm(
+                      title: "Pseudonyme",
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                  SuggestTextForm(
+                      title: "Type de Suivi",
+                      list: ["Masculin", "Féminin", "Trans", "Autre"],
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                  TextForm(
+                      title: "Sujet",
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                  BigTextForm(title: "Motif", onFieldSubmitted: (value) {}),
+                  AppDateForm(
+                      title: "Date de début",
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                  MenuForm(
+                      title: "Degré de manifestation",
+                      list: ["Élevé", "Moyen", "Faible"],
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                  MenuForm(
+                      title: "Fréquence d'apparition",
+                      list: ["Très souvent", "Rarement", "Très rarement"],
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                  MenuForm(
+                      title: "Évolution",
+                      list: ["S'améliore", "Stagne", "Empire"],
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                  ProgressionForm(
+                      title: "Degré d'implication",
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
                 ],
               ),
             ),
@@ -52,9 +82,15 @@ class _SuiviDetailState extends State<SuiviDetail> {
               title: "Symptômes cognitifs, Comportementaux et affectifs",
               child: Column(
                 children: [
-                  BigTextForm(title: "Impression personnel sur le problème",onFieldSubmitted: (value){}),
-                  BigTextForm(title: "Impact sur le comportement",onFieldSubmitted: (value){}),
-                  BigTextForm(title: "Impact sur la vie affective",onFieldSubmitted: (value){}),
+                  BigTextForm(
+                      title: "Impression personnel sur le problème",
+                      onFieldSubmitted: (value) {}),
+                  BigTextForm(
+                      title: "Impact sur le comportement",
+                      onFieldSubmitted: (value) {}),
+                  BigTextForm(
+                      title: "Impact sur la vie affective",
+                      onFieldSubmitted: (value) {}),
                 ],
               ),
             ),
@@ -62,9 +98,15 @@ class _SuiviDetailState extends State<SuiviDetail> {
               title: "Conséquences du problème",
               child: Column(
                 children: [
-                  BigTextForm(title: "Avantages tirés du problème",onFieldSubmitted: (value){}),
-                  BigTextForm(title: "Pertes engendrés par le problème",onFieldSubmitted: (value){}),
-                  BigTextForm(title: "Impact sur la vie affective",onFieldSubmitted: (value){}),
+                  BigTextForm(
+                      title: "Avantages tirés du problème",
+                      onFieldSubmitted: (value) {}),
+                  BigTextForm(
+                      title: "Pertes engendrés par le problème",
+                      onFieldSubmitted: (value) {}),
+                  BigTextForm(
+                      title: "Impact sur la vie affective",
+                      onFieldSubmitted: (value) {}),
                 ],
               ),
             ),
@@ -72,7 +114,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
               title: "Réaction de l'entourage",
               child: Column(
                 children: [
-                  BigTextForm(title: "Entourage",onFieldSubmitted: (value){}),
+                  BigTextForm(title: "Entourage", onFieldSubmitted: (value) {}),
                 ],
               ),
             ),
@@ -80,14 +122,29 @@ class _SuiviDetailState extends State<SuiviDetail> {
               title: "Écris",
               child: Column(
                 children: [
-                  SuggestTextForm(title: "Stratégie thérapeutique",list: ["Masculin","Féminin","Trans","Autre"],onChanged: (value){}, onFieldSubmitted: (value){}),
-                  SuggestTextForm(title: "Analyse fonctionnelle",list: ["Masculin","Féminin","Trans","Autre"],onChanged: (value){}, onFieldSubmitted: (value){}),
-                  BigTextForm(title: "Objectif du travail",onFieldSubmitted: (value){}),
-                  BigTextForm(title: "Hypothèse",onFieldSubmitted: (value){}),
-                  BigTextForm(title: "WICS",onFieldSubmitted: (value){}),
-                  MenuForm(title: "Trame d'Anamnèse",list: ["Autre","Féminin","Trans","Autre"],onChanged: (value){}, onFieldSubmitted: (value){}),
-                  BigTextForm(title: "Anamnèse",onFieldSubmitted: (value){}),
-                  BigTextForm(title: "Compte rendu",onFieldSubmitted: (value){}),
+                  SuggestTextForm(
+                      title: "Stratégie thérapeutique",
+                      list: ["Masculin", "Féminin", "Trans", "Autre"],
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                  SuggestTextForm(
+                      title: "Analyse fonctionnelle",
+                      list: ["Masculin", "Féminin", "Trans", "Autre"],
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                  BigTextForm(
+                      title: "Objectif du travail",
+                      onFieldSubmitted: (value) {}),
+                  BigTextForm(title: "Hypothèse", onFieldSubmitted: (value) {}),
+                  BigTextForm(title: "WICS", onFieldSubmitted: (value) {}),
+                  MenuForm(
+                      title: "Trame d'Anamnèse",
+                      list: ["Autre", "Féminin", "Trans", "Autre"],
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                  BigTextForm(title: "Anamnèse", onFieldSubmitted: (value) {}),
+                  BigTextForm(
+                      title: "Compte rendu", onFieldSubmitted: (value) {}),
                 ],
               ),
             ),
@@ -99,14 +156,47 @@ class _SuiviDetailState extends State<SuiviDetail> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      MakeSimpleButon(texte: "Nouvelle Séance",icon: FluentIcons.circle_addition_solid,function: ()=> showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouvelle séance",child: AddSeancePopUp(),save: true,),),),
+                      SimpleAppButon(
+                        texte: "Nouvelle Séance",
+                        icon: FluentIcons.circle_addition_solid,
+                        function: () => showDialog(
+                          context: context,
+                          builder: (context) => BigPopUp(
+                            title: "Nouvelle séance",
+                            child: AddSeancePopUp(),
+                            save: true,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                  Seance(numero: -1,dateActuelle: DateTime.now(), dateProchaine: null),
-                  SmallButton(texte: "Autres séances",function: ()=>showDialog(
-                    context: context,
-                    builder: (context) => MiddlePopUp(title: "Séances",child: SeanceListPopUp(list: ["","","","","","","","","","",],),),
-                  ),),
+                  Seance(
+                      numero: -1,
+                      dateActuelle: DateTime.now(),
+                      dateProchaine: null),
+                  SmallAppButton(
+                    texte: "Autres séances",
+                    function: () => showDialog(
+                      context: context,
+                      builder: (context) => MiddlePopUp(
+                        title: "Séances",
+                        child: SeanceListPopUp(
+                          list: [
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -118,10 +208,13 @@ class _SuiviDetailState extends State<SuiviDetail> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      MakeSimpleButon(texte: "Ajouter un fichier",icon: FluentIcons.circle_addition_solid,function: (){},),
+                      SimpleAppButon(
+                        texte: "Ajouter un fichier",
+                        icon: FluentIcons.circle_addition_solid,
+                        function: () => pickFile(context),
+                      ),
                     ],
                   ),
-
                 ],
               ),
             ),

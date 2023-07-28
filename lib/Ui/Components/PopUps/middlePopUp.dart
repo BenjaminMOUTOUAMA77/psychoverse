@@ -8,7 +8,7 @@ import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 class MiddlePopUp extends StatefulWidget {
   String title;
   Widget child;
-  MiddlePopUp({Key? key,this.title="PopUp",this.child= const Text("PopUp"),}) : super(key: key);
+  MiddlePopUp({Key? key,this.title="Midle PopUp",this.child= const Text("Middle PopUp"),}) : super(key: key);
 
   @override
   State<MiddlePopUp> createState() => _MiddlePopUpState();
