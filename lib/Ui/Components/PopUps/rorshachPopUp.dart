@@ -8,14 +8,14 @@ import 'package:psychoverse/Ui/Components/PopUps/imagePopUp.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
 
-class RorsharchPopUp extends StatefulWidget {
-  const RorsharchPopUp({Key? key}) : super(key: key);
+class RorshachPopUp extends StatefulWidget {
+  const RorshachPopUp({Key? key}) : super(key: key);
 
   @override
-  State<RorsharchPopUp> createState() => _RorsharchPopUpState();
+  State<RorshachPopUp> createState() => _RorshachPopUpState();
 }
 
-class _RorsharchPopUpState extends State<RorsharchPopUp> {
+class _RorshachPopUpState extends State<RorshachPopUp> {
   @override
   Widget build(BuildContext context) {
     return Column(

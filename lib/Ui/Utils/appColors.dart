@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fluent_ui/fluent_ui.dart';
 
 class AppColors{
@@ -14,4 +16,17 @@ class AppColors{
   static Color grisLite = const Color(0xFFBBBBBB);
   static Color grisLitePlus = const Color(0xFFEAEAEA);
   static Color blancGrise = const Color(0xFFF3F3F3);
+}
+
+Color getColor(){
+  int nbr = Random().nextInt(3);
+  if(nbr==0){
+    return AppColors.primary;
+  }else if(nbr==1){
+    return AppColors.rouge;
+  }else if(nbr==2){
+    return AppColors.gris;
+  }else{
+    return AppColors.blancGrise;
+  }
 }

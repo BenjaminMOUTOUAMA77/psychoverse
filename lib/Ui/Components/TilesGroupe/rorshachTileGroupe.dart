@@ -1,19 +1,19 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/rorsharchPopUp.dart';
-import 'package:psychoverse/Ui/Components/Tiles/rorsharchTile.dart';
+import 'package:psychoverse/Ui/Components/PopUps/rorshachPopUp.dart';
+import 'package:psychoverse/Ui/Components/Tiles/rorshachTile.dart';
 import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
 
-class RorsharchTileGroupe extends StatefulWidget {
+class RorshachTileGroupe extends StatefulWidget {
   List<String> list;
-  RorsharchTileGroupe({Key? key,this.list = const [],}) : super(key: key);
+  RorshachTileGroupe({Key? key,this.list = const [],}) : super(key: key);
 
   @override
-  State<RorsharchTileGroupe> createState() => _RorsharchTileGroupeState();
+  State<RorshachTileGroupe> createState() => _RorshachTileGroupeState();
 }
 
-class _RorsharchTileGroupeState extends State<RorsharchTileGroupe> {
+class _RorshachTileGroupeState extends State<RorshachTileGroupe> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -24,11 +24,11 @@ class _RorsharchTileGroupeState extends State<RorsharchTileGroupe> {
         onTap: ({index = 0}) {
           showDialog(
             context: context,
-            builder: (context) => BigPopUp(title: "Rorsharch",delete: true,child: RorsharchPopUp(),),
+            builder: (context) => BigPopUp(title: "Rorsharch",delete: true,child: RorshachPopUp(),),
           );
         },
         getTile: ({index = 0}) {
-          return RorsharchTile();
+          return RorshachTile();
         },
       ),
     );

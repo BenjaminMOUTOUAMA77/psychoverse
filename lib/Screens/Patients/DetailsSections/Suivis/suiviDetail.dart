@@ -1,8 +1,11 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Functions/appPaths.dart';
 import 'package:psychoverse/Functions/pickFiles.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/Boxs/FileBox.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
@@ -16,6 +19,7 @@ import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/middlePopUp.dart';
 import 'package:psychoverse/Ui/Components/seance.dart';
 import 'package:psychoverse/Ui/Components/Buttons/smallButton.dart';
+import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class SuiviDetail extends StatefulWidget {
   final int uiKey;
@@ -28,8 +32,51 @@ class SuiviDetail extends StatefulWidget {
 }
 
 class _SuiviDetailState extends State<SuiviDetail> {
+  late String path="C:\\Users\\Utilisateur\\AppData\\Roaming\\com.example\\psychoverse\\Files";
+  init() async {
+    path = await getAppPath(appFilesDirectory: true);
+  }
   @override
   Widget build(BuildContext context) {
+    init();
+    late List<PlatformFile> files = [
+      PlatformFile(
+        path: "${path}\\16600_oliFood1.ai",
+        name: "oliFood1",
+        size: 0,
+      ),
+      PlatformFile(
+        path: "${path}\\23756_CV_BenjaminMOUTOUAMA.pdf",
+        name: "CV_BenjaminMOUTOUAMA",
+        size: 0,
+      ),
+      PlatformFile(
+        path: "${path}\\37587_CIP.png",
+        name: "CIP",
+        size: 0,
+      ),
+      PlatformFile(
+        path: "${path}\\38482_CIP.txt",
+        name: "CIP",
+        size: 0,
+      ),
+      PlatformFile(
+        path: "${path}\\56852_ADA EHI - Open Doors - Lyrics francais.mp4",
+        name: "ADA EHI - Open Doors - Lyrics francais",
+        size: 0,
+      ),
+      PlatformFile(
+        path: "${path}\\67006_Ada Ehi - Everything - Traduction francaise.mp4",
+        name: "Ada Ehi - Everything - Traduction francaise",
+        size: 0,
+      ),
+      PlatformFile(
+        path: "${path}\\71239_OliFood2.png",
+        name: "OliFood2",
+        size: 0,
+      ),
+    ];
+    late List<String> extensions = ["ai","pdf","png","txt","mp4","mp4","png",];
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
@@ -211,9 +258,28 @@ class _SuiviDetailState extends State<SuiviDetail> {
                       SimpleAppButon(
                         texte: "Ajouter un fichier",
                         icon: FluentIcons.circle_addition_solid,
-                        function: () => pickFile(context,multiple: true),
+                        function: () => pickFile(context, multiple: true),
                       ),
                     ],
+                  ),
+                  Gap(50.h),
+                  SizedBox(
+                    height: files.length / 4 * 500 - 200*2.h,
+                    width: double.infinity,
+                    child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 200,
+                          childAspectRatio: 3.7/4,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20,
+                        ),
+                        itemCount: files.length,
+                        itemBuilder: (BuildContext context, index) {
+                          return FileBox(
+                            file: files[index],
+                            extension: extensions[index],
+                          );
+                        }),
                   ),
                 ],
               ),

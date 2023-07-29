@@ -8,14 +8,14 @@ import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
 
-class RorsharchTile extends StatefulWidget {
-  const RorsharchTile({Key? key}) : super(key: key);
+class RorshachTile extends StatefulWidget {
+  const RorshachTile({Key? key}) : super(key: key);
 
   @override
-  State<RorsharchTile> createState() => _RorsharchTileState();
+  State<RorshachTile> createState() => _RorshachTileState();
 }
 
-class _RorsharchTileState extends State<RorsharchTile> {
+class _RorshachTileState extends State<RorshachTile> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

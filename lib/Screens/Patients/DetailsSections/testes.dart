@@ -7,8 +7,8 @@ import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/checkBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/rorsharchPopUp.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/rorsharchTileGroupe.dart';
+import 'package:psychoverse/Ui/Components/PopUps/rorshachPopUp.dart';
+import 'package:psychoverse/Ui/Components/TilesGroupe/rorshachTileGroupe.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 
 class Testes extends StatefulWidget {
@@ -74,18 +74,18 @@ class _TestesState extends State<Testes> {
             ),
           ),
           Bloc2(
-            title: "Rorshard",
+            title: "Rorshach",
             child: Column(
               children: [
                 Gap(20.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SimpleAppButon(texte: "Ajouter un nouveau Rorshard",icon: FluentIcons.circle_addition_solid,function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Rorsharch",child: RorsharchPopUp(),save: true,)),),
+                    SimpleAppButon(texte: "Ajouter un nouveau Rorshach",icon: FluentIcons.circle_addition_solid,function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Rorsharch",child: RorshachPopUp(),save: true,)),),
                   ],
                 ),
                 Gap(40.h),
-                RorsharchTileGroupe(list: ["","","","","","","","","","","","","",],),
+                RorshachTileGroupe(list: ["","","","","","","","","","","","","",],),
               ],
             ),
           ),

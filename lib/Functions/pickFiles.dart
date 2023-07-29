@@ -29,6 +29,7 @@ Future<void> pickFile(BuildContext context,{bool image=false,bool custum=false,L
     lockParentWindow: true,
     allowedExtensions: extensions,
   );
+
   if (result != null) {
     List<PlatformFile> files = result.files;
     showDialog(context: context, builder: (context)=>SmallPopUp(title: "Choisir un fichier",child: PickFilePopUp(files: files,),));
