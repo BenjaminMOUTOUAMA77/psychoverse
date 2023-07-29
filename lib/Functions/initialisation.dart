@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:psychoverse/Functions/appPaths.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:adaptive_layout/adaptive_layout.dart';
 
@@ -24,4 +25,6 @@ initialisation() async{
     mediumScreenMinWidth: 1008,
     largeScreenMinWidth: 1300,
   );
+
+  createAppFolders();
 }

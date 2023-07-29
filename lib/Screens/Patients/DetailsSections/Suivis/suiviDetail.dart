@@ -211,7 +211,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
                       SimpleAppButon(
                         texte: "Ajouter un fichier",
                         icon: FluentIcons.circle_addition_solid,
-                        function: () => pickFile(context),
+                        function: () => pickFile(context,multiple: true),
                       ),
                     ],
                   ),

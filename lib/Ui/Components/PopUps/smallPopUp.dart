@@ -22,7 +22,7 @@ class _SmallPopUpState extends State<SmallPopUp> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 600.w-200,),
+      padding: EdgeInsets.symmetric(horizontal: 800.w-200,),
       child: Column(
         children: [
           Expanded(child: Gap(0)),
@@ -32,7 +32,7 @@ class _SmallPopUpState extends State<SmallPopUp> {
             padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 40.w),
             decoration: BoxDecoration(
               color: AppColors.blancGrise,
-              borderRadius: BorderRadius.circular(10.r),
+              borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 AppDesignEffects.shadow3,
               ],
