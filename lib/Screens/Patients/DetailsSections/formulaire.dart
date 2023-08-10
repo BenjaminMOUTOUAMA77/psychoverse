@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
-import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class Formulaire extends StatefulWidget {
   final int uiKey;
@@ -21,9 +21,13 @@ class _FormulaireState extends State<Formulaire> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            height: 300,
-            color: AppColors.primary,
+          Bloc2(
+            title: "Dynamique contents",
+            child: Column(
+              children: [
+
+              ],
+            ),
           ),
         ],
       ),

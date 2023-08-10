@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:psychoverse/Screens/Architecture/architecture.dart';
 import 'package:psychoverse/Screens/Patients/mainPatient.dart';
 import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
 import 'package:psychoverse/screens/home.dart';
@@ -33,7 +34,7 @@ List<PaneItem> appNavMenu() => [
         icon: SvgPicture.asset(AppIcons.architecture,
             color: AppColors.rouge, height: 20),
         title: Text('Architecture', style: AppTextStyle.navBarTexte),
-        body: defaultPage,
+        body: const Architecture(),
       ),
       PaneItem(
         icon: SvgPicture.asset(AppIcons.save,

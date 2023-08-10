@@ -17,7 +17,7 @@ class _RorshachTileGroupeState extends State<RorshachTileGroupe> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 440.h * widget.list.length,
+      height: 445.h * widget.list.length,
       width: double.infinity,
       child: ListViewTilesGenerator(
         number: widget.list.length,

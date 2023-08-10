@@ -8,10 +8,18 @@ import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 class SmallPopUp extends StatefulWidget {
   String title;
   Widget child;
+  bool delete;
+  bool save;
+  Function? deleteFunction;
+  Function? saveFunction;
   SmallPopUp({
     Key? key,
     this.title = "Small PopUp",
     this.child = const Text("Small PopUp"),
+    this.delete = false,
+    this.save = false,
+    this.deleteFunction,
+    this.saveFunction,
   }) : super(key: key);
 
   @override
@@ -22,7 +30,9 @@ class _SmallPopUpState extends State<SmallPopUp> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 800.w-200,),
+      padding: EdgeInsets.symmetric(
+        horizontal: 800.w - 200,
+      ),
       child: Column(
         children: [
           Expanded(child: Gap(0)),
@@ -41,7 +51,44 @@ class _SmallPopUpState extends State<SmallPopUp> {
               children: [
                 Row(
                   children: [
-                    Gap(40.w),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        widget.save? Tooltip(
+                          message: "Enrégistrer",
+                          child: IconButton(
+                            style: ButtonStyle(
+                              elevation: ButtonState.all(1),
+                              backgroundColor: ButtonState.all(AppColors.rouge),
+                            ),
+                            icon: Icon(
+                              FluentIcons.save,
+                              color: AppColors.blancGrise,
+                              size: 30.h,
+                              weight: 100,
+                            ),
+                            onPressed: ()=>widget.saveFunction,
+                          ),
+                        ):Gap(0),
+                        widget.delete? Tooltip(
+                          message: "Supprimer",
+                          child: IconButton(
+                            style: ButtonStyle(
+                              elevation: ButtonState.all(1),
+                              backgroundColor: ButtonState.all(AppColors.rouge),
+                            ),
+                            icon: Icon(
+                              FluentIcons.delete,
+                              color: AppColors.blancGrise,
+                              size: 30.h,
+                              weight: 100,
+                            ),
+                            onPressed: () => widget.deleteFunction,
+                          ),
+                        ):Gap(0),
+                      ],
+                    ),
+                    Gap(10.w),
                     Expanded(
                       child: Titre2(
                         title: widget.title,
@@ -53,7 +100,8 @@ class _SmallPopUpState extends State<SmallPopUp> {
                       child: IconButton(
                         style: ButtonStyle(
                           elevation: ButtonState.all(1),
-                          backgroundColor: ButtonState.all(AppColors.blancGrise),
+                          backgroundColor:
+                              ButtonState.all(AppColors.blancGrise),
                         ),
                         icon: Icon(
                           FluentIcons.cancel,

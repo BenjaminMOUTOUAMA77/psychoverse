@@ -19,22 +19,50 @@ class _ParentsPopUpState extends State<ParentsPopUp> {
     return Column(
       children: [
         Gap(30.h),
-        RelationTilesGroupe(list: ["",""],),
+        RelationTilesGroupe(
+          list: ["", ""],
+        ),
         Gap(20.h),
         AdaptiveLayout(
           mediumLayout: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(child: SuggestTextForm(title: "Situation Matrimoniale",list: ["En couple","Divorcés",],onChanged: (value){}, onFieldSubmitted: (value){})),
+              Expanded(
+                child: SuggestTextForm(
+                    title: "Situation Matrimoniale",
+                    list: [
+                      "En couple",
+                      "Divorcés",
+                    ],
+                    onChanged: (value) {},
+                    onFieldSubmitted: (value) {}),
+              ),
               Gap(20.w),
-              Expanded(child: SuggestTextForm(title: "État Matrimoniale",list: ["Polygamie","Monogamie","Poluandrie"],onChanged: (value){}, onFieldSubmitted: (value){})),
+              Expanded(
+                child: SuggestTextForm(
+                    title: "État Matrimoniale",
+                    list: ["Polygamie", "Monogamie", "Poluandrie"],
+                    onChanged: (value) {},
+                    onFieldSubmitted: (value) {}),
+              ),
             ],
           ),
           smallLayout: Column(
             children: [
-              SuggestTextForm(title: "Situation Matrimoniale",list: ["En couple","Divorcés",],onChanged: (value){}, onFieldSubmitted: (value){}),
+              SuggestTextForm(
+                  title: "Situation Matrimoniale",
+                  list: [
+                    "En couple",
+                    "Divorcés",
+                  ],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
               Gap(20.h),
-              SuggestTextForm(title: "État Matrimoniale",list: ["Polygamie","Monogamie","Poluandrie"],onChanged: (value){}, onFieldSubmitted: (value){}),
+              SuggestTextForm(
+                  title: "État Matrimoniale",
+                  list: ["Polygamie", "Monogamie", "Poluandrie"],
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
             ],
           ),
         ),

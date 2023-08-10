@@ -7,6 +7,7 @@ import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
+import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class RorshachTile extends StatefulWidget {
   const RorshachTile({Key? key}) : super(key: key);
@@ -75,16 +76,11 @@ class _RorshachTileState extends State<RorshachTile> {
             Gap(20.w),
             Expanded(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextForm(
-                      title: "Designation",
-                      onChanged: (value){},
-                      onFieldSubmitted: (value){},
-                    ),
-                    BigTextForm(
-                      title: "Résultat" ,
-              onFieldSubmitted: (value) {},
-            ),
+                    Text("Nom du Rorshach",style: AppTextStyle.navBarTexte,),
+                    Gap(20.h),
+                    Text("Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.",)
                   ],
                 ),),
           ],

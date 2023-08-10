@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
+import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Providers/changeScreenProvider.dart';
 import 'package:psychoverse/Ui/Components/Menu/menus.dart';
@@ -17,6 +18,7 @@ class _MainScreensManagerState extends State<MainScreensManager> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ChangeSectionsProvider()),
+        ChangeNotifierProvider(create: (_) => ChangeSectionsProviderArchitecture()),
       ],
       child: NavigationView(
         pane: NavigationPane(

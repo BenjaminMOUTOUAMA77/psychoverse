@@ -260,7 +260,7 @@ class _AppToggleMenuButtonState extends State<AppToggleMenuButton> {
           shape: ButtonState.all<OutlinedBorder>(
             RoundedRectangleBorder(
               side: BorderSide(
-                  color: AppColors.grisLite.withOpacity(0.3),
+                  color: AppColors.blancGrise,
                   width: 1,
                   strokeAlign: BorderSide.strokeAlignCenter),
               borderRadius: BorderRadius.all(
@@ -271,14 +271,14 @@ class _AppToggleMenuButtonState extends State<AppToggleMenuButton> {
           padding: ButtonState.all(
               EdgeInsets.symmetric(horizontal: 20.w+5, vertical: 10.h+5)),
           textStyle: ButtonState.all(
-              TextStyle(color: AppColors.gris, fontSize: 7.sp+10, fontWeight: FontWeight.bold)),
-          backgroundColor: ButtonState.all(AppColors.blancGrise),
+              TextStyle(color: AppColors.primary, fontSize: 7.sp+10, fontWeight: FontWeight.bold)),
+          backgroundColor: ButtonState.all(AppColors.blancGrise.withOpacity(0.3)),
         ),
         checkedButtonStyle: ButtonStyle(
           shape: ButtonState.all<OutlinedBorder>(
             RoundedRectangleBorder(
               side: BorderSide(
-                  color: AppColors.grisLite.withOpacity(0.3),
+                  color: AppColors.blancGrise,
                   width: 1,
                   strokeAlign: BorderSide.strokeAlignCenter),
               borderRadius: BorderRadius.all(
@@ -300,7 +300,7 @@ class _AppToggleMenuButtonState extends State<AppToggleMenuButton> {
       child: Text(
         widget.texte,
         style:
-            TextStyle(color: widget.checked ? AppColors.blanc : AppColors.gris),
+            TextStyle(color: widget.checked ? AppColors.blanc : AppColors.primary),
       ),
     );
   }

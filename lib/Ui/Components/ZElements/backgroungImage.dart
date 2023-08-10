@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
 
 class MakeBackgroundImage extends StatefulWidget {
@@ -11,7 +12,8 @@ class _MakeBackgroundImageState extends State<MakeBackgroundImage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(AppImages.pattern), fit: BoxFit.cover, opacity: 0.04),
+        image: DecorationImage(image: AssetImage(AppImages.pattern), fit: BoxFit.cover, opacity: 0),
+        color: AppColors.blanc,
       ),
     );
   }

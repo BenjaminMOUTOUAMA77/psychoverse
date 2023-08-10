@@ -143,6 +143,7 @@ class ChangeSectionsProvider extends ChangeNotifier{
     notifyListeners();
   }
 }
+
 class PatientUi{
   static int theSuiviKey=0;
   late int patientId;

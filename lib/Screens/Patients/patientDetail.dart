@@ -11,52 +11,68 @@ import 'package:psychoverse/Screens/Patients/DetailsSections/sms.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/Suivis/mainSuivis.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/testes.dart';
 import 'package:psychoverse/Ui/Components/Buttons/togleButton.dart';
+import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/brouillonPopUp.dart';
 import 'package:psychoverse/Ui/Components/appNav/appNavBar.dart';
 import 'package:psychoverse/Ui/Components/appNav/appNavMenuPane.dart';
+import 'package:psychoverse/Ui/Utils/appColors.dart';
+import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
+import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class PatientDetail extends StatefulWidget {
   final int uiKey;
-  PatientDetail({Key? key, this.uiKey=0}) : super(key: key);
-
+  PatientDetail({Key? key, this.uiKey = 0}) : super(key: key);
 
   @override
   State<PatientDetail> createState() => _PatientDetailState();
 }
 
 class _PatientDetailState extends State<PatientDetail> {
-
   @override
   Widget build(BuildContext context) {
-
     late ChangeSectionsProvider sections;
     List<AppNavMenuPane> menu = [
       AppNavMenuPane(
         title: "Identité",
-        body: Identite(uiKey: widget.uiKey,),
+        body: Identite(
+          uiKey: widget.uiKey,
+        ),
       ),
       AppNavMenuPane(
         title: "Historique",
-        body: Historique(uiKey: widget.uiKey,),
+        body: Historique(
+          uiKey: widget.uiKey,
+        ),
       ),
       AppNavMenuPane(
         title: "Suivis",
-        body: MainSuivis(uiKey: widget.uiKey,),
+        body: MainSuivis(
+          uiKey: widget.uiKey,
+        ),
       ),
       AppNavMenuPane(
         title: "Testes",
-        body:Testes(uiKey: widget.uiKey,),
+        body: Testes(
+          uiKey: widget.uiKey,
+        ),
       ),
       AppNavMenuPane(
         title: "Relations",
-        body: Relations(uiKey: widget.uiKey,),
+        body: Relations(
+          uiKey: widget.uiKey,
+        ),
       ),
       AppNavMenuPane(
         title: "Formulaire",
-        body: Formulaire(uiKey: widget.uiKey,),
+        body: Formulaire(
+          uiKey: widget.uiKey,
+        ),
       ),
       AppNavMenuPane(
         title: "SMS",
-        body: Sms(uiKey: widget.uiKey,),
+        body: Sms(
+          uiKey: widget.uiKey,
+        ),
       ),
     ];
     List<String> getTitles() {
@@ -66,6 +82,7 @@ class _PatientDetailState extends State<PatientDetail> {
       }
       return list;
     }
+
     List<Widget> getBodys() {
       List<Widget> list = [];
       for (var i in menu) {
@@ -73,12 +90,11 @@ class _PatientDetailState extends State<PatientDetail> {
       }
       return list;
     }
+
     late List<Widget> bodys;
 
     sections = Provider.of<ChangeSectionsProvider>(context);
     bodys = getBodys();
-
-
 
     return Padding(
       padding: EdgeInsets.only(left: 50.w, right: 50.w, top: 10.h),
@@ -86,28 +102,104 @@ class _PatientDetailState extends State<PatientDetail> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Gap(20.h),
-            AppNavBar(
-              links: [
-                NavLink(
-                    title: "Dossiers",
-                    function: () {
-                      sections.setPage(0, widget.uiKey);
-                    }),
-                NavLink(title: "TOUMOUDAGOU Jeanne", function: () {})
-              ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 300.w),
+              child: CommandBarCard(
+                borderColor: AppColors.blancGrise,
+                borderRadius: BorderRadius.circular(10),
+                child: CommandBar(
+                  overflowBehavior: CommandBarOverflowBehavior.dynamicOverflow,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  primaryItems: [
+                    CommandBarBuilderItem(
+                      builder: (context, mode, w) => Tooltip(
+                        message: "Page précédente",
+                        child: w,
+                      ),
+                      wrappedItem: CommandBarButton(
+                        icon: Icon(FluentIcons.chrome_back,color: AppColors.rouge,),
+                        label: const Text('Retour'),
+                        onPressed: () {
+                          sections.setPage(0, widget.uiKey);
+                        },
+                      ),
+                    ),
+                    const CommandBarSeparator(),
+                    CommandBarBuilderItem(
+                      builder: (context, mode, w) => Tooltip(
+                        message: "Dossier",
+                        child: w,
+                      ),
+                      wrappedItem: CommandBarButton(
+                        icon: Icon(FluentIcons.fabric_user_folder,color: AppColors.rouge,),
+                        label: const Text('TOUMOUDAGOU Jeanne'),
+                        onPressed: () {},
+                      ),
+                    ),
+                    const CommandBarSeparator(),
+                    CommandBarBuilderItem(
+                      builder: (context, mode, w) => Tooltip(
+                        message: "Exporter en pdf",
+                        child: w,
+                      ),
+                      wrappedItem: CommandBarButton(
+                        icon: Icon(FluentIcons.pdf,color: AppColors.rouge,),
+                        label: const Text('PDF'),
+                        onPressed: () {},
+                      ),
+                    ),
+                    const CommandBarSeparator(),
+                    CommandBarBuilderItem(
+                      builder: (context, mode, w) => Tooltip(
+                        message: "Exporter en fichier BD",
+                        child: w,
+                      ),
+                      wrappedItem: CommandBarButton(
+                        icon: Icon(FluentIcons.page_data,color: AppColors.rouge,),
+                        label: const Text('BD'),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                  secondaryItems: [
+                    CommandBarBuilderItem(
+                      builder: (context, mode, w) => Tooltip(
+                        message: "Supprimer le dossier",
+                        child: w,
+                      ),
+                      wrappedItem: CommandBarButton(
+                        icon: Icon(FluentIcons.delete,color: AppColors.rouge,),
+                        label: const Text('Supprimer'),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             Gap(20.h),
             Row(
               children: [
                 GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    children: [
-                      const Icon(FluentIcons.sad_solid),
-                      Gap(10.w),
-                      const Text("Unsaved"),
-                    ],
+                  onTap: () {
+                    showDialog(context: context, builder: (context)=>BigPopUp(title: "Brouillon",child: BrouillonPopUp(),),);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10),
+                    decoration: BoxDecoration(
+                      color: AppColors.rouge,
+                      borderRadius: BorderRadius.circular(5),
+                      boxShadow: [
+                        AppDesignEffects.shadow0,
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(FluentIcons.text_document_edit,color: AppColors.blanc,),
+                        Gap(10),
+                        Text("Brouillon",style: AppTextStyle.filedTexte.copyWith(fontWeight: FontWeight.bold,color: AppColors.blanc),),
+                      ],
+                    ),
                   ),
                 ),
                 Gap(50.w),
@@ -124,17 +216,15 @@ class _PatientDetailState extends State<PatientDetail> {
                         selectedMenuNums = const [2, 4],
                         selectedMenuNum = 0,
                         getSelectedOnString = const []}) {
-
                       setState(() {
                         sections.setMode(mode, widget.uiKey);
                         if (mode) {
                           sections.setSelected(selectedMenuNums, widget.uiKey);
                         } else {
-                          sections.setSelectedNum(selectedMenuNum, widget.uiKey);
+                          sections.setSelectedNum(
+                              selectedMenuNum, widget.uiKey);
                         }
-
                       });
-
                     },
                   ),
                 ),
@@ -142,17 +232,23 @@ class _PatientDetailState extends State<PatientDetail> {
             ),
             Gap(20.h),
             Expanded(
-              child: sections.getMode(widget.uiKey)?SingleChildScrollView(
-                child: Column(
-                  children: List.generate(
-                    bodys.length,
-                    (i) => Visibility(
-                      visible: sections.getSelected(widget.uiKey).contains(i) ? true : false,
-                      child: bodys[i],
-                    ),
-                  ),
-                ),
-              ):bodys[sections.getSelectedMenuNum(widget.uiKey)],
+              child: sections.getMode(widget.uiKey)
+                  ? SingleChildScrollView(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: Column(
+                        children: List.generate(
+                          bodys.length,
+                          (i) => Visibility(
+                            visible:
+                                sections.getSelected(widget.uiKey).contains(i)
+                                    ? true
+                                    : false,
+                            child: bodys[i],
+                          ),
+                        ),
+                      ),
+                    )
+                  : bodys[sections.getSelectedMenuNum(widget.uiKey)],
             ),
           ],
         ),
