@@ -26,3 +26,17 @@ class ChangeSectionsProviderArchitecture extends ChangeNotifier{
     notifyListeners();
   }
 }
+
+class ArchitectureFormulairePagesManagerProvider extends ChangeNotifier{
+  late PageController architectureFormulairePage = PageController(
+    initialPage: 0,
+  );
+  PageController getPage() => architectureFormulairePage;
+  setPage(int value){
+    architectureFormulairePage.jumpToPage(value);
+    architectureFormulairePage=PageController(
+      initialPage: value,
+    );
+    notifyListeners();
+  }
+}

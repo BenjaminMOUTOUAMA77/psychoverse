@@ -24,40 +24,57 @@ class _MainPatientState extends State<MainPatient> {
 
   @override
   Widget build(BuildContext context) {
-    sections=Provider.of<ChangeSectionsProvider>(context);
+    sections = Provider.of<ChangeSectionsProvider>(context);
 
     Tab generateTab(int index, key) {
       late Tab tab;
       tab = Tab(
-        icon: SvgPicture.asset(AppIcons.logoSymboleV,height: 25.h,color: AppColors.grisLite,),
-        text: Text('Document $index'),
-        semanticLabel: 'Document #$index',
-        body: Patients(uiKey: key,),
+        icon: SvgPicture.asset(
+          AppIcons.logoSymboleV,
+          height: 25.h,
+          color: AppColors.grisLite,
+        ),
+        text: Text('Document $key'),
+        semanticLabel: 'Document #$key',
+        body: Patients(
+          uiKey: key,
+        ),
         onClosed: () {
-          if(this.mounted){
-            setState(() {
-              sections.removePatientUi(key);
-              sections.removeTab(tab);
-              if (sections.getCurrentIndex() > 0){sections.setCurrentIndex(sections.getCurrentIndex() -1);}
-            });
-          }else{
-            print("Impossible");
-            sections.removeTab(tab);
-            if (sections.getCurrentIndex() > 0){sections.setCurrentIndex(sections.getCurrentIndex() -1);}
+          void closeFunction(){
+            if (sections.getCurrentIndex() > 0) {
+              if(sections.findIndex(key)<=sections.getCurrentIndex()){
+                sections.setCurrentIndex(sections.getCurrentIndex() - 1);
+              }
+            }else{
+              if(sections.getTabs().length==1){
+                sections.setPage(0,key);
+              }
+            }
             sections.removePatientUi(key);
-            print("UiIndex : ${sections.findIndex(key)}");
+            sections.removeTab(tab);
           }
-
+          if (this.mounted) {
+            setState(() {
+              closeFunction();
+            });
+          } else {
+            closeFunction();
+          }
         },
       );
       return tab;
     }
-    addTab(){
+
+    addTab() {
       setState(() {
-        sections.addTab(generateTab(sections.getTabs().length,sections.addPatientUi()));
+        int uikey = sections.addPatientUi();
+        sections.addTab(
+            generateTab(sections.getTabs().length,uikey));
+        sections.setCurrentIndex(sections.findIndex(uikey));
       });
     }
-    onReorder(oldIndex, newIndex){
+
+    onReorder(oldIndex, newIndex) {
       setState(() {
         if (oldIndex < newIndex) {
           newIndex -= 1;
@@ -72,12 +89,15 @@ class _MainPatientState extends State<MainPatient> {
         }
       });
     }
-    if(sections.getTabs().isEmpty){addTab();}
+
+    if (sections.getTabs().isEmpty) {
+      addTab();
+    }
 
     return TabView(
       tabs: sections.getTabs(),
       currentIndex: sections.getCurrentIndex(),
-      onChanged: (index)=>sections.setCurrentIndex(index),
+      onChanged: (index) => sections.setCurrentIndex(index),
       tabWidthBehavior: TabWidthBehavior.equal,
       closeButtonVisibility: CloseButtonVisibilityMode.onHover,
       showScrollButtons: true,

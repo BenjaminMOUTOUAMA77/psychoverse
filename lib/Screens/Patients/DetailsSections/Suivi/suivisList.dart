@@ -4,6 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
+import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/suiviPopUp.dart';
 import 'package:psychoverse/Ui/Components/Tiles/suivisTile.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
 import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
@@ -40,6 +42,21 @@ class _SuivisListState extends State<SuivisList> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SimpleAppButon(
+                  texte: "Nouveau Suivi",
+                  icon: FluentIcons.dependency_add,
+                  function: () {
+                    showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Suivi",save: true,child: SuiviPopUp(),));
+                  },
+                ),
+              ],
+            ),
+          ),
           suivis.length > 20
               ? Column(
                   children: [
@@ -74,19 +91,6 @@ class _SuivisListState extends State<SuivisList> {
                   ],
                 )
               : const Gap(0),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SimpleAppButon(
-                  texte: "Nouveau Suivi",
-                  icon: FluentIcons.dependency_add,
-                  function: () {},
-                ),
-              ],
-            ),
-          ),
           Gap(20.h),
           Expanded(
             child:

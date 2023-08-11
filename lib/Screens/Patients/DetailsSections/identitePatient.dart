@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:image_fade/image_fade.dart';
+import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/checkBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
@@ -33,8 +34,8 @@ class _IdentiteState extends State<Identite> {
       icon: FluentIcons.user_clapper,
       title: "Identité",
       number: 10,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.w),
+      child: Bloc2(
+        title: "Dossier 54",
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -68,21 +69,6 @@ class _IdentiteState extends State<Identite> {
                           ),
                         ],
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "N :",
-                          style: AppTextStyle.buttonStyleTexte.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w100),
-                        ),
-                        Text(
-                          "54",
-                          style: AppTextStyle.buttonStyleTexte.copyWith(
-                              color: AppColors.primary, fontSize: 10.sp + 15),
-                        ),
-                      ],
                     ),
                     Expanded(
                       child: Row(

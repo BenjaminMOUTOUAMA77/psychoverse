@@ -20,41 +20,43 @@ class PickFilePopUp extends StatefulWidget {
 class _PickFilePopUpState extends State<PickFilePopUp> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Gap(20.h),
-        SizedBox(
-          height: 700.h-200,
-          child: ListViewTilesGenerator(
-            number: widget.files.length,
-            onTap: ({index = 0}) {
-              OpenFile.open(widget.files[index].path);
-            },
-            getTile: ({index = 0}) {
-              return Padding(
-                padding: EdgeInsets.only(right: 10.w),
-                child: SmallFileTile(file: widget.files[index],),
-              );
-            },
-          ),
-        ),
-        Gap(30.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SimpleAppButon(
-              function: () {
-                for(PlatformFile file in widget.files){
-                  saveFile(file);
-                }
-                Navigator.pop(context);
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Gap(20.h),
+          SizedBox(
+            height: 700.h-200,
+            child: ListViewTilesGenerator(
+              number: widget.files.length,
+              onTap: ({index = 0}) {
+                OpenFile.open(widget.files[index].path);
               },
-              texte: "Charger",
-              icon: FluentIcons.to_do_logo_inverse,
+              getTile: ({index = 0}) {
+                return Padding(
+                  padding: EdgeInsets.only(right: 10.w),
+                  child: SmallFileTile(file: widget.files[index],),
+                );
+              },
             ),
-          ],
-        ),
-      ],
+          ),
+          Gap(30.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SimpleAppButon(
+                function: () {
+                  for(PlatformFile file in widget.files){
+                    saveFile(file);
+                  }
+                  Navigator.pop(context);
+                },
+                texte: "Charger",
+                icon: FluentIcons.to_do_logo_inverse,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

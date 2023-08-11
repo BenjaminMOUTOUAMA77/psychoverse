@@ -18,6 +18,7 @@ class _SuivisState extends State<Suivis> {
   Widget build(BuildContext context) {
     ChangeSectionsProvider sections=Provider.of<ChangeSectionsProvider>(context);
     return PageView(
+          pageSnapping: false,
           controller: sections.getSuiviPage(widget.uiKey,widget.suiviUiKey),
           onPageChanged: (value){sections.setSuiviPage(value, widget.uiKey,widget.suiviUiKey);},
           children: <Widget>[

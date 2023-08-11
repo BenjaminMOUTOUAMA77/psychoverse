@@ -19,6 +19,7 @@ class _MainScreensManagerState extends State<MainScreensManager> {
       providers: [
         ChangeNotifierProvider(create: (_) => ChangeSectionsProvider()),
         ChangeNotifierProvider(create: (_) => ChangeSectionsProviderArchitecture()),
+        ChangeNotifierProvider(create: (_) => ArchitectureFormulairePagesManagerProvider()),
       ],
       child: NavigationView(
         pane: NavigationPane(

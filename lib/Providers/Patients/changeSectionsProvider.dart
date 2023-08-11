@@ -60,7 +60,6 @@ class ChangeSectionsProvider extends ChangeNotifier{
     patientUiList=value;
     notifyListeners();
   }
-
   int getPatientId(int key) => patientUiList[findIndex(key)].patientId;
   setPatientId(int value,int key){
     patientUiList[findIndex(key)].patientId=value;
@@ -96,6 +95,17 @@ class ChangeSectionsProvider extends ChangeNotifier{
 
 
   // Suivi TabView Manage
+  int findSuiviIndex(int key,int uiKey){
+    int value=0;
+    for(int i=0;i<patientUiList[findIndex(uiKey)].getSuiviUis().length;i++){
+      if(patientUiList[findIndex(uiKey)].getSuiviUis()[i].key==key){
+        value=i;
+        break;
+      }
+    }
+    return value;
+  }
+
   int getSuiviCurrentIndex(int key)=>patientUiList[findIndex(key)].suiviCurrentIndex;
   setSuiviCurrentIndex(int value,int key) {
     patientUiList[findIndex(key)].suiviCurrentIndex=value;
@@ -138,6 +148,17 @@ class ChangeSectionsProvider extends ChangeNotifier{
 
 
   // Formulaire TabView Manage
+  int findFormulaireIndex(int key,int uiKey){
+    int value=0;
+    for(int i=0;i<patientUiList[findIndex(uiKey)].getFormulaireUis().length;i++){
+      if(patientUiList[findIndex(uiKey)].getFormulaireUis()[i].key==key){
+        value=i;
+        break;
+      }
+    }
+    return value;
+  }
+
   int getFormulaireCurrentIndex(int key)=>patientUiList[findIndex(key)].formulaireCurrentIndex;
   setFormulaireCurrentIndex(int value,int key) {
     patientUiList[findIndex(key)].formulaireCurrentIndex=value;
@@ -191,14 +212,14 @@ class PatientUi{
 
   //Suivis Attributes
   static int theSuiviKey=0;
-  static late int suiviCurrentIndex=0;
-  static late List<Tab> suiviTabs = [];
+  late int suiviCurrentIndex=0;
+  late List<Tab> suiviTabs = [];
   static List<SuiviUi> suivisUis=[];
 
   //Suivis Attributes
   static int theFormulaireKey=-1;
-  static late int formulaireCurrentIndex=0;
-  static late List<Tab> formulairesTabs = [];
+  late int formulaireCurrentIndex=0;
+  late List<Tab> formulairesTabs = [];
   static List<FormulaireUi> formulairesUis=[];
 
   // Suivis functions

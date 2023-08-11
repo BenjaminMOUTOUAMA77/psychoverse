@@ -18,6 +18,7 @@ class _FormulairesState extends State<Formulaires> {
   Widget build(BuildContext context) {
     ChangeSectionsProvider sections=Provider.of<ChangeSectionsProvider>(context);
     return PageView(
+      pageSnapping: false,
       controller: sections.getFormulairePage(widget.uiKey,widget.formulaireUiKey),
       onPageChanged: (value){sections.setFormulairePage(value, widget.uiKey,widget.formulaireUiKey);},
       children: <Widget>[

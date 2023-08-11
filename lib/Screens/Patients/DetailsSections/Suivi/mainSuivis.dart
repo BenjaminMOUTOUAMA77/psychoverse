@@ -8,7 +8,7 @@ import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class MainSuivis extends StatefulWidget {
   final int uiKey;
-  const MainSuivis({Key? key,this.uiKey=0}) : super(key: key);
+  const MainSuivis({Key? key, this.uiKey = 0}) : super(key: key);
 
   @override
   State<MainSuivis> createState() => _MainSuivisState();
@@ -31,56 +31,80 @@ class _MainSuivisState extends State<MainSuivis> {
 
   @override
   Widget build(BuildContext context) {
+    sections = Provider.of<ChangeSectionsProvider>(context);
 
-    sections=Provider.of<ChangeSectionsProvider>(context);
-
-    Tab generateTab(int index,int suiviIndex) {
+    Tab generateTab(int index, int suiviUiKey) {
       late Tab tab;
       tab = Tab(
-        icon: Icon(FluentIcons.arrange_send_backward,color: AppColors.grisLite,),
+        icon: Icon(
+          FluentIcons.arrange_send_backward,
+          color: AppColors.grisLite,
+        ),
         text: Text('Suivi $index'),
         semanticLabel: 'Suivi #$index',
-        body: Suivis(uiKey: widget.uiKey,suiviUiKey: suiviIndex,),
+        body: Suivis(
+          uiKey: widget.uiKey,
+          suiviUiKey: suiviUiKey,
+        ),
         onClosed: () {
-          if(this.mounted){
-            setState(() {
-              sections.removeSuiviTab(tab,widget.uiKey);
-              sections.removeSuiviUi(widget.uiKey, suiviIndex);
-              if (sections.getSuiviCurrentIndex(widget.uiKey) > 0){sections.setSuiviCurrentIndex(sections.getCurrentIndex() -1,widget.uiKey);}
-            });
-          }else{
-            print("Impossible");
-            sections.removeSuiviTab(tab,widget.uiKey);
-            sections.removeSuiviUi(widget.uiKey, suiviIndex);
-            if (sections.getSuiviCurrentIndex(widget.uiKey) > 0){sections.setSuiviCurrentIndex(sections.getCurrentIndex() -1,widget.uiKey);}
-            print("UiIndex : ${sections.findIndex(widget.uiKey)}");
+          void closeFunction() {
+            if (sections.getSuiviCurrentIndex(widget.uiKey) > 0) {
+              if (sections.findSuiviIndex(suiviUiKey, widget.uiKey) <=
+                  sections.getSuiviCurrentIndex(widget.uiKey)) {
+                sections.setSuiviCurrentIndex(
+                    sections.getSuiviCurrentIndex(widget.uiKey) - 1,
+                    widget.uiKey);
+              }
+            } else {
+              if(sections.getSuiviTabs(widget.uiKey).length==1){
+                sections.setSuiviPage(0, widget.uiKey, suiviUiKey);
+              }
+            }
+            sections.removeSuiviTab(tab, widget.uiKey);
+            sections.removeSuiviUi(widget.uiKey, suiviUiKey);
           }
 
+          if (this.mounted) {
+            setState(() {
+              closeFunction();
+            });
+          } else {
+            closeFunction();
+          }
         },
       );
       return tab;
     }
-    addTab(){
+
+    addTab() {
       setState(() {
-        sections.addSuiviTab(generateTab(sections.getSuiviTabs(widget.uiKey).length,sections.addSuiviUi(widget.uiKey)),widget.uiKey);
+        int suiviUiKey = sections.addSuiviUi(widget.uiKey);
+        sections.addSuiviTab(
+            generateTab(sections.getSuiviTabs(widget.uiKey).length,suiviUiKey),
+            widget.uiKey);
+        sections.setSuiviCurrentIndex(sections.findSuiviIndex(suiviUiKey, widget.uiKey), widget.uiKey);
       });
     }
-    onReorder(oldIndex, newIndex){
+
+    onReorder(oldIndex, newIndex) {
       setState(() {
         if (oldIndex < newIndex) {
           newIndex -= 1;
         }
-        final item = sections.removeSuiviTabAtIndex(oldIndex,widget.uiKey);
-        sections.insertSuiviTab(newIndex, item,widget.uiKey);
+        final item = sections.removeSuiviTabAtIndex(oldIndex, widget.uiKey);
+        sections.insertSuiviTab(newIndex, item, widget.uiKey);
 
         if (sections.getSuiviCurrentIndex(widget.uiKey) == newIndex) {
-          sections.setSuiviCurrentIndex(oldIndex,widget.uiKey);
+          sections.setSuiviCurrentIndex(oldIndex, widget.uiKey);
         } else if (sections.getSuiviCurrentIndex(widget.uiKey) == oldIndex) {
-          sections.setSuiviCurrentIndex(newIndex,widget.uiKey);
+          sections.setSuiviCurrentIndex(newIndex, widget.uiKey);
         }
       });
     }
-    if(sections.getSuiviTabs(widget.uiKey).isEmpty){addTab();}
+
+    if (sections.getSuiviTabs(widget.uiKey).isEmpty) {
+      addTab();
+    }
 
     return Bloc1(
       uiKey: widget.uiKey,
@@ -93,7 +117,7 @@ class _MainSuivisState extends State<MainSuivis> {
         child: TabView(
           tabs: sections.getSuiviTabs(widget.uiKey),
           currentIndex: sections.getSuiviCurrentIndex(widget.uiKey),
-          onChanged: (index)=>sections.setSuiviCurrentIndex(index,widget.uiKey),
+          onChanged: (index) => sections.setSuiviCurrentIndex(index, widget.uiKey),
           tabWidthBehavior: TabWidthBehavior.equal,
           closeButtonVisibility: CloseButtonVisibilityMode.onHover,
           showScrollButtons: true,

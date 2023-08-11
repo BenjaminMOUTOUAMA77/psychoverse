@@ -16,19 +16,42 @@ class ParentsPopUp extends StatefulWidget {
 class _ParentsPopUpState extends State<ParentsPopUp> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Gap(30.h),
-        RelationTilesGroupe(
-          list: ["", ""],
-        ),
-        Gap(20.h),
-        AdaptiveLayout(
-          mediumLayout: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: SuggestTextForm(
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: Column(
+        children: [
+          Gap(30.h),
+          RelationTilesGroupe(
+            list: ["", ""],
+          ),
+          Gap(20.h),
+          AdaptiveLayout(
+            mediumLayout: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: SuggestTextForm(
+                      title: "Situation Matrimoniale",
+                      list: [
+                        "En couple",
+                        "Divorcés",
+                      ],
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                ),
+                Gap(20.w),
+                Expanded(
+                  child: SuggestTextForm(
+                      title: "État Matrimoniale",
+                      list: ["Polygamie", "Monogamie", "Poluandrie"],
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                ),
+              ],
+            ),
+            smallLayout: Column(
+              children: [
+                SuggestTextForm(
                     title: "Situation Matrimoniale",
                     list: [
                       "En couple",
@@ -36,39 +59,19 @@ class _ParentsPopUpState extends State<ParentsPopUp> {
                     ],
                     onChanged: (value) {},
                     onFieldSubmitted: (value) {}),
-              ),
-              Gap(20.w),
-              Expanded(
-                child: SuggestTextForm(
+                Gap(20.h),
+                SuggestTextForm(
                     title: "État Matrimoniale",
                     list: ["Polygamie", "Monogamie", "Poluandrie"],
                     onChanged: (value) {},
                     onFieldSubmitted: (value) {}),
-              ),
-            ],
+              ],
+            ),
           ),
-          smallLayout: Column(
-            children: [
-              SuggestTextForm(
-                  title: "Situation Matrimoniale",
-                  list: [
-                    "En couple",
-                    "Divorcés",
-                  ],
-                  onChanged: (value) {},
-                  onFieldSubmitted: (value) {}),
-              Gap(20.h),
-              SuggestTextForm(
-                  title: "État Matrimoniale",
-                  list: ["Polygamie", "Monogamie", "Poluandrie"],
-                  onChanged: (value) {},
-                  onFieldSubmitted: (value) {}),
-            ],
-          ),
-        ),
-        Gap(20.h),
-        BigTextForm(title: "Commentaire", onFieldSubmitted: (value) {}),
-      ],
+          Gap(20.h),
+          BigTextForm(title: "Commentaire", onFieldSubmitted: (value) {}),
+        ],
+      ),
     );
   }
 }

@@ -2,25 +2,22 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
-import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
+import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
-import 'package:psychoverse/Ui/Components/PopUps/chooseFormulairePopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/middlePopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 import 'package:psychoverse/Ui/Components/Tiles/simpleTile.dart';
 import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
 
-class FormulairesList extends StatefulWidget {
-  final int uiKey;
-  final int formulaireUiKey;
-  const FormulairesList({Key? key,this.uiKey=0, this.formulaireUiKey=0}) : super(key: key);
+class ArchitectureFormulaireList extends StatefulWidget {
+  const ArchitectureFormulaireList({Key? key}) : super(key: key);
 
   @override
-  State<FormulairesList> createState() => _FormulairesListState();
+  State<ArchitectureFormulaireList> createState() => _ArchitectureFormulaireListState();
 }
 
-class _FormulairesListState extends State<FormulairesList> {
-  late ChangeSectionsProvider sections;
+class _ArchitectureFormulaireListState extends State<ArchitectureFormulaireList> {
+  late ArchitectureFormulairePagesManagerProvider sections;
   List<String> formulaires = [
     "Formulaire 1",
     "Formulaire 2",
@@ -35,7 +32,7 @@ class _FormulairesListState extends State<FormulairesList> {
   ];
   @override
   Widget build(BuildContext context) {
-    sections = Provider.of<ChangeSectionsProvider>(context);
+    sections = Provider.of<ArchitectureFormulairePagesManagerProvider>(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 200.w, vertical: 40.h),
       child: Column(
@@ -82,19 +79,19 @@ class _FormulairesListState extends State<FormulairesList> {
                   texte: "Ajouter un formulaire à ce dossier",
                   icon: FluentIcons.dependency_add,
                   function: () {
-                    showDialog(context: context, builder: (context)=>MiddlePopUp(title: "Ajouter un formulaire",child: ChooseFormulairePopUp(),));
+                    showDialog(context: context, builder: (context)=>BigPopUp(title: "Ajouter un formulaire",));
                   },
                 ),
               ],
             ),
           ),
           Gap(20.h),
-          Expanded(
-            child:
-            ListViewTilesGenerator(
+          SizedBox(
+            height: 600.h,
+            child: ListViewTilesGenerator(
               number: formulaires.length,
               onTap: ({index = 0}) {
-                sections.setFormulairePage(1, widget.uiKey, widget.formulaireUiKey);
+                sections.setPage(1);
               },
               getTile: ({index = 0}) {
                 return Padding(
@@ -102,8 +99,7 @@ class _FormulairesListState extends State<FormulairesList> {
                   child: SimpleTile(),
                 );
               },
-            )
-            ,
+            ),
           ),
         ],
       ),

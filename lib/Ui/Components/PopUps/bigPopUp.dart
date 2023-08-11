@@ -99,8 +99,8 @@ class _BigPopUpState extends State<BigPopUp> {
             ),
             Gap(10.h),
             Expanded(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 40.w),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
                 child: widget.child,
               ),
             ),

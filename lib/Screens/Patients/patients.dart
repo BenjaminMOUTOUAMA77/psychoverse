@@ -22,6 +22,7 @@ class _PatientsState extends State<Patients> {
         children: [
           const MakeBackgroundImage(),
           PageView(
+            pageSnapping: false,
             controller: page.getPage(widget.uiKey),
             onPageChanged: (value){page.setPage(value, widget.uiKey);},
             children: <Widget>[

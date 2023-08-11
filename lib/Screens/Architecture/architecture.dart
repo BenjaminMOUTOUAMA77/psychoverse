@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
+import 'package:psychoverse/Screens/Architecture/Sections/Formulaire/architectureFormulaires.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/contacter.dart';
-import 'package:psychoverse/Screens/Architecture/Sections/formulaireArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/histotiqueArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/identiteArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/suivisArchitecture.dart';
@@ -48,7 +48,7 @@ class _ArchitectureState extends State<Architecture> {
       ),
       AppNavMenuPane(
         title: "Formulaire",
-        body: FormulaireArchitecture(),
+        body: ArchitectureFormulaires(),
       ),
       AppNavMenuPane(
         title: "Contacter",

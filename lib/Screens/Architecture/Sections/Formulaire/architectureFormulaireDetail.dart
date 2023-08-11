@@ -1,17 +1,19 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc11.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
-import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
+import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
 
-class FormulaireArchitecture extends StatefulWidget {
-  const FormulaireArchitecture({Key? key}) : super(key: key);
+class ArchitectureFormulaireDetail extends StatefulWidget {
+  const ArchitectureFormulaireDetail({Key? key}) : super(key: key);
 
   @override
-  State<FormulaireArchitecture> createState() => _FormulaireArchitectureState();
+  State<ArchitectureFormulaireDetail> createState() =>
+      _ArchitectureFormulaireDetailState();
 }
 
-class _FormulaireArchitectureState extends State<FormulaireArchitecture> {
-
+class _ArchitectureFormulaireDetailState extends State<ArchitectureFormulaireDetail> {
+  late ArchitectureFormulairePagesManagerProvider sections;
   final items = [
     TreeViewItem(
       content: const Text('Personal Documents'),
@@ -60,28 +62,31 @@ class _FormulaireArchitectureState extends State<FormulaireArchitecture> {
       ],
     ),
   ];
-
-
   @override
   Widget build(BuildContext context) {
-    return
-      Bloc11(
-        icon: FluentIcons.form_library,
-        title: "Formulaire",
-        number: 10,
-        child: Bloc2(
-          title: "Lossature du formulaire",
-          child: TreeView(
-            selectionMode: TreeViewSelectionMode.multiple,
-            shrinkWrap: true,
-            items: items,
-            onSelectionChanged: (selectedItems) async => debugPrint(
-                'onSelectionChanged: \${selectedItems.map((i) => i.value)}'),
-            onSecondaryTap: (item, details) async {
-              debugPrint('onSecondaryTap $item at ${details.globalPosition}');
-            },
-          ),
+    sections = Provider.of<ArchitectureFormulairePagesManagerProvider>(context);
+    return Column(
+      children: [
+        Row(
+          children: [
+            IconButton(icon: Icon(FluentIcons.navigate_back), onPressed: () {
+              sections.setPage(0);
+            }),
+          ],
         ),
-      );
+        Gap(20.h),
+        Expanded(
+            child: TreeView(
+              selectionMode: TreeViewSelectionMode.multiple,
+              shrinkWrap: true,
+              items: items,
+              onSelectionChanged: (selectedItems) async => debugPrint(
+                  'onSelectionChanged: \${selectedItems.map((i) => i.value)}'),
+              onSecondaryTap: (item, details) async {
+                debugPrint('onSecondaryTap $item at ${details.globalPosition}');
+              },
+            ),),
+      ],
+    );
   }
 }
