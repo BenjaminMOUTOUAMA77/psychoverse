@@ -1,16 +1,12 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
-
 class ChangeSectionsProvider extends ChangeNotifier{
   static int theKey=0;
   static int currentIndex = 0;
   static List<Tab> tabs = [];
   static List<PatientUi> patientUiList=[];
-  
-  int getCurrentIndex()=>currentIndex;
-  List<Tab> getTabs()=>tabs;
-  List<PatientUi> get thePatientUiList => patientUiList;
 
+  // Patient TabView Manage
   int findIndex(int key){
     int value=0;
     for(int i=0;i<patientUiList.length;i++){
@@ -22,79 +18,74 @@ class ChangeSectionsProvider extends ChangeNotifier{
     return value;
   }
 
-  int getPatientId(int key) => patientUiList[findIndex(key)].patientId;
-  List<int> getSelected(int key) => patientUiList[findIndex(key)].selected;
-  int getSelectedMenuNum(int key) => patientUiList[findIndex(key)].selectedMenuNum;
-  bool getMode(int key) => patientUiList[findIndex(key)].mode;
-  PageController getPage(int key) => patientUiList[findIndex(key)].page;
-
-  int getSuiviCurrentIndex(int key)=>patientUiList[findIndex(key)].suiviCurrentIndex;
-  List<Tab> getSuiviTabs(int key)=>patientUiList[findIndex(key)].suiviTabs;
-  PageController getSuiviPage(int key,int suiviKey) => patientUiList[findIndex(key)].getSuiviPage(suiviKey);
-
+  int getCurrentIndex()=>currentIndex;
   setCurrentIndex(int value) {
     currentIndex=value;
     notifyListeners();
   }
 
+  List<Tab> getTabs()=>tabs;
   addTab(Tab value){
     tabs.add(value);
     notifyListeners();
   }
-
   insertTab(int index,Tab element){
     tabs.insert(index, element);
     notifyListeners();
   }
-
   removeTab(Tab value){
     tabs.remove(value);
     notifyListeners();
   }
-
   Tab removeTabAtIndex(int index){
     Tab tab = tabs.removeAt(index);
     notifyListeners();
     return tab;
   }
 
+
+// PatientUI Manage
+  List<PatientUi> get thePatientUiList => patientUiList;
   int addPatientUi(){
     patientUiList.add(PatientUi(key: theKey));
     notifyListeners();
     theKey++;
     return theKey -1;
   }
-
   removePatientUi(int key){
     patientUiList.removeAt(findIndex(key));
     notifyListeners();
   }
-
   setPatientUiList(List<PatientUi> value){
     patientUiList=value;
     notifyListeners();
   }
 
+  int getPatientId(int key) => patientUiList[findIndex(key)].patientId;
   setPatientId(int value,int key){
     patientUiList[findIndex(key)].patientId=value;
     notifyListeners();
   }
 
+  List<int> getSelected(int key) => patientUiList[findIndex(key)].selected;
   setSelected(List<int> value,int key){
     patientUiList[findIndex(key)].selected=value;
     notifyListeners();
   }
 
+  int getSelectedMenuNum(int key) => patientUiList[findIndex(key)].selectedMenuNum;
   setSelectedNum(int value,int key){
     patientUiList[findIndex(key)].selectedMenuNum=value;
     notifyListeners();
   }
 
+  bool getMode(int key) => patientUiList[findIndex(key)].mode;
   setMode(bool value,int key){
     patientUiList[findIndex(key)].mode=value;
     notifyListeners();
   }
 
+  PageController getPage(int key) => patientUiList[findIndex(key)].page;
   setPage(int value,int key){
     patientUiList[findIndex(key)].page.jumpToPage(value);
     patientUiList[findIndex(key)].page=PageController(
@@ -104,37 +95,39 @@ class ChangeSectionsProvider extends ChangeNotifier{
   }
 
 
+  // Suivi TabView Manage
+  int getSuiviCurrentIndex(int key)=>patientUiList[findIndex(key)].suiviCurrentIndex;
+  setSuiviCurrentIndex(int value,int key) {
+    patientUiList[findIndex(key)].suiviCurrentIndex=value;
+    notifyListeners();
+  }
+
+  List<Tab> getSuiviTabs(int key)=>patientUiList[findIndex(key)].suiviTabs;
   addSuiviTab(Tab value,int key){
     patientUiList[findIndex(key)].suiviTabs.add(value);
     notifyListeners();
   }
-
   insertSuiviTab(int index,Tab element,int key){
     patientUiList[findIndex(key)].suiviTabs.insert(index, element);
     notifyListeners();
   }
-
   removeSuiviTab(Tab value,int key){
     patientUiList[findIndex(key)].suiviTabs.remove(value);
     notifyListeners();
   }
-
   Tab removeSuiviTabAtIndex(int index,int key){
     Tab tab = patientUiList[findIndex(key)].suiviTabs.removeAt(index);
     notifyListeners();
     return tab;
   }
 
-
-  setSuiviCurrentIndex(int value,int key) {
-    patientUiList[findIndex(key)].suiviCurrentIndex=value;
-    notifyListeners();
-  }
+  PageController getSuiviPage(int key,int suiviKey) => patientUiList[findIndex(key)].getSuiviPage(suiviKey);
   setSuiviPage(int value,int key,int suiviKey){
     patientUiList[findIndex(key)].setSuiviPage(value, suiviKey);
     notifyListeners();
   }
 
+  // SuiviUi Manage
   int addSuiviUi(int key,){
     return patientUiList[findIndex(key)].addSuiviUi();
   }
@@ -142,10 +135,52 @@ class ChangeSectionsProvider extends ChangeNotifier{
     patientUiList[findIndex(key)].removeSuiviUi(suiviKey);
     notifyListeners();
   }
+
+
+  // Formulaire TabView Manage
+  int getFormulaireCurrentIndex(int key)=>patientUiList[findIndex(key)].formulaireCurrentIndex;
+  setFormulaireCurrentIndex(int value,int key) {
+    patientUiList[findIndex(key)].formulaireCurrentIndex=value;
+    notifyListeners();
+  }
+
+  List<Tab> getFormulaireTabs(int key)=>patientUiList[findIndex(key)].formulairesTabs;
+  addFormulaireTab(Tab value,int key){
+    patientUiList[findIndex(key)].formulairesTabs.add(value);
+    notifyListeners();
+  }
+  insertFormulaireTab(int index,Tab element,int key){
+    patientUiList[findIndex(key)].formulairesTabs.insert(index, element);
+    notifyListeners();
+  }
+  removeFormulaireTab(Tab value,int key){
+    patientUiList[findIndex(key)].formulairesTabs.remove(value);
+    notifyListeners();
+  }
+  Tab removeFormulaireTabAtIndex(int index,int key){
+    Tab tab = patientUiList[findIndex(key)].formulairesTabs.removeAt(index);
+    notifyListeners();
+    return tab;
+  }
+
+  PageController getFormulairePage(int key,int formulaireKey) => patientUiList[findIndex(key)].getFormulairePage(formulaireKey);
+  setFormulairePage(int value,int key,int formulaireKey){
+    patientUiList[findIndex(key)].setFormulairePage(value, formulaireKey);
+    notifyListeners();
+  }
+
+  // FormulaireUi Manage
+  int addFormulaireUi(int key,){
+    return patientUiList[findIndex(key)].addFormulaireUi();
+  }
+  removeFormulaireUi(int key, int formulaireKey){
+    patientUiList[findIndex(key)].removeFormulaireUi(formulaireKey);
+    notifyListeners();
+  }
 }
 
 class PatientUi{
-  static int theSuiviKey=0;
+  late int key;
   late int patientId;
   late bool mode;
   late List<int> selected=[0];
@@ -153,13 +188,20 @@ class PatientUi{
   late PageController page = PageController(
     initialPage: 0,
   );
-  late int key;
 
-  late int suiviCurrentIndex=0;
-  late List<Tab> suiviTabs = [];
+  //Suivis Attributes
+  static int theSuiviKey=0;
+  static late int suiviCurrentIndex=0;
+  static late List<Tab> suiviTabs = [];
   static List<SuiviUi> suivisUis=[];
 
-  List<SuiviUi> getSuiviUis()=>suivisUis;
+  //Suivis Attributes
+  static int theFormulaireKey=-1;
+  static late int formulaireCurrentIndex=0;
+  static late List<Tab> formulairesTabs = [];
+  static List<FormulaireUi> formulairesUis=[];
+
+  // Suivis functions
   int findSuiviIndex(int key){
     int value=0;
     for(int i=0;i<suivisUis.length;i++){
@@ -170,15 +212,8 @@ class PatientUi{
     }
     return value;
   }
-  PageController getSuiviPage(int suiviKey)=>suivisUis[findSuiviIndex(suiviKey)].suiviPage;
 
-  setSuiviPage(int value,int suiviKey){
-    suivisUis[findSuiviIndex(suiviKey)].suiviPage.jumpToPage(value);
-    suivisUis[findSuiviIndex(suiviKey)].suiviPage=PageController(
-      initialPage: value,
-    );
-  }
-
+  List<SuiviUi> getSuiviUis()=>suivisUis;
   int addSuiviUi(){
     suivisUis.add(SuiviUi(key: theSuiviKey));
     theSuiviKey++;
@@ -188,14 +223,61 @@ class PatientUi{
     suivisUis.removeAt(findSuiviIndex(key));
   }
 
-  PatientUi({this.patientId= -1,this.mode=false,this.selectedMenuNum=0,this.key=0});
+  PageController getSuiviPage(int suiviKey)=>suivisUis[findSuiviIndex(suiviKey)].suiviPage;
+  setSuiviPage(int value,int suiviKey){
+    suivisUis[findSuiviIndex(suiviKey)].suiviPage.jumpToPage(value);
+    suivisUis[findSuiviIndex(suiviKey)].suiviPage=PageController(
+      initialPage: value,
+    );
+  }
+
+  // Formulairess functions
+  int findFormulaireIndex(int key){
+    int value=0;
+    for(int i=0;i<formulairesUis.length;i++){
+      if(formulairesUis[i].key==key){
+        value=i;
+        break;
+      }
+    }
+    return value;
+  }
+
+  List<FormulaireUi> getFormulaireUis()=>formulairesUis;
+  int addFormulaireUi(){
+    formulairesUis.add(FormulaireUi(key: theFormulaireKey));
+    theFormulaireKey++;
+    return theFormulaireKey -1;
+  }
+  removeFormulaireUi(int key){
+    formulairesUis.removeAt(findFormulaireIndex(key));
+  }
+
+  PageController getFormulairePage(int formulaireKey)=>formulairesUis[findFormulaireIndex(formulaireKey)].formulairePage;
+  setFormulairePage(int value,int formulaireKey){
+    formulairesUis[findFormulaireIndex(formulaireKey)].formulairePage.jumpToPage(value);
+    formulairesUis[findFormulaireIndex(formulaireKey)].formulairePage=PageController(
+      initialPage: value,
+    );
+  }
+
+  PatientUi({this.patientId= 0,this.mode=false,this.selectedMenuNum=0,this.key=0});
 }
 
 class SuiviUi{
   int key;
+  int suiviId;
   PageController suiviPage=PageController(
     initialPage: 0,
   );
-  SuiviUi({required this.key});
+  SuiviUi({required this.key,this.suiviId=0});
 }
 
+class FormulaireUi{
+  int key;
+  int formulaireId;
+  PageController formulairePage=PageController(
+    initialPage: 0,
+  );
+  FormulaireUi({required this.key,this.formulaireId=0});
+}

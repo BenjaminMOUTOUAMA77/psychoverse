@@ -1,8 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
-import 'package:psychoverse/Screens/Patients/DetailsSections/Suivis/suiviDetail.dart';
-import 'package:psychoverse/Screens/Patients/DetailsSections/Suivis/suivisList.dart';
+import 'package:psychoverse/Screens/Patients/DetailsSections/Suivi/suiviDetail.dart';
+import 'package:psychoverse/Screens/Patients/DetailsSections/Suivi/suivisList.dart';
 
 class Suivis extends StatefulWidget {
   final int uiKey;

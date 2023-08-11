@@ -3,17 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
-import 'package:psychoverse/Screens/Patients/DetailsSections/formulaire.dart';
+import 'package:psychoverse/Screens/Patients/DetailsSections/Formulaire/mainFormulaire.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/historique.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/identitePatient.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/relations.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/sms.dart';
-import 'package:psychoverse/Screens/Patients/DetailsSections/Suivis/mainSuivis.dart';
+import 'package:psychoverse/Screens/Patients/DetailsSections/Suivi/mainSuivis.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/testes.dart';
 import 'package:psychoverse/Ui/Components/Buttons/togleButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/brouillonPopUp.dart';
-import 'package:psychoverse/Ui/Components/appNav/appNavBar.dart';
 import 'package:psychoverse/Ui/Components/appNav/appNavMenuPane.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
@@ -64,7 +63,7 @@ class _PatientDetailState extends State<PatientDetail> {
       ),
       AppNavMenuPane(
         title: "Formulaire",
-        body: Formulaire(
+        body: MainFormulaire(
           uiKey: widget.uiKey,
         ),
       ),

@@ -3,11 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc11.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
-import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
-import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class ContacterArchitecture extends StatefulWidget {
   const ContacterArchitecture({Key? key}) : super(key: key);
@@ -32,12 +29,6 @@ class _ContacterArchitectureState extends State<ContacterArchitecture> {
                 TextForm(title: "Titre", onFieldSubmitted: (value) {}, onChanged: (value) {},),
                 BigTextForm(title: "Contenu", onFieldSubmitted: (value) {}),
                 Gap(40.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SimpleAppButon(texte: "Envoyer",function: (){},),
-                  ],
-                ),
               ],
             ),
           ),
@@ -48,12 +39,6 @@ class _ContacterArchitectureState extends State<ContacterArchitecture> {
                 TextForm(title: "Titre", onFieldSubmitted: (value) {}, onChanged: (value) {},),
                 BigTextForm(title: "Contenu", onFieldSubmitted: (value) {}),
                 Gap(40.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SimpleAppButon(texte: "Envoyer",function: (){},),
-                  ],
-                ),
               ],
             ),
           ),

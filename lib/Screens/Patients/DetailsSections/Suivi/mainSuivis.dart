@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
-import 'package:psychoverse/Screens/Patients/DetailsSections/Suivis/suivis.dart';
+import 'package:psychoverse/Screens/Patients/DetailsSections/Suivi/suivis.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
@@ -89,7 +89,7 @@ class _MainSuivisState extends State<MainSuivis> {
       number: 10,
       child: SizedBox(
         width: double.infinity,
-        height: 650.h,
+        height: 720.h,
         child: TabView(
           tabs: sections.getSuiviTabs(widget.uiKey),
           currentIndex: sections.getSuiviCurrentIndex(widget.uiKey),
