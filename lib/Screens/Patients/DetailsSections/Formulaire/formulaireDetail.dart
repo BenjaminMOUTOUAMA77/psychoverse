@@ -1,5 +1,11 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
+import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/checkBoxMenuForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
+import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 
 class FormulaireDetail extends StatefulWidget {
   final int uiKey;
@@ -18,9 +24,90 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
         child: Column(
           children: [
             Bloc2(
-              title: "Dynamique",
+              title: "Section 1",
               child: Column(
                 children: [
+                  CheckBoxMenu(value: [],list: [CheckBoxUnit(element: "Fait 1"),CheckBoxUnit(element: "Fait 2"),CheckBoxUnit(element: "Fait 3"),CheckBoxUnit(element: "Fait 4"),CheckBoxUnit(element: "Fait 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                  SuggestTextForm(list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                  BigTextForm(onFieldSubmitted: (value) {}),
+                  BigTextForm(onFieldSubmitted: (value) {}),
+                  BigTextForm(onFieldSubmitted: (value) {}),
+                  Bloc3(
+                    child: Column(
+                      children: [
+                        TextForm(onChanged: (value){}, onFieldSubmitted: (value){}),
+                        TextForm(onChanged: (value){}, onFieldSubmitted: (value){}),
+                        SuggestTextForm(list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                        BigTextForm(onFieldSubmitted: (value) {}),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Bloc2(
+              title: "Section 2",
+              child: Column(
+                children: [
+                  CheckBoxMenu(value: [],list: [CheckBoxUnit(element: "Fait 1"),CheckBoxUnit(element: "Fait 2"),CheckBoxUnit(element: "Fait 3"),CheckBoxUnit(element: "Fait 4"),CheckBoxUnit(element: "Fait 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                  SuggestTextForm(list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                  BigTextForm(onFieldSubmitted: (value) {}),
+                  BigTextForm(onFieldSubmitted: (value) {}),
+                  BigTextForm(onFieldSubmitted: (value) {}),
+                  Bloc3(
+                    child: Column(
+                      children: [
+                        TextForm(onChanged: (value){}, onFieldSubmitted: (value){}),
+                        TextForm(onChanged: (value){}, onFieldSubmitted: (value){}),
+                        SuggestTextForm(list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                        BigTextForm(onFieldSubmitted: (value) {}),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Bloc2(
+              title: "Section 3",
+              child: Column(
+                children: [
+                  CheckBoxMenu(value: [],list: [CheckBoxUnit(element: "Fait 1"),CheckBoxUnit(element: "Fait 2"),CheckBoxUnit(element: "Fait 3"),CheckBoxUnit(element: "Fait 4"),CheckBoxUnit(element: "Fait 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                  SuggestTextForm(list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                  BigTextForm(onFieldSubmitted: (value) {}),
+                  BigTextForm(onFieldSubmitted: (value) {}),
+                  BigTextForm(onFieldSubmitted: (value) {}),
+                  Bloc3(
+                    child: Column(
+                      children: [
+                        TextForm(onChanged: (value){}, onFieldSubmitted: (value){}),
+                        TextForm(onChanged: (value){}, onFieldSubmitted: (value){}),
+                        SuggestTextForm(list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                        BigTextForm(onFieldSubmitted: (value) {}),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Bloc2(
+              title: "Section 5",
+              child: Column(
+                children: [
+                  CheckBoxMenu(value: [],list: [CheckBoxUnit(element: "Fait 1"),CheckBoxUnit(element: "Fait 2"),CheckBoxUnit(element: "Fait 3"),CheckBoxUnit(element: "Fait 4"),CheckBoxUnit(element: "Fait 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                  SuggestTextForm(list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                  BigTextForm(onFieldSubmitted: (value) {}),
+                  BigTextForm(onFieldSubmitted: (value) {}),
+                  BigTextForm(onFieldSubmitted: (value) {}),
+                  Bloc3(
+                    child: Column(
+                      children: [
+                        TextForm(onChanged: (value){}, onFieldSubmitted: (value){}),
+                        TextForm(onChanged: (value){}, onFieldSubmitted: (value){}),
+                        SuggestTextForm(list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                        BigTextForm(onFieldSubmitted: (value) {}),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -6,7 +6,8 @@ import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class SeanceTile extends StatefulWidget {
-  const SeanceTile({Key? key}) : super(key: key);
+  String title;
+  SeanceTile({Key? key, this.title="Séance"}) : super(key: key);
 
   @override
   State<SeanceTile> createState() => _SeanceTileState();
@@ -50,7 +51,7 @@ class _SeanceTileState extends State<SeanceTile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Séance 1",
+                  widget.title,
                   style: AppTextStyle.formStyleTexte,
                 ),
                 Gap(10.h),

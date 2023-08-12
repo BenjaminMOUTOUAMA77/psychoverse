@@ -33,88 +33,81 @@ class Seance extends StatefulWidget {
 class _SeanceState extends State<Seance> {
   @override
   Widget build(BuildContext context) {
-    return Bloc3(
-      title: widget.numero < 0
-          ? "Dernière Séance"
-          : widget.numero == 0
-              ? "Première Séance"
-              : "Séance ${widget.numero}",
-      child: Column(
-        children: [
-          AdaptiveLayout(
-            mediumLayout: Row(
-              children: [
-                Expanded(
-                  child: AppDateForm(
-                      title: "Date",
-                      value: widget.dateActuelle,
-                      onChanged: (value) {},
-                      onFieldSubmitted: (value) {}),
-                ),
-                Gap(20.w),
-                Expanded(
-                  child: TimeForm(
-                      title: "Heure",
-                      value: widget.heureActuelle,
-                      onChanged: (value) {},
-                      onFieldSubmitted: (value) {}),
-                ),
-              ],
-            ),
-            smallLayout: Column(
-              children: [
-                AppDateForm(
+    return Column(
+      children: [
+        AdaptiveLayout(
+          mediumLayout: Row(
+            children: [
+              Expanded(
+                child: AppDateForm(
                     title: "Date",
                     value: widget.dateActuelle,
                     onChanged: (value) {},
                     onFieldSubmitted: (value) {}),
-                TimeForm(
+              ),
+              Gap(20.w),
+              Expanded(
+                child: TimeForm(
                     title: "Heure",
                     value: widget.heureActuelle,
                     onChanged: (value) {},
                     onFieldSubmitted: (value) {}),
-              ],
-            ),
+              ),
+            ],
           ),
-          BigTextForm(title: "Note", onFieldSubmitted: (value) {}),
-          AdaptiveLayout(
-            mediumLayout: Row(
-              children: [
-                Expanded(
-                  child: AppDateForm(
-                      title: "Date",
-                      value: widget.dateActuelle,
-                      onChanged: (value) {},
-                      onFieldSubmitted: (value) {}),
-                ),
-                Gap(20.w),
-                Expanded(
-                  child: TimeForm(
-                      title: "Heure",
-                      value: widget.heureActuelle,
-                      onChanged: (value) {},
-                      onFieldSubmitted: (value) {}),
-                ),
-              ],
-            ),
-            smallLayout: Column(
-              children: [
-                AppDateForm(
+          smallLayout: Column(
+            children: [
+              AppDateForm(
+                  title: "Date",
+                  value: widget.dateActuelle,
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
+              TimeForm(
+                  title: "Heure",
+                  value: widget.heureActuelle,
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
+            ],
+          ),
+        ),
+        BigTextForm(title: "Note", onFieldSubmitted: (value) {}),
+        AdaptiveLayout(
+          mediumLayout: Row(
+            children: [
+              Expanded(
+                child: AppDateForm(
                     title: "Date",
                     value: widget.dateActuelle,
                     onChanged: (value) {},
                     onFieldSubmitted: (value) {}),
-                TimeForm(
+              ),
+              Gap(20.w),
+              Expanded(
+                child: TimeForm(
                     title: "Heure",
                     value: widget.heureActuelle,
                     onChanged: (value) {},
                     onFieldSubmitted: (value) {}),
-              ],
-            ),
+              ),
+            ],
           ),
-          BigTextForm(title: "Programme", onFieldSubmitted: (value) {}),
-        ],
-      ),
+          smallLayout: Column(
+            children: [
+              AppDateForm(
+                  title: "Date",
+                  value: widget.dateActuelle,
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
+              TimeForm(
+                  title: "Heure",
+                  value: widget.heureActuelle,
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
+            ],
+          ),
+        ),
+        BigTextForm(title: "Programme", onFieldSubmitted: (value) {}),
+      ],
     );
   }
 }

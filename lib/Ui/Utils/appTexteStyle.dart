@@ -11,8 +11,8 @@ class AppTextStyle{
   static TextStyle bigFilledTexte = TextStyle(color: AppColors.grisTexte, fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 10.sp+10,);
   static TextStyle title = TextStyle(color: AppColors.grisTexte, fontFamily: 'MavenPro', fontWeight: FontWeight.w900, fontSize: 15.sp+15,);
   static TextStyle buttonStyleTexte = TextStyle(color: AppColors.blanc, fontFamily: 'MavenPro', fontWeight: FontWeight.w900, fontSize: 12.sp+7,);
-  static TextStyle formLabelStyleTexte = filedTexte.copyWith(fontWeight: FontWeight.bold, color: AppColors.grisLite,);
-  static TextStyle formStyleTexte = filedTexte.copyWith(fontWeight: FontWeight.w900, fontSize: 5.sp + 15, color: AppColors.primary,);
-  static TextStyle formPlaceHolderStyleTexte = filedTexte.copyWith(fontWeight: FontWeight.bold, fontSize: 10.sp + 10, color: AppColors.grisLitePlus,);
+  static TextStyle formLabelStyleTexte = filedTexte.copyWith(color: AppColors.gris,fontFamily: "MavenPro",fontWeight: FontWeight.w600);
+  static TextStyle formStyleTexte = filedTexte.copyWith(fontWeight: FontWeight.bold, fontSize: 5.sp + 15, color: AppColors.noire,);
+  static TextStyle formPlaceHolderStyleTexte = filedTexte.copyWith( fontSize: 10.sp + 10, color: AppColors.grisLitePlus,);
 
 }

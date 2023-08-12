@@ -19,7 +19,13 @@ class SuivisArchitecture extends StatefulWidget {
 }
 
 class _SuivisArchitectureState extends State<SuivisArchitecture> {
-  List<String> genreList = ["", "", "", ""];
+  List<String> typeList = ["Type 1","Type 2","Type 3","Type 4",];
+  List<String> degreList = ["Manifestation 1","Manifestation 2","Manifestation 3","Manifestation 4",];
+  List<String> frequenceList = ["Fréquence 1","Fréquence 2","Fréquence 3","Fréquence 4",];
+  List<String> evolutionList = ["Évolution 1","Évolution 2","Évolution 3","Évolution 4",];
+  List<String> strategieList = ["Stratégie 1","Stratégie 2","Stratégie 3","Stratégie 4",];
+  List<String> analyseList = ["Analyse 1","Analyse 2","Analyse 3","Analyse 4"];
+  List<String> trameList = ["Trame 1","Trame 2","Trame 3","Trame 4",];
   @override
   Widget build(BuildContext context) {
     return Bloc11(
@@ -57,10 +63,10 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * typeList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: typeList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -76,7 +82,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: typeList[index],);
                     },
                   ),
                 ),
@@ -112,10 +118,10 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * degreList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: degreList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -131,7 +137,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: degreList[index],);
                     },
                   ),
                 ),
@@ -167,10 +173,10 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * frequenceList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: frequenceList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -186,7 +192,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: frequenceList[index],);
                     },
                   ),
                 ),
@@ -222,10 +228,10 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * evolutionList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: evolutionList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -241,7 +247,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: evolutionList[index],);
                     },
                   ),
                 ),
@@ -277,10 +283,10 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * strategieList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: strategieList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -296,7 +302,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: strategieList[index],);
                     },
                   ),
                 ),
@@ -332,10 +338,10 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * analyseList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: analyseList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -351,7 +357,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: analyseList[index],);
                     },
                   ),
                 ),
@@ -395,10 +401,10 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * trameList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: trameList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -422,7 +428,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: trameList[index],);
                     },
                   ),
                 ),

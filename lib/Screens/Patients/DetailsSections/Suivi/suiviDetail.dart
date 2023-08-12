@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:psychoverse/Functions/appPaths.dart';
 import 'package:psychoverse/Functions/pickFiles.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
 import 'package:psychoverse/Ui/Components/Boxs/FileBox.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
@@ -19,7 +20,6 @@ import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/middlePopUp.dart';
 import 'package:psychoverse/Ui/Components/seance.dart';
 import 'package:psychoverse/Ui/Components/Buttons/smallButton.dart';
-import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class SuiviDetail extends StatefulWidget {
   final int uiKey;
@@ -39,6 +39,14 @@ class _SuiviDetailState extends State<SuiviDetail> {
   @override
   Widget build(BuildContext context) {
     init();
+    List<String> typeList = ["Type 1","Type 2","Type 3","Type 4",];
+    List<String> degreList = ["Manifestation 1","Manifestation 2","Manifestation 3","Manifestation 4",];
+    List<String> frequenceList = ["Fréquence 1","Fréquence 2","Fréquence 3","Fréquence 4",];
+    List<String> evolutionList = ["Évolution 1","Évolution 2","Évolution 3","Évolution 4",];
+    List<String> strategieList = ["Stratégie 1","Stratégie 2","Stratégie 3","Stratégie 4",];
+    List<String> analyseList = ["Analyse 1","Analyse 2","Analyse 3","Analyse 4"];
+    List<String> trameList = ["Trame 1","Trame 2","Trame 3","Trame 4",];
+    List<String> seanceList = ["Séance 1","Séance 2","Séance 3","Séance 4","Séance 5",];
     late List<PlatformFile> files = [
       PlatformFile(
         path: "${path}\\16600_oliFood1.ai",
@@ -91,7 +99,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
                       onFieldSubmitted: (value) {}),
                   SuggestTextForm(
                       title: "Type de Suivi",
-                      list: ["Masculin", "Féminin", "Trans", "Autre"],
+                      list: typeList,
                       onChanged: (value) {},
                       onFieldSubmitted: (value) {}),
                   TextForm(
@@ -105,21 +113,21 @@ class _SuiviDetailState extends State<SuiviDetail> {
                       onFieldSubmitted: (value) {}),
                   MenuForm(
                       title: "Degré de manifestation",
-                      list: ["Élevé", "Moyen", "Faible"],
+                      list: degreList,
                       onChanged: (value) {},
                       onFieldSubmitted: (value) {}),
                   MenuForm(
                       title: "Fréquence d'apparition",
-                      list: ["Très souvent", "Rarement", "Très rarement"],
+                      list: frequenceList,
                       onChanged: (value) {},
                       onFieldSubmitted: (value) {}),
                   MenuForm(
                       title: "Évolution",
-                      list: ["S'améliore", "Stagne", "Empire"],
+                      list: evolutionList,
                       onChanged: (value) {},
                       onFieldSubmitted: (value) {}),
                   ProgressionForm(
-                      title: "Degré d'implication",
+                      title: "Implication",
                       onChanged: (value) {},
                       onFieldSubmitted: (value) {}),
                 ],
@@ -171,12 +179,12 @@ class _SuiviDetailState extends State<SuiviDetail> {
                 children: [
                   SuggestTextForm(
                       title: "Stratégie thérapeutique",
-                      list: ["Masculin", "Féminin", "Trans", "Autre"],
+                      list: strategieList,
                       onChanged: (value) {},
                       onFieldSubmitted: (value) {}),
                   SuggestTextForm(
                       title: "Analyse fonctionnelle",
-                      list: ["Masculin", "Féminin", "Trans", "Autre"],
+                      list: analyseList,
                       onChanged: (value) {},
                       onFieldSubmitted: (value) {}),
                   BigTextForm(
@@ -186,7 +194,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
                   BigTextForm(title: "WICS", onFieldSubmitted: (value) {}),
                   MenuForm(
                       title: "Trame d'Anamnèse",
-                      list: ["Autre", "Féminin", "Trans", "Autre"],
+                      list: trameList,
                       onChanged: (value) {},
                       onFieldSubmitted: (value) {}),
                   BigTextForm(title: "Anamnèse", onFieldSubmitted: (value) {}),
@@ -217,10 +225,13 @@ class _SuiviDetailState extends State<SuiviDetail> {
                       ),
                     ],
                   ),
-                  Seance(
-                      numero: -1,
-                      dateActuelle: DateTime.now(),
-                      dateProchaine: null),
+                  Bloc3(
+                    title: "Dernière séance",
+                    child: Seance(
+                        numero: -1,
+                        dateActuelle: DateTime.now(),
+                        dateProchaine: null),
+                  ),
                   SmallAppButton(
                     texte: "Autres séances",
                     function: () => showDialog(
@@ -228,18 +239,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
                       builder: (context) => MiddlePopUp(
                         title: "Séances",
                         child: SeanceListPopUp(
-                          list: [
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                          ],
+                          list: seanceList,
                         ),
                       ),
                     ),

@@ -17,7 +17,14 @@ class IdentiteArchitecture extends StatefulWidget {
 }
 
 class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
-  List<String> genreList = ["", "", "", ""];
+  List<String> genreList = ["Genre 1", "Genre 2", "Genre 3", "Genre 4"];
+  List<String> residenceList = ["Résidence 1", "Résidence 2", "Résidence 3", "Résidence 4"];
+  List<String> ethnieList = ["Èthnie 1", "Èthnie 2", "Èthnie 3", "Èthnie 4"];
+  List<String> villeList = ["Ville 1", "Ville 2", "Ville 3", "Ville 4"];
+  List<String> etudeList = ["Niveau 1", "Niveau 2", "Niveau 3", "Niveau 4"];
+  List<String> professionList = ["Profession 1", "Profession 2", "Profession 3", "Profession 4"];
+  List<String> religionList = ["Réligion 1", "Réligion 2", "Réligion 3", "Réligion 4"];
+  List<String> loisirList = ["Loisir 1", "Loisir 2", "Loisir 3", "Loisir 4"];
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +89,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             );
                           },
                           getTile: ({index = 0}) {
-                            return SimpleTile();
+                            return SimpleTile(title: genreList[index],);
                           },
                         ),
                       ),
@@ -126,7 +133,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             showDialog(
                               context: context,
                               builder: (context) => SmallPopUp(
-                                title: "Genre",
+                                title: "Condition de résidence",
                                 delete: true,
                                 child: TextForm(
                                   title: "Designation",
@@ -137,7 +144,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             );
                           },
                           getTile: ({index = 0}) {
-                            return SimpleTile();
+                            return SimpleTile(title: residenceList[index],);
                           },
                         ),
                       ),
@@ -181,7 +188,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             showDialog(
                               context: context,
                               builder: (context) => SmallPopUp(
-                                title: "Genre",
+                                title: "Èthnie",
                                 delete: true,
                                 child: TextForm(
                                   title: "Designation",
@@ -192,7 +199,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             );
                           },
                           getTile: ({index = 0}) {
-                            return SimpleTile();
+                            return SimpleTile(title: ethnieList[index],);
                           },
                         ),
                       ),
@@ -236,7 +243,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             showDialog(
                               context: context,
                               builder: (context) => SmallPopUp(
-                                title: "Genre",
+                                title: "Ville",
                                 delete: true,
                                 child: TextForm(
                                   title: "Designation",
@@ -247,7 +254,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             );
                           },
                           getTile: ({index = 0}) {
-                            return SimpleTile();
+                            return SimpleTile(title: villeList[index],);
                           },
                         ),
                       ),
@@ -291,7 +298,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             showDialog(
                               context: context,
                               builder: (context) => SmallPopUp(
-                                title: "Genre",
+                                title: "Niveau d'étude",
                                 delete: true,
                                 child: TextForm(
                                   title: "Designation",
@@ -302,7 +309,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             );
                           },
                           getTile: ({index = 0}) {
-                            return SimpleTile();
+                            return SimpleTile(title: etudeList[index],);
                           },
                         ),
                       ),
@@ -346,7 +353,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             showDialog(
                               context: context,
                               builder: (context) => SmallPopUp(
-                                title: "Genre",
+                                title: "Profession",
                                 delete: true,
                                 child: TextForm(
                                   title: "Designation",
@@ -357,7 +364,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             );
                           },
                           getTile: ({index = 0}) {
-                            return SimpleTile();
+                            return SimpleTile(title: professionList[index],);
                           },
                         ),
                       ),
@@ -401,7 +408,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             showDialog(
                               context: context,
                               builder: (context) => SmallPopUp(
-                                title: "Genre",
+                                title: "Réligion",
                                 delete: true,
                                 child: TextForm(
                                   title: "Designation",
@@ -412,7 +419,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             );
                           },
                           getTile: ({index = 0}) {
-                            return SimpleTile();
+                            return SimpleTile(title: religionList[index],);
                           },
                         ),
                       ),
@@ -456,7 +463,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             showDialog(
                               context: context,
                               builder: (context) => SmallPopUp(
-                                title: "Genre",
+                                title: "Loisirs",
                                 delete: true,
                                 child: TextForm(
                                   title: "Designation",
@@ -467,7 +474,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                             );
                           },
                           getTile: ({index = 0}) {
-                            return SimpleTile();
+                            return SimpleTile(title: loisirList[index],);
                           },
                         ),
                       ),

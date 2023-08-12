@@ -27,11 +27,6 @@ class _FormulairesListState extends State<FormulairesList> {
     "Formulaire 3",
     "Formulaire 4",
     "Formulaire 5",
-    "Formulaire 1",
-    "Formulaire 2",
-    "Formulaire 3",
-    "Formulaire 4",
-    "Formulaire 5",
   ];
   @override
   Widget build(BuildContext context) {
@@ -99,7 +94,7 @@ class _FormulairesListState extends State<FormulairesList> {
               getTile: ({index = 0}) {
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40.w),
-                  child: SimpleTile(),
+                  child: SimpleTile(title: formulaires[index],),
                 );
               },
             )

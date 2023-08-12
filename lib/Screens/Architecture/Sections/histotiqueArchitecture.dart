@@ -17,7 +17,9 @@ class HistoriqueArchitecture extends StatefulWidget {
 }
 
 class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
-  List<String> genreList = ["", "", "", ""];
+  List<String> psychologiqueList = ["Psychologique 1", "Psychologique 2", "Psychologique 3", "Psychologique 4"];
+  List<String> psychiatriqueList = ["Psychiatrique 1", "Psychiatrique 2", "Psychiatrique 3", "Psychiatrique 4"];
+  List<String> marquantList = ["Marquant 1", "Marquant 2", "Marquant 3", "Marquant 4"];
   @override
   Widget build(BuildContext context) {
     return Bloc11(
@@ -56,10 +58,10 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * psychologiqueList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: psychologiqueList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -75,7 +77,7 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: psychologiqueList[index],);
                     },
                   ),
                 ),
@@ -111,10 +113,10 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * psychiatriqueList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: psychiatriqueList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -130,7 +132,7 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: psychiatriqueList[index],);
                     },
                   ),
                 ),
@@ -166,10 +168,10 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * marquantList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: marquantList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -185,7 +187,7 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: marquantList[index],);
                     },
                   ),
                 ),

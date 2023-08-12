@@ -45,7 +45,7 @@ List<PaneItem> appNavMenu() => [
       PaneItem(
         icon:
             SvgPicture.asset(AppIcons.sms, color: AppColors.rouge, height: 20),
-        title: Text('SMS Rappel', style: AppTextStyle.navBarTexte),
+        title: Text('Rappel', style: AppTextStyle.navBarTexte),
         body: defaultPage,
       ),
       PaneItem(

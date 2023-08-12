@@ -5,7 +5,8 @@ import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class SimpleTile extends StatefulWidget {
-  const SimpleTile({Key? key}) : super(key: key);
+  String title;
+  SimpleTile({Key? key,this.title="Simple Tile"}) : super(key: key);
 
   @override
   State<SimpleTile> createState() => _SimpleTileState();
@@ -24,7 +25,7 @@ class _SimpleTileState extends State<SimpleTile> {
         children: [
           Expanded(
             child: Text(
-              "Masculin",
+              widget.title,
               style:
                   AppTextStyle.filedTexte.copyWith(fontWeight: FontWeight.bold),
               overflow: TextOverflow.fade,

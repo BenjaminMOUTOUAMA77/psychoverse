@@ -55,7 +55,7 @@ class _BigPopUpState extends State<BigPopUp> {
                         ),
                         onPressed: ()=>widget.saveFunction,
                       ),
-                    ):Gap(0),
+                    ):Gap(20.w),
                     widget.delete? Tooltip(
                       message: "Supprimer",
                       child: IconButton(
@@ -71,7 +71,7 @@ class _BigPopUpState extends State<BigPopUp> {
                         ),
                         onPressed: () => widget.deleteFunction,
                       ),
-                    ):Gap(0),
+                    ):Gap(20.w),
                   ],
                 ),
                 Expanded(

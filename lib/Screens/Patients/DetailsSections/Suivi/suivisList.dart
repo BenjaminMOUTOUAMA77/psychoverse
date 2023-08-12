@@ -28,11 +28,6 @@ class _SuivisListState extends State<SuivisList> {
     "Suivi 3",
     "Suivi 4",
     "Suivi 5",
-    "Suivi 1",
-    "Suivi 2",
-    "Suivi 3",
-    "Suivi 4",
-    "Suivi 5",
   ];
   @override
   Widget build(BuildContext context) {
@@ -102,7 +97,7 @@ class _SuivisListState extends State<SuivisList> {
               getTile: ({index = 0}) {
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40.w),
-                  child: SuivisTile(),
+                  child: SuivisTile(title: suivis[index],),
                 );
               },
             )

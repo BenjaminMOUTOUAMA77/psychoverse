@@ -6,7 +6,8 @@ import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 
 class SuivisTile extends StatefulWidget {
-  const SuivisTile({Key? key}) : super(key: key);
+  String title;
+  SuivisTile({Key? key,this.title="Suivi"}) : super(key: key);
 
   @override
   State<SuivisTile> createState() => _SuivisTileState();
@@ -51,7 +52,7 @@ class _SuivisTileState extends State<SuivisTile> {
               ),
             ),
             Gap(20.w),
-            Expanded(child: Text("Suivis", style: AppTextStyle.bigFilledTexte.copyWith(fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,)),
+            Expanded(child: Text(widget.title, style: AppTextStyle.bigFilledTexte.copyWith(fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,)),
             Gap(20.w),
             Text("10 Janvier 2022",style: AppTextStyle.smallTexte.copyWith(fontWeight: FontWeight.w900),),
           ],

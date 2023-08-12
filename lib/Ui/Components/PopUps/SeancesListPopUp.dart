@@ -22,13 +22,13 @@ class _SeanceListPopUpState extends State<SeanceListPopUp> {
         Navigator.pop(context);
         showDialog(
           context: context,
-          builder: (context) => BigPopUp(title: "Séances du Samedi 14 Avril 2023",delete: true,child: SeanceDetailPopUp(),),
+          builder: (context) => BigPopUp(title: widget.list[index],delete: true,child: SeanceDetailPopUp(),),
         );
       },
       getTile: ({index = 0}) {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 30.w),
-          child: SeanceTile(),
+          child: SeanceTile(title: widget.list[index],),
         );
       },
     );

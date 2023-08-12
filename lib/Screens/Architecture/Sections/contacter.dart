@@ -18,12 +18,12 @@ class _ContacterArchitectureState extends State<ContacterArchitecture> {
   Widget build(BuildContext context) {
     return Bloc11(
       icon: FluentIcons.skype_message,
-      title: "Contacter",
+      title: "Message rappel",
       number: 10,
       child: Column(
         children: [
           Bloc2(
-            title: "Email",
+            title: "Email message rappel",
             child: Column(
               children: [
                 TextForm(title: "Titre", onFieldSubmitted: (value) {}, onChanged: (value) {},),
@@ -33,7 +33,7 @@ class _ContacterArchitectureState extends State<ContacterArchitecture> {
             ),
           ),
           Bloc2(
-            title: "SMS",
+            title: "SMS message rappel",
             child: Column(
               children: [
                 TextForm(title: "Titre", onFieldSubmitted: (value) {}, onChanged: (value) {},),

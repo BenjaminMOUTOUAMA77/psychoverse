@@ -51,7 +51,7 @@ class _ArchitectureState extends State<Architecture> {
         body: ArchitectureFormulaires(),
       ),
       AppNavMenuPane(
-        title: "Contacter",
+        title: "Rappel",
         body: ContacterArchitecture(),
       ),
     ];

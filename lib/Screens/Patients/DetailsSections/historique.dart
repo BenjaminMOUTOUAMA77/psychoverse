@@ -15,6 +15,9 @@ class Historique extends StatefulWidget {
 }
 
 class _HistoriqueState extends State<Historique> {
+  List<CheckBoxUnit> psychologiqueList = [CheckBoxUnit(element: "Psychologique 1"),CheckBoxUnit(element: "Psychologique 2"),CheckBoxUnit(element: "Psychologique 3"),CheckBoxUnit(element: "Psychologique 4"),];
+  List<CheckBoxUnit> psychiatriqueList = [CheckBoxUnit(element: "Psychiatrique 1"),CheckBoxUnit(element: "Psychiatrique 2"),CheckBoxUnit(element: "Psychiatrique 3"),CheckBoxUnit(element: "Psychiatrique 4"),];
+  List<CheckBoxUnit> marquantList = [CheckBoxUnit(element: "Marquant 1"),CheckBoxUnit(element: "Marquant 2"),CheckBoxUnit(element: "Marquant 3"),CheckBoxUnit(element: "Marquant 4"),];
   @override
   Widget build(BuildContext context) {
     return Bloc1(
@@ -45,7 +48,7 @@ class _HistoriqueState extends State<Historique> {
                   title: "Faits psychologiques",
                   child: Column(
                     children: [
-                      CheckBoxMenu(title: "Faits", value: [],list: [CheckBoxUnit(element: "Fait 1"),CheckBoxUnit(element: "Fait 2"),CheckBoxUnit(element: "Fait 3"),CheckBoxUnit(element: "Fait 4"),CheckBoxUnit(element: "Fait 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                      CheckBoxMenu(title: "Faits", value: [],list: psychologiqueList,onChanged: (value){},onFieldSubmitted: (value){},),
                       SuggestTextForm(title: "Autre", list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
                       BigTextForm(
                           title: "Commentaire", onFieldSubmitted: (value) {}),
@@ -56,7 +59,7 @@ class _HistoriqueState extends State<Historique> {
                   title: "Faits psychiatriques",
                   child: Column(
                     children: [
-                      CheckBoxMenu(title: "Faits", value: [],list: [CheckBoxUnit(element: "Fait 1"),CheckBoxUnit(element: "Fait 2"),CheckBoxUnit(element: "Fait 3"),CheckBoxUnit(element: "Fait 4"),CheckBoxUnit(element: "Fait 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                      CheckBoxMenu(title: "Faits", value: [],list: psychiatriqueList,onChanged: (value){},onFieldSubmitted: (value){},),
                       SuggestTextForm(title: "Autre", list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
                       BigTextForm(
                           title: "Commentaire", onFieldSubmitted: (value) {}),
@@ -67,7 +70,7 @@ class _HistoriqueState extends State<Historique> {
                   title: "Faits sociaux marquants",
                   child: Column(
                     children: [
-                      CheckBoxMenu(title: "Faits", value: [],list: [CheckBoxUnit(element: "Fait 1"),CheckBoxUnit(element: "Fait 2"),CheckBoxUnit(element: "Fait 3"),CheckBoxUnit(element: "Fait 4"),CheckBoxUnit(element: "Fait 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                      CheckBoxMenu(title: "Faits", value: [],list: marquantList,onChanged: (value){},onFieldSubmitted: (value){},),
                       SuggestTextForm(title: "Autre", list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
                       BigTextForm(
                           title: "Commentaire", onFieldSubmitted: (value) {}),

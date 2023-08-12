@@ -6,7 +6,6 @@ import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
-import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class Sms extends StatefulWidget {
   final int uiKey;
@@ -22,13 +21,13 @@ class _SmsState extends State<Sms> {
     return Bloc1(
       uiKey: widget.uiKey,
       icon: FluentIcons.skype_message,
-      title: "Contacter",
+      title: "Message Rappel",
       number: 10,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Bloc2(
-            title: "Email",
+            title: "Email message rappel",
             child: Column(
               children: [
                 TextForm(title: "Titre", onFieldSubmitted: (value) {}, onChanged: (value) {},),
@@ -44,7 +43,7 @@ class _SmsState extends State<Sms> {
             ),
           ),
           Bloc2(
-            title: "SMS",
+            title: "SMS message rappel",
             child: Column(
               children: [
                 TextForm(title: "Titre", onFieldSubmitted: (value) {}, onChanged: (value) {},),

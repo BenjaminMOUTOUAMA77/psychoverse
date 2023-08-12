@@ -68,7 +68,7 @@ class _PatientDetailState extends State<PatientDetail> {
         ),
       ),
       AppNavMenuPane(
-        title: "SMS",
+        title: "Rappel",
         body: Sms(
           uiKey: widget.uiKey,
         ),
@@ -144,6 +144,18 @@ class _PatientDetailState extends State<PatientDetail> {
                       wrappedItem: CommandBarButton(
                         icon: Icon(FluentIcons.pdf,color: AppColors.rouge,),
                         label: const Text('PDF'),
+                        onPressed: () {},
+                      ),
+                    ),
+                    const CommandBarSeparator(),
+                    CommandBarBuilderItem(
+                      builder: (context, mode, w) => Tooltip(
+                        message: "Exporter en document word",
+                        child: w,
+                      ),
+                      wrappedItem: CommandBarButton(
+                        icon: Icon(FluentIcons.docs_logo_inverse,color: AppColors.rouge,),
+                        label: const Text('Word doc'),
                         onPressed: () {},
                       ),
                     ),

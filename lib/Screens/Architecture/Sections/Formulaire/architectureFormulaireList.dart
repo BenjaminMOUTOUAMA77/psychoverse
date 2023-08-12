@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
-import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
+import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
+import 'package:psychoverse/Ui/Components/PopUps/smallPopUp.dart';
 import 'package:psychoverse/Ui/Components/Tiles/simpleTile.dart';
 import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
 
@@ -13,17 +14,14 @@ class ArchitectureFormulaireList extends StatefulWidget {
   const ArchitectureFormulaireList({Key? key}) : super(key: key);
 
   @override
-  State<ArchitectureFormulaireList> createState() => _ArchitectureFormulaireListState();
+  State<ArchitectureFormulaireList> createState() =>
+      _ArchitectureFormulaireListState();
 }
 
-class _ArchitectureFormulaireListState extends State<ArchitectureFormulaireList> {
+class _ArchitectureFormulaireListState
+    extends State<ArchitectureFormulaireList> {
   late ArchitectureFormulairePagesManagerProvider sections;
   List<String> formulaires = [
-    "Formulaire 1",
-    "Formulaire 2",
-    "Formulaire 3",
-    "Formulaire 4",
-    "Formulaire 5",
     "Formulaire 1",
     "Formulaire 2",
     "Formulaire 3",
@@ -40,35 +38,36 @@ class _ArchitectureFormulaireListState extends State<ArchitectureFormulaireList>
         children: [
           formulaires.length > 20
               ? Column(
-            children: [
-              MakeSearchBar(
-                  withComboFilter: true,
-                  withToggleFilter: true,
-                  comboFilterList: ["Nom", "Ville", "Numero dossier"],
-                  textList: [
-                    "Patient 1",
-                    "Patient 2",
-                    "Patient 3",
-                    "Patient 4",
-                    "Patient 5",
-                    "Patient 6",
+                  children: [
+                    MakeSearchBar(
+                        withComboFilter: true,
+                        withToggleFilter: true,
+                        comboFilterList: ["Nom", "Ville", "Numero dossier"],
+                        textList: [
+                          "Patient 1",
+                          "Patient 2",
+                          "Patient 3",
+                          "Patient 4",
+                          "Patient 5",
+                          "Patient 6",
+                        ],
+                        toggleFilterList: [
+                          "Tout",
+                          "En Cours",
+                          "En Pause",
+                          "Archivés",
+                        ],
+                        onChanged: (
+                            {toggleFilter = "",
+                            comboFilter = "",
+                            text = ""}) {},
+                        onFieldSubmitted: (
+                            {toggleFilter = "",
+                            comboFilter = "",
+                            text = ""}) {}),
+                    Gap(70.h),
                   ],
-                  toggleFilterList: [
-                    "Tout",
-                    "En Cours",
-                    "En Pause",
-                    "Archivés",
-                  ],
-                  onChanged: (
-                      {toggleFilter = "",
-                        comboFilter = "",
-                        text = ""}) {},
-                  onFieldSubmitted: (
-                      {toggleFilter = "", comboFilter = "", text = ""}) {
-                  }),
-              Gap(70.h),
-            ],
-          )
+                )
               : const Gap(0),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.w),
@@ -79,15 +78,33 @@ class _ArchitectureFormulaireListState extends State<ArchitectureFormulaireList>
                   texte: "Ajouter un formulaire à ce dossier",
                   icon: FluentIcons.dependency_add,
                   function: () {
-                    showDialog(context: context, builder: (context)=>BigPopUp(title: "Ajouter un formulaire",));
+                    showDialog(
+                        context: context,
+                        builder: (context) => SmallPopUp(
+                              title: "Nouveau formulaire",
+                              child: Column(
+                                children: [
+                                  TextForm(
+                                      title: "Nom du formulaire",
+                                      onChanged: (value) {},
+                                      onFieldSubmitted: (value) {}),
+                                  Gap(20.h),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SimpleAppButon(texte: "Créer",function: (){}),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ));
                   },
                 ),
               ],
             ),
           ),
           Gap(20.h),
-          SizedBox(
-            height: 600.h,
+          Expanded(
             child: ListViewTilesGenerator(
               number: formulaires.length,
               onTap: ({index = 0}) {
@@ -96,7 +113,9 @@ class _ArchitectureFormulaireListState extends State<ArchitectureFormulaireList>
               getTile: ({index = 0}) {
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40.w),
-                  child: SimpleTile(),
+                  child: SimpleTile(
+                    title: formulaires[index],
+                  ),
                 );
               },
             ),

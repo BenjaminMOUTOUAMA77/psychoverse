@@ -27,6 +27,14 @@ class Identite extends StatefulWidget {
 }
 
 class _IdentiteState extends State<Identite> {
+  List<String> genreList = ["Genre 1", "Genre 2", "Genre 3", "Genre 4"];
+  List<String> residenceList = ["Résidence 1", "Résidence 2", "Résidence 3", "Résidence 4"];
+  List<String> ethnieList = ["Èthnie 1", "Èthnie 2", "Èthnie 3", "Èthnie 4"];
+  List<String> villeList = ["Ville 1", "Ville 2", "Ville 3", "Ville 4"];
+  List<String> etudeList = ["Niveau 1", "Niveau 2", "Niveau 3", "Niveau 4"];
+  List<String> professionList = ["Profession 1", "Profession 2", "Profession 3", "Profession 4"];
+  List<String> religionList = ["Réligion 1", "Réligion 2", "Réligion 3", "Réligion 4"];
+  List<CheckBoxUnit> loisirList = [CheckBoxUnit(element: "Loisir 1"),CheckBoxUnit(element: "Loisir 2"),CheckBoxUnit(element: "Loisir 3"),CheckBoxUnit(element: "Loisir 4"),];
   @override
   Widget build(BuildContext context) {
     return Bloc1(
@@ -178,14 +186,14 @@ class _IdentiteState extends State<Identite> {
                   mediumLayout: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: SuggestTextForm(title: "Genre",list: ["Masculin","Féminin","Trans","Autre"],onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(child: SuggestTextForm(title: "Genre",list: genreList,onChanged: (value){}, onFieldSubmitted: (value){})),
                       Gap(20.w),
                       Expanded(child: NumberTextForm(title: "Âge",onChanged: (value){}, onFieldSubmitted: (value){})),
                     ],
                   ),
                   smallLayout: Column(
                     children: [
-                      SuggestTextForm(title: "Genre",list: ["Masculin","Féminin","Trans","Autre"],onChanged: (value){}, onFieldSubmitted: (value){}),
+                      SuggestTextForm(title: "Genre",list: genreList,onChanged: (value){}, onFieldSubmitted: (value){}),
                       NumberTextForm(title: "Âge",onChanged: (value){}, onFieldSubmitted: (value){}),
                     ],
                   ),
@@ -194,15 +202,15 @@ class _IdentiteState extends State<Identite> {
                   mediumLayout: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: SuggestTextForm(title: "Condition de résidence",list: ["Placé","Exil","Prison","Location","Maison propre"],onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(child: SuggestTextForm(title: "Condition de résidence",list: residenceList,onChanged: (value){}, onFieldSubmitted: (value){})),
                       Gap(20.w),
-                      Expanded(child: SuggestTextForm(title: "Èthnie",list: ["Placé","Exil","Prison","Location","Maison propre"],onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(child: SuggestTextForm(title: "Èthnie",list: ethnieList,onChanged: (value){}, onFieldSubmitted: (value){})),
                     ],
                   ),
                   smallLayout: Column(
                     children: [
-                      SuggestTextForm(title: "Condition de résidence",list: ["Placé","Exil","Prison","Location","Maison propre"],onChanged: (value){}, onFieldSubmitted: (value){}),
-                      SuggestTextForm(title: "Èthnie",list: ["Placé","Exil","Prison","Location","Maison propre"],onChanged: (value){}, onFieldSubmitted: (value){}),
+                      SuggestTextForm(title: "Condition de résidence",list: residenceList,onChanged: (value){}, onFieldSubmitted: (value){}),
+                      SuggestTextForm(title: "Èthnie",list: ethnieList,onChanged: (value){}, onFieldSubmitted: (value){}),
                     ],
                   ),
                 ),
@@ -212,13 +220,13 @@ class _IdentiteState extends State<Identite> {
                     children: [
                       Expanded(child: AppDateForm(title: "Date de naissance",onChanged: (value){}, onFieldSubmitted: (value){})),
                       Gap(20.w),
-                      Expanded(child: SuggestTextForm(title: "Lieu de naissance",list: ["Calavi","Cotonou","Natitingou",],onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(child: SuggestTextForm(title: "Lieu de naissance",list: villeList,onChanged: (value){}, onFieldSubmitted: (value){})),
                     ],
                   ),
                   smallLayout: Column(
                     children: [
                       AppDateForm(title: "Date de naissance",onChanged: (value){}, onFieldSubmitted: (value){}),
-                      SuggestTextForm(title: "Lieu de naissance",list: ["Calavi","Cotonou","Natitingou",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                      SuggestTextForm(title: "Lieu de naissance",list: villeList,onChanged: (value){}, onFieldSubmitted: (value){}),
                     ],
                   ),
                 ),
@@ -226,15 +234,15 @@ class _IdentiteState extends State<Identite> {
                   mediumLayout: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: SuggestTextForm(title: "Niveau d'étude",list: ["Analphabet","Maternelle","CEP","Doctorat","Mater",],onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(child: SuggestTextForm(title: "Niveau d'étude",list: etudeList,onChanged: (value){}, onFieldSubmitted: (value){})),
                       Gap(20.w),
-                      Expanded(child: SuggestTextForm(title: "Profession",list: ["Analphabet","Maternelle","CEP","Doctorat","Mater",],onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(child: SuggestTextForm(title: "Profession",list: professionList,onChanged: (value){}, onFieldSubmitted: (value){})),
                     ],
                   ),
                   smallLayout: Column(
                     children: [
-                      SuggestTextForm(title: "Niveau d'étude",list: ["Analphabet","Maternelle","CEP","Doctorat","Mater",],onChanged: (value){}, onFieldSubmitted: (value){}),
-                      SuggestTextForm(title: "Profession",list: ["Analphabet","Maternelle","CEP","Doctorat","Mater",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                      SuggestTextForm(title: "Niveau d'étude",list: etudeList,onChanged: (value){}, onFieldSubmitted: (value){}),
+                      SuggestTextForm(title: "Profession",list: professionList,onChanged: (value){}, onFieldSubmitted: (value){}),
                     ],
                   ),
                 ),
@@ -242,14 +250,14 @@ class _IdentiteState extends State<Identite> {
                   mediumLayout: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: SuggestTextForm(title: "Réligion",list: ["Analphabet","Maternelle","CEP","Doctorat","Mater",],onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(child: SuggestTextForm(title: "Réligion",list: religionList,onChanged: (value){}, onFieldSubmitted: (value){})),
                       Gap(20.w),
                       Expanded(child: NumberTextForm(title: "Ordre de naissance chez le père",onChanged: (value){}, onFieldSubmitted: (value){})),
                     ],
                   ),
                   smallLayout: Column(
                     children: [
-                      SuggestTextForm(title: "Réligion",list: ["Analphabet","Maternelle","CEP","Doctorat","Mater",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                      SuggestTextForm(title: "Réligion",list: religionList,onChanged: (value){}, onFieldSubmitted: (value){}),
                       NumberTextForm(title: "Ordre de naissance chez le père",onChanged: (value){}, onFieldSubmitted: (value){}),
                     ],
                   ),
@@ -266,7 +274,7 @@ class _IdentiteState extends State<Identite> {
                   smallLayout: Column(
                     children: [
                       NumberTextForm(title: "Ordre de naissance chez la mère",onChanged: (value){}, onFieldSubmitted: (value){}),
-                      CheckBoxMenu(title: "Loisirs", value: [],list: [CheckBoxUnit(element: "Loisir 1"),CheckBoxUnit(element: "Loisir 2"),CheckBoxUnit(element: "Loisir 3"),CheckBoxUnit(element: "Loisir 4"),CheckBoxUnit(element: "Loisir 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                      CheckBoxMenu(title: "Loisirs", value: [],list: loisirList,onChanged: (value){},onFieldSubmitted: (value){},),
                     ],
                   ),
                 ),

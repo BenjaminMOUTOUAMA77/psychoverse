@@ -32,6 +32,7 @@ class _MiddlePopUpState extends State<MiddlePopUp> {
           children: [
             Row(
               children: [
+                Gap(50.w),
                 Expanded(
                   child: Titre2(
                     title: widget.title,

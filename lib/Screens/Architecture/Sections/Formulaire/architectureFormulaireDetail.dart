@@ -3,6 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
+import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/radioMenuForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
+import 'package:psychoverse/Ui/Utils/appColors.dart';
+import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class ArchitectureFormulaireDetail extends StatefulWidget {
   const ArchitectureFormulaireDetail({Key? key}) : super(key: key);
@@ -67,24 +73,46 @@ class _ArchitectureFormulaireDetailState extends State<ArchitectureFormulaireDet
     sections = Provider.of<ArchitectureFormulairePagesManagerProvider>(context);
     return Column(
       children: [
+        Gap(20.h),
         Row(
           children: [
-            IconButton(icon: Icon(FluentIcons.navigate_back), onPressed: () {
+            IconButton(icon: Icon(FluentIcons.navigate_back,color: AppColors.rouge,size: 40.h,), onPressed: () {
               sections.setPage(0);
             }),
+            Gap(40.w),
+            Text("Formulaire de Sondage",style: AppTextStyle.buttonStyleTexte.copyWith(color: AppColors.primary,fontSize: 20.sp+10,),)
           ],
         ),
         Gap(20.h),
         Expanded(
-            child: TreeView(
-              selectionMode: TreeViewSelectionMode.multiple,
-              shrinkWrap: true,
-              items: items,
-              onSelectionChanged: (selectedItems) async => debugPrint(
-                  'onSelectionChanged: \${selectedItems.map((i) => i.value)}'),
-              onSecondaryTap: (item, details) async {
-                debugPrint('onSecondaryTap $item at ${details.globalPosition}');
-              },
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Bloc2(
+                    title: "À Propos" ,
+                    child: Column(
+                      children: [
+                        TextForm(title: "Nom du formulaire",onChanged: (value){}, onFieldSubmitted: (value){}),
+                        BigTextForm(title: "Description",onFieldSubmitted: (value){},),
+                        RadioMenuForm(title: "Inclusion dans les dossiers",list: ["Facultatif", "Par défaut"], onChanged: (value){}, onFieldSubmitted: (value){}),
+                      ],
+                    ),
+                  ),
+                  Bloc2(
+                    title: "Lossature" ,
+                    child: TreeView(
+                      selectionMode: TreeViewSelectionMode.none,
+                      shrinkWrap: true,
+                      items: items,
+                      onSelectionChanged: (selectedItems) async => debugPrint(
+                          'onSelectionChanged: \${selectedItems.map((i) => i.value)}'),
+                      onSecondaryTap: (item, details) async {
+                        debugPrint('onSecondaryTap $item at ${details.globalPosition}');
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),),
       ],
     );

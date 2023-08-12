@@ -17,7 +17,12 @@ class TextesArchitecture extends StatefulWidget {
 }
 
 class _TextesArchitectureState extends State<TextesArchitecture> {
-  List<String> genreList = ["", "", "", ""];
+  List<String> parentList = ["Trait Parent 1","Trait Parent 2","Trait Parent 3","Trait Parent 4",];
+  List<String> adulteList = ["Trait Adulte 1","Trait Adulte 2","Trait Adulte 3","Trait Adulte 4",];
+  List<String> enfantList = ["Trait Enfant 1","Trait Enfant 2","Trait Enfant 3","Trait Enfant 4",];
+  List<String> karpmanList = ["Trait Karpman 1","Trait Karpman 2","Trait Karpman 3","Trait Karpman 4",];
+  List<String> personnaliteList = ["Trait Personnalité 1","Trait Personnalité 2","Trait Personnalité 3","Trait Personnalité 4",];
+
   @override
   Widget build(BuildContext context) {
     return Bloc11(
@@ -56,10 +61,10 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * parentList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: parentList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -75,7 +80,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: parentList[index],);
                     },
                   ),
                 ),
@@ -111,10 +116,10 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * adulteList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: adulteList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -130,7 +135,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: adulteList[index],);
                     },
                   ),
                 ),
@@ -166,10 +171,10 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * enfantList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: enfantList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -185,7 +190,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: enfantList[index],);
                     },
                   ),
                 ),
@@ -221,10 +226,10 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * karpmanList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: karpmanList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -240,7 +245,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: karpmanList[index],);
                     },
                   ),
                 ),
@@ -276,10 +281,10 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * genreList.length,
+                  height: 90.h * personnaliteList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
-                    number: genreList.length,
+                    number: personnaliteList.length,
                     onTap: ({index = 0}) {
                       showDialog(
                         context: context,
@@ -295,7 +300,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                       );
                     },
                     getTile: ({index = 0}) {
-                      return SimpleTile();
+                      return SimpleTile(title: personnaliteList[index],);
                     },
                   ),
                 ),
