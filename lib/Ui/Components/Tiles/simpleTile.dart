@@ -17,7 +17,7 @@ class _SimpleTileState extends State<SimpleTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
+      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
       decoration:
           BoxDecoration(borderRadius: BorderRadius.circular(5), boxShadow: [
         AppDesignEffects.shadow0,

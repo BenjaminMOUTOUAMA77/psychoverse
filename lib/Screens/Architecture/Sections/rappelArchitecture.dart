@@ -1,30 +1,26 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Ui/Components/Blocs/bloc11.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
-import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 
-class Sms extends StatefulWidget {
-  final int uiKey;
-  const Sms({Key? key,this.uiKey=0}) : super(key: key);
+class RappelArchitecture extends StatefulWidget {
+  const RappelArchitecture({Key? key}) : super(key: key);
 
   @override
-  State<Sms> createState() => _SmsState();
+  State<RappelArchitecture> createState() => _RappelArchitectureState();
 }
 
-class _SmsState extends State<Sms> {
+class _RappelArchitectureState extends State<RappelArchitecture> {
   @override
   Widget build(BuildContext context) {
-    return Bloc1(
-      uiKey: widget.uiKey,
+    return Bloc11(
       icon: FluentIcons.skype_message,
-      title: "Message Rappel",
+      title: "Message rappel",
       number: 10,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Bloc2(
             title: "Email message rappel",
@@ -33,12 +29,6 @@ class _SmsState extends State<Sms> {
                 TextForm(title: "Titre", onFieldSubmitted: (value) {}, onChanged: (value) {},),
                 BigTextForm(title: "Contenu", onFieldSubmitted: (value) {}),
                 Gap(40.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SimpleAppButon(texte: "Envoyer",function: (){},),
-                  ],
-                ),
               ],
             ),
           ),
@@ -49,18 +39,11 @@ class _SmsState extends State<Sms> {
                 TextForm(title: "Titre", onFieldSubmitted: (value) {}, onChanged: (value) {},),
                 BigTextForm(title: "Contenu", onFieldSubmitted: (value) {}),
                 Gap(40.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SimpleAppButon(texte: "Envoyer",function: (){},),
-                  ],
-                ),
               ],
             ),
           ),
         ],
       ),
     );
-
   }
 }

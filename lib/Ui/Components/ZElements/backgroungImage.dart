@@ -12,7 +12,7 @@ class _MakeBackgroundImageState extends State<MakeBackgroundImage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(AppImages.pattern), fit: BoxFit.cover, opacity: 0),
+        image: DecorationImage(image: AssetImage(AppImages.pattern), fit: BoxFit.cover, opacity: 0.01),
         color: AppColors.blanc,
       ),
     );

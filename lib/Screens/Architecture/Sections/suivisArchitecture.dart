@@ -63,7 +63,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * typeList.length,
+                  height: 100.h * typeList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: typeList.length,
@@ -118,7 +118,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * degreList.length,
+                  height: 100.h * degreList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: degreList.length,
@@ -173,7 +173,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * frequenceList.length,
+                  height: 100.h * frequenceList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: frequenceList.length,
@@ -228,7 +228,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * evolutionList.length,
+                  height: 100.h * evolutionList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: evolutionList.length,
@@ -283,7 +283,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * strategieList.length,
+                  height: 100.h * strategieList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: strategieList.length,
@@ -338,7 +338,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * analyseList.length,
+                  height: 100.h * analyseList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: analyseList.length,
@@ -403,7 +403,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * trameList.length,
+                  height: 100.h * trameList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: trameList.length,

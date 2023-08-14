@@ -12,6 +12,7 @@ class SmallPopUp extends StatefulWidget {
   bool save;
   Function? deleteFunction;
   Function? saveFunction;
+  Function? cancelFunction;
   SmallPopUp({
     Key? key,
     this.title = "Small PopUp",
@@ -20,6 +21,7 @@ class SmallPopUp extends StatefulWidget {
     this.save = false,
     this.deleteFunction,
     this.saveFunction,
+    this.cancelFunction,
   }) : super(key: key);
 
   @override
@@ -41,7 +43,7 @@ class _SmallPopUpState extends State<SmallPopUp> {
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 40.w),
             decoration: BoxDecoration(
-              color: AppColors.blancGrise,
+              color: AppColors.blanc,
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 AppDesignEffects.shadow3,
@@ -59,7 +61,7 @@ class _SmallPopUpState extends State<SmallPopUp> {
                           child: IconButton(
                             style: ButtonStyle(
                               elevation: ButtonState.all(1),
-                              backgroundColor: ButtonState.all(AppColors.rouge),
+                              backgroundColor: ButtonState.all(AppColors.primary),
                             ),
                             icon: Icon(
                               FluentIcons.save,
@@ -75,7 +77,7 @@ class _SmallPopUpState extends State<SmallPopUp> {
                           child: IconButton(
                             style: ButtonStyle(
                               elevation: ButtonState.all(1),
-                              backgroundColor: ButtonState.all(AppColors.rouge),
+                              backgroundColor: ButtonState.all(AppColors.primary),
                             ),
                             icon: Icon(
                               FluentIcons.delete,
@@ -101,15 +103,18 @@ class _SmallPopUpState extends State<SmallPopUp> {
                         style: ButtonStyle(
                           elevation: ButtonState.all(1),
                           backgroundColor:
-                              ButtonState.all(AppColors.blancGrise),
+                              ButtonState.all(AppColors.rouge),
                         ),
                         icon: Icon(
                           FluentIcons.cancel,
-                          color: AppColors.rouge,
+                          color: AppColors.blanc,
                           size: 30.h,
                           weight: 100,
                         ),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: (){
+                          widget.cancelFunction;
+                          Navigator.pop(context);
+                        },
                       ),
                     ),
                   ],

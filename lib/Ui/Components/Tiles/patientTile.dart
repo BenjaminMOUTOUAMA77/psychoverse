@@ -8,7 +8,8 @@ import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class PatientTile extends StatefulWidget {
   final Patient? patient;
-  PatientTile({Key? key, this.patient}) : super(key: key);
+  String nom;
+  PatientTile({Key? key, this.patient,this.nom="Nom du patient"}) : super(key: key);
 
   @override
   State<PatientTile> createState() => _PatientTileState();
@@ -55,7 +56,7 @@ class _PatientTileState extends State<PatientTile> {
                     ),
                   ),
                   Gap(20.w),
-                  Expanded(child: Text("TOUMOUDAGOU Josiane", style: AppTextStyle.bigFilledTexte.copyWith(fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,)),
+                  Expanded(child: Text(widget.nom, style: AppTextStyle.bigFilledTexte.copyWith(fontWeight: FontWeight.w600),overflow: TextOverflow.ellipsis,)),
                   Gap(20.w),
                   Text("Depuis le",style: AppTextStyle.smallTexte,),
                   Gap(10.w),

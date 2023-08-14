@@ -7,7 +7,7 @@ import 'package:psychoverse/Screens/Patients/DetailsSections/Formulaire/mainForm
 import 'package:psychoverse/Screens/Patients/DetailsSections/historique.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/identitePatient.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/relations.dart';
-import 'package:psychoverse/Screens/Patients/DetailsSections/sms.dart';
+import 'package:psychoverse/Screens/Patients/DetailsSections/rappelPatient.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/Suivi/mainSuivis.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/testes.dart';
 import 'package:psychoverse/Ui/Components/Buttons/togleButton.dart';
@@ -69,7 +69,7 @@ class _PatientDetailState extends State<PatientDetail> {
       ),
       AppNavMenuPane(
         title: "Rappel",
-        body: Sms(
+        body: PatientRappel(
           uiKey: widget.uiKey,
         ),
       ),

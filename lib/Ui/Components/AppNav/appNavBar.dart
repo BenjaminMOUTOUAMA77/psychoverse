@@ -26,7 +26,7 @@ class _AppNavBarState extends State<AppNavBar> {
           padding:
               EdgeInsets.symmetric(vertical: 5.h + 5, horizontal: 15.w + 10),
           decoration: BoxDecoration(
-            color: AppColors.grisLitePlus,
+            color: AppColors.blanc,
             borderRadius: BorderRadius.circular(50.r),
             boxShadow: [
               AppDesignEffects.shadow1,

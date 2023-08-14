@@ -2,6 +2,8 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:psychoverse/Screens/Architecture/architecture.dart';
 import 'package:psychoverse/Screens/Patients/mainPatient.dart';
+import 'package:psychoverse/Screens/quotes.dart';
+import 'package:psychoverse/Screens/rappels.dart';
 import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
 import 'package:psychoverse/screens/home.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
@@ -46,13 +48,13 @@ List<PaneItem> appNavMenu() => [
         icon:
             SvgPicture.asset(AppIcons.sms, color: AppColors.rouge, height: 20),
         title: Text('Rappel', style: AppTextStyle.navBarTexte),
-        body: defaultPage,
+        body: const Rappels(),
       ),
       PaneItem(
         icon: SvgPicture.asset(AppIcons.quote,
             color: AppColors.primary, height: 20),
         title: Text('Quote', style: AppTextStyle.navBarTexte),
-        body: defaultPage,
+        body: const Quotes(),
       ),
       PaneItem(
         icon: SvgPicture.asset(AppIcons.diagnostic,

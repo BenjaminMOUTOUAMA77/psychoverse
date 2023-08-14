@@ -4,14 +4,16 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/Formulaire/architectureFormulaires.dart';
-import 'package:psychoverse/Screens/Architecture/Sections/contacter.dart';
+import 'package:psychoverse/Screens/Architecture/Sections/rappelArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/histotiqueArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/identiteArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/suivisArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/testesArchitecture.dart';
+import 'package:psychoverse/Ui/Components/AppNav/appNavBar.dart';
 import 'package:psychoverse/Ui/Components/Buttons/togleButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/brouillonPopUp.dart';
+import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/appNav/appNavMenuPane.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
@@ -52,7 +54,7 @@ class _ArchitectureState extends State<Architecture> {
       ),
       AppNavMenuPane(
         title: "Rappel",
-        body: ContacterArchitecture(),
+        body: RappelArchitecture(),
       ),
     ];
     List<String> getTitles() {
@@ -76,84 +78,91 @@ class _ArchitectureState extends State<Architecture> {
     sections = Provider.of<ChangeSectionsProviderArchitecture>(context);
     bodys = getBodys();
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.w),
-      child: Column(
-        children: [
-          Gap(50.h),
-          Row(
+    return Stack(
+      children: [
+        const MakeBackgroundImage(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30.w),
+          child: Column(
             children: [
-              GestureDetector(
-                onTap: () {
-                  showDialog(context: context, builder: (context)=>BigPopUp(title: "Brouillon",child: BrouillonPopUp(),),);
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10),
-                  decoration: BoxDecoration(
-                    color: AppColors.rouge,
-                    borderRadius: BorderRadius.circular(5),
-                    boxShadow: [
-                      AppDesignEffects.shadow0,
-                    ],
+              Gap(20.h),
+              AppNavBar(links: [NavLink(title: "Architecture",function: (){})],),
+              Gap(50.h),
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(context: context, builder: (context)=>BigPopUp(title: "Brouillon",child: BrouillonPopUp(),),);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10),
+                      decoration: BoxDecoration(
+                        color: AppColors.rouge,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          AppDesignEffects.shadow0,
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(FluentIcons.text_document_edit,color: AppColors.blanc,),
+                          Gap(10),
+                          Text("Brouillon",style: AppTextStyle.filedTexte.copyWith(fontWeight: FontWeight.bold,color: AppColors.blanc),),
+                        ],
+                      ),
+                    ),
                   ),
-                  child: Row(
-                    children: [
-                      Icon(FluentIcons.text_document_edit,color: AppColors.blanc,),
-                      Gap(10),
-                      Text("Brouillon",style: AppTextStyle.filedTexte.copyWith(fontWeight: FontWeight.bold,color: AppColors.blanc),),
-                    ],
+                  Gap(50.w),
+                  Expanded(
+                    child: MakeToggleMenu(
+                      type: 2,
+                      menu: getTitles(),
+                      selectedMenuNums: sections.selectedMenuNums,
+                      mode: sections.mode,
+                      selectedMenuNum: sections.selectedMenuNum,
+                      onChanged: (
+                          {mode = true,
+                            menu = const [],
+                            selectedMenuNums = const [2, 4],
+                            selectedMenuNum = 0,
+                            getSelectedOnString = const []}) {
+                        setState(() {
+                          sections.mode=mode;
+                          if (mode) {
+                            sections.selectedMenuNums=selectedMenuNums;
+                          } else {
+                            sections.selectedMenuNum=selectedMenuNum;
+                          }
+                        });
+                      },
+                    ),
                   ),
-                ),
+                ],
               ),
-              Gap(50.w),
+              Gap(20.h),
               Expanded(
-                child: MakeToggleMenu(
-                  type: 2,
-                  menu: getTitles(),
-                  selectedMenuNums: sections.selectedMenuNums,
-                  mode: sections.mode,
-                  selectedMenuNum: sections.selectedMenuNum,
-                  onChanged: (
-                      {mode = true,
-                        menu = const [],
-                        selectedMenuNums = const [2, 4],
-                        selectedMenuNum = 0,
-                        getSelectedOnString = const []}) {
-                    setState(() {
-                      sections.mode=mode;
-                      if (mode) {
-                        sections.selectedMenuNums=selectedMenuNums;
-                      } else {
-                        sections.selectedMenuNum=selectedMenuNum;
-                      }
-                    });
-                  },
-                ),
+                child: sections.mode
+                    ? SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: Column(
+                    children: List.generate(
+                      bodys.length,
+                          (i) => Visibility(
+                        visible:
+                        sections.selectedMenuNums.contains(i)
+                            ? true
+                            : false,
+                        child: bodys[i],
+                      ),
+                    ),
+                  ),
+                )
+                    : bodys[sections.selectedMenuNum],
               ),
             ],
           ),
-          Gap(20.h),
-          Expanded(
-            child: sections.mode
-                ? SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Column(
-                children: List.generate(
-                  bodys.length,
-                      (i) => Visibility(
-                    visible:
-                    sections.selectedMenuNums.contains(i)
-                        ? true
-                        : false,
-                    child: bodys[i],
-                  ),
-                ),
-              ),
-            )
-                : bodys[sections.selectedMenuNum],
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

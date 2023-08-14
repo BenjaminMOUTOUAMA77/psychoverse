@@ -2,37 +2,32 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:image_fade/image_fade.dart';
+import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
+import 'package:psychoverse/Ui/Components/PopUps/imagePopUp.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
-import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
-import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
-class RorshachTile extends StatefulWidget {
-  const RorshachTile({Key? key}) : super(key: key);
+class QuotePopUp extends StatefulWidget {
+  const QuotePopUp({Key? key}) : super(key: key);
 
   @override
-  State<RorshachTile> createState() => _RorshachTileState();
+  State<QuotePopUp> createState() => _QuotePopUpState();
 }
 
-class _RorshachTileState extends State<RorshachTile> {
+class _QuotePopUpState extends State<QuotePopUp> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.h),
-      decoration: BoxDecoration(
-        color: AppColors.blanc,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          AppDesignEffects.shadow1,
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(horizontal: 40.w),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
+          GestureDetector(
+            onTap: ()=>showDialog(context: context, builder: (context)=>ImagePopUp(),),
             child: Container(
               width: double.infinity,
-              height: 400.h,
+              height: 500.h,
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(5.r)),
@@ -71,15 +66,19 @@ class _RorshachTileState extends State<RorshachTile> {
             ),
           ),
           Gap(20.w),
-          Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Nom du Rorshach",style: AppTextStyle.navBarTexte,),
-                  Gap(20.h),
-                  Text("Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.",)
-                ],
-              ),),
+          Column(
+            children: [
+              TextForm(
+                title: "Auteur",
+                onChanged: (value){},
+                onFieldSubmitted: (value){},
+              ),
+              BigTextForm(
+                title: "Pensée" ,
+                onFieldSubmitted: (value) {},
+              ),
+            ],
+          ),
         ],
       ),
     );

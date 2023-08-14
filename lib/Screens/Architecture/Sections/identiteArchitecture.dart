@@ -70,7 +70,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                       ),
                       Gap(30.h),
                       SizedBox(
-                        height: 90.h * genreList.length,
+                        height: 100.h * genreList.length,
                         width: double.infinity,
                         child: ListViewTilesGenerator(
                           number: genreList.length,
@@ -125,7 +125,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                       ),
                       Gap(30.h),
                       SizedBox(
-                        height: 90.h * genreList.length,
+                        height: 100.h * genreList.length,
                         width: double.infinity,
                         child: ListViewTilesGenerator(
                           number: genreList.length,
@@ -180,7 +180,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                       ),
                       Gap(30.h),
                       SizedBox(
-                        height: 90.h * genreList.length,
+                        height: 100.h * genreList.length,
                         width: double.infinity,
                         child: ListViewTilesGenerator(
                           number: genreList.length,
@@ -235,7 +235,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                       ),
                       Gap(30.h),
                       SizedBox(
-                        height: 90.h * genreList.length,
+                        height: 100.h * genreList.length,
                         width: double.infinity,
                         child: ListViewTilesGenerator(
                           number: genreList.length,
@@ -290,7 +290,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                       ),
                       Gap(30.h),
                       SizedBox(
-                        height: 90.h * genreList.length,
+                        height: 100.h * genreList.length,
                         width: double.infinity,
                         child: ListViewTilesGenerator(
                           number: genreList.length,
@@ -345,7 +345,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                       ),
                       Gap(30.h),
                       SizedBox(
-                        height: 90.h * genreList.length,
+                        height: 100.h * genreList.length,
                         width: double.infinity,
                         child: ListViewTilesGenerator(
                           number: genreList.length,
@@ -400,7 +400,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                       ),
                       Gap(30.h),
                       SizedBox(
-                        height: 90.h * genreList.length,
+                        height: 100.h * genreList.length,
                         width: double.infinity,
                         child: ListViewTilesGenerator(
                           number: genreList.length,
@@ -455,7 +455,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                       ),
                       Gap(30.h),
                       SizedBox(
-                        height: 90.h * genreList.length,
+                        height: 100.h * genreList.length,
                         width: double.infinity,
                         child: ListViewTilesGenerator(
                           number: genreList.length,

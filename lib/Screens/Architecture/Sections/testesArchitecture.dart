@@ -61,7 +61,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * parentList.length,
+                  height: 100.h * parentList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: parentList.length,
@@ -116,7 +116,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * adulteList.length,
+                  height: 100.h * adulteList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: adulteList.length,
@@ -171,7 +171,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * enfantList.length,
+                  height: 100.h * enfantList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: enfantList.length,
@@ -226,7 +226,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * karpmanList.length,
+                  height: 100.h * karpmanList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: karpmanList.length,
@@ -281,7 +281,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * personnaliteList.length,
+                  height: 100.h * personnaliteList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: personnaliteList.length,

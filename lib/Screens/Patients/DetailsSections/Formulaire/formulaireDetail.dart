@@ -1,4 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
+import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
@@ -6,6 +10,8 @@ import 'package:psychoverse/Ui/Components/Forms/checkBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
+import 'package:psychoverse/Ui/Utils/appColors.dart';
+import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class FormulaireDetail extends StatefulWidget {
   final int uiKey;
@@ -17,12 +23,37 @@ class FormulaireDetail extends StatefulWidget {
 }
 
 class _FormulaireDetailState extends State<FormulaireDetail> {
+  late ChangeSectionsProvider sections;
   @override
   Widget build(BuildContext context) {
+    sections = Provider.of<ChangeSectionsProvider>(context);
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
           children: [
+            Gap(20.h),
+            Row(
+              children: [
+                IconButton(
+                    icon: Icon(
+                      FluentIcons.navigate_back,
+                      color: AppColors.rouge,
+                      size: 40.h,
+                    ),
+                    onPressed: () {
+                      sections.setFormulairePage(0, widget.uiKey, widget.formulaireUiKey);
+                    }),
+                Gap(40.w),
+                Text(
+                  "Formulaire de Sondage",
+                  style: AppTextStyle.buttonStyleTexte.copyWith(
+                    color: AppColors.primary,
+                    fontSize: 20.sp + 10,
+                  ),
+                )
+              ],
+            ),
+            Gap(20.h),
             Bloc2(
               title: "Section 1",
               child: Column(

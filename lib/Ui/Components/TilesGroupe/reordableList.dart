@@ -16,7 +16,7 @@ class _AppReordableListState extends State<AppReordableList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: widget.list.length.h *90,
+      height: widget.list.length.h *100,
       child: ReorderableListView(
         padding: EdgeInsets.symmetric(horizontal: 30.w),
         children: <Widget>[

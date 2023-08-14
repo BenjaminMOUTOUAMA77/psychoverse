@@ -7,14 +7,14 @@ import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
-class RorshachTile extends StatefulWidget {
-  const RorshachTile({Key? key}) : super(key: key);
+class QuoteTile extends StatefulWidget {
+  const QuoteTile({Key? key}) : super(key: key);
 
   @override
-  State<RorshachTile> createState() => _RorshachTileState();
+  State<QuoteTile> createState() => _QuoteTileState();
 }
 
-class _RorshachTileState extends State<RorshachTile> {
+class _QuoteTileState extends State<QuoteTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -72,14 +72,14 @@ class _RorshachTileState extends State<RorshachTile> {
           ),
           Gap(20.w),
           Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Nom du Rorshach",style: AppTextStyle.navBarTexte,),
-                  Gap(20.h),
-                  Text("Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.",)
-                ],
-              ),),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.",),
+                Gap(20.h),
+                Text("Nom du Rorshach",style: AppTextStyle.navBarTexte,),
+              ],
+            ),),
         ],
       ),
     );

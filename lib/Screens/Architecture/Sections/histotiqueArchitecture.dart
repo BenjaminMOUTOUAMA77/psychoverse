@@ -58,7 +58,7 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * psychologiqueList.length,
+                  height: 100.h * psychologiqueList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: psychologiqueList.length,
@@ -113,7 +113,7 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * psychiatriqueList.length,
+                  height: 100.h * psychiatriqueList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: psychiatriqueList.length,
@@ -168,7 +168,7 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
                 ),
                 Gap(30.h),
                 SizedBox(
-                  height: 90.h * marquantList.length,
+                  height: 100.h * marquantList.length,
                   width: double.infinity,
                   child: ListViewTilesGenerator(
                     number: marquantList.length,
