@@ -8,13 +8,14 @@ initialisation() async{
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
 
-  WindowOptions windowOptions = const WindowOptions(
+  WindowOptions windowOptions = WindowOptions(
     title: 'psychoverse',
     size: Size(700, 500),
     minimumSize: Size(700, 400),
     center: true,
     skipTaskbar: false,
     titleBarStyle: TitleBarStyle.normal,
+    windowButtonVisibility: true,
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();

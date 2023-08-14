@@ -380,18 +380,20 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                           builder: (context) => BigPopUp(
                             title: "Trame d'anamnèse",
                             save: true,
-                            child: Column(
-                              children: [
-                                TextForm(
-                                  title: "Nom de la trame" ,
-                                  onChanged: (value){},
-                                  onFieldSubmitted: (value){},
-                                ),
-                                BigTextForm(
-                                  title: "Lossature de la trame",
-                                  onFieldSubmitted: (value) {},
-                                ),
-                              ],
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  TextForm(
+                                    title: "Nom de la trame" ,
+                                    onChanged: (value){},
+                                    onFieldSubmitted: (value){},
+                                  ),
+                                  BigTextForm(
+                                    title: "Ossature de la trame",
+                                    onFieldSubmitted: (value) {},
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );
@@ -411,18 +413,20 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                         builder: (context) => BigPopUp(
                           title: "Trame d'anamnèse",
                           delete: true,
-                          child: Column(
-                            children: [
-                              TextForm(
-                                title: "Nom de la trame" ,
-                                onChanged: (value){},
-                                onFieldSubmitted: (value){},
-                              ),
-                              BigTextForm(
-                                title: "Lossature de la trame",
-                                onFieldSubmitted: (value) {},
-                              ),
-                            ],
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                TextForm(
+                                  title: "Nom de la trame" ,
+                                  onChanged: (value){},
+                                  onFieldSubmitted: (value){},
+                                ),
+                                BigTextForm(
+                                  title: "Lossature de la trame",
+                                  onFieldSubmitted: (value) {},
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );

@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
@@ -23,6 +24,8 @@ class _SimpleTileState extends State<SimpleTile> {
       ]),
       child: Row(
         children: [
+          Icon(FluentIcons.edge_logo,color: AppColors.grisLite,),
+          Gap(20.w),
           Expanded(
             child: Text(
               widget.title,
@@ -35,7 +38,7 @@ class _SimpleTileState extends State<SimpleTile> {
           Tooltip(
               message: "Supprimer",
               child:
-                  IconButton(icon: Icon(FluentIcons.delete), onPressed: () {})),
+                  IconButton(icon: Icon(FluentIcons.delete,color: AppColors.rouge,), onPressed: () {})),
         ],
       ),
     );

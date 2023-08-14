@@ -30,22 +30,7 @@ class _SeanceTileState extends State<SeanceTile> {
         ),
         child: Row(
           children: [
-            Container(
-              height: 70.h,
-              width: 70.h,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  AppDesignEffects.shadow2,
-                ],
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/im1.jpg"),
-                ),
-                border: Border.all(width: 2, color: AppColors.grisLitePlus),
-                shape: BoxShape.circle,
-              ),
-            ),
+            Icon(FluentIcons.location_outline,color: AppColors.grisLite,size: 50.h,),
             Gap(30.w),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

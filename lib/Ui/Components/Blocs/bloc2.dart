@@ -35,7 +35,7 @@ class _Bloc2State extends State<Bloc2> {
         headerHeight: 100.h,
         headerBackgroundColor: ButtonState.all(AppColors.grisLitePlus),
         leading: Icon(
-          FluentIcons.backlog_list,
+          FluentIcons.starburst,
           color: AppColors.primary,
         ),
         header: Text(widget.title,style: AppTextStyle.buttonStyleTexte.copyWith(fontWeight: FontWeight.bold,color: AppColors.primary, fontSize: 8.sp+10),),

@@ -22,7 +22,7 @@ class _MiddlePopUpState extends State<MiddlePopUp> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 40.w),
         decoration: BoxDecoration(
-          color: AppColors.blancGrise,
+          color: AppColors.blanc,
           borderRadius: BorderRadius.circular(10.r),
           boxShadow: [
             AppDesignEffects.shadow3,
@@ -43,11 +43,11 @@ class _MiddlePopUpState extends State<MiddlePopUp> {
                   child: IconButton(
                     style: ButtonStyle(
                       elevation: ButtonState.all(1),
-                      backgroundColor: ButtonState.all(AppColors.blancGrise),
+                      backgroundColor: ButtonState.all(AppColors.rouge),
                     ),
                     icon: Icon(
                       FluentIcons.cancel,
-                      color: AppColors.rouge,
+                      color: AppColors.blanc,
                       size: 30.h,
                       weight: 100,
                     ),

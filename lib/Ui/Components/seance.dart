@@ -2,7 +2,6 @@ import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/timeForm.dart';
@@ -48,7 +47,15 @@ class _SeanceState extends State<Seance> {
               Gap(20.w),
               Expanded(
                 child: TimeForm(
-                    title: "Heure",
+                    title: "Heure de début",
+                    value: widget.heureActuelle,
+                    onChanged: (value) {},
+                    onFieldSubmitted: (value) {}),
+              ),
+              Gap(20.w),
+              Expanded(
+                child: TimeForm(
+                    title: "Heure de fin",
                     value: widget.heureActuelle,
                     onChanged: (value) {},
                     onFieldSubmitted: (value) {}),
@@ -64,6 +71,11 @@ class _SeanceState extends State<Seance> {
                   onFieldSubmitted: (value) {}),
               TimeForm(
                   title: "Heure",
+                  value: widget.heureActuelle,
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
+              TimeForm(
+                  title: "Heure de fin",
                   value: widget.heureActuelle,
                   onChanged: (value) {},
                   onFieldSubmitted: (value) {}),
@@ -84,7 +96,15 @@ class _SeanceState extends State<Seance> {
               Gap(20.w),
               Expanded(
                 child: TimeForm(
-                    title: "Heure",
+                    title: "Heure de début",
+                    value: widget.heureActuelle,
+                    onChanged: (value) {},
+                    onFieldSubmitted: (value) {}),
+              ),
+              Gap(20.w),
+              Expanded(
+                child: TimeForm(
+                    title: "Heure de fin",
                     value: widget.heureActuelle,
                     onChanged: (value) {},
                     onFieldSubmitted: (value) {}),
@@ -100,6 +120,11 @@ class _SeanceState extends State<Seance> {
                   onFieldSubmitted: (value) {}),
               TimeForm(
                   title: "Heure",
+                  value: widget.heureActuelle,
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {}),
+              TimeForm(
+                  title: "Heure de fin",
                   value: widget.heureActuelle,
                   onChanged: (value) {},
                   onFieldSubmitted: (value) {}),
