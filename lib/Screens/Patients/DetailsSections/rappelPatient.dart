@@ -36,7 +36,7 @@ class _PatientRappelState extends State<PatientRappel> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SimpleAppButon(texte: "Envoyer",function: (){},),
+                    SimpleAppButon(texte: "Envoyer",function: (){},icon: FluentIcons.send,),
                   ],
                 ),
               ],
@@ -52,7 +52,7 @@ class _PatientRappelState extends State<PatientRappel> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SimpleAppButon(texte: "Envoyer",function: (){},),
+                    SimpleAppButon(texte: "Envoyer",function: (){},icon: FluentIcons.send,),
                   ],
                 ),
               ],

@@ -204,6 +204,31 @@ class _SuiviDetailState extends State<SuiviDetail> {
               ),
             ),
             Bloc2(
+              title: "Suivis d'expériences de réalité virtuelle",
+              child: Column(
+                children: [
+                  Gap(20.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SimpleAppButon(
+                        texte: "Ajouter une expérience VR",
+                        icon: FluentIcons.circle_addition_solid,
+                        function: () => showDialog(
+                          context: context,
+                          builder: (context) => BigPopUp(
+                            title: "Nouvelle séance",
+                            child: AddSeancePopUp(),
+                            save: true,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Bloc2(
               title: "Séances",
               child: Column(
                 children: [

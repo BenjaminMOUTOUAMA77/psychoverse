@@ -12,7 +12,7 @@ class TextForm extends StatefulWidget {
   bool addresse;
   bool password;
 
-  bool showPassword=false;
+  bool showPassword=true;
 
   final String title;
   String placehholder;
@@ -191,7 +191,7 @@ class _TextFormState extends State<TextForm> {
               ),
             ),
             highlightColor: Colors.transparent,
-            obscureText: widget.showPassword,
+            obscureText: widget.password? widget.showPassword:false,
             obscuringCharacter: "*",
             prefix: widget.notSimpleWidget()?Padding(
               padding: EdgeInsets.only(right: 30.w),
@@ -214,7 +214,7 @@ class _TextFormState extends State<TextForm> {
                   widget.showPassword=!widget.showPassword;
                 });
               },
-              icon: Icon(widget.showPassword?FluentIcons.red_eye:FluentIcons.visually_impaired,color: widget.showPassword?AppColors.rouge:AppColors.gris,size: 30.h,),
+              icon: Icon(widget.showPassword? FluentIcons.visually_impaired: FluentIcons.red_eye,color: widget.showPassword?AppColors.rouge:AppColors.gris,size: 30.h,),
             ):null,
           ),
         ],

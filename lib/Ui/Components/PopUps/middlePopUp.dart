@@ -8,7 +8,21 @@ import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 class MiddlePopUp extends StatefulWidget {
   String title;
   Widget child;
-  MiddlePopUp({Key? key,this.title="Midle PopUp",this.child= const Text("Middle PopUp"),}) : super(key: key);
+  bool delete;
+  bool save;
+  Function? deleteFunction;
+  Function? saveFunction;
+  Function? cancelFunction;
+  MiddlePopUp({
+    Key? key,
+    this.title = "Midle PopUp",
+    this.child = const Text("Middle PopUp"),
+    this.delete = false,
+    this.save = false,
+    this.deleteFunction,
+    this.saveFunction,
+    this.cancelFunction,
+  }) : super(key: key);
 
   @override
   State<MiddlePopUp> createState() => _MiddlePopUpState();
@@ -18,7 +32,7 @@ class _MiddlePopUpState extends State<MiddlePopUp> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 500.w,vertical: 30.h),
+      padding: EdgeInsets.symmetric(horizontal: 500.w, vertical: 30.h),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 40.w),
         decoration: BoxDecoration(
@@ -32,18 +46,57 @@ class _MiddlePopUpState extends State<MiddlePopUp> {
           children: [
             Row(
               children: [
-                Gap(50.w),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    widget.save? Tooltip(
+                      message: "Enrégistrer",
+                      child: IconButton(
+                        style: ButtonStyle(
+                          elevation: ButtonState.all(1),
+                          backgroundColor: ButtonState.all(AppColors.primary),
+                        ),
+                        icon: Icon(
+                          FluentIcons.save,
+                          color: AppColors.blancGrise,
+                          size: 30.h,
+                          weight: 100,
+                        ),
+                        onPressed: ()=>widget.saveFunction,
+                      ),
+                    ):Gap(20.w),
+                    widget.delete? Tooltip(
+                      message: "Supprimer",
+                      child: IconButton(
+                        style: ButtonStyle(
+                          elevation: ButtonState.all(1),
+                          backgroundColor: ButtonState.all(AppColors.primary),
+                        ),
+                        icon: Icon(
+                          FluentIcons.delete,
+                          color: AppColors.blancGrise,
+                          size: 30.h,
+                          weight: 100,
+                        ),
+                        onPressed: () => widget.deleteFunction,
+                      ),
+                    ):Gap(20.w),
+                  ],
+                ),
+                Gap(10.w),
                 Expanded(
                   child: Titre2(
                     title: widget.title,
                   ),
                 ),
+                Gap(10.w),
                 Tooltip(
                   message: "Fermer",
                   child: IconButton(
                     style: ButtonStyle(
                       elevation: ButtonState.all(1),
-                      backgroundColor: ButtonState.all(AppColors.rouge),
+                      backgroundColor:
+                      ButtonState.all(AppColors.rouge),
                     ),
                     icon: Icon(
                       FluentIcons.cancel,
@@ -51,7 +104,10 @@ class _MiddlePopUpState extends State<MiddlePopUp> {
                       size: 30.h,
                       weight: 100,
                     ),
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: (){
+                      widget.cancelFunction;
+                      Navigator.pop(context);
+                    },
                   ),
                 ),
               ],

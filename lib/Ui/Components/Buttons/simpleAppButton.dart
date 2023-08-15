@@ -37,7 +37,11 @@ class _SimpleAppButonState extends State<SimpleAppButon> {
               size: 30.h,
             ),
             Gap(20.w),
-            Text(widget.texte, style: AppTextStyle.buttonStyleTexte),
+            Column(
+              children: [
+                Text(widget.texte, style: AppTextStyle.buttonStyleTexte.copyWith(overflow: TextOverflow.fade)),
+              ],
+            ),
           ],
         ),
       ),

@@ -212,7 +212,7 @@ class _PhoneFormState extends State<PhoneForm> {
                           ),
                           Text(
                             '${_selectedCountry!.callingCode} ${_selectedCountry!.name} (${_selectedCountry!.countryCode})',
-                            style: AppTextStyle.filedTexte
+                            style: AppTextStyle.smallTexte
                                 .copyWith(fontWeight: FontWeight.bold),
                           ),
                         ],

@@ -23,7 +23,7 @@ class Rappels extends StatefulWidget {
 }
 
 class _RappelsState extends State<Rappels> {
-  List<String> patienList = [];
+  List<String> emailList = [];
   List<String> smsList = [];
   String emailSendMode = "Envoi Manuel";
   String smsSendMode = "Envoi Manuel";
@@ -80,17 +80,20 @@ class _RappelsState extends State<Rappels> {
                             sendMode(emailSendMode)
                                 ? Column(
                                     children: [
-                                      patienList.length==0? Column(
+                                      emailList.length==0? Column(
                                         children: [
                                           Row(
                                             mainAxisAlignment:
                                             MainAxisAlignment.center,
                                             children: [
-                                              SimpleAppButon(
-                                                texte:
-                                                "Envoyer à un mail à tous les patients ayants un rendez-vous en vu",
-                                                icon: FluentIcons.send,
-                                                function: () {},
+                                              Tooltip(
+                                                message: "Envoyer à un mail à tous les patients ayants un rendez-vous en vu" ,
+                                                child: SimpleAppButon(
+                                                  texte:
+                                                  "Envoyer à tous",
+                                                  icon: FluentIcons.send,
+                                                  function: () {},
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -150,13 +153,13 @@ class _RappelsState extends State<Rappels> {
                                                             }),
                                                         Gap(20.h),
                                                         SizedBox(
-                                                          height: 700.h,
+                                                          height: 230.h,
                                                           child:
                                                           SelectablePatientList(
                                                             getSelected:
                                                                 (value) {
                                                               setState(() {
-                                                                patienList =
+                                                                emailList =
                                                                     value;
                                                               });
                                                             },
@@ -169,14 +172,14 @@ class _RappelsState extends State<Rappels> {
                                           ),
                                         ],
                                       ):Gap(0),
-                                      patienList.length > 0
+                                      emailList.length > 0
                                           ? Bloc3(
                                         title: "Envoyer un mail à des destinataires cibles",
                                             child: Column(
                                                 children: [
                                                   Gap(20.h),
                                                   SizedBox(
-                                                    height: patienList.length / 4 * 50 + 20,
+                                                    height: emailList.length / 4 * 50 + 20,
                                                     width: double.infinity,
                                                     child: GridView.builder(
                                                         gridDelegate:
@@ -188,13 +191,13 @@ class _RappelsState extends State<Rappels> {
                                                           mainAxisSpacing: 20,
                                                         ),
                                                         itemCount:
-                                                            patienList.length,
+                                                            emailList.length,
                                                         itemBuilder:
                                                             (BuildContext context,
                                                                 index) {
                                                           return AppToggleButton(
                                                             texte:
-                                                                patienList[index],
+                                                                emailList[index],
                                                             toggle: () {},
                                                           );
                                                         }),
@@ -207,7 +210,7 @@ class _RappelsState extends State<Rappels> {
                                                             "Annuler",
                                                         function: () {
                                                           setState(() {
-                                                            patienList.clear();
+                                                            emailList.clear();
                                                           });
                                                         },
                                                       ),
@@ -226,6 +229,7 @@ class _RappelsState extends State<Rappels> {
                                     ],
                                   )
                                 : Gap(0),
+                            Gap(40.h),
                           ],
                         ),
                       ),
@@ -259,11 +263,14 @@ class _RappelsState extends State<Rappels> {
                                       mainAxisAlignment:
                                       MainAxisAlignment.center,
                                       children: [
-                                        SimpleAppButon(
-                                          texte:
-                                          "Envoyer un sms à tous les patients ayants un rendez-vous en vu",
-                                          icon: FluentIcons.send,
-                                          function: () {},
+                                        Tooltip(
+                                          message: "Envoyer à un sms à tous les patients ayants un rendez-vous en vu" ,
+                                          child: SimpleAppButon(
+                                            texte:
+                                            "Envoyer à tous",
+                                            icon: FluentIcons.send,
+                                            function: () {},
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -321,9 +328,9 @@ class _RappelsState extends State<Rappels> {
                                                         print(
                                                             "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
                                                       }),
-                                                  Gap(20.h),
+                                                  Gap(40.h),
                                                   SizedBox(
-                                                    height: 700.h,
+                                                    height: 230.h,
                                                     child:
                                                     SelectablePatientList(
                                                       getSelected:
@@ -399,6 +406,7 @@ class _RappelsState extends State<Rappels> {
                               ],
                             )
                                 : Gap(0),
+                            Gap(40.h),
                           ],
                         ),
                       ),
