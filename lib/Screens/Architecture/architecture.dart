@@ -10,11 +10,11 @@ import 'package:psychoverse/Screens/Architecture/Sections/identiteArchitecture.d
 import 'package:psychoverse/Screens/Architecture/Sections/suivisArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/testesArchitecture.dart';
 import 'package:psychoverse/Ui/Components/AppNav/appNavBar.dart';
+import 'package:psychoverse/Ui/Components/AppNav/appNavMenuPane.dart';
 import 'package:psychoverse/Ui/Components/Buttons/togleButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/brouillonPopUp.dart';
 import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
-import 'package:psychoverse/Ui/Components/appNav/appNavMenuPane.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -81,14 +81,13 @@ class _ArchitectureState extends State<Architecture> {
     return Stack(
       children: [
         const MakeBackgroundImage(),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30.w),
-          child: Column(
-            children: [
-              Gap(20.h),
-              AppNavBar(links: [NavLink(title: "Architecture",function: (){})],),
-              Gap(50.h),
-              Row(
+        Column(
+          children: [
+            AppNavBar(menu: "Architecture",),
+            Gap(20.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30.w),
+              child: Row(
                 children: [
                   GestureDetector(
                     onTap: () {
@@ -139,28 +138,31 @@ class _ArchitectureState extends State<Architecture> {
                   ),
                 ],
               ),
-              Gap(20.h),
-              Expanded(
-                child: sections.mode
-                    ? SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Column(
-                    children: List.generate(
-                      bodys.length,
-                          (i) => Visibility(
-                        visible:
-                        sections.selectedMenuNums.contains(i)
-                            ? true
-                            : false,
-                        child: bodys[i],
-                      ),
+            ),
+            Gap(20.h),
+            Expanded(
+              child: sections.mode
+                  ? SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
+                child: Column(
+                  children: List.generate(
+                    bodys.length,
+                        (i) => Visibility(
+                      visible:
+                      sections.selectedMenuNums.contains(i)
+                          ? true
+                          : false,
+                      child: bodys[i],
                     ),
                   ),
-                )
-                    : bodys[sections.selectedMenuNum],
-              ),
-            ],
-          ),
+                ),
+              )
+                  : Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30.w),
+                    child: bodys[sections.selectedMenuNum],
+                  ),
+            ),
+          ],
         ),
       ],
     );

@@ -23,23 +23,24 @@ class _Bloc2State extends State<Bloc2> {
         onStateChanged: (value){
           if(value){
             setState(() {
-              icon=FluentIcons.chevron_up_end6;
+              icon=FluentIcons.chevron_up;
             });
           }else{
             setState(() {
-              icon=FluentIcons.chevron_down_end6;
+              icon=FluentIcons.chevron_down_med;
             });
           }
         },
         icon: Icon(icon,color: AppColors.grisLite.withOpacity(0.3),),
         headerHeight: 100.h,
-        headerBackgroundColor: ButtonState.all(AppColors.grisLitePlus),
+        headerBackgroundColor: ButtonState.all(AppColors.blancGrise),
         leading: Icon(
           FluentIcons.starburst,
           color: AppColors.primary,
         ),
         header: Text(widget.title,style: AppTextStyle.buttonStyleTexte.copyWith(fontWeight: FontWeight.bold,color: AppColors.primary, fontSize: 8.sp+10),),
         content: widget.child,
+        contentBackgroundColor: AppColors.blancGrise.withOpacity(0.2),
       ),
     );
   }

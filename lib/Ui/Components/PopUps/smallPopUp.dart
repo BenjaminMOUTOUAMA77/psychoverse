@@ -10,15 +10,19 @@ class SmallPopUp extends StatefulWidget {
   Widget child;
   bool delete;
   bool save;
-  Function? deleteFunction;
-  Function? saveFunction;
-  Function? cancelFunction;
+  String saveTexte;
+  String deleteTexte;
+  Function()? deleteFunction;
+  Function()? saveFunction;
+  Function()? cancelFunction;
   SmallPopUp({
     Key? key,
     this.title = "Small PopUp",
     this.child = const Text("Small PopUp"),
     this.delete = false,
     this.save = false,
+    this.deleteTexte="Supprimer",
+    this.saveTexte="Enrégistrer",
     this.deleteFunction,
     this.saveFunction,
     this.cancelFunction,
@@ -41,7 +45,7 @@ class _SmallPopUpState extends State<SmallPopUp> {
           Container(
             width: double.infinity,
             alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 40.w),
+            padding: EdgeInsets.only(bottom: 10.h),
             decoration: BoxDecoration(
               color: AppColors.blanc,
               borderRadius: BorderRadius.circular(10),
@@ -49,78 +53,83 @@ class _SmallPopUpState extends State<SmallPopUp> {
                 AppDesignEffects.shadow3,
               ],
             ),
+            clipBehavior: Clip.hardEdge,
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        widget.save? Tooltip(
-                          message: "Enrégistrer",
-                          child: IconButton(
-                            style: ButtonStyle(
-                              elevation: ButtonState.all(1),
-                              backgroundColor: ButtonState.all(AppColors.primary),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 40.w,vertical: 30.h),
+                  color: AppColors.blancGrise,
+                  child: Row(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          widget.save? Tooltip(
+                            message: widget.saveTexte,
+                            child: IconButton(
+                              style: ButtonStyle(
+                                elevation: ButtonState.all(1),
+                                backgroundColor: ButtonState.all(AppColors.primary),
+                              ),
+                              icon: Icon(
+                                FluentIcons.save,
+                                color: AppColors.blancGrise,
+                                size: 30.h,
+                                weight: 100,
+                              ),
+                              onPressed: widget.saveFunction,
                             ),
-                            icon: Icon(
-                              FluentIcons.save,
-                              color: AppColors.blancGrise,
-                              size: 30.h,
-                              weight: 100,
+                          ):Gap(20.w),
+                          widget.delete? Tooltip(
+                            message: widget.deleteTexte,
+                            child: IconButton(
+                              style: ButtonStyle(
+                                elevation: ButtonState.all(1),
+                                backgroundColor: ButtonState.all(AppColors.primary),
+                              ),
+                              icon: Icon(
+                                FluentIcons.delete,
+                                color: AppColors.blancGrise,
+                                size: 30.h,
+                                weight: 100,
+                              ),
+                              onPressed: widget.deleteFunction,
                             ),
-                            onPressed: ()=>widget.saveFunction,
-                          ),
-                        ):Gap(20.w),
-                        widget.delete? Tooltip(
-                          message: "Supprimer",
-                          child: IconButton(
-                            style: ButtonStyle(
-                              elevation: ButtonState.all(1),
-                              backgroundColor: ButtonState.all(AppColors.primary),
-                            ),
-                            icon: Icon(
-                              FluentIcons.delete,
-                              color: AppColors.blancGrise,
-                              size: 30.h,
-                              weight: 100,
-                            ),
-                            onPressed: () => widget.deleteFunction,
-                          ),
-                        ):Gap(20.w),
-                      ],
-                    ),
-                    Gap(10.w),
-                    Expanded(
-                      child: Titre2(
-                        title: widget.title,
+                          ):Gap(20.w),
+                        ],
                       ),
-                    ),
-                    Gap(10.w),
-                    Tooltip(
-                      message: "Fermer",
-                      child: IconButton(
-                        style: ButtonStyle(
-                          elevation: ButtonState.all(1),
-                          backgroundColor:
-                              ButtonState.all(AppColors.rouge),
+                      Gap(10.w),
+                      Expanded(
+                        child: Titre2(
+                          title: widget.title,
                         ),
-                        icon: Icon(
-                          FluentIcons.cancel,
-                          color: AppColors.blanc,
-                          size: 30.h,
-                          weight: 100,
-                        ),
-                        onPressed: (){
-                          widget.cancelFunction;
-                          Navigator.pop(context);
-                        },
                       ),
-                    ),
-                  ],
+                      Gap(10.w),
+                      Tooltip(
+                        message: "Fermer",
+                        child: IconButton(
+                          style: ButtonStyle(
+                            elevation: ButtonState.all(1),
+                            backgroundColor:
+                                ButtonState.all(AppColors.rouge),
+                          ),
+                          icon: Icon(
+                            FluentIcons.cancel,
+                            color: AppColors.blanc,
+                            size: 30.h,
+                            weight: 100,
+                          ),
+                          onPressed: widget.cancelFunction,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Gap(20.h),
-                widget.child,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: widget.child,
+                ),
               ],
             ),
           ),

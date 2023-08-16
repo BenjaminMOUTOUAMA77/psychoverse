@@ -70,105 +70,99 @@ class _AbonnementState extends State<Abonnement> {
     return Stack(
       children: [
         const MakeBackgroundImage(),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 40.w),
-          child: Column(
-            children: [
-              Gap(20.h),
-              AppNavBar(
-                links: [
-                  NavLink(title: "Centre des abonnements", function: () {})
-                ],
-              ),
-              Gap(50.h),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Bloc2(
-                        title: "Votre statut",
-                        child: Column(
-                          children: [
-                            Container(
-                              color: AppColors.rouge,
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 20.h, horizontal: 20.w),
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Vous avez un abonnement premium en cour !!",
-                                    style: AppTextStyle.navBarTexte
-                                        .copyWith(color: AppColors.blanc),
-                                  ),
-                                  Gap(30.w),
-                                  Icon(
-                                    FluentIcons.crown_solid,
-                                    color: AppColors.blanc,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Gap(20.h),
-                            Row(
+        Column(
+          children: [
+            AppNavBar(
+              menu: "Abonnement",
+            ),
+            Gap(20.h),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Bloc2(
+                      title: "Votre statut",
+                      child: Column(
+                        children: [
+                          Container(
+                            color: AppColors.rouge,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 20.h, horizontal: 20.w),
+                            alignment: Alignment.center,
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Jusqu'au ",
-                                  style: AppTextStyle.filedTexte,
+                                  "Vous avez un abonnement premium en cour !!",
+                                  style: AppTextStyle.navBarTexte
+                                      .copyWith(color: AppColors.blanc),
                                 ),
-                                Text(
-                                  "${DateFormat.yMMMMEEEEd(Localizations.localeOf(context).languageCode).format(DateTime.now() as DateTime)}",
-                                  style: AppTextStyle.filedTexte
-                                      .copyWith(fontWeight: FontWeight.w900),
+                                Gap(30.w),
+                                Icon(
+                                  FluentIcons.crown_solid,
+                                  color: AppColors.blanc,
                                 ),
                               ],
                             ),
-                          ],
-                        ),
+                          ),
+                          Gap(20.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Jusqu'au ",
+                                style: AppTextStyle.filedTexte,
+                              ),
+                              Text(
+                                "${DateFormat.yMMMMEEEEd(Localizations.localeOf(context).languageCode).format(DateTime.now() as DateTime)}",
+                                style: AppTextStyle.filedTexte
+                                    .copyWith(fontWeight: FontWeight.w900),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      Bloc2(
-                        title: "Plans d'abonnement",
-                        child: Column(
-                          children: [
-                            AdaptiveLayout(
-                              largeLayout: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: gratuit,
-                                  ),
-                                  Gap(20.w),
-                                  Expanded(
-                                    child: semestrielle,
-                                  ),
-                                  Gap(20.w),
-                                  Expanded(
-                                    child: annuel,
-                                  ),
-                                ],
-                              ),
-                              smallLayout: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  gratuit,
-                                  Gap(60.h),
-                                  semestrielle,
-                                  Gap(60.h),
-                                  annuel,
-                                ],
-                              ),
+                    ),
+                    Bloc2(
+                      title: "Plans d'abonnement",
+                      child: Column(
+                        children: [
+                          AdaptiveLayout(
+                            largeLayout: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: gratuit,
+                                ),
+                                Gap(20.w),
+                                Expanded(
+                                  child: semestrielle,
+                                ),
+                                Gap(20.w),
+                                Expanded(
+                                  child: annuel,
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                            smallLayout: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                gratuit,
+                                Gap(60.h),
+                                semestrielle,
+                                Gap(60.h),
+                                annuel,
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );

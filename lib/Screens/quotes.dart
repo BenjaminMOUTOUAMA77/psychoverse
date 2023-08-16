@@ -1,9 +1,12 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
+import 'package:psychoverse/Providers/HomeProviders/sliderItemProvider.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/quotePopUp.dart';
+import 'package:psychoverse/Ui/Components/Slides/quotesSlider.dart';
 import 'package:psychoverse/Ui/Components/TilesGroupe/quotesTilesGroupe.dart';
 import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/AppNav/appNavBar.dart';
@@ -18,18 +21,24 @@ class Quotes extends StatefulWidget {
 class _QuotesState extends State<Quotes> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const MakeBackgroundImage(),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 40.w),
-          child: Column(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SliderItemProvider()),
+      ],
+      child: Stack(
+        children: [
+          const MakeBackgroundImage(),
+          Column(
             children: [
-              Gap(20.h),
               AppNavBar(
-                links: [NavLink(title: "Quotes", function: () {})],
+                menu: "Pensées",
               ),
-              Gap(50.h),
+              Gap(20.h),
+              Expanded(child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: MakeQuotesSlider(),
+              )),
+              Gap(20.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -45,8 +54,8 @@ class _QuotesState extends State<Quotes> {
               ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

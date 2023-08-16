@@ -9,7 +9,6 @@ class RadioMenuForm extends StatefulWidget {
 
   final String title;
   String? value;
-  int selected;
   String placeHolder;
   bool readOnly;
   bool managers;
@@ -22,7 +21,6 @@ class RadioMenuForm extends StatefulWidget {
     this.readOnly=true,
     this.managers=true,
     this.value,
-    this.selected=0,
     this.placeHolder = "...",
     required this.list,
     required this.onChanged,
@@ -91,11 +89,10 @@ class _RadioMenuFormState extends State<RadioMenuForm> {
                             size: 20.h,
                           ),
                           onPressed: () {
-                            widget.value=widget.list[widget.selected];
-                            widget.onFieldSubmitted(widget.value);
                             setState(() {
                               widget.readOnly = true;
                             });
+                            widget.onFieldSubmitted(widget.value);
                           },
                         ),
                       ),
@@ -121,10 +118,10 @@ class _RadioMenuFormState extends State<RadioMenuForm> {
                         padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: Text(i,style: AppTextStyle.filedTexte.copyWith(fontWeight: FontWeight.bold),),
                       ),
-                        checked: i==widget.list[widget.selected],
+                        checked: i==widget.value,
                         onChanged: (checked) {
                           if (checked) {
-                            setState(() => widget.selected = widget.list.indexOf(i));
+                            setState((){widget.value = i;});
                           }
                         },
                       style: RadioButtonThemeData(

@@ -55,10 +55,10 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 5.h),
+          padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
           width: double.infinity,
           decoration: BoxDecoration(
-            color: AppColors.blanc,
+            color: AppColors.blancGrise,
             borderRadius: BorderRadius.circular(10.r),
             boxShadow: [
               AppDesignEffects.shadow0,

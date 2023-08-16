@@ -6,10 +6,10 @@ import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/addPatientPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
-import 'package:psychoverse/Ui/Components/appNav/appNavBar.dart';
 import 'package:psychoverse/Ui/Components/Tiles/patientTile.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
 import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
+import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class PatientList extends StatefulWidget {
   int uiKey;
@@ -23,18 +23,14 @@ class _PatientListState extends State<PatientList> {
   @override
   Widget build(BuildContext context) {
     ChangeSectionsProvider page = Provider.of<ChangeSectionsProvider>(context);
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 50.h),
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Gap(20.h),
-            AppNavBar(
-              links: [NavLink(title: "Dossiers", function: () {})],
-            ),
-            Gap(20.h),
-            MakeSearchBar(
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            color: AppColors.primary,
+            padding: EdgeInsets.symmetric(horizontal: 40.w,vertical: 40.h),
+            child: MakeSearchBar(
                 withComboFilter: true,
                 withToggleFilter: true,
                 comboFilterList: ["Nom", "Ville", "Numero dossier"],
@@ -59,43 +55,43 @@ class _PatientListState extends State<PatientList> {
                   print(
                       "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
                 }),
-            Gap(60.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SimpleAppButon(
-                    texte: "Nouveau Dossier",
-                    icon: FluentIcons.add_friend,
-                    function: () => showDialog(context: context, builder:(context)=>BigPopUp(title: "Nouveau Dossier",child: AddPatientPopUp(),save: true,)),
-                  ),
-                  SimpleAppButon(
-                    texte: "Importer / Exporter",
-                    icon: FluentIcons.save_and_close,
-                    function: () => print("Initiale page : " +
-                        page.getPage(widget.uiKey).initialPage.toString()),
-                  ),
-                ],
-              ),
+          ),
+          Gap(40.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SimpleAppButon(
+                  texte: "Nouveau Dossier",
+                  icon: FluentIcons.add_friend,
+                  function: () => showDialog(context: context, builder:(context)=>BigPopUp(title: "Nouveau Dossier",child: AddPatientPopUp(),save: true,)),
+                ),
+                SimpleAppButon(
+                  texte: "Importer / Exporter",
+                  icon: FluentIcons.save_and_close,
+                  function: () => print("Initiale page : " +
+                      page.getPage(widget.uiKey).initialPage.toString()),
+                ),
+              ],
             ),
-            Gap(20.h),
-            Expanded(
-              child: ListViewTilesGenerator(
-                number: 50,
-                onTap: ({index = 0}) {
-                  page.setPage(1, widget.uiKey);
-                },
-                getTile: ({index = 0}) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40.w),
-                    child: PatientTile(),
-                  );
-                },
-              ),
+          ),
+          Gap(20.h),
+          Expanded(
+            child: ListViewTilesGenerator(
+              number: 50,
+              onTap: ({index = 0}) {
+                page.setPage(1, widget.uiKey);
+              },
+              getTile: ({index = 0}) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40.w),
+                  child: PatientTile(),
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

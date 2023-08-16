@@ -7,6 +7,7 @@ import 'package:psychoverse/Functions/pickFiles.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
 import 'package:psychoverse/Ui/Components/Boxs/FileBox.dart';
+import 'package:psychoverse/Ui/Components/Boxs/vrBox.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
@@ -18,8 +19,13 @@ import 'package:psychoverse/Ui/Components/PopUps/SeancesListPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/addSeancePopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/middlePopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/smallPopUp.dart';
+import 'package:psychoverse/Ui/Components/TilesGroupe/vrNiveauList.dart';
+import 'package:psychoverse/Ui/Components/TilesGroupe/vrList.dart';
 import 'package:psychoverse/Ui/Components/seance.dart';
 import 'package:psychoverse/Ui/Components/Buttons/smallButton.dart';
+import 'package:psychoverse/Ui/Utils/appColors.dart';
+import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class SuiviDetail extends StatefulWidget {
   final int uiKey;
@@ -32,21 +38,87 @@ class SuiviDetail extends StatefulWidget {
 }
 
 class _SuiviDetailState extends State<SuiviDetail> {
-  late String path="C:\\Users\\Utilisateur\\AppData\\Roaming\\com.example\\psychoverse\\Files";
+  late String path =
+      "C:\\Users\\Utilisateur\\AppData\\Roaming\\com.example\\psychoverse\\Files";
   init() async {
     path = await getAppPath(appFilesDirectory: true);
   }
+
   @override
   Widget build(BuildContext context) {
     init();
-    List<String> typeList = ["Type 1","Type 2","Type 3","Type 4",];
-    List<String> degreList = ["Manifestation 1","Manifestation 2","Manifestation 3","Manifestation 4",];
-    List<String> frequenceList = ["Fréquence 1","Fréquence 2","Fréquence 3","Fréquence 4",];
-    List<String> evolutionList = ["Évolution 1","Évolution 2","Évolution 3","Évolution 4",];
-    List<String> strategieList = ["Stratégie 1","Stratégie 2","Stratégie 3","Stratégie 4",];
-    List<String> analyseList = ["Analyse 1","Analyse 2","Analyse 3","Analyse 4"];
-    List<String> trameList = ["Trame 1","Trame 2","Trame 3","Trame 4",];
-    List<String> seanceList = ["Séance 1","Séance 2","Séance 3","Séance 4","Séance 5",];
+    List<String> typeList = [
+      "Type 1",
+      "Type 2",
+      "Type 3",
+      "Type 4",
+    ];
+    List<String> degreList = [
+      "Manifestation 1",
+      "Manifestation 2",
+      "Manifestation 3",
+      "Manifestation 4",
+    ];
+    List<String> frequenceList = [
+      "Fréquence 1",
+      "Fréquence 2",
+      "Fréquence 3",
+      "Fréquence 4",
+    ];
+    List<String> evolutionList = [
+      "Évolution 1",
+      "Évolution 2",
+      "Évolution 3",
+      "Évolution 4",
+    ];
+    List<String> strategieList = [
+      "Stratégie 1",
+      "Stratégie 2",
+      "Stratégie 3",
+      "Stratégie 4",
+    ];
+    List<String> analyseList = [
+      "Analyse 1",
+      "Analyse 2",
+      "Analyse 3",
+      "Analyse 4"
+    ];
+    List<String> trameList = [
+      "Trame 1",
+      "Trame 2",
+      "Trame 3",
+      "Trame 4",
+    ];
+    List<String> seanceList = [
+      "Séance 1",
+      "Séance 2",
+      "Séance 3",
+      "Séance 4",
+      "Séance 5",
+    ];
+    List<String> vrList = [
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+    ];
+    List<String> vrNiveauList = [
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+      "Vr 1",
+    ];
     late List<PlatformFile> files = [
       PlatformFile(
         path: "${path}\\16600_oliFood1.ai",
@@ -84,7 +156,15 @@ class _SuiviDetailState extends State<SuiviDetail> {
         size: 0,
       ),
     ];
-    late List<String> extensions = ["ai","pdf","png","txt","mp4","mp4","png",];
+    late List<String> extensions = [
+      "ai",
+      "pdf",
+      "png",
+      "txt",
+      "mp4",
+      "mp4",
+      "png",
+    ];
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
@@ -208,6 +288,17 @@ class _SuiviDetailState extends State<SuiviDetail> {
               child: Column(
                 children: [
                   Gap(20.h),
+                  TextForm(
+                      title: "Identifiant mobile VR",
+                      password: true,
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                  TextForm(
+                      title: "Mot de passe mobile VR",
+                      password: true,
+                      onChanged: (value) {},
+                      onFieldSubmitted: (value) {}),
+                  Gap(30.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -216,14 +307,85 @@ class _SuiviDetailState extends State<SuiviDetail> {
                         icon: FluentIcons.circle_addition_solid,
                         function: () => showDialog(
                           context: context,
-                          builder: (context) => BigPopUp(
-                            title: "Nouvelle séance",
-                            child: AddSeancePopUp(),
+                          builder: (context) => SmallPopUp(
+                            title: "Ajouter une VR à ce suivi",
+                            child: SizedBox(
+                              height: 350.h,
+                              child: VrBox(vrName: "edzedzedugzieugdized zeugdiegdize zedhizehdizhe",),
+                            ),
                             save: true,
+                            saveTexte: "Ajouter",
+                            saveFunction: (){
+                              Navigator.pop(context);
+                            },
+                            cancelFunction: (){Navigator.pop(context);},
                           ),
                         ),
                       ),
                     ],
+                  ),
+                  Gap(30.h),
+                  VrList(
+                    showStat: true,
+                    stat: "3/5",
+                    list: vrList,
+                    onTap: (index) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => BigPopUp(
+                          delete: true,
+                          deleteTexte: "Retier cette VR",
+                          title: "Nom de la VR",
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 30.w,vertical: 20.h) ,
+                                decoration: BoxDecoration(
+                                  color: AppColors.primary,
+                                ) ,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround ,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center ,
+                                      children: [
+                                        Text("Niveau",style: AppTextStyle.bigFilledTexte.copyWith(color: AppColors.blanc),),
+                                        Gap(10.h),
+                                        Text("3/5", style: AppTextStyle.buttonStyleTexte.copyWith(color: Colors.yellow,fontSize: 10.sp+14),),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center ,
+                                      children: [
+                                        Text("Score Total",style: AppTextStyle.bigFilledTexte.copyWith(color: AppColors.blanc),),
+                                        Gap(10.h),
+                                        Text("561", style: AppTextStyle.buttonStyleTexte.copyWith(color: Colors.yellow,fontSize: 10.sp+14),),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center ,
+                                      children: [
+                                        Text("Moyenne",style: AppTextStyle.bigFilledTexte.copyWith(color: AppColors.blanc),),
+                                        Gap(10.h),
+                                        Text("15,45", style: AppTextStyle.buttonStyleTexte.copyWith(color: Colors.yellow,fontSize: 10.sp+14),),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Gap(20.h),
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  child: VrNiveauList(
+                                    list: vrNiveauList,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -289,12 +451,14 @@ class _SuiviDetailState extends State<SuiviDetail> {
                   ),
                   Gap(50.h),
                   SizedBox(
-                    height: files.length / 4 * 500 - 200*2.h,
+                    height:
+                        (files.length <= 5 ? 1 : files.length / 5 + 1) * 320.h,
                     width: double.infinity,
                     child: GridView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 30.w),
                         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                           maxCrossAxisExtent: 200,
-                          childAspectRatio: 3.7/4,
+                          childAspectRatio: 3.7 / 4,
                           crossAxisSpacing: 20,
                           mainAxisSpacing: 20,
                         ),

@@ -20,9 +20,9 @@ class _AppFormBoxState extends State<AppFormBox> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.blanc,
-        /*boxShadow: [
+        boxShadow: [
           AppDesignEffects.shadow0,
-        ],*/
+        ],
         borderRadius: BorderRadius.circular(5),
       ),
       child: widget.child,

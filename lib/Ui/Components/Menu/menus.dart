@@ -5,6 +5,7 @@ import 'package:psychoverse/Screens/Patients/mainPatient.dart';
 import 'package:psychoverse/Screens/abonnement.dart';
 import 'package:psychoverse/Screens/mobileVR.dart';
 import 'package:psychoverse/Screens/monCompte.dart';
+import 'package:psychoverse/Screens/psychoVerse.dart';
 import 'package:psychoverse/Screens/quotes.dart';
 import 'package:psychoverse/Screens/rappels.dart';
 import 'package:psychoverse/Screens/sauvegarde.dart';
@@ -82,15 +83,6 @@ List<PaneItem> appNavMenu() => [
       PaneItem(
         icon: SizedBox(
           width: 30,
-          child: SvgPicture.asset(AppIcons.diagnostic,
-              color: AppColors.rouge, height: 20),
-        ),
-        title: Text('Diagnostique', style: AppTextStyle.navBarTexte),
-        body: defaultPage,
-      ),
-      PaneItem(
-        icon: SizedBox(
-          width: 30,
           child: SvgPicture.asset(AppIcons.prices,
               color: AppColors.primary, height: 20),
         ),
@@ -113,7 +105,7 @@ List<PaneItem> appNavMenu() => [
               color: AppColors.primary, height: 20),
         ),
         title: Text('Psychoverse', style: AppTextStyle.navBarTexte),
-        body: defaultPage,
+        body: const PsychoVerse(),
       ),
       PaneItem(
         icon: SizedBox(width: 30,child: SvgPicture.asset(AppIcons.user, color: AppColors.rouge, height: 20)),

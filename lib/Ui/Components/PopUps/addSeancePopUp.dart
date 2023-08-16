@@ -11,6 +11,6 @@ class AddSeancePopUp extends StatefulWidget {
 class _AddSeancePopUpState extends State<AddSeancePopUp> {
   @override
   Widget build(BuildContext context) {
-    return Seance(numero: -1,dateActuelle: null, dateProchaine: null);
+    return SingleChildScrollView(child: Seance(numero: -1,dateActuelle: null, dateProchaine: null));
   }
 }
