@@ -8,8 +8,10 @@ import 'package:psychoverse/Ui/Components/PopUps/addPatientPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 import 'package:psychoverse/Ui/Components/Tiles/patientTile.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
+import 'package:psychoverse/Ui/Components/TilesGroupe/patientList.dart';
 import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
+import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 
 class PatientList extends StatefulWidget {
   int uiKey;
@@ -28,8 +30,13 @@ class _PatientListState extends State<PatientList> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            color: AppColors.primary,
             padding: EdgeInsets.symmetric(horizontal: 40.w,vertical: 40.h),
+            decoration: BoxDecoration(
+              color: AppColors.blancGrise,
+              boxShadow: [
+                AppDesignEffects.shadow2,
+              ],
+            ),
             child: MakeSearchBar(
                 withComboFilter: true,
                 withToggleFilter: true,
@@ -78,18 +85,7 @@ class _PatientListState extends State<PatientList> {
           ),
           Gap(20.h),
           Expanded(
-            child: ListViewTilesGenerator(
-              number: 50,
-              onTap: ({index = 0}) {
-                page.setPage(1, widget.uiKey);
-              },
-              getTile: ({index = 0}) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40.w),
-                  child: PatientTile(),
-                );
-              },
-            ),
+            child: PatientBoxList(uiKey: widget.uiKey,list: ["Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob",],),
           ),
         ],
       ),

@@ -8,6 +8,7 @@ import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
 import 'package:psychoverse/Ui/Components/PopUps/chooseFormulairePopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/middlePopUp.dart';
 import 'package:psychoverse/Ui/Components/Tiles/simpleTile.dart';
+import 'package:psychoverse/Ui/Components/TilesGroupe/formulaireBoxList.dart';
 import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
 
 class FormulairesList extends StatefulWidget {
@@ -31,77 +32,63 @@ class _FormulairesListState extends State<FormulairesList> {
   @override
   Widget build(BuildContext context) {
     sections = Provider.of<ChangeSectionsProvider>(context);
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 200.w, vertical: 40.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          formulaires.length > 20
-              ? Column(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        formulaires.length > 20
+            ? Column(
+          children: [
+            MakeSearchBar(
+                withComboFilter: true,
+                withToggleFilter: true,
+                comboFilterList: ["Nom", "Ville", "Numero dossier"],
+                textList: [
+                  "Patient 1",
+                  "Patient 2",
+                  "Patient 3",
+                  "Patient 4",
+                  "Patient 5",
+                  "Patient 6",
+                ],
+                toggleFilterList: [
+                  "Tout",
+                  "En Cours",
+                  "En Pause",
+                  "Archivés",
+                ],
+                onChanged: (
+                    {toggleFilter = "",
+                      comboFilter = "",
+                      text = ""}) {},
+                onFieldSubmitted: (
+                    {toggleFilter = "", comboFilter = "", text = ""}) {
+                }),
+            Gap(70.h),
+          ],
+        )
+            : const Gap(0),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              MakeSearchBar(
-                  withComboFilter: true,
-                  withToggleFilter: true,
-                  comboFilterList: ["Nom", "Ville", "Numero dossier"],
-                  textList: [
-                    "Patient 1",
-                    "Patient 2",
-                    "Patient 3",
-                    "Patient 4",
-                    "Patient 5",
-                    "Patient 6",
-                  ],
-                  toggleFilterList: [
-                    "Tout",
-                    "En Cours",
-                    "En Pause",
-                    "Archivés",
-                  ],
-                  onChanged: (
-                      {toggleFilter = "",
-                        comboFilter = "",
-                        text = ""}) {},
-                  onFieldSubmitted: (
-                      {toggleFilter = "", comboFilter = "", text = ""}) {
-                  }),
-              Gap(70.h),
+              SimpleAppButon(
+                texte: "Ajouter un formulaire à ce dossier",
+                icon: FluentIcons.dependency_add,
+                function: () {
+                  showDialog(context: context, builder: (context)=>MiddlePopUp(title: "Ajouter un formulaire",child: ChooseFormulairePopUp(),));
+                },
+              ),
             ],
-          )
-              : const Gap(0),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SimpleAppButon(
-                  texte: "Ajouter un formulaire à ce dossier",
-                  icon: FluentIcons.dependency_add,
-                  function: () {
-                    showDialog(context: context, builder: (context)=>MiddlePopUp(title: "Ajouter un formulaire",child: ChooseFormulairePopUp(),));
-                  },
-                ),
-              ],
-            ),
           ),
-          Gap(20.h),
-          Expanded(
-            child:
-            ListViewTilesGenerator(
-              number: formulaires.length,
-              onTap: ({index = 0}) {
-                sections.setFormulairePage(1, widget.uiKey, widget.formulaireUiKey);
-              },
-              getTile: ({index = 0}) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40.w),
-                  child: SimpleTile(title: formulaires[index],),
-                );
-              },
-            )
-            ,
-          ),
-        ],
-      ),
+        ),
+        Gap(20.h),
+        Expanded(
+          child:
+          FormulaireBoxList(list: ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",],)
+          ,
+        ),
+      ],
     );
   }
 }

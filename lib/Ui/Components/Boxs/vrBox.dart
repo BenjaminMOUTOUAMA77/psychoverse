@@ -54,10 +54,15 @@ class _VrBoxState extends State<VrBox> {
                   ),
                   child: Container(
                     height: double.infinity,
+                    width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: AssetImage(widget.image), fit: BoxFit.cover),
+                    ),
+                    clipBehavior: Clip.hardEdge,
+                    child: FadeInImage(
+                      placeholder: AssetImage("assets/images/LSFBlanc.png"),
+                      image: AssetImage(widget.image),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),

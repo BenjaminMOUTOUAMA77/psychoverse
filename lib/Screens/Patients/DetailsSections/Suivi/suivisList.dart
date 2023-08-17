@@ -8,6 +8,7 @@ import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/suiviPopUp.dart';
 import 'package:psychoverse/Ui/Components/Tiles/suivisTile.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
+import 'package:psychoverse/Ui/Components/TilesGroupe/suiviBoxList.dart';
 import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
 
 class SuivisList extends StatefulWidget {
@@ -32,79 +33,64 @@ class _SuivisListState extends State<SuivisList> {
   @override
   Widget build(BuildContext context) {
     sections = Provider.of<ChangeSectionsProvider>(context);
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 200.w, vertical: 40.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SimpleAppButon(
-                  texte: "Nouveau Suivi",
-                  icon: FluentIcons.dependency_add,
-                  function: () {
-                    showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Suivi",save: true,child: SuiviPopUp(),));
-                  },
-                ),
-              ],
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SimpleAppButon(
+                texte: "Nouveau Suivi",
+                icon: FluentIcons.dependency_add,
+                function: () {
+                  showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Suivi",save: true,child: SuiviPopUp(),));
+                },
+              ),
+            ],
           ),
-          suivis.length > 20
-              ? Column(
-                  children: [
-                    MakeSearchBar(
-                        withComboFilter: true,
-                        withToggleFilter: true,
-                        comboFilterList: ["Nom", "Ville", "Numero dossier"],
-                        textList: [
-                          "Patient 1",
-                          "Patient 2",
-                          "Patient 3",
-                          "Patient 4",
-                          "Patient 5",
-                          "Patient 6",
-                        ],
-                        toggleFilterList: [
-                          "Tout",
-                          "En Cours",
-                          "En Pause",
-                          "Archivés",
-                        ],
-                        onChanged: (
-                            {toggleFilter = "",
-                            comboFilter = "",
-                            text = ""}) {},
-                        onFieldSubmitted: (
-                            {toggleFilter = "", comboFilter = "", text = ""}) {
-                          print(
-                              "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
-                        }),
-                    Gap(70.h),
-                  ],
-                )
-              : const Gap(0),
-          Gap(20.h),
-          Expanded(
-            child:
-            ListViewTilesGenerator(
-              number: suivis.length,
-              onTap: ({index = 0}) {
-                sections.setSuiviPage(1, widget.uiKey, widget.suiviUiKey);
-              },
-              getTile: ({index = 0}) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40.w),
-                  child: SuivisTile(title: suivis[index],),
-                );
-              },
-            )
-            ,
-          ),
-        ],
-      ),
+        ),
+        suivis.length > 20
+            ? Column(
+                children: [
+                  MakeSearchBar(
+                      withComboFilter: true,
+                      withToggleFilter: true,
+                      comboFilterList: ["Nom", "Ville", "Numero dossier"],
+                      textList: [
+                        "Patient 1",
+                        "Patient 2",
+                        "Patient 3",
+                        "Patient 4",
+                        "Patient 5",
+                        "Patient 6",
+                      ],
+                      toggleFilterList: [
+                        "Tout",
+                        "En Cours",
+                        "En Pause",
+                        "Archivés",
+                      ],
+                      onChanged: (
+                          {toggleFilter = "",
+                          comboFilter = "",
+                          text = ""}) {},
+                      onFieldSubmitted: (
+                          {toggleFilter = "", comboFilter = "", text = ""}) {
+                        print(
+                            "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
+                      }),
+                  Gap(70.h),
+                ],
+              )
+            : const Gap(0),
+        Gap(20.h),
+        Expanded(
+          child:
+          SuiviBoxList(list: ["","","","","","","","","","","","","","","","","","",],),
+        ),
+      ],
     );
   }
 }

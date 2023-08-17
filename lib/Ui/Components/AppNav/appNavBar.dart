@@ -19,7 +19,7 @@ class _AppNavBarState extends State<AppNavBar> {
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.primary,
-      padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 20.h),
+      padding: EdgeInsets.symmetric(horizontal: 40.w,vertical: 20.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

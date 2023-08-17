@@ -2,8 +2,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 import 'package:psychoverse/Functions/appPaths.dart';
 import 'package:psychoverse/Functions/pickFiles.dart';
+import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
 import 'package:psychoverse/Ui/Components/Boxs/FileBox.dart';
@@ -165,10 +167,34 @@ class _SuiviDetailState extends State<SuiviDetail> {
       "mp4",
       "png",
     ];
+    ChangeSectionsProvider sections = Provider.of<ChangeSectionsProvider>(context);
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
           children: [
+            Gap(20.h),
+            Row(
+              children: [
+                IconButton(
+                    icon: Icon(
+                      FluentIcons.navigate_back,
+                      color: AppColors.rouge,
+                      size: 40.h,
+                    ),
+                    onPressed: () {
+                      sections.setSuiviPage(0, widget.uiKey, widget.suiviUiKey);
+                    }),
+                Gap(40.w),
+                Text(
+                  "Suivi de ...",
+                  style: AppTextStyle.buttonStyleTexte.copyWith(
+                    color: AppColors.primary,
+                    fontSize: 20.sp + 10,
+                  ),
+                )
+              ],
+            ),
+            Gap(20.h),
             Bloc2(
               title: "À Propos",
               child: Column(

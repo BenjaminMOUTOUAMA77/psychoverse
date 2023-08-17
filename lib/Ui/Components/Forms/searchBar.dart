@@ -80,7 +80,7 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
                   padding: EdgeInsets.all(15.h),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.rouge,
+                    color: getColor(),
                     boxShadow: [
                       AppDesignEffects.shadow2,
                     ],
@@ -121,7 +121,7 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
                       ),
                     ),
                     unfocusedColor: Colors.transparent,
-                    cursorColor: AppColors.rouge,
+                    cursorColor: getColor(),
                     placeholder: "Rechercher ...",
                     clearButtonEnabled: false,
                     showCursor: true,
