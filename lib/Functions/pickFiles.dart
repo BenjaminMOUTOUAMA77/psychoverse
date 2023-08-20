@@ -116,3 +116,8 @@ Future<PlatformFile> saveFile(PlatformFile oldFile) async {
 Future<FileSystemEntity> deleteFile(PlatformFile file) async {
   return File(file.path!).delete(recursive: true);
 }
+
+String extensionFromPath(String path){
+  List<String> decomposeName = path.split(".");
+  return decomposeName[1];
+}

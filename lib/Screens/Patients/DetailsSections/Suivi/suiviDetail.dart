@@ -4,6 +4,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Functions/pickFiles.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
@@ -44,13 +45,14 @@ class _SuiviDetailState extends State<SuiviDetail> {
   late MyAppPathProvider path;
   String appPath="";
   init() async {
-    Directory value = await getAppPath(appFilesDirectory: true);
-    appPath = value.path;
+    Directory value = await getApplicationSupportDirectory();
+    appPath = value.path+"\\Files\\";
+    print("appPath : "+appPath);
   }
   @override
   Widget build(BuildContext context) {
     ChangeSectionsProvider sections = Provider.of<ChangeSectionsProvider>(context);
-
+    init();
     List<String> typeList = [
       "Type 1",
       "Type 2",
@@ -121,38 +123,37 @@ class _SuiviDetailState extends State<SuiviDetail> {
     late List<PlatformFile> filesList = [
       PlatformFile(
         path: "${appPath}16600_oliFood1.ai",
-        name: "oliFood1",
+        name: "oliFood1.ai",
         size: 0,
       ),
       PlatformFile(
         path: "${appPath}23756_CV_BenjaminMOUTOUAMA.pdf",
-        name: "CV_BenjaminMOUTOUAMA",
+        name: "CV_BenjaminMOUTOUAMA.pdf",
         size: 0,
       ),
       PlatformFile(
         path: "${appPath}37587_CIP.png",
-        name: "CIP",
+        name: "CIP.png",
         size: 0,
       ),
       PlatformFile(
         path: "${appPath}38482_CIP.txt",
-        name: "CIP",
+        name: "CIP.txt",
         size: 0,
       ),
       PlatformFile(
         path: "${appPath}56852_ADA EHI - Open Doors - Lyrics francais.mp4",
-        name: "ADA EHI - Open Doors - Lyrics francais",
+        name: "ADA EHI - Open Doors - Lyrics francais.mp4",
         size: 0,
       ),
       PlatformFile(
-        path:
-            "${appPath}67006_Ada Ehi - Everything - Traduction francaise.mp4",
-        name: "Ada Ehi - Everything - Traduction francaise",
+        path: "${appPath}67006_Ada Ehi - Everything - Traduction francaise.mp4",
+        name: "Ada Ehi - Everything - Traduction francaise.mp4",
         size: 0,
       ),
       PlatformFile(
         path: "${appPath}71239_OliFood2.png",
-        name: "OliFood2",
+        name: "OliFood2.png",
         size: 0,
       ),
     ];
