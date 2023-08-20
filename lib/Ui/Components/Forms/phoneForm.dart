@@ -3,8 +3,8 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
-import 'package:psychoverse/Ui/Components/ZElements/appProgressRing.dart';
+import 'package:psychoverse/Ui/Components/Forms/zFormBox.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/appProgressRing.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -12,24 +12,25 @@ import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 class PhoneForm extends StatefulWidget {
   final String title;
   String placehholder;
-  String country;
-  String? value;
+  String? countryCode;
+  String? phoneNumber;
+  String? callingCode;
   bool readOnly;
   bool managers;
   TextEditingController controller = TextEditingController();
-  Function({String numero, String country}) onChanged;
-  Function({String numero, String country}) onFieldSubmitted;
+  Function({String? phoneNumber, String? callingCode, String? countryCode})?
+      onFieldSubmitted;
 
   PhoneForm({
     Key? key,
     this.title = "Phone Form",
-    this.readOnly=true,
-    this.managers=true,
-    this.country = "BJ",
-    this.value,
-    this.placehholder = "...",
-    required this.onChanged,
-    required this.onFieldSubmitted,
+    this.readOnly = true,
+    this.managers = true,
+    this.countryCode,
+    this.phoneNumber,
+    this.callingCode,
+    this.placehholder = "_",
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -38,18 +39,31 @@ class PhoneForm extends StatefulWidget {
 
 class _PhoneFormState extends State<PhoneForm> {
   Country? _selectedCountry;
+  String? phoneNumber;
+  String? countryCode;
+  String? callingCode;
 
   @override
   void initState() {
+    phoneNumber = widget.phoneNumber;
+    countryCode = widget.countryCode;
+    callingCode = widget.callingCode;
     initCountry();
     super.initState();
   }
 
   void initCountry() async {
-    Country? country = await getCountryByCountryCode(context, widget.country);
+    countryCode ??= "BJ";
+    Country? country = await getCountryByCountryCode(context, countryCode!);
     setState(() {
       _selectedCountry = country;
     });
+
+    widget.phoneNumber == null
+        ? widget.controller.clear()
+        : widget.controller.value = TextEditingValue(
+            text: widget.phoneNumber.toString(),
+          );
   }
 
   void _showCountryPicker() async {
@@ -75,76 +89,76 @@ class _PhoneFormState extends State<PhoneForm> {
                 widget.title,
                 style: AppTextStyle.formLabelStyleTexte,
               ),
-              widget.managers?Row(
-                children: [
-                  widget.readOnly
-                      ? Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5.w),
-                          child: IconButton(
-                            icon: Icon(
-                              FluentIcons.edit,
-                              color: AppColors.primary,
-                              size: 20.h,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                widget.readOnly = false;
-                              });
-                            },
-                          ),
-                        )
-                      : Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.w),
-                              child: IconButton(
-                                icon: Icon(
-                                  FluentIcons.sync_occurence_cancel,
-                                  color: AppColors.primary,
-                                  size: 20.h,
+              widget.managers
+                  ? Row(
+                      children: [
+                        widget.readOnly
+                            ? Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 5.w),
+                                child: IconButton(
+                                  icon: Icon(
+                                    FluentIcons.edit,
+                                    color: AppColors.primary,
+                                    size: 20.h,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      widget.readOnly = false;
+                                    });
+                                  },
                                 ),
-                                onPressed: () {
-                                  setState(() {
-                                    initCountry();
-                                    widget.value == null
-                                        ? widget.controller.clear()
-                                        : widget.controller.value =
-                                            TextEditingValue(
-                                                text: widget.value.toString());
-                                    widget.readOnly = true;
-                                  });
-                                },
+                              )
+                            : Row(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 5.w),
+                                    child: IconButton(
+                                      icon: Icon(
+                                        FluentIcons.sync_occurence_cancel,
+                                        color: AppColors.primary,
+                                        size: 20.h,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          widget.readOnly = true;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 5.w),
+                                    child: IconButton(
+                                      icon: Icon(
+                                        FluentIcons.save_template,
+                                        color: AppColors.primary,
+                                        size: 20.h,
+                                      ),
+                                      onPressed: () {
+                                        if (_selectedCountry != null) {
+                                          widget.countryCode =
+                                              _selectedCountry!.countryCode;
+                                          widget.callingCode =
+                                              _selectedCountry!.callingCode;
+                                        }
+                                        widget.phoneNumber =
+                                            widget.controller.text;
+                                        widget.onFieldSubmitted!(
+                                            phoneNumber: widget.phoneNumber,
+                                            callingCode: widget.callingCode,
+                                            countryCode: widget.countryCode);
+                                        setState(() {
+                                          widget.readOnly = true;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.w),
-                              child: IconButton(
-                                icon: Icon(
-                                  FluentIcons.save_template,
-                                  color: AppColors.primary,
-                                  size: 20.h,
-                                ),
-                                onPressed: () {
-                                  if (_selectedCountry != null) {
-                                    widget.country = _selectedCountry!
-                                        .countryCode
-                                        .toString();
-                                  }
-                                  widget.value = widget.controller.text;
-                                  widget.onFieldSubmitted(
-                                      numero: widget.value.toString(),
-                                      country: widget.country);
-
-                                  setState(() {
-                                    widget.readOnly = true;
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                ],
-              ):const Gap(0),
+                      ],
+                    )
+                  : const Gap(0),
             ],
           ),
           TextFormBox(
@@ -156,11 +170,15 @@ class _PhoneFormState extends State<PhoneForm> {
               horizontal: 0,
               vertical: 0,
             ),
-            onChanged: (value) =>
-                widget.onChanged(numero: value, country: widget.country),
             onFieldSubmitted: (value) {
-              widget.value = value;
-              widget.onFieldSubmitted(numero: value, country: widget.country);
+              phoneNumber = value;
+              countryCode=_selectedCountry!.countryCode;
+              callingCode=_selectedCountry!.callingCode;
+              widget.onFieldSubmitted!(
+                phoneNumber: phoneNumber,
+                callingCode: callingCode,
+                countryCode: countryCode,
+              );
               setState(() {
                 widget.readOnly = true;
               });
@@ -188,37 +206,40 @@ class _PhoneFormState extends State<PhoneForm> {
                       color: AppColors.rouge,
                     ),
                   ),
-                  _selectedCountry?.flag==null? AppProgressRing():GestureDetector(
-                    onTap: () => widget.readOnly ? null : _showCountryPicker(),
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 10.w),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 70.h,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: AppDesignEffects.BorderAll0,
-                              boxShadow: [
-                                AppDesignEffects.shadow2,
+                  _selectedCountry?.flag == null
+                      ? AppProgressRing()
+                      : GestureDetector(
+                          onTap: () =>
+                              widget.readOnly ? null : _showCountryPicker(),
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 10.w),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 70.h,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: AppDesignEffects.BorderAll0,
+                                    boxShadow: [
+                                      AppDesignEffects.shadow2,
+                                    ],
+                                  ),
+                                  child: Image.asset(
+                                    _selectedCountry!.flag,
+                                    package: countryCodePackageName,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  clipBehavior: Clip.hardEdge,
+                                ),
+                                Text(
+                                  '${_selectedCountry!.callingCode} ${_selectedCountry!.name} (${_selectedCountry!.countryCode})',
+                                  style: AppTextStyle.smallTexte
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
                               ],
                             ),
-                            child:Image.asset(
-                              _selectedCountry!.flag,
-                              package: countryCodePackageName,
-                              fit: BoxFit.cover,
-                            ),
-                            clipBehavior: Clip.hardEdge,
                           ),
-                          Text(
-                            '${_selectedCountry!.callingCode} ${_selectedCountry!.name} (${_selectedCountry!.countryCode})',
-                            style: AppTextStyle.smallTexte
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                        ),
                 ],
               ),
             ),

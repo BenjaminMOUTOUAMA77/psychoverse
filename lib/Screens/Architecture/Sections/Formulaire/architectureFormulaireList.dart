@@ -6,9 +6,8 @@ import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderA
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/smallPopUp.dart';
-import 'package:psychoverse/Ui/Components/Tiles/simpleTile.dart';
-import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
+import 'package:psychoverse/Ui/Components/Lists/zListGenerator.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 
 class ArchitectureFormulaireList extends StatefulWidget {
   const ArchitectureFormulaireList({Key? key}) : super(key: key);
@@ -92,7 +91,8 @@ class _ArchitectureFormulaireListState
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SimpleAppButon(texte: "Créer",function: (){}),
+                                      SimpleAppButon(
+                                          texte: "Créer", function: () {}),
                                     ],
                                   ),
                                 ],
@@ -105,19 +105,16 @@ class _ArchitectureFormulaireListState
           ),
           Gap(20.h),
           Expanded(
-            child: ListViewTilesGenerator(
-              number: formulaires.length,
-              onTap: ({index = 0}) {
-                sections.setPage(1);
-              },
-              getTile: ({index = 0}) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40.w),
-                  child: SimpleTile(
-                    title: formulaires[index],
-                  ),
-                );
-              },
+            child: SingleChildScrollView(
+              child: ListGenerator(
+                list: formulaires,
+                deleteTexte: "Supprimer ce formulaire",
+                useParticularOntap: true,
+                onTap: (index){
+                  sections.setPage(1);
+                },
+                deleteFunction: (index){},
+              ),
             ),
           ),
         ],

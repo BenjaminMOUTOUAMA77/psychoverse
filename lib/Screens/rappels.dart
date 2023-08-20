@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
@@ -10,10 +11,8 @@ import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/radioMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/smallPopUp.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/selectablePatientList.dart';
-import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
-import 'package:psychoverse/Ui/Components/AppNav/appNavBar.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
+import 'package:psychoverse/Ui/Components/Lists/selectablePatientList.dart';
 
 class Rappels extends StatefulWidget {
   const Rappels({Key? key}) : super(key: key);
@@ -42,9 +41,6 @@ class _RappelsState extends State<Rappels> {
         const MakeBackgroundImage(),
         Column(
           children: [
-            AppNavBar(
-              menu: "Rappel",
-            ),
             Gap(20.h),
             Expanded(
               child: SingleChildScrollView(
@@ -150,7 +146,7 @@ class _RappelsState extends State<Rappels> {
                                                         height: 230.h,
                                                         child:
                                                         SelectablePatientList(
-                                                          getSelected:
+                                                          onChanged:
                                                               (value) {
                                                             setState(() {
                                                               emailList =
@@ -327,7 +323,7 @@ class _RappelsState extends State<Rappels> {
                                                   height: 230.h,
                                                   child:
                                                   SelectablePatientList(
-                                                    getSelected:
+                                                    onChanged:
                                                         (value) {
                                                       setState(() {
                                                         smsList =

@@ -6,10 +6,9 @@ import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
-import 'package:psychoverse/Ui/Components/Forms/checkBoxMenuForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/multiCheckBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
@@ -58,7 +57,7 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
               title: "Section 1",
               child: Column(
                 children: [
-                  CheckBoxMenu(value: [],list: [CheckBoxUnit(element: "Fait 1"),CheckBoxUnit(element: "Fait 2"),CheckBoxUnit(element: "Fait 3"),CheckBoxUnit(element: "Fait 4"),CheckBoxUnit(element: "Fait 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                  MultiCheckBoxMenuForm(selected: [],list: ["Fait 1","Fait 2","Fait 3","Fait 4","Fait 5"],onChanged: (value){},onFieldSubmitted: (value){},),
                   SuggestTextForm(list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
                   BigTextForm(onFieldSubmitted: (value) {}),
                   BigTextForm(onFieldSubmitted: (value) {}),
@@ -80,7 +79,7 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
               title: "Section 2",
               child: Column(
                 children: [
-                  CheckBoxMenu(value: [],list: [CheckBoxUnit(element: "Fait 1"),CheckBoxUnit(element: "Fait 2"),CheckBoxUnit(element: "Fait 3"),CheckBoxUnit(element: "Fait 4"),CheckBoxUnit(element: "Fait 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                  MultiCheckBoxMenuForm(selected: [],list: ["Fait 1","Fait 2","Fait 3","Fait 4","Fait 5"],onChanged: (value){},onFieldSubmitted: (value){},),
                   SuggestTextForm(list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
                   BigTextForm(onFieldSubmitted: (value) {}),
                   BigTextForm(onFieldSubmitted: (value) {}),
@@ -102,7 +101,7 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
               title: "Section 3",
               child: Column(
                 children: [
-                  CheckBoxMenu(value: [],list: [CheckBoxUnit(element: "Fait 1"),CheckBoxUnit(element: "Fait 2"),CheckBoxUnit(element: "Fait 3"),CheckBoxUnit(element: "Fait 4"),CheckBoxUnit(element: "Fait 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                  MultiCheckBoxMenuForm(selected: [],list: ["Fait 1","Fait 2","Fait 3","Fait 4","Fait 5"],onChanged: (value){},onFieldSubmitted: (value){},),
                   SuggestTextForm(list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
                   BigTextForm(onFieldSubmitted: (value) {}),
                   BigTextForm(onFieldSubmitted: (value) {}),
@@ -124,7 +123,7 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
               title: "Section 5",
               child: Column(
                 children: [
-                  CheckBoxMenu(value: [],list: [CheckBoxUnit(element: "Fait 1"),CheckBoxUnit(element: "Fait 2"),CheckBoxUnit(element: "Fait 3"),CheckBoxUnit(element: "Fait 4"),CheckBoxUnit(element: "Fait 5"),],onChanged: (value){},onFieldSubmitted: (value){},),
+                  MultiCheckBoxMenuForm(selected: [],list: ["Fait 1","Fait 2","Fait 3","Fait 4","Fait 5"],onChanged: (value){},onFieldSubmitted: (value){},),
                   SuggestTextForm(list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
                   BigTextForm(onFieldSubmitted: (value) {}),
                   BigTextForm(onFieldSubmitted: (value) {}),

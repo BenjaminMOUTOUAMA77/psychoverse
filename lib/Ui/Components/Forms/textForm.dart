@@ -2,26 +2,25 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
+import 'package:psychoverse/Ui/Components/Forms/zFormBox.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class TextForm extends StatefulWidget {
-
   bool email;
   bool addresse;
   bool password;
 
   bool showPassword=true;
 
-  final String title;
+  String title;
   String placehholder;
   String? value;
   bool readOnly;
   bool managers;
   TextEditingController controller = TextEditingController();
-  Function(String) onChanged;
-  Function(String) onFieldSubmitted;
+  Function(String?)? onChanged;
+  Function(String?)? onFieldSubmitted;
   TextForm({
     Key? key,
     this.email=false,
@@ -32,9 +31,9 @@ class TextForm extends StatefulWidget {
     this.value,
     this.readOnly=true,
     this.managers=true,
-    this.placehholder = "...",
-    required this.onChanged,
-    required this.onFieldSubmitted,
+    this.placehholder = "_",
+    this.onChanged,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
 
@@ -147,7 +146,7 @@ class _TextFormState extends State<TextForm> {
                           ),
                           onPressed: () {
                             widget.value=widget.controller.text;
-                            widget.onFieldSubmitted(widget.controller.text);
+                            widget.onFieldSubmitted!(widget.controller.text);
                             setState(() {
                               widget.readOnly = true;
                             });
@@ -169,10 +168,10 @@ class _TextFormState extends State<TextForm> {
               horizontal: 0,
               vertical: 0,
             ),
-            onChanged: (value) => widget.onChanged(value),
+            onChanged: (value) => widget.onChanged!(value),
             onFieldSubmitted: (value) {
               widget.value=value;
-              widget.onFieldSubmitted(value);
+              widget.onFieldSubmitted!(value);
               setState(() {
                 widget.readOnly = true;
               });

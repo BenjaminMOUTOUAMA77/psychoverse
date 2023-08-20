@@ -12,8 +12,8 @@ import 'package:psychoverse/Screens/Patients/DetailsSections/Suivi/mainSuivis.da
 import 'package:psychoverse/Screens/Patients/DetailsSections/testes.dart';
 import 'package:psychoverse/Ui/Components/AppNav/appNavMenuPane.dart';
 import 'package:psychoverse/Ui/Components/Buttons/togleButton.dart';
-import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/brouillonPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/note.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -27,9 +27,11 @@ class PatientDetail extends StatefulWidget {
 }
 
 class _PatientDetailState extends State<PatientDetail> {
+  String? note;
   @override
   Widget build(BuildContext context) {
     late ChangeSectionsProvider sections;
+
     List<AppNavMenuPane> menu = [
       AppNavMenuPane(
         title: "Identité",
@@ -116,7 +118,10 @@ class _PatientDetailState extends State<PatientDetail> {
                         child: w,
                       ),
                       wrappedItem: CommandBarButton(
-                        icon: Icon(FluentIcons.chrome_back,color: AppColors.rouge,),
+                        icon: Icon(
+                          FluentIcons.chrome_back,
+                          color: AppColors.rouge,
+                        ),
                         label: const Text('Retour'),
                         onPressed: () {
                           sections.setPage(0, widget.uiKey);
@@ -130,7 +135,10 @@ class _PatientDetailState extends State<PatientDetail> {
                         child: w,
                       ),
                       wrappedItem: CommandBarButton(
-                        icon: Icon(FluentIcons.fabric_user_folder,color: AppColors.rouge,),
+                        icon: Icon(
+                          FluentIcons.fabric_user_folder,
+                          color: AppColors.rouge,
+                        ),
                         label: const Text('TOUMOUDAGOU Jeanne'),
                         onPressed: () {},
                       ),
@@ -142,7 +150,10 @@ class _PatientDetailState extends State<PatientDetail> {
                         child: w,
                       ),
                       wrappedItem: CommandBarButton(
-                        icon: Icon(FluentIcons.pdf,color: AppColors.rouge,),
+                        icon: Icon(
+                          FluentIcons.pdf,
+                          color: AppColors.rouge,
+                        ),
                         label: const Text('PDF'),
                         onPressed: () {},
                       ),
@@ -154,7 +165,10 @@ class _PatientDetailState extends State<PatientDetail> {
                         child: w,
                       ),
                       wrappedItem: CommandBarButton(
-                        icon: Icon(FluentIcons.docs_logo_inverse,color: AppColors.rouge,),
+                        icon: Icon(
+                          FluentIcons.docs_logo_inverse,
+                          color: AppColors.rouge,
+                        ),
                         label: const Text('Word doc'),
                         onPressed: () {},
                       ),
@@ -166,7 +180,10 @@ class _PatientDetailState extends State<PatientDetail> {
                         child: w,
                       ),
                       wrappedItem: CommandBarButton(
-                        icon: Icon(FluentIcons.page_data,color: AppColors.rouge,),
+                        icon: Icon(
+                          FluentIcons.page_data,
+                          color: AppColors.rouge,
+                        ),
                         label: const Text('BD'),
                         onPressed: () {},
                       ),
@@ -179,7 +196,10 @@ class _PatientDetailState extends State<PatientDetail> {
                         child: w,
                       ),
                       wrappedItem: CommandBarButton(
-                        icon: Icon(FluentIcons.delete,color: AppColors.rouge,),
+                        icon: Icon(
+                          FluentIcons.delete,
+                          color: AppColors.rouge,
+                        ),
                         label: const Text('Supprimer'),
                         onPressed: () {},
                       ),
@@ -193,10 +213,23 @@ class _PatientDetailState extends State<PatientDetail> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    showDialog(context: context, builder: (context)=>BigPopUp(title: "Brouillon",child: BrouillonPopUp(),),);
+                    showDialog(
+                      context: context,
+                      builder: (context) => BigPopUp(
+                        title: "Block Note",
+                        save: true,
+                        saveTexte: "Enrégistrer",
+                        saveFunction: (){
+                          print(note);
+                          Navigator.pop(context);
+                        },
+                        child: Note(value: note,onChanged: (value){note=value;},),
+                      ),
+                    );
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10),
                     decoration: BoxDecoration(
                       color: AppColors.rouge,
                       borderRadius: BorderRadius.circular(5),
@@ -206,9 +239,17 @@ class _PatientDetailState extends State<PatientDetail> {
                     ),
                     child: Row(
                       children: [
-                        Icon(FluentIcons.text_document_edit,color: AppColors.blanc,),
+                        Icon(
+                          FluentIcons.text_document_edit,
+                          color: AppColors.blanc,
+                        ),
                         Gap(10),
-                        Text("Brouillon",style: AppTextStyle.filedTexte.copyWith(fontWeight: FontWeight.bold,color: AppColors.blanc),),
+                        Text(
+                          "Block Note",
+                          style: AppTextStyle.filedTexte.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.blanc),
+                        ),
                       ],
                     ),
                   ),

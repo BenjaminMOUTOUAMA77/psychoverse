@@ -73,7 +73,7 @@ class _HomeMenuButtonState extends State<HomeMenuButton> {
     MainScreenPagesManagerProvider pagesManager = Provider.of<MainScreenPagesManagerProvider>(context);
     return FilledButton(
       onPressed: (){
-        pagesManager.set(widget.screen);
+        pagesManager.setPage(widget.screen);
       },
       style: ButtonStyle(
         shape: ButtonState.all<OutlinedBorder>(

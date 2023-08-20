@@ -5,9 +5,8 @@ import 'package:psychoverse/Ui/Components/Blocs/bloc11.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/smallPopUp.dart';
-import 'package:psychoverse/Ui/Components/Tiles/simpleTile.dart';
-import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
+import 'package:psychoverse/Ui/Components/Lists/zListGenerator.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 
 class HistoriqueArchitecture extends StatefulWidget {
   const HistoriqueArchitecture({Key? key}) : super(key: key);
@@ -57,29 +56,11 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
                   ],
                 ),
                 Gap(30.h),
-                SizedBox(
-                  height: 100.h * psychologiqueList.length,
-                  width: double.infinity,
-                  child: ListViewTilesGenerator(
-                    number: psychologiqueList.length,
-                    onTap: ({index = 0}) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => SmallPopUp(
-                          title: "Fait psychologique",
-                          delete: true,
-                          child: TextForm(
-                            title: "Designation",
-                            onChanged: (value) {},
-                            onFieldSubmitted: (value) {},
-                          ),
-                        ),
-                      );
-                    },
-                    getTile: ({index = 0}) {
-                      return SimpleTile(title: psychologiqueList[index],);
-                    },
-                  ),
+                ListGenerator(
+                  list: psychologiqueList,
+                  popUpTitle: "Fait psychologique",
+                  deleteFunction: (index){},
+                  onSubmitted: ({value,index}){},
                 ),
               ],
             ),
@@ -112,29 +93,11 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
                   ],
                 ),
                 Gap(30.h),
-                SizedBox(
-                  height: 100.h * psychiatriqueList.length,
-                  width: double.infinity,
-                  child: ListViewTilesGenerator(
-                    number: psychiatriqueList.length,
-                    onTap: ({index = 0}) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => SmallPopUp(
-                          title: "Fait psychiatrique",
-                          delete: true,
-                          child: TextForm(
-                            title: "Designation",
-                            onChanged: (value) {},
-                            onFieldSubmitted: (value) {},
-                          ),
-                        ),
-                      );
-                    },
-                    getTile: ({index = 0}) {
-                      return SimpleTile(title: psychiatriqueList[index],);
-                    },
-                  ),
+                ListGenerator(
+                  list: psychiatriqueList,
+                  popUpTitle: "Fait psychiatrique",
+                  deleteFunction: (index){},
+                  onSubmitted: ({value,index}){},
                 ),
               ],
             ),
@@ -167,29 +130,11 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
                   ],
                 ),
                 Gap(30.h),
-                SizedBox(
-                  height: 100.h * marquantList.length,
-                  width: double.infinity,
-                  child: ListViewTilesGenerator(
-                    number: marquantList.length,
-                    onTap: ({index = 0}) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => SmallPopUp(
-                          title: "Fait sociaux marquants",
-                          delete: true,
-                          child: TextForm(
-                            title: "Designation",
-                            onChanged: (value) {},
-                            onFieldSubmitted: (value) {},
-                          ),
-                        ),
-                      );
-                    },
-                    getTile: ({index = 0}) {
-                      return SimpleTile(title: marquantList[index],);
-                    },
-                  ),
+                ListGenerator(
+                  list: marquantList,
+                  popUpTitle: "Fait social marquant",
+                  deleteFunction: (index){},
+                  onSubmitted: ({value,index}){},
                 ),
               ],
             ),

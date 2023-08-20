@@ -34,7 +34,7 @@ class _RelationPopUpState extends State<RelationPopUp> {
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: ()=>showDialog(context: context, builder: (context)=>ImagePopUp(image: "assets/images/im7.jpg",)),
+                  onTap: ()=>showDialog(context: context, builder: (context)=>ImagePopUp()),
                   child: Container(
                     width: double.infinity,
                     height: 550.h,
@@ -89,9 +89,7 @@ class _RelationPopUpState extends State<RelationPopUp> {
                           onFieldSubmitted: (value) {}),
                       PhoneForm(
                           title: "Téléphone",
-                          onChanged: ({country = "", numero = ""}) {},
-                          onFieldSubmitted: (
-                              {country = "", numero = ""}) {}),
+                      ),
                       TextForm(
                           title: "Email",
                           email: true,

@@ -1,30 +1,30 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
+import 'package:psychoverse/Ui/Components/Forms/zFormBox.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class RadioMenuForm extends StatefulWidget {
 
   final String title;
-  String? value;
+  String? selected;
   String placeHolder;
   bool readOnly;
   bool managers;
-  List<String> list=[];
-  Function(String?) onChanged;
-  Function(String?) onFieldSubmitted;
+  List<String>? list=[];
+  Function(String?)? onChanged;
+  Function(String?)? onFieldSubmitted;
 
   RadioMenuForm({Key? key,
     this.title = "Radio Menu",
     this.readOnly=true,
     this.managers=true,
-    this.value,
+    this.selected,
     this.placeHolder = "...",
     required this.list,
-    required this.onChanged,
-    required this.onFieldSubmitted,
+    this.onChanged,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -32,8 +32,10 @@ class RadioMenuForm extends StatefulWidget {
 }
 
 class _RadioMenuFormState extends State<RadioMenuForm> {
+  String? selected;
   @override
   Widget build(BuildContext context) {
+    selected=widget.selected;
     return AppFormBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,10 +91,10 @@ class _RadioMenuFormState extends State<RadioMenuForm> {
                             size: 20.h,
                           ),
                           onPressed: () {
+                            widget.onFieldSubmitted!(widget.selected);
                             setState(() {
                               widget.readOnly = true;
                             });
-                            widget.onFieldSubmitted(widget.value);
                           },
                         ),
                       ),
@@ -103,12 +105,12 @@ class _RadioMenuFormState extends State<RadioMenuForm> {
             ],
           ),
           widget.readOnly
-              ? Text( widget.value==null? widget.placeHolder:widget.value.toString(),
-            style: widget.value==null?AppTextStyle.formPlaceHolderStyleTexte:AppTextStyle.formStyleTexte,
+              ? Text( widget.selected==null? widget.placeHolder:widget.selected.toString(),
+            style: widget.selected==null?AppTextStyle.formPlaceHolderStyleTexte:AppTextStyle.formStyleTexte,
           )
               : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: widget.list.map((i) {
+            children: widget.list!.map((i) {
               return Builder(
                 builder: (BuildContext context) {
                   return Padding(
@@ -118,10 +120,10 @@ class _RadioMenuFormState extends State<RadioMenuForm> {
                         padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: Text(i,style: AppTextStyle.filedTexte.copyWith(fontWeight: FontWeight.bold),),
                       ),
-                        checked: i==widget.value,
+                        checked: i==selected,
                         onChanged: (checked) {
                           if (checked) {
-                            setState((){widget.value = i;});
+                            setState((){selected = i;});
                           }
                         },
                       style: RadioButtonThemeData(

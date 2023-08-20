@@ -11,32 +11,30 @@ class MakeSearchBar extends StatefulWidget {
   bool withToggleFilter;
 
   String? textValue;
-  String? textSelected;
-  List<String> textList;
+  List<String>? textList;
 
   String? comboFilterSelected;
-  List<String> comboFilterList;
+  List<String>? comboFilterList;
 
   String? toggleFilterSelected;
-  List<String> toggleFilterList;
+  List<String>? toggleFilterList;
   TextEditingController controller = TextEditingController();
-  Function({String? comboFilter,String? toggleFilter, String? text}) onChanged;
-  Function({String? comboFilter,String? toggleFilter, String? text}) onFieldSubmitted;
+  Function({String? comboFilter,String? toggleFilter, String? text})? onChanged;
+  Function({String? comboFilter,String? toggleFilter, String? text})? onFieldSubmitted;
 
   var formKey = GlobalKey<FormState>();
   MakeSearchBar({
     Key? key,
     this.withComboFilter = false,
     this.withToggleFilter = false,
-    this.textSelected,
     this.comboFilterSelected,
     this.toggleFilterSelected,
     this.textValue,
-    this.textList = const [],
-    this.comboFilterList = const [],
-    this.toggleFilterList= const [],
-    required this.onChanged,
-    required this.onFieldSubmitted,
+    this.textList,
+    this.comboFilterList,
+    this.toggleFilterList,
+    this.onChanged,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   GlobalKey getFormKey() => formKey;
@@ -49,9 +47,11 @@ class MakeSearchBar extends StatefulWidget {
 class _MakeSearchBarState extends State<MakeSearchBar> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController controller = TextEditingController();
+  String? textSelected;
 
   @override
   Widget build(BuildContext context) {
+    textSelected = widget.textValue;
     return Column(
       children: [
         Container(
@@ -68,13 +68,15 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
             children: [
               GestureDetector(
                 onTap: () {
-                  if(!widget.comboFilterList.contains(widget.controller.text)){
-                    widget.comboFilterList.add(widget.controller.text);
+                  if(!widget.comboFilterList!.contains(widget.controller.text)){
+                    widget.comboFilterList!.add(widget.controller.text,
+                    );
                   }
-                  widget.onFieldSubmitted(
+                  widget.onFieldSubmitted!(
                       toggleFilter: widget.toggleFilterSelected,
                       comboFilter: widget.comboFilterSelected,
-                      text: widget.controller.text);
+                      text: widget.controller.text,
+                  );
                 },
                 child: Container(
                   padding: EdgeInsets.all(15.h),
@@ -101,7 +103,7 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
                   key: _formKey,
                   child: AutoSuggestBox<String>(
                     controller: widget.controller,
-                    items: widget.textList.map((e) {
+                    items: widget.textList!.map((e) {
                       return AutoSuggestBoxItem<String>(
                           value: e,
                           label: e,
@@ -112,7 +114,13 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
                           });
                     }).toList(),
                     onSelected: (value) {
-                      setState(() => widget.textSelected = value.value);
+                      setState((){
+                        textSelected = value.value;
+                        widget.textValue=textSelected;
+                        widget.onChanged!(comboFilter: widget.comboFilterSelected,text: widget.controller.text,toggleFilter: widget.toggleFilterSelected);
+                        widget.onFieldSubmitted!(comboFilter: widget.comboFilterSelected,text: widget.controller.text,toggleFilter: widget.toggleFilterSelected);
+                      }
+                      );
                     },
                     style: AppTextStyle.formStyleTexte,
                     decoration: BoxDecoration(
@@ -122,7 +130,7 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
                     ),
                     unfocusedColor: Colors.transparent,
                     cursorColor: getColor(),
-                    placeholder: "Rechercher ...",
+                    placeholder: "Recherche",
                     clearButtonEnabled: false,
                     showCursor: true,
                     placeholderStyle: AppTextStyle.filedTexte.copyWith(
@@ -136,7 +144,7 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
                 height: 55.h,
                 child: widget.withComboFilter? ComboBox<String>(
                   value: widget.comboFilterSelected,
-                  items: widget.comboFilterList.map((e) {
+                  items: widget.comboFilterList!.map((e) {
                     return ComboBoxItem(
                       value: e,
                       child: Text(e),
@@ -145,7 +153,11 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
                   style:
                   AppTextStyle.filedTexte.copyWith(fontWeight: FontWeight.bold),
                   onChanged: (value) {
-                    setState(() => widget.comboFilterSelected = value);
+                    setState((){
+                      widget.comboFilterSelected = value;
+                      widget.onChanged!(comboFilter: widget.comboFilterSelected,text: widget.controller.text,toggleFilter: widget.toggleFilterSelected);
+                      widget.onFieldSubmitted!(comboFilter: widget.comboFilterSelected,text: widget.controller.text,toggleFilter: widget.toggleFilterSelected);
+                    });
                   },
                   icon: Icon(
                     FluentIcons.chevron_down_small,
@@ -169,11 +181,11 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
                 onChanged: (
                     {mode = true,
                       menu = const [],
-                      selectedMenuNums = const [],
+                      selectedMenuNums = const [0],
                       selectedMenuNum = 0,
                       getSelectedOnString = const []}) {
                   widget.toggleFilterSelected=menu[selectedMenuNum];
-                  widget.onFieldSubmitted(text: widget.textValue,comboFilter: widget.comboFilterSelected,toggleFilter: widget.toggleFilterSelected);
+                  widget.onFieldSubmitted!(text: widget.textValue,comboFilter: widget.comboFilterSelected,toggleFilter: widget.toggleFilterSelected);
                 },
                 mode: false,
                 menu: widget.toggleFilterList,
@@ -182,7 +194,7 @@ class _MakeSearchBarState extends State<MakeSearchBar> {
               ),
             ),
           ],
-        ):Gap(0),
+        ):const Gap(0),
       ],
     );
   }

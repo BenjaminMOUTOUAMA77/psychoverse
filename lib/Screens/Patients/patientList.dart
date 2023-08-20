@@ -4,12 +4,10 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
-import 'package:psychoverse/Ui/Components/PopUps/addPatientPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
-import 'package:psychoverse/Ui/Components/Tiles/patientTile.dart';
+import 'package:psychoverse/Ui/Components/PopUps/newPatient.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/patientList.dart';
-import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
+import 'package:psychoverse/Ui/Components/Lists/patientBoxList.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 
@@ -30,7 +28,7 @@ class _PatientListState extends State<PatientList> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 40.w,vertical: 40.h),
+            padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 40.h),
             decoration: BoxDecoration(
               color: AppColors.blancGrise,
               boxShadow: [
@@ -72,20 +70,51 @@ class _PatientListState extends State<PatientList> {
                 SimpleAppButon(
                   texte: "Nouveau Dossier",
                   icon: FluentIcons.add_friend,
-                  function: () => showDialog(context: context, builder:(context)=>BigPopUp(title: "Nouveau Dossier",child: AddPatientPopUp(),save: true,)),
+                  function: () => showDialog(
+                    context: context,
+                    builder: (context) => SmallPopUp(
+                      title: "Nouveau Dossier",
+                      child: newPatient(),
+                      save: true,
+                      saveTexte: "Créer",
+                      saveFunction: () {},
+                    ),
+                  ),
                 ),
                 SimpleAppButon(
                   texte: "Importer / Exporter",
                   icon: FluentIcons.save_and_close,
-                  function: () => print("Initiale page : " +
-                      page.getPage(widget.uiKey).initialPage.toString()),
+                  function: () {},
                 ),
               ],
             ),
           ),
           Gap(20.h),
           Expanded(
-            child: PatientBoxList(uiKey: widget.uiKey,list: ["Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob","Toundji Jacob",],),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: PatientBoxList(
+                uiKey: widget.uiKey,
+                list: [
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                  "Toundji Jacob",
+                ],
+              ),
+            ),
           ),
         ],
       ),

@@ -1,10 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/AppNav/appNavBar.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Forms/radioMenuForm.dart';
-import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
@@ -26,9 +25,6 @@ class _SauvegardeState extends State<Sauvegarde> {
         const MakeBackgroundImage(),
         Column(
           children: [
-            AppNavBar(
-              menu: "Sauvegarde",
-            ),
             Gap(20.h),
             Expanded(
               child: SingleChildScrollView(
@@ -39,7 +35,7 @@ class _SauvegardeState extends State<Sauvegarde> {
                       child: Column(
                         children: [
                           RadioMenuForm(
-                              value: sauvAuto ? "Activé" : "Désactivé",
+                              selected: sauvAuto ? "Activé" : "Désactivé",
                               title: "Sauvegarde automatique",
                               list: ["Désactivé", "Activé"],
                               onChanged: (value) {},
@@ -61,7 +57,7 @@ class _SauvegardeState extends State<Sauvegarde> {
                       child: Column(
                         children: [
                           RadioMenuForm(
-                              value: sauvManuelle ? "Activé" : "Désactivé",
+                              selected: sauvManuelle ? "Activé" : "Désactivé",
                               title: "Sauvegarde Manuelle",
                               list: ["Désactivé", "Activé"],
                               onChanged: (value) {},
@@ -121,7 +117,7 @@ class _SauvegardeState extends State<Sauvegarde> {
                           ),
                           Gap(20.h),
                           RadioMenuForm(
-                              value: sauv ? "Activé" : "Désactivé",
+                              selected: sauv ? "Activé" : "Désactivé",
                               title: "Sauvegarde",
                               list: ["Désactivé", "Activé"],
                               onChanged: (value) {},

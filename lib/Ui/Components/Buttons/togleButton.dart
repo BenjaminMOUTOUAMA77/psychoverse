@@ -8,20 +8,25 @@ class MakeToggleMenu extends StatefulWidget {
   int type;
   bool showModeControle;
   bool mode;
-  List<String> menu;
-  List<int> selectedMenuNums;
-  int selectedMenuNum;
-  Function({bool mode,List<String> menu,List<int> selectedMenuNums,int selectedMenuNum,List<String> getSelectedOnString}) onChanged;
+  List<String>? menu;
+  List<int>? selectedMenuNums;
+  int? selectedMenuNum;
+  Function(
+      {bool mode,
+      List<String> menu,
+      List<int> selectedMenuNums,
+      int selectedMenuNum,
+      List<String> getSelectedOnString})? onChanged;
 
   MakeToggleMenu({
     Key? key,
-    required this.menu,
+    this.menu,
     this.selectedMenuNum = 0,
-    required this.selectedMenuNums,
+    this.selectedMenuNums = const [0],
     this.mode = true,
     this.showModeControle = true,
     this.type = 1,
-    required this.onChanged,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -29,19 +34,20 @@ class MakeToggleMenu extends StatefulWidget {
 
   int get getType => type;
   bool get getShowModeControle => showModeControle;
-  bool get getMode=>mode;
-  List<String> get getMenu=>menu;
-  List<int> get getSelectedMenuNums=>selectedMenuNums;
-  int get getSelectedMenuNum=>selectedMenuNum;
+  bool get getMode => mode;
+  List<String> get getMenu => menu!;
+  List<int> get getSelectedMenuNums => selectedMenuNums!;
+  int get getSelectedMenuNum => selectedMenuNum!;
 
   List<String> selectedMenus() {
     List<String> menus = [];
-    for (int i in selectedMenuNums) {
-      menus.add(menu[i]);
+    for (int i in selectedMenuNums!) {
+      menus.add(menu![i]);
     }
     return menus;
   }
-  String selectedMenu() => menu[selectedMenuNum];
+
+  String selectedMenu() => menu![selectedMenuNum!];
 
   List<String> getSelected() {
     if (mode) {
@@ -51,39 +57,46 @@ class MakeToggleMenu extends StatefulWidget {
     }
   }
 }
+
 class _MakeToggleMenuState extends State<MakeToggleMenu> {
   @override
   Widget build(BuildContext context) {
     List<bool> boolStock = [];
 
     initBoolStock() {
-      for (int i = 0; i < widget.menu.length; i++) {
+      for (int i = 0; i < widget.menu!.length; i++) {
         boolStock.add(false);
       }
       if (widget.mode) {
-        for (int i in widget.selectedMenuNums) {
+        for (int i in widget.selectedMenuNums!) {
           boolStock[i] = true;
         }
       } else {
-        boolStock[widget.selectedMenuNum] = true;
+        boolStock[widget.selectedMenuNum!] = true;
       }
     }
 
     initBoolStock();
+
     toggleElements(int active) {
       setState(() {
         if (widget.mode) {
-          if (widget.selectedMenuNums.contains(active)) {
-            widget.selectedMenuNums.remove(active);
+          if (widget.selectedMenuNums!.contains(active)) {
+            widget.selectedMenuNums!.remove(active);
           } else {
-            widget.selectedMenuNums.add(active);
+            widget.selectedMenuNums!.add(active);
           }
         } else {
           widget.selectedMenuNum = active;
         }
         initBoolStock();
       });
-      widget.onChanged(mode: widget.getMode,menu:widget.getMenu,selectedMenuNums:widget.selectedMenuNums,selectedMenuNum : widget.getSelectedMenuNum,getSelectedOnString:widget.getSelected());
+      widget.onChanged!(
+          mode: widget.getMode,
+          menu: widget.getMenu,
+          selectedMenuNums: widget.selectedMenuNums!,
+          selectedMenuNum: widget.getSelectedMenuNum,
+          getSelectedOnString: widget.getSelected());
     }
 
     return Row(
@@ -97,23 +110,25 @@ class _MakeToggleMenuState extends State<MakeToggleMenu> {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    widget.menu.length,
-                    (i) => Row(
-                      children: [
-                        Gap(10.w),
-                        widget.type == 1? AppToggleButton(
-                          texte: widget.menu[i],
-                          checked: boolStock[i],
-                          toggle: () => toggleElements(i),
-                        ) : AppToggleMenuButton(texte: widget.menu[i],
-                          checked: boolStock[i],
-                          toggle: () => toggleElements(i),),
-                        Gap(10.w),
-                      ],
-                    ),
-                  ),),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  widget.menu!.length,
+                  (i) => Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: widget.type == 1
+                        ? AppToggleButton(
+                            texte: widget.menu![i],
+                            checked: boolStock[i],
+                            toggle: () => toggleElements(i),
+                          )
+                        : AppToggleMenuButton(
+                            texte: widget.menu![i],
+                            checked: boolStock[i],
+                            toggle: () => toggleElements(i),
+                          ),
+                  ),
+                ),
+              ),
             ),
           ),
         ),
@@ -125,7 +140,12 @@ class _MakeToggleMenuState extends State<MakeToggleMenu> {
               setState(() {
                 widget.mode = !widget.mode;
                 initBoolStock();
-                widget.onChanged(mode: widget.mode,menu:widget.menu,selectedMenuNums:widget.selectedMenuNums,selectedMenuNum : widget.getSelectedMenuNum,getSelectedOnString:widget.getSelected());
+                widget.onChanged!(
+                    mode: widget.mode,
+                    menu: widget.menu!,
+                    selectedMenuNums: widget.selectedMenuNums!,
+                    selectedMenuNum: widget.getSelectedMenuNum,
+                    getSelectedOnString: widget.getSelected());
               });
             },
             child: Container(
@@ -170,17 +190,18 @@ class _MakeToggleMenuState extends State<MakeToggleMenu> {
 class AppToggleButton extends StatefulWidget {
   bool checked;
   String texte;
-  VoidCallback toggle;
+  VoidCallback? toggle;
   AppToggleButton({
     Key? key,
     this.checked = false,
     this.texte = "TogleButton",
-    required this.toggle,
+    this.toggle,
   }) : super(key: key);
 
   @override
   State<AppToggleButton> createState() => _AppToggleButtonState();
 }
+
 class _AppToggleButtonState extends State<AppToggleButton> {
   @override
   Widget build(BuildContext context) {
@@ -199,9 +220,11 @@ class _AppToggleButtonState extends State<AppToggleButton> {
             ),
           ),
           padding: ButtonState.all(
-              EdgeInsets.symmetric(horizontal: 15.w+10, vertical: 5.h+3)),
-          textStyle: ButtonState.all(
-              TextStyle(color: AppColors.gris, fontSize: 7.sp+10,)),
+              EdgeInsets.symmetric(horizontal: 15.w + 10, vertical: 5.h + 3)),
+          textStyle: ButtonState.all(TextStyle(
+            color: AppColors.gris,
+            fontSize: 7.sp + 10,
+          )),
           backgroundColor: ButtonState.all(AppColors.blancGrise),
         ),
         checkedButtonStyle: ButtonStyle(
@@ -217,15 +240,15 @@ class _AppToggleButtonState extends State<AppToggleButton> {
             ),
           ),
           padding: ButtonState.all(
-              EdgeInsets.symmetric(horizontal: 15.w+10, vertical: 5.h+3)),
+              EdgeInsets.symmetric(horizontal: 15.w + 10, vertical: 5.h + 3)),
           textStyle: ButtonState.all(
-              TextStyle(color: AppColors.blanc, fontSize: 7.sp+10)),
+              TextStyle(color: AppColors.blanc, fontSize: 7.sp + 10)),
           backgroundColor: ButtonState.all(AppColors.rouge),
         ),
       ),
       checked: widget.checked,
       onChanged: (value) {
-        widget.toggle();
+        widget.toggle!();
       },
       child: Text(
         widget.texte,
@@ -240,17 +263,18 @@ class _AppToggleButtonState extends State<AppToggleButton> {
 class AppToggleMenuButton extends StatefulWidget {
   bool checked;
   String texte;
-  VoidCallback toggle;
+  VoidCallback? toggle;
   AppToggleMenuButton({
     Key? key,
     this.checked = false,
     this.texte = "TogleButton",
-    required this.toggle,
+    this.toggle,
   }) : super(key: key);
 
   @override
   State<AppToggleMenuButton> createState() => _AppToggleMenuButtonState();
 }
+
 class _AppToggleMenuButtonState extends State<AppToggleMenuButton> {
   @override
   Widget build(BuildContext context) {
@@ -269,10 +293,13 @@ class _AppToggleMenuButtonState extends State<AppToggleMenuButton> {
             ),
           ),
           padding: ButtonState.all(
-              EdgeInsets.symmetric(horizontal: 20.w+5, vertical: 10.h+5)),
-          textStyle: ButtonState.all(
-              TextStyle(color: AppColors.primary, fontSize: 7.sp+10, fontWeight: FontWeight.bold)),
-          backgroundColor: ButtonState.all(AppColors.blancGrise.withOpacity(0.3)),
+              EdgeInsets.symmetric(horizontal: 20.w + 5, vertical: 10.h + 5)),
+          textStyle: ButtonState.all(TextStyle(
+              color: AppColors.primary,
+              fontSize: 7.sp + 10,
+              fontWeight: FontWeight.bold)),
+          backgroundColor:
+              ButtonState.all(AppColors.blancGrise.withOpacity(0.3)),
         ),
         checkedButtonStyle: ButtonStyle(
           shape: ButtonState.all<OutlinedBorder>(
@@ -287,20 +314,22 @@ class _AppToggleMenuButtonState extends State<AppToggleMenuButton> {
             ),
           ),
           padding: ButtonState.all(
-              EdgeInsets.symmetric(horizontal: 20.w+5, vertical: 10.h+5)),
-          textStyle: ButtonState.all(
-              TextStyle(color: AppColors.blanc, fontSize: 7.sp+10, fontWeight: FontWeight.bold)),
+              EdgeInsets.symmetric(horizontal: 20.w + 5, vertical: 10.h + 5)),
+          textStyle: ButtonState.all(TextStyle(
+              color: AppColors.blanc,
+              fontSize: 7.sp + 10,
+              fontWeight: FontWeight.bold)),
           backgroundColor: ButtonState.all(AppColors.primary),
         ),
       ),
       checked: widget.checked,
       onChanged: (value) {
-        widget.toggle();
+        widget.toggle!();
       },
       child: Text(
         widget.texte,
-        style:
-            TextStyle(color: widget.checked ? AppColors.blanc : AppColors.primary),
+        style: TextStyle(
+            color: widget.checked ? AppColors.blanc : AppColors.primary),
       ),
     );
   }

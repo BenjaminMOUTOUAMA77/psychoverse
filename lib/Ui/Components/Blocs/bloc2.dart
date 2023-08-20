@@ -13,7 +13,7 @@ class Bloc2 extends StatefulWidget {
 }
 
 class _Bloc2State extends State<Bloc2> {
-  IconData icon=FluentIcons.chevron_up_end6;
+  IconData icon=FluentIcons.chevron_up;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,7 +32,6 @@ class _Bloc2State extends State<Bloc2> {
           }
         },
         icon: Icon(icon,color: AppColors.grisLite.withOpacity(0.3),),
-        headerHeight: 100.h,
         headerBackgroundColor: ButtonState.all(AppColors.blancGrise),
         leading: Icon(
           FluentIcons.starburst,

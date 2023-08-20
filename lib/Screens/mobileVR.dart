@@ -1,16 +1,15 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/AppNav/appNavBar.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Boxs/vrBox.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/smallPopUp.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/vrList.dart';
-import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
+import 'package:psychoverse/Ui/Components/Lists/vrList.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
@@ -41,9 +40,6 @@ class _MobileVRState extends State<MobileVR> {
         const MakeBackgroundImage(),
         Column(
           children: [
-            AppNavBar(
-              menu: "Mobile VR",
-            ),
             Gap(20.h),
             Expanded(
               child: SingleChildScrollView(
@@ -152,9 +148,6 @@ class _MobileVRState extends State<MobileVR> {
                                                   saveFunction: (){
                                                     Navigator.pop(context);
                                                   },
-                                                  cancelFunction: (){
-                                                    Navigator.pop(context);
-                                                  },
                                                   child: SizedBox(
                                                     height: 350.h,
                                                     child: VrBox(
@@ -190,9 +183,6 @@ class _MobileVRState extends State<MobileVR> {
                                   delete: true,
                                   deleteTexte: "Retirer cette VR de ma banque VR",
                                   deleteFunction: () {
-                                    Navigator.pop(context);
-                                  },
-                                  cancelFunction: () {
                                     Navigator.pop(context);
                                   },
                                 ),

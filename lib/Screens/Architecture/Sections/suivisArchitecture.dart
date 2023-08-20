@@ -6,10 +6,9 @@ import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/smallPopUp.dart';
-import 'package:psychoverse/Ui/Components/Tiles/simpleTile.dart';
-import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
+import 'package:psychoverse/Ui/Components/Lists/zListGenerator.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 
 class SuivisArchitecture extends StatefulWidget {
   const SuivisArchitecture({Key? key}) : super(key: key);
@@ -62,29 +61,11 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                   ],
                 ),
                 Gap(30.h),
-                SizedBox(
-                  height: 100.h * typeList.length,
-                  width: double.infinity,
-                  child: ListViewTilesGenerator(
-                    number: typeList.length,
-                    onTap: ({index = 0}) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => SmallPopUp(
-                          title: "Type de suivi",
-                          delete: true,
-                          child: TextForm(
-                            title: "Designation",
-                            onChanged: (value) {},
-                            onFieldSubmitted: (value) {},
-                          ),
-                        ),
-                      );
-                    },
-                    getTile: ({index = 0}) {
-                      return SimpleTile(title: typeList[index],);
-                    },
-                  ),
+                ListGenerator(
+                  list: typeList,
+                  popUpTitle: "Type de suivi",
+                  deleteFunction: (index){},
+                  onSubmitted: ({value,index}){},
                 ),
               ],
             ),
@@ -117,29 +98,11 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                   ],
                 ),
                 Gap(30.h),
-                SizedBox(
-                  height: 100.h * degreList.length,
-                  width: double.infinity,
-                  child: ListViewTilesGenerator(
-                    number: degreList.length,
-                    onTap: ({index = 0}) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => SmallPopUp(
-                          title: "Degré de manifestation",
-                          delete: true,
-                          child: TextForm(
-                            title: "Designation",
-                            onChanged: (value) {},
-                            onFieldSubmitted: (value) {},
-                          ),
-                        ),
-                      );
-                    },
-                    getTile: ({index = 0}) {
-                      return SimpleTile(title: degreList[index],);
-                    },
-                  ),
+                ListGenerator(
+                  list: degreList,
+                  popUpTitle: "Degré de manifestation",
+                  deleteFunction: (index){},
+                  onSubmitted: ({value,index}){},
                 ),
               ],
             ),
@@ -172,29 +135,11 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                   ],
                 ),
                 Gap(30.h),
-                SizedBox(
-                  height: 100.h * frequenceList.length,
-                  width: double.infinity,
-                  child: ListViewTilesGenerator(
-                    number: frequenceList.length,
-                    onTap: ({index = 0}) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => SmallPopUp(
-                          title: "Fréquence",
-                          delete: true,
-                          child: TextForm(
-                            title: "Designation",
-                            onChanged: (value) {},
-                            onFieldSubmitted: (value) {},
-                          ),
-                        ),
-                      );
-                    },
-                    getTile: ({index = 0}) {
-                      return SimpleTile(title: frequenceList[index],);
-                    },
-                  ),
+                ListGenerator(
+                  list: frequenceList,
+                  popUpTitle: "Fréquence de manifestation",
+                  deleteFunction: (index){},
+                  onSubmitted: ({value,index}){},
                 ),
               ],
             ),
@@ -227,29 +172,11 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                   ],
                 ),
                 Gap(30.h),
-                SizedBox(
-                  height: 100.h * evolutionList.length,
-                  width: double.infinity,
-                  child: ListViewTilesGenerator(
-                    number: evolutionList.length,
-                    onTap: ({index = 0}) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => SmallPopUp(
-                          title: "Évolution",
-                          delete: true,
-                          child: TextForm(
-                            title: "Designation",
-                            onChanged: (value) {},
-                            onFieldSubmitted: (value) {},
-                          ),
-                        ),
-                      );
-                    },
-                    getTile: ({index = 0}) {
-                      return SimpleTile(title: evolutionList[index],);
-                    },
-                  ),
+                ListGenerator(
+                  list: evolutionList,
+                  popUpTitle: "Évolution de la situation",
+                  deleteFunction: (index){},
+                  onSubmitted: ({value,index}){},
                 ),
               ],
             ),
@@ -282,29 +209,11 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                   ],
                 ),
                 Gap(30.h),
-                SizedBox(
-                  height: 100.h * strategieList.length,
-                  width: double.infinity,
-                  child: ListViewTilesGenerator(
-                    number: strategieList.length,
-                    onTap: ({index = 0}) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => SmallPopUp(
-                          title: "stratégie thérapeutique",
-                          delete: true,
-                          child: TextForm(
-                            title: "Designation",
-                            onChanged: (value) {},
-                            onFieldSubmitted: (value) {},
-                          ),
-                        ),
-                      );
-                    },
-                    getTile: ({index = 0}) {
-                      return SimpleTile(title: strategieList[index],);
-                    },
-                  ),
+                ListGenerator(
+                  list: strategieList,
+                  popUpTitle: "Stratégie thérapeutique",
+                  deleteFunction: (index){},
+                  onSubmitted: ({value,index}){},
                 ),
               ],
             ),
@@ -337,29 +246,11 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                   ],
                 ),
                 Gap(30.h),
-                SizedBox(
-                  height: 100.h * analyseList.length,
-                  width: double.infinity,
-                  child: ListViewTilesGenerator(
-                    number: analyseList.length,
-                    onTap: ({index = 0}) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => SmallPopUp(
-                          title: "Analyse fontionnelle",
-                          delete: true,
-                          child: TextForm(
-                            title: "Designation",
-                            onChanged: (value) {},
-                            onFieldSubmitted: (value) {},
-                          ),
-                        ),
-                      );
-                    },
-                    getTile: ({index = 0}) {
-                      return SimpleTile(title: analyseList[index],);
-                    },
-                  ),
+                ListGenerator(
+                  list: analyseList,
+                  popUpTitle: "Analyse fonctionnelle",
+                  deleteFunction: (index){},
+                  onSubmitted: ({value,index}){},
                 ),
               ],
             ),
@@ -402,39 +293,11 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                   ],
                 ),
                 Gap(30.h),
-                SizedBox(
-                  height: 100.h * trameList.length,
-                  width: double.infinity,
-                  child: ListViewTilesGenerator(
-                    number: trameList.length,
-                    onTap: ({index = 0}) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => BigPopUp(
-                          title: "Trame d'anamnèse",
-                          delete: true,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                TextForm(
-                                  title: "Nom de la trame" ,
-                                  onChanged: (value){},
-                                  onFieldSubmitted: (value){},
-                                ),
-                                BigTextForm(
-                                  title: "Lossature de la trame",
-                                  onFieldSubmitted: (value) {},
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                    getTile: ({index = 0}) {
-                      return SimpleTile(title: trameList[index],);
-                    },
-                  ),
+                ListGenerator(
+                  list: trameList,
+                  popUpTitle: "Trame d'anamnèse",
+                  deleteFunction: (index){},
+                  onSubmitted: ({value,index}){},
                 ),
               ],
             ),

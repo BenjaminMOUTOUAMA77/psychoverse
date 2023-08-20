@@ -1,15 +1,17 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Functions/initialisation.dart';
+import 'package:psychoverse/Providers/myAppPathProvider.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/screens/mainScreensManager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Providers/changeScreenProvider.dart';
 
-void main() async{
+void main() async {
   initialisation();
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(1920, 1080),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context , child) {
+      builder: (context, child) {
         return FluentApp(
           debugShowCheckedModeBanner: false,
           title: 'Psychoverse',
@@ -31,12 +33,14 @@ class MyApp extends StatelessWidget {
             accentColor: Colors.purple,
             fontFamily: "BeVietnamPro",
           ),
+          color: AppColors.primary,
           home: child,
         );
       },
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => MainScreenPagesManagerProvider()),
+          ChangeNotifierProvider(create: (_) => MyAppPathProvider()),
         ],
         child: const MainScreensManager(),
       ),

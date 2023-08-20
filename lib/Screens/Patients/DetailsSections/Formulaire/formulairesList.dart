@@ -4,17 +4,15 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
-import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
-import 'package:psychoverse/Ui/Components/PopUps/chooseFormulairePopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/middlePopUp.dart';
-import 'package:psychoverse/Ui/Components/Tiles/simpleTile.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/formulaireBoxList.dart';
-import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
+import 'package:psychoverse/Ui/Components/Lists/zSelectableList.dart';
+import 'package:psychoverse/Ui/Components/Lists/formulaireBoxList.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 
 class FormulairesList extends StatefulWidget {
   final int uiKey;
   final int formulaireUiKey;
-  const FormulairesList({Key? key,this.uiKey=0, this.formulaireUiKey=0}) : super(key: key);
+  const FormulairesList({Key? key, this.uiKey = 0, this.formulaireUiKey = 0})
+      : super(key: key);
 
   @override
   State<FormulairesList> createState() => _FormulairesListState();
@@ -22,51 +20,21 @@ class FormulairesList extends StatefulWidget {
 
 class _FormulairesListState extends State<FormulairesList> {
   late ChangeSectionsProvider sections;
-  List<String> formulaires = [
-    "Formulaire 1",
-    "Formulaire 2",
-    "Formulaire 3",
-    "Formulaire 4",
-    "Formulaire 5",
+  List<String> formulairesList = [
+    'Formulaire 1',
+    'Formulaire 2',
+    'Formulaire 3',
+    'Formulaire 4',
+    'Formulaire 5',
+    'Formulaire 6',
   ];
+  List<String> selectedList = [];
   @override
   Widget build(BuildContext context) {
     sections = Provider.of<ChangeSectionsProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        formulaires.length > 20
-            ? Column(
-          children: [
-            MakeSearchBar(
-                withComboFilter: true,
-                withToggleFilter: true,
-                comboFilterList: ["Nom", "Ville", "Numero dossier"],
-                textList: [
-                  "Patient 1",
-                  "Patient 2",
-                  "Patient 3",
-                  "Patient 4",
-                  "Patient 5",
-                  "Patient 6",
-                ],
-                toggleFilterList: [
-                  "Tout",
-                  "En Cours",
-                  "En Pause",
-                  "Archivés",
-                ],
-                onChanged: (
-                    {toggleFilter = "",
-                      comboFilter = "",
-                      text = ""}) {},
-                onFieldSubmitted: (
-                    {toggleFilter = "", comboFilter = "", text = ""}) {
-                }),
-            Gap(70.h),
-          ],
-        )
-            : const Gap(0),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 30.w),
           child: Row(
@@ -76,7 +44,23 @@ class _FormulairesListState extends State<FormulairesList> {
                 texte: "Ajouter un formulaire à ce dossier",
                 icon: FluentIcons.dependency_add,
                 function: () {
-                  showDialog(context: context, builder: (context)=>MiddlePopUp(title: "Ajouter un formulaire",child: ChooseFormulairePopUp(),));
+                  showDialog(
+                      context: context,
+                      builder: (context) => SmallPopUp(
+                            title: "Ajouter un formulaire",
+                            save: true,
+                            saveTexte: "Ajouter",
+                            saveFunction: () {},
+                            child: SelectableList(
+                              list: formulairesList,
+                              selectedList: selectedList,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedList = value;
+                                });
+                              },
+                            ),
+                          ));
                 },
               ),
             ],
@@ -84,9 +68,9 @@ class _FormulairesListState extends State<FormulairesList> {
         ),
         Gap(20.h),
         Expanded(
-          child:
-          FormulaireBoxList(list: ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",],)
-          ,
+          child: FormulaireBoxList(
+            list: formulairesList,
+          ),
         ),
       ],
     );

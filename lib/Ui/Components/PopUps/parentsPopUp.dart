@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/relationTilesGroupe.dart';
+import 'package:psychoverse/Ui/Components/Lists/relationList.dart';
 
 class ParentsPopUp extends StatefulWidget {
   const ParentsPopUp({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _ParentsPopUpState extends State<ParentsPopUp> {
       child: Column(
         children: [
           Gap(30.h),
-          RelationTilesGroupe(
+          RelationList(
             list: ["", ""],
           ),
           Gap(20.h),

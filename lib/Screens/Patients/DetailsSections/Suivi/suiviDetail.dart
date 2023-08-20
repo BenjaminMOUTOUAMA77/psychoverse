@@ -1,30 +1,32 @@
-import 'package:file_picker/file_picker.dart';
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
-import 'package:psychoverse/Functions/appPaths.dart';
 import 'package:psychoverse/Functions/pickFiles.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
+import 'package:psychoverse/Providers/myAppPathProvider.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
-import 'package:psychoverse/Ui/Components/Boxs/FileBox.dart';
 import 'package:psychoverse/Ui/Components/Boxs/vrBox.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
-import 'package:psychoverse/Ui/Components/Forms/menuForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/comboBoxForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/progessionForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/SeancesListPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/addSeancePopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/middlePopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/smallPopUp.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/vrNiveauList.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/vrList.dart';
-import 'package:psychoverse/Ui/Components/seance.dart';
+import 'package:psychoverse/Ui/Components/Lists/filesBoxList.dart';
+import 'package:psychoverse/Ui/Components/Lists/seanceList.dart';
+import 'package:psychoverse/Ui/Components/PopUps/newSeance.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zMiddlePopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
+import 'package:psychoverse/Ui/Components/Lists/vrNiveauList.dart';
+import 'package:psychoverse/Ui/Components/Lists/vrList.dart';
+import 'package:psychoverse/Ui/Components/Sections/seance.dart';
 import 'package:psychoverse/Ui/Components/Buttons/smallButton.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -32,23 +34,23 @@ import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 class SuiviDetail extends StatefulWidget {
   final int uiKey;
   final int suiviUiKey;
-  const SuiviDetail({Key? key, this.uiKey = 0, required this.suiviUiKey})
-      : super(key: key);
+  const SuiviDetail({Key? key, this.uiKey = 0, required this.suiviUiKey}) : super(key: key);
 
   @override
   State<SuiviDetail> createState() => _SuiviDetailState();
 }
 
 class _SuiviDetailState extends State<SuiviDetail> {
-  late String path =
-      "C:\\Users\\Utilisateur\\AppData\\Roaming\\com.example\\psychoverse\\Files";
+  late MyAppPathProvider path;
+  String appPath="";
   init() async {
-    path = await getAppPath(appFilesDirectory: true);
+    Directory value = await getAppPath(appFilesDirectory: true);
+    appPath = value.path;
   }
-
   @override
   Widget build(BuildContext context) {
-    init();
+    ChangeSectionsProvider sections = Provider.of<ChangeSectionsProvider>(context);
+
     List<String> typeList = [
       "Type 1",
       "Type 2",
@@ -91,13 +93,6 @@ class _SuiviDetailState extends State<SuiviDetail> {
       "Trame 3",
       "Trame 4",
     ];
-    List<String> seanceList = [
-      "Séance 1",
-      "Séance 2",
-      "Séance 3",
-      "Séance 4",
-      "Séance 5",
-    ];
     List<String> vrList = [
       "Vr 1",
       "Vr 1",
@@ -121,53 +116,48 @@ class _SuiviDetailState extends State<SuiviDetail> {
       "Vr 1",
       "Vr 1",
     ];
-    late List<PlatformFile> files = [
+    print("appPath : "+appPath);
+
+    late List<PlatformFile> filesList = [
       PlatformFile(
-        path: "${path}\\16600_oliFood1.ai",
+        path: "${appPath}16600_oliFood1.ai",
         name: "oliFood1",
         size: 0,
       ),
       PlatformFile(
-        path: "${path}\\23756_CV_BenjaminMOUTOUAMA.pdf",
+        path: "${appPath}23756_CV_BenjaminMOUTOUAMA.pdf",
         name: "CV_BenjaminMOUTOUAMA",
         size: 0,
       ),
       PlatformFile(
-        path: "${path}\\37587_CIP.png",
+        path: "${appPath}37587_CIP.png",
         name: "CIP",
         size: 0,
       ),
       PlatformFile(
-        path: "${path}\\38482_CIP.txt",
+        path: "${appPath}38482_CIP.txt",
         name: "CIP",
         size: 0,
       ),
       PlatformFile(
-        path: "${path}\\56852_ADA EHI - Open Doors - Lyrics francais.mp4",
+        path: "${appPath}56852_ADA EHI - Open Doors - Lyrics francais.mp4",
         name: "ADA EHI - Open Doors - Lyrics francais",
         size: 0,
       ),
       PlatformFile(
-        path: "${path}\\67006_Ada Ehi - Everything - Traduction francaise.mp4",
+        path:
+            "${appPath}67006_Ada Ehi - Everything - Traduction francaise.mp4",
         name: "Ada Ehi - Everything - Traduction francaise",
         size: 0,
       ),
       PlatformFile(
-        path: "${path}\\71239_OliFood2.png",
+        path: "${appPath}71239_OliFood2.png",
         name: "OliFood2",
         size: 0,
       ),
     ];
-    late List<String> extensions = [
-      "ai",
-      "pdf",
-      "png",
-      "txt",
-      "mp4",
-      "mp4",
-      "png",
-    ];
-    ChangeSectionsProvider sections = Provider.of<ChangeSectionsProvider>(context);
+
+
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
@@ -217,17 +207,17 @@ class _SuiviDetailState extends State<SuiviDetail> {
                       title: "Date de début",
                       onChanged: (value) {},
                       onFieldSubmitted: (value) {}),
-                  MenuForm(
+                  ComboBoxForm(
                       title: "Degré de manifestation",
                       list: degreList,
                       onChanged: (value) {},
                       onFieldSubmitted: (value) {}),
-                  MenuForm(
+                  ComboBoxForm(
                       title: "Fréquence d'apparition",
                       list: frequenceList,
                       onChanged: (value) {},
                       onFieldSubmitted: (value) {}),
-                  MenuForm(
+                  ComboBoxForm(
                       title: "Évolution",
                       list: evolutionList,
                       onChanged: (value) {},
@@ -298,7 +288,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
                       onFieldSubmitted: (value) {}),
                   BigTextForm(title: "Hypothèse", onFieldSubmitted: (value) {}),
                   BigTextForm(title: "WICS", onFieldSubmitted: (value) {}),
-                  MenuForm(
+                  ComboBoxForm(
                       title: "Trame d'Anamnèse",
                       list: trameList,
                       onChanged: (value) {},
@@ -337,14 +327,16 @@ class _SuiviDetailState extends State<SuiviDetail> {
                             title: "Ajouter une VR à ce suivi",
                             child: SizedBox(
                               height: 350.h,
-                              child: VrBox(vrName: "edzedzedugzieugdized zeugdiegdize zedhizehdizhe",),
+                              child: VrBox(
+                                vrName:
+                                    "edzedzedugzieugdized zeugdiegdize zedhizehdizhe",
+                              ),
                             ),
                             save: true,
                             saveTexte: "Ajouter",
-                            saveFunction: (){
+                            saveFunction: () {
                               Navigator.pop(context);
                             },
-                            cancelFunction: (){Navigator.pop(context);},
                           ),
                         ),
                       ),
@@ -365,35 +357,70 @@ class _SuiviDetailState extends State<SuiviDetail> {
                           child: Column(
                             children: [
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: 30.w,vertical: 20.h) ,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 30.w, vertical: 20.h),
                                 decoration: BoxDecoration(
                                   color: AppColors.primary,
-                                ) ,
+                                ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround ,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center ,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
-                                        Text("Niveau",style: AppTextStyle.bigFilledTexte.copyWith(color: AppColors.blanc),),
+                                        Text(
+                                          "Niveau",
+                                          style: AppTextStyle.bigFilledTexte
+                                              .copyWith(color: AppColors.blanc),
+                                        ),
                                         Gap(10.h),
-                                        Text("3/5", style: AppTextStyle.buttonStyleTexte.copyWith(color: Colors.yellow,fontSize: 10.sp+14),),
+                                        Text(
+                                          "3/5",
+                                          style: AppTextStyle.buttonStyleTexte
+                                              .copyWith(
+                                                  color: Colors.yellow,
+                                                  fontSize: 10.sp + 14),
+                                        ),
                                       ],
                                     ),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center ,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
-                                        Text("Score Total",style: AppTextStyle.bigFilledTexte.copyWith(color: AppColors.blanc),),
+                                        Text(
+                                          "Score Total",
+                                          style: AppTextStyle.bigFilledTexte
+                                              .copyWith(color: AppColors.blanc),
+                                        ),
                                         Gap(10.h),
-                                        Text("561", style: AppTextStyle.buttonStyleTexte.copyWith(color: Colors.yellow,fontSize: 10.sp+14),),
+                                        Text(
+                                          "561",
+                                          style: AppTextStyle.buttonStyleTexte
+                                              .copyWith(
+                                                  color: Colors.yellow,
+                                                  fontSize: 10.sp + 14),
+                                        ),
                                       ],
                                     ),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center ,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
-                                        Text("Moyenne",style: AppTextStyle.bigFilledTexte.copyWith(color: AppColors.blanc),),
+                                        Text(
+                                          "Moyenne",
+                                          style: AppTextStyle.bigFilledTexte
+                                              .copyWith(color: AppColors.blanc),
+                                        ),
                                         Gap(10.h),
-                                        Text("15,45", style: AppTextStyle.buttonStyleTexte.copyWith(color: Colors.yellow,fontSize: 10.sp+14),),
+                                        Text(
+                                          "15,45",
+                                          style: AppTextStyle.buttonStyleTexte
+                                              .copyWith(
+                                                  color: Colors.yellow,
+                                                  fontSize: 10.sp + 14),
+                                        ),
                                       ],
                                     ),
                                   ],
@@ -431,7 +458,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
                           context: context,
                           builder: (context) => BigPopUp(
                             title: "Nouvelle séance",
-                            child: AddSeancePopUp(),
+                            child: NewSeance(),
                             save: true,
                           ),
                         ),
@@ -451,9 +478,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
                       context: context,
                       builder: (context) => MiddlePopUp(
                         title: "Séances",
-                        child: SeanceListPopUp(
-                          list: seanceList,
-                        ),
+                        child: SeanceList(),
                       ),
                     ),
                   ),
@@ -471,30 +496,17 @@ class _SuiviDetailState extends State<SuiviDetail> {
                       SimpleAppButon(
                         texte: "Ajouter un fichier",
                         icon: FluentIcons.circle_addition_solid,
-                        function: () => pickFile(context, multiple: true),
+                        function: () => pickFiles(context, multiple: true,onPiked: (filesList){
+                          for(var file in filesList) {
+                            saveFile(file);
+                          }
+                        }),
                       ),
                     ],
                   ),
                   Gap(50.h),
-                  SizedBox(
-                    height:
-                        (files.length <= 5 ? 1 : files.length / 5 + 1) * 320.h,
-                    width: double.infinity,
-                    child: GridView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 30.w),
-                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 200,
-                          childAspectRatio: 3.7 / 4,
-                          crossAxisSpacing: 20,
-                          mainAxisSpacing: 20,
-                        ),
-                        itemCount: files.length,
-                        itemBuilder: (BuildContext context, index) {
-                          return FileBox(
-                            file: files[index],
-                            extension: extensions[index],
-                          );
-                        }),
+                  FilesBoxList(
+                    list: filesList,
                   ),
                 ],
               ),

@@ -4,6 +4,7 @@ import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderA
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Providers/changeScreenProvider.dart';
 import 'package:psychoverse/Ui/Components/Menu/menus.dart';
+import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
 
 class MainScreensManager extends StatefulWidget {
@@ -23,17 +24,18 @@ class _MainScreensManagerState extends State<MainScreensManager> {
       ],
       child: NavigationView(
         pane: NavigationPane(
+          displayMode: pagesManager.displayMode,
           size: const NavigationPaneSize(
             openMaxWidth: 230,
             headerHeight: 70,
           ),
           selected: pagesManager.page,
           onChanged: (index) {
-            pagesManager.set(index);
+            pagesManager.setPage(index);
           },
-          header: Image.asset(AppImages.logo),
-          items: appNavMenu(),
-          footerItems: appDownMenu(),
+          header: Container(color: AppColors.blanc,padding: EdgeInsets.symmetric(vertical: 7),child: Image.asset(AppImages.logo),),
+          items: appNavMenu(pagesManager),
+          footerItems: appDownMenu(pagesManager),
         ),
       ),
     );

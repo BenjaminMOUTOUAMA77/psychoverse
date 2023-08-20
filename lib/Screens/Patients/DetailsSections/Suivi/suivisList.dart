@@ -4,12 +4,10 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
-import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/suiviPopUp.dart';
-import 'package:psychoverse/Ui/Components/Tiles/suivisTile.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/suiviBoxList.dart';
-import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
+import 'package:psychoverse/Ui/Components/Lists/suiviBoxList.dart';
 
 class SuivisList extends StatefulWidget {
   final int uiKey;

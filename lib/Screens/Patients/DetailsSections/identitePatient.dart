@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:image_fade/image_fade.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
-import 'package:psychoverse/Ui/Components/Forms/checkBoxMenuForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/multiCheckBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/numberTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/phoneForm.dart';
@@ -20,13 +20,20 @@ import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class Identite extends StatefulWidget {
   final int uiKey;
-  const Identite({Key? key,this.uiKey=0}) : super(key: key);
+  const Identite({Key? key, this.uiKey = 0}) : super(key: key);
 
   @override
   State<Identite> createState() => _IdentiteState();
 }
 
 class _IdentiteState extends State<Identite> {
+  //Properties
+  String? phoneNumber;
+  String? countryCode;
+  String? callingCode;
+  List<String> loisirList = ["Loisir 1","Loisir 2","Loisir 3","Loisir 4",];
+
+  //Suggest Lists
   List<String> genreList = ["Genre 1", "Genre 2", "Genre 3", "Genre 4"];
   List<String> residenceList = ["Résidence 1", "Résidence 2", "Résidence 3", "Résidence 4"];
   List<String> ethnieList = ["Èthnie 1", "Èthnie 2", "Èthnie 3", "Èthnie 4"];
@@ -34,7 +41,7 @@ class _IdentiteState extends State<Identite> {
   List<String> etudeList = ["Niveau 1", "Niveau 2", "Niveau 3", "Niveau 4"];
   List<String> professionList = ["Profession 1", "Profession 2", "Profession 3", "Profession 4"];
   List<String> religionList = ["Réligion 1", "Réligion 2", "Réligion 3", "Réligion 4"];
-  List<CheckBoxUnit> loisirList = [CheckBoxUnit(element: "Loisir 1"),CheckBoxUnit(element: "Loisir 2"),CheckBoxUnit(element: "Loisir 3"),CheckBoxUnit(element: "Loisir 4"),];
+
   @override
   Widget build(BuildContext context) {
     return Bloc1(
@@ -67,7 +74,8 @@ class _IdentiteState extends State<Identite> {
                             ),
                             mediumLayout: Text(
                               "Dernière rencontre : ",
-                              style: AppTextStyle.bigFilledTexte.copyWith(fontSize: 15.sp),
+                              style: AppTextStyle.bigFilledTexte
+                                  .copyWith(fontSize: 15.sp),
                             ),
                           ),
                           Text(
@@ -104,7 +112,8 @@ class _IdentiteState extends State<Identite> {
                               children: [
                                 Text(
                                   "Prochaine rencontre : ",
-                                  style: AppTextStyle.bigFilledTexte.copyWith(fontSize: 15.sp),
+                                  style: AppTextStyle.bigFilledTexte
+                                      .copyWith(fontSize: 15.sp),
                                 ),
                                 Text(
                                   "20 Juin 2023 ",
@@ -125,13 +134,16 @@ class _IdentiteState extends State<Identite> {
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onTap: ()=>showDialog(context: context, builder: (context)=>ImagePopUp(image: "assets/images/im7.jpg",)),
+                        onTap: () => showDialog(
+                            context: context,
+                            builder: (context) => ImagePopUp()),
                         child: Container(
                           width: double.infinity,
                           height: 550.h,
                           clipBehavior: Clip.hardEdge,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.r)),
                             boxShadow: [
                               BoxShadow(
                                 color: AppColors.grisLite,
@@ -171,12 +183,34 @@ class _IdentiteState extends State<Identite> {
                     Gap(20.w),
                     Expanded(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                          TextForm(title: "Nom prénoms",onChanged: (value){}, onFieldSubmitted: (value){}),
-                          PhoneForm(title: "Téléphone",onChanged: ({country="",numero=""}){}, onFieldSubmitted: ({country="",numero=""}){}),
-                          TextForm(title: "Email",email: true,onChanged: (value){}, onFieldSubmitted: (value){}),
-                          TextForm(title: "Adresse",addresse: true,onChanged: (value){}, onFieldSubmitted: (value){}),
+                        TextForm(
+                            title: "Nom prénoms",
+                            onChanged: (value) {},
+                            onFieldSubmitted: (value) {}),
+                        PhoneForm(
+                          title: "Téléphone",
+                          phoneNumber: phoneNumber,
+                          countryCode: countryCode,
+                          callingCode: callingCode,
+                          onFieldSubmitted: (
+                              {callingCode, countryCode, phoneNumber}) {
+                            callingCode=callingCode;
+                            countryCode=countryCode;
+                            phoneNumber=phoneNumber;
+                          },
+                        ),
+                        TextForm(
+                            title: "Email",
+                            email: true,
+                            onChanged: (value) {},
+                            onFieldSubmitted: (value) {}),
+                        TextForm(
+                            title: "Adresse",
+                            addresse: true,
+                            onChanged: (value) {},
+                            onFieldSubmitted: (value) {}),
                       ],
                     ))
                   ],
@@ -186,15 +220,31 @@ class _IdentiteState extends State<Identite> {
                   mediumLayout: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: SuggestTextForm(title: "Genre",list: genreList,onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(
+                          child: SuggestTextForm(
+                              title: "Genre",
+                              list: genreList,
+                              onChanged: (value) {},
+                              onFieldSubmitted: (value) {})),
                       Gap(20.w),
-                      Expanded(child: NumberTextForm(title: "Âge",onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(
+                          child: NumberTextForm(
+                              title: "Âge",
+                              onChanged: (value) {},
+                              onFieldSubmitted: (value) {})),
                     ],
                   ),
                   smallLayout: Column(
                     children: [
-                      SuggestTextForm(title: "Genre",list: genreList,onChanged: (value){}, onFieldSubmitted: (value){}),
-                      NumberTextForm(title: "Âge",onChanged: (value){}, onFieldSubmitted: (value){}),
+                      SuggestTextForm(
+                          title: "Genre",
+                          list: genreList,
+                          onChanged: (value) {},
+                          onFieldSubmitted: (value) {}),
+                      NumberTextForm(
+                          title: "Âge",
+                          onChanged: (value) {},
+                          onFieldSubmitted: (value) {}),
                     ],
                   ),
                 ),
@@ -202,15 +252,33 @@ class _IdentiteState extends State<Identite> {
                   mediumLayout: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: SuggestTextForm(title: "Condition de résidence",list: residenceList,onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(
+                          child: SuggestTextForm(
+                              title: "Condition de résidence",
+                              list: residenceList,
+                              onChanged: (value) {},
+                              onFieldSubmitted: (value) {})),
                       Gap(20.w),
-                      Expanded(child: SuggestTextForm(title: "Èthnie",list: ethnieList,onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(
+                          child: SuggestTextForm(
+                              title: "Èthnie",
+                              list: ethnieList,
+                              onChanged: (value) {},
+                              onFieldSubmitted: (value) {})),
                     ],
                   ),
                   smallLayout: Column(
                     children: [
-                      SuggestTextForm(title: "Condition de résidence",list: residenceList,onChanged: (value){}, onFieldSubmitted: (value){}),
-                      SuggestTextForm(title: "Èthnie",list: ethnieList,onChanged: (value){}, onFieldSubmitted: (value){}),
+                      SuggestTextForm(
+                          title: "Condition de résidence",
+                          list: residenceList,
+                          onChanged: (value) {},
+                          onFieldSubmitted: (value) {}),
+                      SuggestTextForm(
+                          title: "Èthnie",
+                          list: ethnieList,
+                          onChanged: (value) {},
+                          onFieldSubmitted: (value) {}),
                     ],
                   ),
                 ),
@@ -218,15 +286,31 @@ class _IdentiteState extends State<Identite> {
                   mediumLayout: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: AppDateForm(title: "Date de naissance",onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(
+                          child: AppDateForm(
+                              title: "Date de naissance",
+                              onChanged: (value) {},
+                              onFieldSubmitted: (value) {})),
                       Gap(20.w),
-                      Expanded(child: SuggestTextForm(title: "Lieu de naissance",list: villeList,onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(
+                          child: SuggestTextForm(
+                              title: "Lieu de naissance",
+                              list: villeList,
+                              onChanged: (value) {},
+                              onFieldSubmitted: (value) {})),
                     ],
                   ),
                   smallLayout: Column(
                     children: [
-                      AppDateForm(title: "Date de naissance",onChanged: (value){}, onFieldSubmitted: (value){}),
-                      SuggestTextForm(title: "Lieu de naissance",list: villeList,onChanged: (value){}, onFieldSubmitted: (value){}),
+                      AppDateForm(
+                          title: "Date de naissance",
+                          onChanged: (value) {},
+                          onFieldSubmitted: (value) {}),
+                      SuggestTextForm(
+                          title: "Lieu de naissance",
+                          list: villeList,
+                          onChanged: (value) {},
+                          onFieldSubmitted: (value) {}),
                     ],
                   ),
                 ),
@@ -234,15 +318,33 @@ class _IdentiteState extends State<Identite> {
                   mediumLayout: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: SuggestTextForm(title: "Niveau d'étude",list: etudeList,onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(
+                          child: SuggestTextForm(
+                              title: "Niveau d'étude",
+                              list: etudeList,
+                              onChanged: (value) {},
+                              onFieldSubmitted: (value) {})),
                       Gap(20.w),
-                      Expanded(child: SuggestTextForm(title: "Profession",list: professionList,onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(
+                          child: SuggestTextForm(
+                              title: "Profession",
+                              list: professionList,
+                              onChanged: (value) {},
+                              onFieldSubmitted: (value) {})),
                     ],
                   ),
                   smallLayout: Column(
                     children: [
-                      SuggestTextForm(title: "Niveau d'étude",list: etudeList,onChanged: (value){}, onFieldSubmitted: (value){}),
-                      SuggestTextForm(title: "Profession",list: professionList,onChanged: (value){}, onFieldSubmitted: (value){}),
+                      SuggestTextForm(
+                          title: "Niveau d'étude",
+                          list: etudeList,
+                          onChanged: (value) {},
+                          onFieldSubmitted: (value) {}),
+                      SuggestTextForm(
+                          title: "Profession",
+                          list: professionList,
+                          onChanged: (value) {},
+                          onFieldSubmitted: (value) {}),
                     ],
                   ),
                 ),
@@ -250,15 +352,31 @@ class _IdentiteState extends State<Identite> {
                   mediumLayout: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: SuggestTextForm(title: "Réligion",list: religionList,onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(
+                          child: SuggestTextForm(
+                              title: "Réligion",
+                              list: religionList,
+                              onChanged: (value) {},
+                              onFieldSubmitted: (value) {})),
                       Gap(20.w),
-                      Expanded(child: NumberTextForm(title: "Ordre de naissance chez le père",onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(
+                          child: NumberTextForm(
+                              title: "Ordre de naissance chez le père",
+                              onChanged: (value) {},
+                              onFieldSubmitted: (value) {})),
                     ],
                   ),
                   smallLayout: Column(
                     children: [
-                      SuggestTextForm(title: "Réligion",list: religionList,onChanged: (value){}, onFieldSubmitted: (value){}),
-                      NumberTextForm(title: "Ordre de naissance chez le père",onChanged: (value){}, onFieldSubmitted: (value){}),
+                      SuggestTextForm(
+                          title: "Réligion",
+                          list: religionList,
+                          onChanged: (value) {},
+                          onFieldSubmitted: (value) {}),
+                      NumberTextForm(
+                          title: "Ordre de naissance chez le père",
+                          onChanged: (value) {},
+                          onFieldSubmitted: (value) {}),
                     ],
                   ),
                 ),
@@ -266,20 +384,39 @@ class _IdentiteState extends State<Identite> {
                   mediumLayout: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: NumberTextForm(title: "Ordre de naissance chez la mère",onChanged: (value){}, onFieldSubmitted: (value){})),
+                      Expanded(
+                          child: NumberTextForm(
+                              title: "Ordre de naissance chez la mère",
+                              onChanged: (value) {},
+                              onFieldSubmitted: (value) {})),
                       Gap(20.w),
-                      Expanded(child: CheckBoxMenu(title: "Loisirs", value: [],list: [CheckBoxUnit(element: "Loisir 1"),CheckBoxUnit(element: "Loisir 2"),CheckBoxUnit(element: "Loisir 3"),CheckBoxUnit(element: "Loisir 4"),CheckBoxUnit(element: "Loisir 5"),],onChanged: (value){},onFieldSubmitted: (value){},)),
+                      Expanded(
+                          child: MultiCheckBoxMenuForm(
+                        title: "Loisirs",
+                        selected: [],
+                        list: ["Loisir 1","Loisir 2","Loisir 3","Loisir 4","Loisir 5"],
+                        onChanged: (value) {},
+                        onFieldSubmitted: (value) {},
+                      )),
                     ],
                   ),
                   smallLayout: Column(
                     children: [
-                      NumberTextForm(title: "Ordre de naissance chez la mère",onChanged: (value){}, onFieldSubmitted: (value){}),
-                      CheckBoxMenu(title: "Loisirs", value: [],list: loisirList,onChanged: (value){},onFieldSubmitted: (value){},),
+                      NumberTextForm(
+                          title: "Ordre de naissance chez la mère",
+                          onChanged: (value) {},
+                          onFieldSubmitted: (value) {}),
+                      MultiCheckBoxMenuForm(
+                        title: "Loisirs",
+                        selected: [],
+                        list: loisirList,
+                        onChanged: (value) {},
+                        onFieldSubmitted: (value) {},
+                      ),
                     ],
                   ),
                 ),
-                BigTextForm(
-                    title: "Commentaire", onFieldSubmitted: (value) {}),
+                BigTextForm(title: "Commentaire", onFieldSubmitted: (value) {}),
                 const Gap(30),
               ],
             ),

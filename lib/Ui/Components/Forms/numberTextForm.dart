@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
+import 'package:psychoverse/Ui/Components/Forms/zFormBox.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
@@ -10,29 +10,28 @@ class NumberTextForm extends StatefulWidget {
   final String title;
   String placeHolder;
   int? value;
-  int? selected;
   bool readOnly;
   bool managers;
-  TextEditingController controller = TextEditingController();
-  Function(int?) onChanged;
-  Function(int?) onFieldSubmitted;
+  Function(int?)? onChanged;
+  Function(int?)? onFieldSubmitted;
   NumberTextForm({Key? key,
     this.title = "Number Text Form",
     this.readOnly=true,
     this.managers=true,
     this.value,
     this.placeHolder="0",
-    this.selected,
-    required this.onChanged,
-    required this.onFieldSubmitted,}) : super(key: key);
+    this.onChanged,
+    this.onFieldSubmitted,}) : super(key: key);
 
   @override
   State<NumberTextForm> createState() => _NumberTextFormState();
 }
 
 class _NumberTextFormState extends State<NumberTextForm> {
+  int? selected;
   @override
   Widget build(BuildContext context) {
+    selected=widget.value;
     return AppFormBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,8 +87,8 @@ class _NumberTextFormState extends State<NumberTextForm> {
                             size: 20.h,
                           ),
                           onPressed: () {
-                            widget.value=widget.selected;
-                            widget.onFieldSubmitted(widget.selected);
+                            widget.value=selected;
+                            widget.onFieldSubmitted!(widget.value);
                             setState(() {
                               widget.readOnly = true;
                             });
@@ -109,10 +108,10 @@ class _NumberTextFormState extends State<NumberTextForm> {
                 ?AppTextStyle.formPlaceHolderStyleTexte: AppTextStyle.formStyleTexte,
           )
               :NumberBox<int>(
-            value: widget.selected,
+            value: selected,
             onChanged: widget.readOnly ? null : (value){
               setState(() {
-                widget.selected=value;
+                selected=value;
               });
             },
             mode: SpinButtonPlacementMode.compact,

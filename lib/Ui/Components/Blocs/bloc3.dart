@@ -25,17 +25,9 @@ class _Bloc3State extends State<Bloc3> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                height:20.h,
-                width: 5.w,
-                decoration: BoxDecoration(
-                  color: AppColors.rouge,
-                  borderRadius: BorderRadius.circular(20.r+20),
-                ),
-              ),
-              Icon(FluentIcons.d365_project_operations,color: AppColors.rouge,size: 30.h,),
-              Gap(40.w),
-              Text(widget.title,style: AppTextStyle.bigFilledTexte.copyWith(color: AppColors.primary, fontSize: 10.h+13,fontWeight: FontWeight.w900),),
+              Icon(FluentIcons.power_automate_logo,color: AppColors.rouge,size: 30.h,),
+              Gap(30.w),
+              Text(widget.title,style: AppTextStyle.bigFilledTexte.copyWith(color: AppColors.primary, fontSize: 10.h+16,fontWeight: FontWeight.w900),),
             ],
           ),
           Padding(

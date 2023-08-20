@@ -5,9 +5,8 @@ import 'package:psychoverse/Ui/Components/Blocs/bloc11.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/smallPopUp.dart';
-import 'package:psychoverse/Ui/Components/Tiles/simpleTile.dart';
-import 'package:psychoverse/Ui/Generators/listViewTilesGenerator.dart';
+import 'package:psychoverse/Ui/Components/Lists/zListGenerator.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 
 class IdentiteArchitecture extends StatefulWidget {
   const IdentiteArchitecture({Key? key}) : super(key: key);
@@ -69,29 +68,11 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                         ],
                       ),
                       Gap(30.h),
-                      SizedBox(
-                        height: 100.h * genreList.length,
-                        width: double.infinity,
-                        child: ListViewTilesGenerator(
-                          number: genreList.length,
-                          onTap: ({index = 0}) {
-                            showDialog(
-                              context: context,
-                              builder: (context) => SmallPopUp(
-                                title: "Genre",
-                                delete: true,
-                                child: TextForm(
-                                  title: "Designation",
-                                  onChanged: (value) {},
-                                  onFieldSubmitted: (value) {},
-                                ),
-                              ),
-                            );
-                          },
-                          getTile: ({index = 0}) {
-                            return SimpleTile(title: genreList[index],);
-                          },
-                        ),
+                      ListGenerator(
+                        list: genreList,
+                        popUpTitle: "Genre",
+                        deleteFunction: (index){},
+                        onSubmitted: ({value,index}){},
                       ),
                     ],
                   ),
@@ -124,29 +105,11 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                         ],
                       ),
                       Gap(30.h),
-                      SizedBox(
-                        height: 100.h * genreList.length,
-                        width: double.infinity,
-                        child: ListViewTilesGenerator(
-                          number: genreList.length,
-                          onTap: ({index = 0}) {
-                            showDialog(
-                              context: context,
-                              builder: (context) => SmallPopUp(
-                                title: "Condition de résidence",
-                                delete: true,
-                                child: TextForm(
-                                  title: "Designation",
-                                  onChanged: (value) {},
-                                  onFieldSubmitted: (value) {},
-                                ),
-                              ),
-                            );
-                          },
-                          getTile: ({index = 0}) {
-                            return SimpleTile(title: residenceList[index],);
-                          },
-                        ),
+                      ListGenerator(
+                        list: residenceList,
+                        popUpTitle: "Condition de résidence",
+                        deleteFunction: (index){},
+                        onSubmitted: ({value,index}){},
                       ),
                     ],
                   ),
@@ -179,29 +142,11 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                         ],
                       ),
                       Gap(30.h),
-                      SizedBox(
-                        height: 100.h * genreList.length,
-                        width: double.infinity,
-                        child: ListViewTilesGenerator(
-                          number: genreList.length,
-                          onTap: ({index = 0}) {
-                            showDialog(
-                              context: context,
-                              builder: (context) => SmallPopUp(
-                                title: "Èthnie",
-                                delete: true,
-                                child: TextForm(
-                                  title: "Designation",
-                                  onChanged: (value) {},
-                                  onFieldSubmitted: (value) {},
-                                ),
-                              ),
-                            );
-                          },
-                          getTile: ({index = 0}) {
-                            return SimpleTile(title: ethnieList[index],);
-                          },
-                        ),
+                      ListGenerator(
+                        list: ethnieList,
+                        popUpTitle: "Èthnie",
+                        deleteFunction: (index){},
+                        onSubmitted: ({value,index}){},
                       ),
                     ],
                   ),
@@ -234,29 +179,11 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                         ],
                       ),
                       Gap(30.h),
-                      SizedBox(
-                        height: 100.h * genreList.length,
-                        width: double.infinity,
-                        child: ListViewTilesGenerator(
-                          number: genreList.length,
-                          onTap: ({index = 0}) {
-                            showDialog(
-                              context: context,
-                              builder: (context) => SmallPopUp(
-                                title: "Ville",
-                                delete: true,
-                                child: TextForm(
-                                  title: "Designation",
-                                  onChanged: (value) {},
-                                  onFieldSubmitted: (value) {},
-                                ),
-                              ),
-                            );
-                          },
-                          getTile: ({index = 0}) {
-                            return SimpleTile(title: villeList[index],);
-                          },
-                        ),
+                      ListGenerator(
+                        list: villeList,
+                        popUpTitle: "Ville",
+                        deleteFunction: (index){},
+                        onSubmitted: ({value,index}){},
                       ),
                     ],
                   ),
@@ -289,29 +216,11 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                         ],
                       ),
                       Gap(30.h),
-                      SizedBox(
-                        height: 100.h * genreList.length,
-                        width: double.infinity,
-                        child: ListViewTilesGenerator(
-                          number: genreList.length,
-                          onTap: ({index = 0}) {
-                            showDialog(
-                              context: context,
-                              builder: (context) => SmallPopUp(
-                                title: "Niveau d'étude",
-                                delete: true,
-                                child: TextForm(
-                                  title: "Designation",
-                                  onChanged: (value) {},
-                                  onFieldSubmitted: (value) {},
-                                ),
-                              ),
-                            );
-                          },
-                          getTile: ({index = 0}) {
-                            return SimpleTile(title: etudeList[index],);
-                          },
-                        ),
+                      ListGenerator(
+                        list: etudeList,
+                        popUpTitle: "Niveau d'étude",
+                        deleteFunction: (index){},
+                        onSubmitted: ({value,index}){},
                       ),
                     ],
                   ),
@@ -344,29 +253,11 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                         ],
                       ),
                       Gap(30.h),
-                      SizedBox(
-                        height: 100.h * genreList.length,
-                        width: double.infinity,
-                        child: ListViewTilesGenerator(
-                          number: genreList.length,
-                          onTap: ({index = 0}) {
-                            showDialog(
-                              context: context,
-                              builder: (context) => SmallPopUp(
-                                title: "Profession",
-                                delete: true,
-                                child: TextForm(
-                                  title: "Designation",
-                                  onChanged: (value) {},
-                                  onFieldSubmitted: (value) {},
-                                ),
-                              ),
-                            );
-                          },
-                          getTile: ({index = 0}) {
-                            return SimpleTile(title: professionList[index],);
-                          },
-                        ),
+                      ListGenerator(
+                        list: professionList,
+                        popUpTitle: "Profession",
+                        deleteFunction: (index){},
+                        onSubmitted: ({value,index}){},
                       ),
                     ],
                   ),
@@ -399,29 +290,11 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                         ],
                       ),
                       Gap(30.h),
-                      SizedBox(
-                        height: 100.h * genreList.length,
-                        width: double.infinity,
-                        child: ListViewTilesGenerator(
-                          number: genreList.length,
-                          onTap: ({index = 0}) {
-                            showDialog(
-                              context: context,
-                              builder: (context) => SmallPopUp(
-                                title: "Réligion",
-                                delete: true,
-                                child: TextForm(
-                                  title: "Designation",
-                                  onChanged: (value) {},
-                                  onFieldSubmitted: (value) {},
-                                ),
-                              ),
-                            );
-                          },
-                          getTile: ({index = 0}) {
-                            return SimpleTile(title: religionList[index],);
-                          },
-                        ),
+                      ListGenerator(
+                        list: religionList,
+                        popUpTitle: "Réligion",
+                        deleteFunction: (index){},
+                        onSubmitted: ({value,index}){},
                       ),
                     ],
                   ),
@@ -454,29 +327,11 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                         ],
                       ),
                       Gap(30.h),
-                      SizedBox(
-                        height: 100.h * genreList.length,
-                        width: double.infinity,
-                        child: ListViewTilesGenerator(
-                          number: genreList.length,
-                          onTap: ({index = 0}) {
-                            showDialog(
-                              context: context,
-                              builder: (context) => SmallPopUp(
-                                title: "Loisirs",
-                                delete: true,
-                                child: TextForm(
-                                  title: "Designation",
-                                  onChanged: (value) {},
-                                  onFieldSubmitted: (value) {},
-                                ),
-                              ),
-                            );
-                          },
-                          getTile: ({index = 0}) {
-                            return SimpleTile(title: loisirList[index],);
-                          },
-                        ),
+                      ListGenerator(
+                        list: loisirList,
+                        popUpTitle: "Loisirs",
+                        deleteFunction: (index){},
+                        onSubmitted: ({value,index}){},
                       ),
                     ],
                   ),

@@ -2,10 +2,9 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:psychoverse/Ui/Components/AppNav/appNavBar.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
@@ -24,9 +23,6 @@ class _MonCompteState extends State<MonCompte> {
         const MakeBackgroundImage(),
         Column(
           children: [
-            AppNavBar(
-              menu: "Mon compte",
-            ),
             Gap(20.h),
             Expanded(
               child: SingleChildScrollView(

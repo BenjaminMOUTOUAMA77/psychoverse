@@ -3,12 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
-import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/parentsPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/relationPopup.dart';
-import 'package:psychoverse/Ui/Components/Tiles/parentsTile.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/parentsTilesGroupe.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/relationTilesGroupe.dart';
+import 'package:psychoverse/Ui/Components/Lists/parentsList.dart';
+import 'package:psychoverse/Ui/Components/Lists/relationList.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 
 class Relations extends StatefulWidget {
@@ -48,7 +47,7 @@ class _RelationsState extends State<Relations> {
                   ],
                 ),
                 Gap(30.h),
-                RelationTilesGroupe(list: ["","",],),
+                RelationList(list: ["","",],),
               ],
             ),
           ),
@@ -69,7 +68,7 @@ class _RelationsState extends State<Relations> {
                   ],
                 ),
                 Gap(30.h),
-                RelationTilesGroupe(list: ["","",],),
+                RelationList(list: ["","",],),
               ],
             ),
           ),
@@ -78,7 +77,7 @@ class _RelationsState extends State<Relations> {
             title: "Parents",
             child: Column(
               children: [
-                ParentsTilesGroupe(list: [""],qualite: "Biologiques",),
+                ParentsList(list: [""],qualite: "Biologiques",),
                 Gap(50.h),
                 Row(
                   children: [
@@ -92,7 +91,7 @@ class _RelationsState extends State<Relations> {
                   ],
                 ),
                 Gap(30.h),
-                ParentsTilesGroupe(list: ["","",],qualite: "Tuteurs",),
+                ParentsList(list: ["","",],qualite: "Tuteurs",),
               ],
             ),
           ),
@@ -113,7 +112,7 @@ class _RelationsState extends State<Relations> {
                   ],
                 ),
                 Gap(30.h),
-                RelationTilesGroupe(list: ["","","","","",],),
+                RelationList(list: ["","","","","",],),
               ],
             ),
           ),
@@ -134,7 +133,7 @@ class _RelationsState extends State<Relations> {
                   ],
                 ),
                 Gap(30.h),
-                RelationTilesGroupe(list: ["","",],),
+                RelationList(list: ["","",],),
               ],
             ),
           ),

@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
-import 'package:psychoverse/Ui/Components/Forms/checkBoxMenuForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/multiCheckBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 
@@ -15,9 +15,9 @@ class Historique extends StatefulWidget {
 }
 
 class _HistoriqueState extends State<Historique> {
-  List<CheckBoxUnit> psychologiqueList = [CheckBoxUnit(element: "Psychologique 1"),CheckBoxUnit(element: "Psychologique 2"),CheckBoxUnit(element: "Psychologique 3"),CheckBoxUnit(element: "Psychologique 4"),];
-  List<CheckBoxUnit> psychiatriqueList = [CheckBoxUnit(element: "Psychiatrique 1"),CheckBoxUnit(element: "Psychiatrique 2"),CheckBoxUnit(element: "Psychiatrique 3"),CheckBoxUnit(element: "Psychiatrique 4"),];
-  List<CheckBoxUnit> marquantList = [CheckBoxUnit(element: "Marquant 1"),CheckBoxUnit(element: "Marquant 2"),CheckBoxUnit(element: "Marquant 3"),CheckBoxUnit(element: "Marquant 4"),];
+  List<String> psychologiqueList = ["Psychologique 1","Psychologique 2","Psychologique 3","Psychologique 4"];
+  List<String> psychiatriqueList = ["Psychiatrique 1","Psychiatrique 2","Psychiatrique 3","Psychiatrique 4"];
+  List<String> marquantList = ["Marquant 1","Marquant 2","Marquant 3","Marquant 4"];
   @override
   Widget build(BuildContext context) {
     return Bloc1(
@@ -48,7 +48,7 @@ class _HistoriqueState extends State<Historique> {
                   title: "Faits psychologiques",
                   child: Column(
                     children: [
-                      CheckBoxMenu(title: "Faits", value: [],list: psychologiqueList,onChanged: (value){},onFieldSubmitted: (value){},),
+                      MultiCheckBoxMenuForm(title: "Faits", selected: [],list: psychologiqueList,onChanged: (value){},onFieldSubmitted: (value){},),
                       SuggestTextForm(title: "Autre", list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
                       BigTextForm(
                           title: "Commentaire", onFieldSubmitted: (value) {}),
@@ -59,7 +59,7 @@ class _HistoriqueState extends State<Historique> {
                   title: "Faits psychiatriques",
                   child: Column(
                     children: [
-                      CheckBoxMenu(title: "Faits", value: [],list: psychiatriqueList,onChanged: (value){},onFieldSubmitted: (value){},),
+                      MultiCheckBoxMenuForm(title: "Faits", selected: [],list: psychiatriqueList,onChanged: (value){},onFieldSubmitted: (value){},),
                       SuggestTextForm(title: "Autre", list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
                       BigTextForm(
                           title: "Commentaire", onFieldSubmitted: (value) {}),
@@ -70,7 +70,7 @@ class _HistoriqueState extends State<Historique> {
                   title: "Faits sociaux marquants",
                   child: Column(
                     children: [
-                      CheckBoxMenu(title: "Faits", value: [],list: marquantList,onChanged: (value){},onFieldSubmitted: (value){},),
+                      MultiCheckBoxMenuForm(title: "Faits", selected: [],list: marquantList,onChanged: (value){},onFieldSubmitted: (value){},),
                       SuggestTextForm(title: "Autre", list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
                       BigTextForm(
                           title: "Commentaire", onFieldSubmitted: (value) {}),

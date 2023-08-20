@@ -2,11 +2,10 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/AppNav/appNavBar.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
-import 'package:psychoverse/Ui/Components/Tiles/abonnementTile.dart';
+import 'package:psychoverse/Ui/Components/Boxs/abonnementBox.dart';
 import 'package:psychoverse/Ui/Components/Tiles/attibutAbonnementTile.dart';
-import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 import 'package:intl/intl.dart';
@@ -19,7 +18,7 @@ class Abonnement extends StatefulWidget {
 }
 
 class _AbonnementState extends State<Abonnement> {
-  AbonnementTile gratuit = AbonnementTile(
+  AbonnementBox gratuit = AbonnementBox(
     image: "assets/images/im3.jpg",
     nom: "Plan gratruit",
     prix: "0 fcfa",
@@ -34,7 +33,7 @@ class _AbonnementState extends State<Abonnement> {
     ],
     start: () {},
   );
-  AbonnementTile semestrielle = AbonnementTile(
+  AbonnementBox semestrielle = AbonnementBox(
     image: "assets/images/im4.jpg",
     nom: "Plan semestrielle",
     prix: "20 mille fcfa",
@@ -49,7 +48,7 @@ class _AbonnementState extends State<Abonnement> {
     ],
     start: () {},
   );
-  AbonnementTile annuel = AbonnementTile(
+  AbonnementBox annuel = AbonnementBox(
     image: "assets/images/im5.jpg",
     nom: "Plan annuel",
     prix: "35 mille fcfa",
@@ -72,9 +71,6 @@ class _AbonnementState extends State<Abonnement> {
         const MakeBackgroundImage(),
         Column(
           children: [
-            AppNavBar(
-              menu: "Abonnement",
-            ),
             Gap(20.h),
             Expanded(
               child: SingleChildScrollView(

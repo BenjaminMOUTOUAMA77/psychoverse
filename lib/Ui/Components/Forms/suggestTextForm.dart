@@ -1,33 +1,31 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
+import 'package:psychoverse/Ui/Components/Forms/zFormBox.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class SuggestTextForm extends StatefulWidget {
   final String title;
   String? value;
-  String? selected;
   String placeHolder;
   bool readOnly;
   bool managers;
-  List<String> list;
+  List<String>? list;
   TextEditingController controller = TextEditingController();
-  Function(String?) onChanged;
-  Function(String?) onFieldSubmitted;
+  Function(String?)? onChanged;
+  Function(String?)? onFieldSubmitted;
 
   SuggestTextForm({
     Key? key,
     this.title = "SuggestForm",
     this.readOnly=true,
     this.managers=true,
-    this.selected,
     this.value,
-    this.placeHolder = "Slectionnez ici",
+    this.placeHolder = "_",
     this.list = const [],
-    required this.onChanged,
-    required this.onFieldSubmitted,
+    this.onChanged,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -35,8 +33,10 @@ class SuggestTextForm extends StatefulWidget {
 }
 
 class _SuggestTextFormState extends State<SuggestTextForm> {
+  String? selected;
   @override
   Widget build(BuildContext context) {
+    selected=widget.value;
     return AppFormBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,12 +94,12 @@ class _SuggestTextFormState extends State<SuggestTextForm> {
                                   size: 20.h,
                                 ),
                                 onPressed: () {
-                                  if(!widget.list.contains(widget.controller.text)){
-                                    widget.list.add(widget.controller.text);
-                                    widget.selected=widget.controller.text;
+                                  if(!widget.list!.contains(widget.controller.text)){
+                                    widget.list!.add(widget.controller.text);
+                                    selected=widget.controller.text;
                                   }
-                                  widget.value=widget.selected;
-                                  widget.onFieldSubmitted(widget.value);
+                                  widget.value=selected;
+                                  widget.onFieldSubmitted!(widget.value);
                                   setState(() {
                                     widget.readOnly = true;
                                   });
@@ -122,7 +122,7 @@ class _SuggestTextFormState extends State<SuggestTextForm> {
           )
               :AutoSuggestBox<String>(
             controller: widget.controller,
-            items: widget.list.map((e) {
+            items: widget.list!.map((e) {
               return AutoSuggestBoxItem<String>(
                   value: e,
                   label: e,
@@ -133,7 +133,7 @@ class _SuggestTextFormState extends State<SuggestTextForm> {
                   });
             }).toList(),
             onSelected: (value) {
-              setState(() => widget.selected = value.value);
+              setState(() => selected = value.value);
             },
             style: AppTextStyle.formStyleTexte,
             decoration: BoxDecoration(

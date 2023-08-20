@@ -1,26 +1,61 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
 IconData getFileIcon(String extension) {
   if (isImage(extension)) {
     return FluentIcons.file_image;
-  } else if(isPdf(extension)){
+  } else if (isPdf(extension)) {
     return FluentIcons.pdf;
-  }else if(isWord(extension)){
+  } else if (isWord(extension)) {
     return FluentIcons.docs_logo_inverse;
-  }else if(isExel(extension)){
+  } else if (isExel(extension)) {
     return FluentIcons.excel_document;
-  }else if(isPowerpoint(extension)){
+  } else if (isPowerpoint(extension)) {
     return FluentIcons.power_point_document;
-  }else if(isText(extension)){
+  } else if (isText(extension)) {
     return FluentIcons.text_document;
-  }else if(isDocument(extension)){
+  } else if (isDocument(extension)) {
     return FluentIcons.document;
-  }else if(isVideo(extension)){
+  } else if (isVideo(extension)) {
     return FluentIcons.m_s_n_videos_solid;
-  }else if(isAudio(extension)){
+  } else if (isAudio(extension)) {
     return FluentIcons.music_in_collection_fill;
-  }else{
+  } else {
     return FluentIcons.file_template;
+  }
+}
+
+FileType getFilesType({
+  bool image = false,
+  bool pdf = false,
+  bool word = false,
+  bool exel = false,
+  bool powerpoint = false,
+  bool text = false,
+  bool document = false,
+  bool video = false,
+  bool audio = false,
+}) {
+  if (image) {
+    return FileType.image;
+  } else if (pdf) {
+    return FileType.custom;
+  } else if (word) {
+    return FileType.custom;
+  } else if (exel) {
+    return FileType.custom;
+  } else if (powerpoint) {
+    return FileType.custom;
+  } else if (text) {
+    return FileType.custom;
+  } else if (document) {
+    return FileType.custom;
+  } else if (video) {
+    return FileType.video;
+  } else if (audio) {
+    return FileType.audio;
+  } else {
+    return FileType.any;
   }
 }
 
@@ -31,6 +66,7 @@ bool isImage(String extension) {
     return false;
   }
 }
+
 bool isPdf(String extension) {
   if (getExtensions(pdf: true).contains(extension)) {
     return true;
@@ -38,6 +74,7 @@ bool isPdf(String extension) {
     return false;
   }
 }
+
 bool isWord(String extension) {
   if (getExtensions(word: true).contains(extension)) {
     return true;
@@ -45,6 +82,7 @@ bool isWord(String extension) {
     return false;
   }
 }
+
 bool isExel(String extension) {
   if (getExtensions(exel: true).contains(extension)) {
     return true;
@@ -52,6 +90,7 @@ bool isExel(String extension) {
     return false;
   }
 }
+
 bool isPowerpoint(String extension) {
   if (getExtensions(powerpoint: true).contains(extension)) {
     return true;
@@ -59,6 +98,7 @@ bool isPowerpoint(String extension) {
     return false;
   }
 }
+
 bool isText(String extension) {
   if (getExtensions(text: true).contains(extension)) {
     return true;
@@ -66,6 +106,7 @@ bool isText(String extension) {
     return false;
   }
 }
+
 bool isDocument(String extension) {
   if (getExtensions(document: true).contains(extension)) {
     return true;
@@ -73,6 +114,7 @@ bool isDocument(String extension) {
     return false;
   }
 }
+
 bool isVideo(String extension) {
   if (getExtensions(video: true).contains(extension)) {
     return true;
@@ -80,6 +122,7 @@ bool isVideo(String extension) {
     return false;
   }
 }
+
 bool isAudio(String extension) {
   if (getExtensions(audio: true).contains(extension)) {
     return true;
@@ -258,7 +301,8 @@ List<String> getExtensions({
       "cda",
     ];
   } else {
-    return ["jpg",
+    return [
+      "jpg",
       "jpeg",
       "jpe",
       "jif",

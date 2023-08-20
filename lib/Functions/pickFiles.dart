@@ -3,43 +3,116 @@ import 'dart:math';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:psychoverse/Functions/appPaths.dart';
-import 'package:psychoverse/Ui/Components/PopUps/pickFilePopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/smallPopUp.dart';
+import 'package:psychoverse/Functions/extensions.dart';
+import 'package:psychoverse/Ui/Components/Lists/selectedFilesList.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 
-Future<void> pickFile(BuildContext context,{bool image=false,bool custum=false,List<String> extens=const [],bool media=false,bool multiple=false}) async {
+import '../Ui/Components/PopUps/zMiddlePopUp.dart';
 
-  FileType fileType=FileType.any;
-  List<String> extensions=["mp3","jpeg","png","tif","tiff","raw","pdf","doc",];
-  if(image){
-    fileType=FileType.image;
-    extensions = ["jpg","jpeg","png","tif","tiff","raw",];
-  }else if(media){
-    fileType=FileType.media;
-    extensions = ["mp3","jpeg","png","tif","tiff",];
-  }else if(custum){
-    fileType=FileType.custom;
-    extensions = extens;
-  }else(document){
-    fileType=FileType.any;
-  };
-
+Future<void> pickFiles(
+  BuildContext context, {
+  String dialogueTitle = "Choisir un ou plusieurs fichier",
+  bool image = false,
+  bool pdf = false,
+  bool word = false,
+  bool exel = false,
+  bool powerpoint = false,
+  bool text = false,
+  bool document = false,
+  bool video = false,
+  bool audio = false,
+  bool multiple = false,
+  Function(List<PlatformFile>)? onPiked,
+}) async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
-    type: fileType,
+    dialogTitle: dialogueTitle,
+    type: getFilesType(
+        image: image,
+        pdf: pdf,
+        word: word,
+        exel: exel,
+        powerpoint: powerpoint,
+        text: text,
+        document: document,
+        video: video,
+        audio: audio),
     allowMultiple: multiple,
     lockParentWindow: true,
-    allowedExtensions: extensions,
+    allowedExtensions: getExtensions(
+        image: image,
+        pdf: pdf,
+        word: word,
+        exel: exel,
+        powerpoint: powerpoint,
+        text: text,
+        document: document,
+        video: video,
+        audio: audio),
   );
 
   if (result != null) {
     List<PlatformFile> files = result.files;
-    showDialog(context: context, builder: (context)=>SmallPopUp(title: "Choisir un fichier",child: PickFilePopUp(files: files,),));
+    showDialog(
+      context: context,
+      builder: (context) => files.length<=3? SmallPopUp(
+        title: "Fichier(s) sélectionné(s)",
+        save: true,
+        saveTexte: "Enrégistrer",
+        saveFunction: () {
+          onPiked != null? files.isEmpty?null: onPiked(files):null;
+          Navigator.pop(context);
+        },
+        cancelTexte: "Annuler",
+        child: SingleChildScrollView(
+          child: SelectedFilesList(
+            files: files,
+            onChanged: (value) {
+              files = value;
+            },
+          ),
+        ),
+      ):MiddlePopUp(
+        title: "Fichier(s) sélectionné(s)",
+        save: true,
+        saveTexte: "Enrégistrer",
+        saveFunction: () {
+          onPiked != null? files.isEmpty?null: onPiked(files):null;
+          Navigator.pop(context);
+        },
+        cancelTexte: "Annuler",
+        child: SingleChildScrollView(
+          child: SelectedFilesList(
+            files: files,
+            onChanged: (value) {
+              files = value;
+            },
+          ),
+        ),
+      ),
+    );
   } else {
     // User canceled the picker
   }
 }
 
-Future<File> saveFile(PlatformFile oldFile) async {
-  final String path = await getAppPath(appFilesDirectory: true);
-  final newFile = File("${path}${Random().nextInt(99999)}_${oldFile.name}");
-  return File(oldFile.path!).copy(newFile.path);
+Future<PlatformFile> saveFile(PlatformFile oldFile) async {
+  List<String> decomposeName = oldFile.name.split(".");
+  String oldName = decomposeName.first;
+  String newName = "${oldName}_${Random().nextInt(99999)}_pcv";
+  String newFullName = "$newName.${oldFile.extension}";
+  int size = oldFile.size;
+
+  final String appFilesPath = await getAppPath(appFilesDirectory: true);
+
+  final newFilePath = "$appFilesPath$newFullName";
+  File newFile = await File(oldFile.path!).copy(newFilePath);
+  return PlatformFile(
+    name: newFullName,
+    size: size,
+    path: newFile.path,
+  );
+}
+
+Future<FileSystemEntity> deleteFile(PlatformFile file) async {
+  return File(file.path!).delete(recursive: true);
 }

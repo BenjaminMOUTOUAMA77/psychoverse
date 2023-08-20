@@ -7,10 +7,9 @@ import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/radioMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/middlePopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/smallPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zMiddlePopUp.dart';
 import 'package:psychoverse/Ui/Components/Tiles/formulaireReordableListTile.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/reordableList.dart';
+import 'package:psychoverse/Ui/Components/Lists/reordableList.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
@@ -44,24 +43,59 @@ class _ArchitectureFormulaireDetailState
       FormulaireReordableList(),
       FormulaireReordableList(),
     ];
-    void theFunction(){
-      showDialog(context: context, builder: (context)=>MiddlePopUp(child: AppReordableList(
-        list: lossature0,
-      ),));
+    void theFunction() {
+      showDialog(
+        context: context,
+        builder: (context) => MiddlePopUp(
+          delete: true,
+          deleteTexte: "Supprimer la section",
+          deleteFunction: () {
+            Navigator.pop(context);
+          },
+          child: AppReordableList(
+            list: lossature0,
+          ),
+        ),
+      );
     }
+
     final lossature = [
-      FormulaireReordableList(onTap: theFunction,),
-      FormulaireReordableList(onTap: theFunction,),
-      FormulaireReordableList(onTap: theFunction,),
-      FormulaireReordableList(onTap: theFunction,),
-      FormulaireReordableList(onTap: theFunction,),
-      FormulaireReordableList(onTap: theFunction,),
-      FormulaireReordableList(onTap: theFunction,),
-      FormulaireReordableList(onTap: theFunction,),
-      FormulaireReordableList(onTap: theFunction,),
-      FormulaireReordableList(onTap: theFunction,),
-      FormulaireReordableList(onTap: theFunction,),
-      FormulaireReordableList(onTap: theFunction,),
+      FormulaireReordableList(
+        onTap: theFunction,
+      ),
+      FormulaireReordableList(
+        onTap: theFunction,
+      ),
+      FormulaireReordableList(
+        onTap: theFunction,
+      ),
+      FormulaireReordableList(
+        onTap: theFunction,
+      ),
+      FormulaireReordableList(
+        onTap: theFunction,
+      ),
+      FormulaireReordableList(
+        onTap: theFunction,
+      ),
+      FormulaireReordableList(
+        onTap: theFunction,
+      ),
+      FormulaireReordableList(
+        onTap: theFunction,
+      ),
+      FormulaireReordableList(
+        onTap: theFunction,
+      ),
+      FormulaireReordableList(
+        onTap: theFunction,
+      ),
+      FormulaireReordableList(
+        onTap: theFunction,
+      ),
+      FormulaireReordableList(
+        onTap: theFunction,
+      ),
     ];
 
     return Column(

@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
+import 'package:psychoverse/Ui/Components/Forms/zFormBox.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
@@ -11,20 +11,18 @@ class AppDateForm extends StatefulWidget {
   final String title;
   String placeHolder;
   DateTime? value;
-  DateTime? selected;
   bool readOnly;
   bool managers;
 
-  Function(DateTime?) onChanged;
-  Function(DateTime?) onFieldSubmitted;
+  Function(DateTime?)? onChanged;
+  Function(DateTime?)? onFieldSubmitted;
 
   AppDateForm({Key? key,
     this.title = "Date Form",
     this.readOnly=true,
     this.managers=true,
     this.value,
-    this.placeHolder="01/01/0000",
-    this.selected,
+    this.placeHolder="_",
     required this.onChanged,
     required this.onFieldSubmitted,}) : super(key: key);
 
@@ -33,8 +31,10 @@ class AppDateForm extends StatefulWidget {
 }
 
 class _AppDateFormState extends State<AppDateForm> {
+  DateTime? selected;
   @override
   Widget build(BuildContext context) {
+    selected=widget.value;
     return AppFormBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,8 +90,8 @@ class _AppDateFormState extends State<AppDateForm> {
                             size: 20.h,
                           ),
                           onPressed: () {
-                            widget.value=widget.selected;
-                            widget.onFieldSubmitted(widget.value);
+                            widget.value=selected;
+                            widget.onFieldSubmitted!(widget.value);
                             setState(() {
                               widget.readOnly = true;
                             });
@@ -112,8 +112,8 @@ class _AppDateFormState extends State<AppDateForm> {
           )
               :DatePicker(
 
-            selected: widget.selected,
-            onChanged: (time) => setState(() => widget.selected = time),
+            selected: selected,
+            onChanged: (time) => setState(() => selected = time),
           ),
         ],
       ),

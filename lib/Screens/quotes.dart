@@ -3,13 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/HomeProviders/sliderItemProvider.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
-import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/quotePopUp.dart';
 import 'package:psychoverse/Ui/Components/Slides/quotesSlider.dart';
-import 'package:psychoverse/Ui/Components/TilesGroupe/quotesTilesGroupe.dart';
-import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
-import 'package:psychoverse/Ui/Components/AppNav/appNavBar.dart';
+import 'package:psychoverse/Ui/Components/Lists/quotesList.dart';
 
 class Quotes extends StatefulWidget {
   const Quotes({Key? key}) : super(key: key);
@@ -30,9 +29,6 @@ class _QuotesState extends State<Quotes> {
           const MakeBackgroundImage(),
           Column(
             children: [
-              AppNavBar(
-                menu: "Pensées",
-              ),
               Gap(20.h),
               Expanded(child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -50,7 +46,7 @@ class _QuotesState extends State<Quotes> {
               ),
               Gap(20.h),
               Expanded(
-                child: QuotesTilesGroupe(list: ["","","","","","","",],),
+                child: SingleChildScrollView(child: QuotesList(list: ["","","","","","","",],)),
               ),
             ],
           ),

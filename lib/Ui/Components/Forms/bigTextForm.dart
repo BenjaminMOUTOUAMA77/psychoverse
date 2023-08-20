@@ -4,58 +4,60 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
-import 'package:psychoverse/Ui/Components/Forms/myTexte.dart';
+import 'package:psychoverse/Ui/Components/Forms/zFormBox.dart';
+import 'package:psychoverse/Ui/Components/Forms/zQuillTexte.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class BigTextForm extends StatefulWidget {
   final String title;
-  String data;
+  String? value;
   String placehholder;
   bool readOnly;
   bool managers;
-  Function(String) onFieldSubmitted;
+  Function(String?)? onFieldSubmitted;
 
   BigTextForm({
     Key? key,
     this.title = "Big Texte Form",
     this.readOnly=true,
     this.managers=true,
-    this.data = "",
-    this.placehholder = "...",
-    required this.onFieldSubmitted,
+    this.value,
+    this.placehholder = "Text",
+    this.onFieldSubmitted,
   }) : super(key: key);
 
-  String getData() {
-    if (data == null || data.isEmpty) {
-      return jsonEncode([
-        {"insert": "\n"}
-      ]);
-    } else {
-      return data;
-    }
-  }
 
   @override
   State<BigTextForm> createState() => _BigTextFormState();
 }
 
 class _BigTextFormState extends State<BigTextForm> {
+
+  String getData() {
+  if (widget.value == null || widget.value!.isEmpty) {
+    return jsonEncode([
+      {"insert": "\n"}
+    ]);
+  } else {
+    return widget.value!;
+  }
+}
+
   @override
   Widget build(BuildContext context) {
+
     QuillController controller = QuillController(
-      document: Document.fromJson(jsonDecode(widget.getData())),
+      document: Document.fromJson(jsonDecode(getData())),
       selection: TextSelection.collapsed(offset: 0),
     );
-
     return AppFormBox(
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              MyTexte(
+              QuillTexte(
                 texte: widget.title,
                 style: AppTextStyle.formLabelStyleTexte,
               ),
@@ -104,9 +106,9 @@ class _BigTextFormState extends State<BigTextForm> {
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    widget.data = jsonEncode(
+                                    widget.value = jsonEncode(
                                         controller.document.toDelta().toJson());
-                                    widget.onFieldSubmitted(widget.data);
+                                    widget.onFieldSubmitted!(widget.value!);
                                     widget.readOnly = true;
                                   });
                                 },
@@ -168,7 +170,7 @@ class _BigTextFormState extends State<BigTextForm> {
                         dialogTheme: QuillDialogTheme(
                           labelTextStyle: AppTextStyle.formStyleTexte,
                           inputTextStyle: AppTextStyle.filedTexte.copyWith(
-                              fontWeight: FontWeight.w400, fontSize: 12.sp + 5),
+                              fontWeight: FontWeight.w400, fontSize: 12.sp + 10),
                         ),
                       ),
                     ),

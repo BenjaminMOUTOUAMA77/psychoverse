@@ -9,12 +9,11 @@ import 'package:psychoverse/Screens/Architecture/Sections/histotiqueArchitecture
 import 'package:psychoverse/Screens/Architecture/Sections/identiteArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/suivisArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/testesArchitecture.dart';
-import 'package:psychoverse/Ui/Components/AppNav/appNavBar.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/AppNav/appNavMenuPane.dart';
 import 'package:psychoverse/Ui/Components/Buttons/togleButton.dart';
-import 'package:psychoverse/Ui/Components/PopUps/bigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/brouillonPopUp.dart';
-import 'package:psychoverse/Ui/Components/ZElements/backgroungImage.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/note.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -83,7 +82,6 @@ class _ArchitectureState extends State<Architecture> {
         const MakeBackgroundImage(),
         Column(
           children: [
-            AppNavBar(menu: "Architecture",),
             Gap(20.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
@@ -91,7 +89,7 @@ class _ArchitectureState extends State<Architecture> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      showDialog(context: context, builder: (context)=>BigPopUp(title: "Brouillon",child: BrouillonPopUp(),),);
+                      showDialog(context: context, builder: (context)=>BigPopUp(title: "Brouillon",child: Note(),),);
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10),

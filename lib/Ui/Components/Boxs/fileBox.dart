@@ -8,14 +8,14 @@ import 'package:psychoverse/Functions/extensions.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
+import 'package:psychoverse/Providers/myAppPathProvider.dart';
+import 'package:provider/provider.dart';
 
 class FileBox extends StatefulWidget {
   PlatformFile file;
-  String extension;
   FileBox({
     Key? key,
     required this.file,
-    this.extension = "",
   }) : super(key: key);
 
   @override
@@ -25,6 +25,7 @@ class FileBox extends StatefulWidget {
 class _FileBoxState extends State<FileBox> {
   @override
   Widget build(BuildContext context) {
+    MyAppPathProvider appPath = Provider.of<MyAppPathProvider>(context);
     return Tooltip(
       message: widget.file.name,
       child: GestureDetector(
@@ -46,14 +47,15 @@ class _FileBoxState extends State<FileBox> {
               Container(
                 alignment: Alignment.center,
                 height: 200.h,
+                clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
-                  color: isImage(widget.extension)?Colors.transparent:getColor(),
+                  color: isImage(widget.file.extension.toString())?Colors.transparent:getColor(),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: isImage(widget.extension)
-                    ? Image.file(File(widget.file.path!))
+                child: isImage(widget.file.extension.toString())
+                    ? Image.file(File(widget.file.path!),fit: BoxFit.cover,)
                     : Icon(
-                        getFileIcon(widget.extension),
+                        getFileIcon(widget.file.extension.toString()),
                         size: 100.h,
                         color: AppColors.blanc,
                       ),

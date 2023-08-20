@@ -7,7 +7,16 @@ import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class SimpleTile extends StatefulWidget {
   String title;
-  SimpleTile({Key? key,this.title="Simple Tile"}) : super(key: key);
+  bool delete;
+  String deleteTexte;
+  VoidCallback? deleteFunction;
+  SimpleTile(
+      {Key? key,
+      this.title = "Simple Tile",
+      this.delete = true,
+      this.deleteTexte = "Supprimer",
+      this.deleteFunction})
+      : super(key: key);
 
   @override
   State<SimpleTile> createState() => _SimpleTileState();
@@ -24,7 +33,10 @@ class _SimpleTileState extends State<SimpleTile> {
       ]),
       child: Row(
         children: [
-          Icon(FluentIcons.edge_logo,color: AppColors.grisLite,),
+          Icon(
+            FluentIcons.edge_logo,
+            color: AppColors.grisLite,
+          ),
           Gap(20.w),
           Expanded(
             child: Text(
@@ -35,10 +47,16 @@ class _SimpleTileState extends State<SimpleTile> {
             ),
           ),
           Gap(20.w),
-          Tooltip(
-              message: "Supprimer",
-              child:
-                  IconButton(icon: Icon(FluentIcons.delete,color: AppColors.rouge,), onPressed: () {})),
+          widget.delete? Tooltip(
+            message: widget.deleteTexte,
+            child: IconButton(
+              icon: Icon(
+                FluentIcons.delete,
+                color: AppColors.rouge,
+              ),
+              onPressed: widget.deleteFunction,
+            ),
+          ):const Gap(0),
         ],
       ),
     );

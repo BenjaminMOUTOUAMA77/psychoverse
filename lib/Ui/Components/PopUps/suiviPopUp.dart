@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
-import 'package:psychoverse/Ui/Components/Forms/menuForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/comboBoxForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/progessionForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
@@ -39,7 +39,7 @@ class _SuiviPopUpState extends State<SuiviPopUp> {
               title: "Date de début",
               onChanged: (value) {},
               onFieldSubmitted: (value) {}),
-          MenuForm(
+          ComboBoxForm(
               title: "Degré de manifestation",
               list: ["Élevé", "Moyen", "Faible"],
               onChanged: (value) {},

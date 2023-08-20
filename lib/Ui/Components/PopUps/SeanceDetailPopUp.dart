@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:psychoverse/Ui/Components/seance.dart';
+import 'package:psychoverse/Ui/Components/Sections/seance.dart';
 
 class SeanceDetailPopUp extends StatefulWidget {
   const SeanceDetailPopUp({Key? key}) : super(key: key);

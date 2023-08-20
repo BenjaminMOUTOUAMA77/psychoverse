@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Forms/formBox.dart';
+import 'package:psychoverse/Ui/Components/Forms/zFormBox.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
@@ -9,12 +9,10 @@ class ProgressionForm extends StatefulWidget {
   final String title;
   String placeHolder;
   double? value;
-  double? selected;
   bool readOnly;
   bool managers;
-  TextEditingController controller = TextEditingController();
-  Function(double?) onChanged;
-  Function(double?) onFieldSubmitted;
+  Function(double?)? onChanged;
+  Function(double?)? onFieldSubmitted;
 
   ProgressionForm({
     Key? key,
@@ -23,7 +21,6 @@ class ProgressionForm extends StatefulWidget {
     this.managers=true,
     this.value,
     this.placeHolder = "0",
-    this.selected,
     required this.onChanged,
     required this.onFieldSubmitted,
   }) : super(key: key);
@@ -33,8 +30,10 @@ class ProgressionForm extends StatefulWidget {
 }
 
 class _ProgressionFormState extends State<ProgressionForm> {
+  double? selected;
   @override
   Widget build(BuildContext context) {
+    selected=widget.value;
     return AppFormBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,8 +88,8 @@ class _ProgressionFormState extends State<ProgressionForm> {
                                   size: 20.h,
                                 ),
                                 onPressed: () {
-                                  widget.value = widget.selected;
-                                  widget.onFieldSubmitted(widget.value);
+                                  widget.value = selected;
+                                  widget.onFieldSubmitted!(widget.value);
                                   setState(() {
                                     widget.readOnly = true;
                                   });
@@ -118,12 +117,12 @@ class _ProgressionFormState extends State<ProgressionForm> {
               ),
             ],
           ): NumberBox<double>(
-                  value: widget.selected,
+                  value: selected,
                   onChanged: widget.readOnly
                       ? null
                       : (value) {
                           setState(() {
-                            widget.selected = value;
+                            selected = value;
                           });
                         },
                   mode: SpinButtonPlacementMode.compact,

@@ -52,7 +52,6 @@ dependencies:
   open_file: ^3.3.2
   file_sizes: ^1.0.6
   path_provider: ^2.0.15
-  drag_and_drop_lists: ^0.3.3
 
 dev_dependencies:
   flutter_test:
