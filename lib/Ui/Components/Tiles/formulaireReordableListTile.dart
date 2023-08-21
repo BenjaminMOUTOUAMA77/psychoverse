@@ -8,9 +8,15 @@ import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 class FormulaireReordableList extends StatefulWidget {
   String title;
   VoidCallback? onTap;
-  FormulaireReordableList(
-      {Key? key, this.title = "FormulaireReordableListTile", this.onTap})
-      : super(key: key);
+  bool isForm;
+  VoidCallback? deleteFunction;
+  FormulaireReordableList({
+    Key? key,
+    this.title = "FormulaireReordableListTile",
+    this.onTap,
+    this.isForm = true,
+    this.deleteFunction,
+  }) : super(key: key);
 
   @override
   State<FormulaireReordableList> createState() =>
@@ -28,22 +34,29 @@ class _FormulaireReordableListState extends State<FormulaireReordableList> {
       ]),
       child: Row(
         children: [
-          Icon(FluentIcons.charticulator_arrange_polar,color: AppColors.grisLite,),
+          Icon(
+            widget.isForm ? FluentIcons.field_filled : FluentIcons.dom,
+            color: AppColors.grisLite,
+          ),
           Gap(20.w),
           Expanded(
             child: GestureDetector(
               child: Text(
                 widget.title,
                 style: AppTextStyle.filedTexte
-                    .copyWith(fontWeight: FontWeight.bold,fontSize: 5.sp+12),
+                    .copyWith(fontWeight: FontWeight.bold, fontSize: 5.sp + 12),
               ),
               onTap: widget.onTap,
             ),
           ),
           Gap(10.w),
           GestureDetector(
-            onTap: (){},
-            child: Icon(FluentIcons.delete, size: 25.h,color: AppColors.rouge,),
+            onTap: widget.deleteFunction,
+            child: Icon(
+              FluentIcons.delete,
+              size: 25.h,
+              color: AppColors.rouge,
+            ),
           ),
         ],
       ),

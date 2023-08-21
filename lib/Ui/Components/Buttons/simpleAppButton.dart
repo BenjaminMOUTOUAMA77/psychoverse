@@ -9,7 +9,7 @@ class SimpleAppButon extends StatefulWidget {
   VoidCallback function;
   final IconData icon;
   final String texte;
-  SimpleAppButon({Key? key, this.texte="Button", this.icon=FluentIcons.app_icon_default,required this.function}) : super(key: key);
+  SimpleAppButon({Key? key, this.texte="Button", this.icon=FluentIcons.circle_addition_solid,required this.function}) : super(key: key);
 
   @override
   State<SimpleAppButon> createState() => _SimpleAppButonState();

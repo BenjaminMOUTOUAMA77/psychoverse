@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/adaptive.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
@@ -50,19 +51,21 @@ class _RappelsState extends State<Rappels> {
                       title: "Email Rappel",
                       child: Column(
                         children: [
-                          RadioMenuForm(
-                              title: "Mode d'envoi",
-                              list: ["Envoi Manuel", "Envoi automatique"],
+                          Adaptive(
+                            first: RadioMenuForm(
+                                title: "Mode d'envoi",
+                                list: ["Envoi Manuel", "Envoi automatique"],
+                                onChanged: (value) {},
+                                onFieldSubmitted: (value) {
+                                  setState(() {
+                                    emailSendMode = value!;
+                                  });
+                                }),
+                            second: TextForm(
+                              title: "Objet",
+                              onFieldSubmitted: (value) {},
                               onChanged: (value) {},
-                              onFieldSubmitted: (value) {
-                                setState(() {
-                                  emailSendMode = value!;
-                                });
-                              }),
-                          TextForm(
-                            title: "Objet",
-                            onFieldSubmitted: (value) {},
-                            onChanged: (value) {},
+                            ),
                           ),
                           BigTextForm(
                               title: "Contenu", onFieldSubmitted: (value) {}),
@@ -70,106 +73,118 @@ class _RappelsState extends State<Rappels> {
                           sendMode(emailSendMode)
                               ? Column(
                                   children: [
-                                    emailList.length==0? Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            Tooltip(
-                                              message: "Envoyer à un mail à tous les patients ayants un rendez-vous en vu" ,
-                                              child: SimpleAppButon(
-                                                texte:
-                                                "Envoyer à tous",
-                                                icon: FluentIcons.send,
-                                                function: () {},
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Gap(20.h),
-                                        SmallAppButton(
-                                          texte: "Envoyer à une destination ciblé",
-                                          function: () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) => SmallPopUp(
-                                                  save: true,
-                                                  saveFunction: (){
-                                                    Navigator.pop(context);
-                                                  },
-                                                  title:
-                                                  "Choisir les destinataires",
-                                                  child: Column(
-                                                    children: [
-                                                      MakeSearchBar(
-                                                          withComboFilter:
-                                                          true,
-                                                          withToggleFilter:
-                                                          true,
-                                                          comboFilterList: [
-                                                            "Nom",
-                                                            "Ville",
-                                                            "Numero dossier"
-                                                          ],
-                                                          textList: [
-                                                            "Patient 1",
-                                                            "Patient 2",
-                                                            "Patient 3",
-                                                            "Patient 4",
-                                                            "Patient 5",
-                                                            "Patient 6",
-                                                          ],
-                                                          toggleFilterList: [
-                                                            "Tout",
-                                                            "En Cours",
-                                                            "En Pause",
-                                                            "Archivés",
-                                                          ],
-                                                          onChanged: (
-                                                              {toggleFilter =
-                                                              "",
-                                                                comboFilter =
-                                                                "",
-                                                                text = ""}) {},
-                                                          onFieldSubmitted: (
-                                                              {toggleFilter =
-                                                              "",
-                                                                comboFilter =
-                                                                "",
-                                                                text = ""}) {
-                                                            print(
-                                                                "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
-                                                          }),
-                                                      Gap(20.h),
-                                                      SizedBox(
-                                                        height: 230.h,
-                                                        child:
-                                                        SelectablePatientList(
-                                                          onChanged:
-                                                              (value) {
-                                                            setState(() {
-                                                              emailList =
-                                                                  value;
-                                                            });
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ],
+                                    emailList.length == 0
+                                        ? Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Tooltip(
+                                                    message:
+                                                        "Envoyer à un mail à tous les patients ayants un rendez-vous en vu",
+                                                    child: SimpleAppButon(
+                                                      texte: "Envoyer à tous",
+                                                      icon: FluentIcons.send,
+                                                      function: () {},
+                                                    ),
                                                   ),
-                                                ));
-                                          },
-                                        ),
-                                      ],
-                                    ):Gap(0),
+                                                ],
+                                              ),
+                                              Gap(20.h),
+                                              SmallAppButton(
+                                                texte:
+                                                    "Envoyer à une destination ciblé",
+                                                function: () {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          SmallPopUp(
+                                                            save: true,
+                                                            saveFunction: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            title:
+                                                                "Choisir les destinataires",
+                                                            child: Column(
+                                                              children: [
+                                                                MakeSearchBar(
+                                                                    withComboFilter:
+                                                                        true,
+                                                                    withToggleFilter:
+                                                                        true,
+                                                                    comboFilterList: [
+                                                                      "Nom",
+                                                                      "Ville",
+                                                                      "Numero dossier"
+                                                                    ],
+                                                                    textList: [
+                                                                      "Patient 1",
+                                                                      "Patient 2",
+                                                                      "Patient 3",
+                                                                      "Patient 4",
+                                                                      "Patient 5",
+                                                                      "Patient 6",
+                                                                    ],
+                                                                    toggleFilterList: [
+                                                                      "Tout",
+                                                                      "En Cours",
+                                                                      "En Pause",
+                                                                      "Archivés",
+                                                                    ],
+                                                                    onChanged: (
+                                                                        {toggleFilter =
+                                                                            "",
+                                                                        comboFilter =
+                                                                            "",
+                                                                        text =
+                                                                            ""}) {},
+                                                                    onFieldSubmitted: (
+                                                                        {toggleFilter =
+                                                                            "",
+                                                                        comboFilter =
+                                                                            "",
+                                                                        text =
+                                                                            ""}) {
+                                                                      print(
+                                                                          "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
+                                                                    }),
+                                                                Gap(20.h),
+                                                                SizedBox(
+                                                                  height: 230.h,
+                                                                  child:
+                                                                      SelectablePatientList(
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      setState(
+                                                                          () {
+                                                                        emailList =
+                                                                            value;
+                                                                      });
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ));
+                                                },
+                                              ),
+                                            ],
+                                          )
+                                        : Gap(0),
                                     emailList.length > 0
                                         ? Bloc3(
-                                      title: "Envoyer un mail à des destinataires cibles",
-                                          child: Column(
+                                            title:
+                                                "Envoyer un mail à des destinataires cibles",
+                                            child: Column(
                                               children: [
                                                 Gap(20.h),
                                                 SizedBox(
-                                                  height: emailList.length / 4 * 50 + 20,
+                                                  height: emailList.length /
+                                                          4 *
+                                                          50 +
+                                                      20,
                                                   width: double.infinity,
                                                   child: GridView.builder(
                                                       gridDelegate:
@@ -193,11 +208,11 @@ class _RappelsState extends State<Rappels> {
                                                       }),
                                                 ),
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: [
                                                     SmallAppButton(
-                                                      texte:
-                                                          "Annuler",
+                                                      texte: "Annuler",
                                                       function: () {
                                                         setState(() {
                                                           emailList.clear();
@@ -206,15 +221,14 @@ class _RappelsState extends State<Rappels> {
                                                     ),
                                                     Gap(30.w),
                                                     SmallAppButton(
-                                                      texte:
-                                                          "Envoyer",
+                                                      texte: "Envoyer",
                                                       function: () {},
                                                     ),
                                                   ],
                                                 ),
                                               ],
                                             ),
-                                        )
+                                          )
                                         : Gap(0),
                                   ],
                                 )
@@ -227,7 +241,8 @@ class _RappelsState extends State<Rappels> {
                       title: "SMS Rappel",
                       child: Column(
                         children: [
-                          RadioMenuForm(
+                          Adaptive(
+                            first: RadioMenuForm(
                               title: "Mode d'envoi",
                               list: ["Envoi Manuel", "Envoi automatique"],
                               onChanged: (value) {},
@@ -235,166 +250,176 @@ class _RappelsState extends State<Rappels> {
                                 setState(() {
                                   smsSendMode = value!;
                                 });
-                              }),
-                          TextForm(
-                            title: "Objet",
-                            onFieldSubmitted: (value) {},
-                            onChanged: (value) {},
+                              },
+                            ),
+                            second: TextForm(
+                              title: "Objet",
+                              onFieldSubmitted: (value) {},
+                              onChanged: (value) {},
+                            ),
                           ),
                           BigTextForm(
                               title: "Contenu", onFieldSubmitted: (value) {}),
                           Gap(40.h),
                           sendMode(smsSendMode)
                               ? Column(
-                            children: [
-                              smsList.length==0? Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
-                                    children: [
-                                      Tooltip(
-                                        message: "Envoyer à un sms à tous les patients ayants un rendez-vous en vu" ,
-                                        child: SimpleAppButon(
-                                          texte:
-                                          "Envoyer à tous",
-                                          icon: FluentIcons.send,
-                                          function: () {},
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Gap(20.h),
-                                  SmallAppButton(
-                                    texte: "Envoyer à une destination cible",
-                                    function: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) => SmallPopUp(
-                                            save: true,
-                                            saveFunction: (){
-                                              Navigator.pop(context);
-                                            },
+                                  children: [
+                                    smsList.length == 0
+                                        ? Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Tooltip(
+                                                    message:
+                                                        "Envoyer à un sms à tous les patients ayants un rendez-vous en vu",
+                                                    child: SimpleAppButon(
+                                                      texte: "Envoyer à tous",
+                                                      icon: FluentIcons.send,
+                                                      function: () {},
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Gap(20.h),
+                                              SmallAppButton(
+                                                texte:
+                                                    "Envoyer à une destination cible",
+                                                function: () {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          SmallPopUp(
+                                                            save: true,
+                                                            saveFunction: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            title:
+                                                                "Choisir les destinataires",
+                                                            child: Column(
+                                                              children: [
+                                                                MakeSearchBar(
+                                                                    withComboFilter:
+                                                                        true,
+                                                                    withToggleFilter:
+                                                                        true,
+                                                                    comboFilterList: [
+                                                                      "Nom",
+                                                                      "Ville",
+                                                                      "Numero dossier"
+                                                                    ],
+                                                                    textList: [
+                                                                      "Patient 1",
+                                                                      "Patient 2",
+                                                                      "Patient 3",
+                                                                      "Patient 4",
+                                                                      "Patient 5",
+                                                                      "Patient 6",
+                                                                    ],
+                                                                    toggleFilterList: [
+                                                                      "Tout",
+                                                                      "En Cours",
+                                                                      "En Pause",
+                                                                      "Archivés",
+                                                                    ],
+                                                                    onChanged: (
+                                                                        {toggleFilter =
+                                                                            "",
+                                                                        comboFilter =
+                                                                            "",
+                                                                        text =
+                                                                            ""}) {},
+                                                                    onFieldSubmitted: (
+                                                                        {toggleFilter =
+                                                                            "",
+                                                                        comboFilter =
+                                                                            "",
+                                                                        text =
+                                                                            ""}) {
+                                                                      print(
+                                                                          "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
+                                                                    }),
+                                                                Gap(40.h),
+                                                                SizedBox(
+                                                                  height: 230.h,
+                                                                  child:
+                                                                      SelectablePatientList(
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      setState(
+                                                                          () {
+                                                                        smsList =
+                                                                            value;
+                                                                      });
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ));
+                                                },
+                                              ),
+                                            ],
+                                          )
+                                        : Gap(0),
+                                    smsList.length > 0
+                                        ? Bloc3(
                                             title:
-                                            "Choisir les destinataires",
+                                                "Envoyer un sms à des destinataires ciblés",
                                             child: Column(
                                               children: [
-                                                MakeSearchBar(
-                                                    withComboFilter:
-                                                    true,
-                                                    withToggleFilter:
-                                                    true,
-                                                    comboFilterList: [
-                                                      "Nom",
-                                                      "Ville",
-                                                      "Numero dossier"
-                                                    ],
-                                                    textList: [
-                                                      "Patient 1",
-                                                      "Patient 2",
-                                                      "Patient 3",
-                                                      "Patient 4",
-                                                      "Patient 5",
-                                                      "Patient 6",
-                                                    ],
-                                                    toggleFilterList: [
-                                                      "Tout",
-                                                      "En Cours",
-                                                      "En Pause",
-                                                      "Archivés",
-                                                    ],
-                                                    onChanged: (
-                                                        {toggleFilter =
-                                                        "",
-                                                          comboFilter =
-                                                          "",
-                                                          text = ""}) {},
-                                                    onFieldSubmitted: (
-                                                        {toggleFilter =
-                                                        "",
-                                                          comboFilter =
-                                                          "",
-                                                          text = ""}) {
-                                                      print(
-                                                          "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
-                                                    }),
-                                                Gap(40.h),
+                                                Gap(20.h),
                                                 SizedBox(
-                                                  height: 230.h,
-                                                  child:
-                                                  SelectablePatientList(
-                                                    onChanged:
-                                                        (value) {
-                                                      setState(() {
-                                                        smsList =
-                                                            value;
-                                                      });
-                                                    },
-                                                  ),
+                                                  height:
+                                                      smsList.length / 4 * 50 +
+                                                          20,
+                                                  width: double.infinity,
+                                                  child: GridView.builder(
+                                                      gridDelegate:
+                                                          SliverGridDelegateWithMaxCrossAxisExtent(
+                                                        maxCrossAxisExtent: 200,
+                                                        childAspectRatio:
+                                                            24 / 4,
+                                                        crossAxisSpacing: 20,
+                                                        mainAxisSpacing: 20,
+                                                      ),
+                                                      itemCount: smsList.length,
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              index) {
+                                                        return AppToggleButton(
+                                                          texte: smsList[index],
+                                                          toggle: () {},
+                                                        );
+                                                      }),
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    SmallAppButton(
+                                                      texte: "Annuler",
+                                                      function: () {
+                                                        setState(() {
+                                                          smsList.clear();
+                                                        });
+                                                      },
+                                                    ),
+                                                    Gap(30.w),
+                                                    SmallAppButton(
+                                                      texte: "Envoyer",
+                                                      function: () {},
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
-                                          ));
-                                    },
-                                  ),
-                                ],
-                              ):Gap(0),
-                              smsList.length > 0
-                                  ? Bloc3(
-                                title: "Envoyer un sms à des destinataires ciblés",
-                                child: Column(
-                                  children: [
-                                    Gap(20.h),
-                                    SizedBox(
-                                      height: smsList.length / 4 * 50 + 20,
-                                      width: double.infinity,
-                                      child: GridView.builder(
-                                          gridDelegate:
-                                          SliverGridDelegateWithMaxCrossAxisExtent(
-                                            maxCrossAxisExtent: 200,
-                                            childAspectRatio:
-                                            24 / 4,
-                                            crossAxisSpacing: 20,
-                                            mainAxisSpacing: 20,
-                                          ),
-                                          itemCount:
-                                          smsList.length,
-                                          itemBuilder:
-                                              (BuildContext context,
-                                              index) {
-                                            return AppToggleButton(
-                                              texte:
-                                              smsList[index],
-                                              toggle: () {},
-                                            );
-                                          }),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        SmallAppButton(
-                                          texte:
-                                          "Annuler",
-                                          function: () {
-                                            setState(() {
-                                              smsList.clear();
-                                            });
-                                          },
-                                        ),
-                                        Gap(30.w),
-                                        SmallAppButton(
-                                          texte:
-                                          "Envoyer",
-                                          function: () {},
-                                        ),
-                                      ],
-                                    ),
+                                          )
+                                        : Gap(0),
                                   ],
-                                ),
-                              )
-                                  : Gap(0),
-                            ],
-                          )
+                                )
                               : Gap(0),
                           Gap(40.h),
                         ],

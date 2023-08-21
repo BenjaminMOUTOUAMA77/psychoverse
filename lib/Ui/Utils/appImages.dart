@@ -2,11 +2,11 @@ class AppImages{
   static String logo = 'assets/images/lFBlanc.png';
   static String pattern = 'assets/images/patternAF.png';
   static String quoteIm1 = 'assets/images/im1.jpg';
+  static String logoSymbole = 'assets/images/LSFBlanc.png';
 }
 
 class AppIcons{
   static String logoSymboleV = 'assets/images/lsymbSFBlanc.svg';
-  static String logoSymbole = 'assets/images/LSFBlanc.png';
   static String logoSymboleNB = 'assets/images/lsymbnuanceBlanc.svg';
   static String agenda = 'assets/icons/agenda.svg';
   static String ap = 'assets/icons/ap.svg';

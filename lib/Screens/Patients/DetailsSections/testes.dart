@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/adaptive.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
@@ -8,7 +9,7 @@ import 'package:psychoverse/Ui/Components/Forms/multiCheckBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/radioMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/rorshachPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/rorshach.dart';
 import 'package:psychoverse/Ui/Components/Lists/rorshachList.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
 
@@ -42,8 +43,10 @@ class _TestesState extends State<Testes> {
             title: "Énnéagramme",
             child: Column(
               children: [
-                RadioMenuForm(title: "Ailes 1", selected: "3",list: ail1,onChanged: (value){},onFieldSubmitted: (value){},),
-                RadioMenuForm(title: "Ailes 2", selected: "7",list: ail2,onChanged: (value){},onFieldSubmitted: (value){},),
+                Adaptive(
+                  first: RadioMenuForm(title: "Ailes 1", selected: "3",list: ail1,onChanged: (value){},onFieldSubmitted: (value){},),
+                  second: RadioMenuForm(title: "Ailes 2", selected: "7",list: ail2,onChanged: (value){},onFieldSubmitted: (value){},),
+                ),
                 BigTextForm(
                     title: "Commentaire", onFieldSubmitted: (value) {}),
               ],
@@ -89,7 +92,7 @@ class _TestesState extends State<Testes> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SimpleAppButon(texte: "Ajouter un nouveau Rorshach",icon: FluentIcons.circle_addition_solid,function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Rorsharch",child: RorshachPopUp(),save: true,)),),
+                    SimpleAppButon(texte: "Ajouter un nouveau Rorshach",icon: FluentIcons.circle_addition_solid,function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Rorsharch",child: Rorshach(),save: true,)),),
                   ],
                 ),
                 Gap(40.h),

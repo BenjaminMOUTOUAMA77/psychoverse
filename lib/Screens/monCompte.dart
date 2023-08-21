@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/adaptive.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
@@ -75,10 +76,14 @@ class _MonCompteState extends State<MonCompte> {
                       title: "Informations de d'authentification",
                       child: Column(
                         children: [
-                          TextForm(title: "Nom",onChanged: (value){}, onFieldSubmitted: (value){}),
-                          TextForm(title: "Prénom",onChanged: (value){}, onFieldSubmitted: (value){}),
-                          TextForm(title: "Pseudonyme",onChanged: (value){}, onFieldSubmitted: (value){}),
-                          TextForm(title: "Mot de passe",password: true,onChanged: (value){}, onFieldSubmitted: (value){}),
+                          Adaptive(
+                            first: TextForm(title: "Nom",onChanged: (value){}, onFieldSubmitted: (value){},),
+                            second: TextForm(title: "Prénom",onChanged: (value){}, onFieldSubmitted: (value){},),
+                          ),
+                          Adaptive(
+                            first: TextForm(title: "Pseudonyme",onChanged: (value){}, onFieldSubmitted: (value){},),
+                            second: TextForm(title: "Mot de passe",password: true,onChanged: (value){}, onFieldSubmitted: (value){},),
+                          ),
                         ],
                       ),
                     ),

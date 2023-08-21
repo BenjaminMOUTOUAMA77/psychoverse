@@ -8,17 +8,17 @@ import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
-class fileTile extends StatefulWidget {
+class FileTile extends StatefulWidget {
   PlatformFile file;
   String cancelTexte;
   VoidCallback? cancelFunction ;
-  fileTile({Key? key,required this.file,this.cancelTexte="retirer",this.cancelFunction}) : super(key: key);
+  FileTile({Key? key,required this.file,this.cancelTexte="retirer",this.cancelFunction}) : super(key: key);
 
   @override
-  State<fileTile> createState() => _fileTileState();
+  State<FileTile> createState() => _FileTileState();
 }
 
-class _fileTileState extends State<fileTile> {
+class _FileTileState extends State<FileTile> {
   @override
   Widget build(BuildContext context) {
     return Tooltip(

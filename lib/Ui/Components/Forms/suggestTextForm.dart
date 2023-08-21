@@ -11,7 +11,7 @@ class SuggestTextForm extends StatefulWidget {
   String placeHolder;
   bool readOnly;
   bool managers;
-  List<String>? list;
+  List<String?>? list;
   TextEditingController controller = TextEditingController();
   Function(String?)? onChanged;
   Function(String?)? onFieldSubmitted;
@@ -23,7 +23,7 @@ class SuggestTextForm extends StatefulWidget {
     this.managers=true,
     this.value,
     this.placeHolder = "_",
-    this.list = const [],
+    this.list=const[],
     this.onChanged,
     this.onFieldSubmitted,
   }) : super(key: key);
@@ -122,13 +122,13 @@ class _SuggestTextFormState extends State<SuggestTextForm> {
           )
               :AutoSuggestBox<String>(
             controller: widget.controller,
-            items: widget.list!.map((e) {
+            items:widget.list!.map((item) {
               return AutoSuggestBoxItem<String>(
-                  value: e,
-                  label: e,
+                  value: item,
+                  label: item!,
                   onFocusChange: (focused) {
                     if (focused) {
-                      debugPrint(e);
+                      debugPrint(item);
                     }
                   });
             }).toList(),

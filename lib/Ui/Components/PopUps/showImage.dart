@@ -7,18 +7,18 @@ import 'package:open_file/open_file.dart';
 import 'package:psychoverse/Functions/pickFiles.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
-class ImagePopUp extends StatefulWidget {
+class ShowImage extends StatefulWidget {
   PlatformFile? image;
-  ImagePopUp({
+  ShowImage({
     Key? key,
     this.image,
   }) : super(key: key);
 
   @override
-  State<ImagePopUp> createState() => _ImagePopUpState();
+  State<ShowImage> createState() => _ShowImageState();
 }
 
-class _ImagePopUpState extends State<ImagePopUp> {
+class _ShowImageState extends State<ShowImage> {
   @override
   Widget build(BuildContext context) {
     return Stack(

@@ -9,7 +9,15 @@ import 'Providers/changeScreenProvider.dart';
 
 void main() async {
   initialisation();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => MainScreenPagesManagerProvider()),
+        ChangeNotifierProvider(create: (_) => MyAppPathProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -18,6 +26,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    MyAppPathProvider appPath= Provider.of<MyAppPathProvider>(context);
+    if(appPath.appPath.isEmpty) {
+      appPath.init();
+    }
     //Set the fit size (Find your UI design, look at the dimensions of the device screen and fill it in,unit in dp)
     return ScreenUtilInit(
       designSize: const Size(1920, 1080),
@@ -37,13 +49,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => MainScreenPagesManagerProvider()),
-          ChangeNotifierProvider(create: (_) => MyAppPathProvider()),
-        ],
-        child: const MainScreensManager(),
-      ),
+      child: const MainScreensManager(),
     );
   }
 }

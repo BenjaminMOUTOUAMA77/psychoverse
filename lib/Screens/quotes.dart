@@ -6,8 +6,7 @@ import 'package:psychoverse/Providers/HomeProviders/sliderItemProvider.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/quotePopUp.dart';
-import 'package:psychoverse/Ui/Components/Slides/quotesSlider.dart';
+import 'package:psychoverse/Ui/Components/PopUps/quote.dart';
 import 'package:psychoverse/Ui/Components/Lists/quotesList.dart';
 
 class Quotes extends StatefulWidget {
@@ -29,18 +28,13 @@ class _QuotesState extends State<Quotes> {
           const MakeBackgroundImage(),
           Column(
             children: [
-              Gap(20.h),
-              Expanded(child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: MakeQuotesSlider(),
-              )),
-              Gap(20.h),
+              Gap(50.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SimpleAppButon(
                       texte: "Ajouter une citation", function: () {
-                        showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouvelle pensée",save: true,child: QuotePopUp(),));
+                        showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouvelle pensée",save: true,child: Quote(),));
                   }),
                 ],
               ),

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Providers/changeScreenProvider.dart';
+import 'package:psychoverse/Providers/myAppPathProvider.dart';
 import 'package:psychoverse/Ui/Components/Menu/menus.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';

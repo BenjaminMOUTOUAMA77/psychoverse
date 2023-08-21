@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/relationPopup.dart';
+import 'package:psychoverse/Ui/Components/PopUps/relation.dart';
 import 'package:psychoverse/Ui/Components/Tiles/relationTile.dart';
 
 class RelationList extends StatefulWidget {
@@ -29,7 +29,7 @@ class _RelationListState extends State<RelationList> {
                       builder: (context) => BigPopUp(
                         title: "Maman biologique",
                         delete: true,
-                        child: RelationPopUp(),
+                        child: Relation(onChanged: (value){print(value);},),
                       ),
                     );
                   },

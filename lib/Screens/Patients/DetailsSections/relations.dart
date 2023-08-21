@@ -4,8 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/parentsPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/relationPopup.dart';
+import 'package:psychoverse/Ui/Components/PopUps/parents.dart';
+import 'package:psychoverse/Ui/Components/PopUps/relation.dart';
 import 'package:psychoverse/Ui/Components/Lists/parentsList.dart';
 import 'package:psychoverse/Ui/Components/Lists/relationList.dart';
 import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
@@ -19,7 +19,7 @@ class Relations extends StatefulWidget {
 }
 
 class _RelationsState extends State<Relations> {
-  List<String> ParentList=["",""];
+  List<String> ParentList = ["", ""];
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +41,24 @@ class _RelationsState extends State<Relations> {
                     SimpleAppButon(
                       texte: "Ajouter une personne",
                       icon: FluentIcons.circle_addition_solid,
-                      function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau contact d'urgence",save: true,child: RelationPopUp(),)),
+                      function: () => showDialog(
+                          context: context,
+                          builder: (context) => BigPopUp(
+                                title: "Nouveau contact d'urgence",
+                                save: true,
+                                child: Relation(onChanged: (value){print("Print from add personne urgence : $value");},),
+                              )),
                     ),
                     Expanded(child: const Gap(0)),
                   ],
                 ),
                 Gap(30.h),
-                RelationList(list: ["","",],),
+                RelationList(
+                  list: [
+                    "",
+                    "",
+                  ],
+                ),
               ],
             ),
           ),
@@ -62,13 +73,24 @@ class _RelationsState extends State<Relations> {
                     SimpleAppButon(
                       texte: "Ajouter un(e) conjoint(e)",
                       icon: FluentIcons.circle_addition_solid,
-                      function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau(lle) conjoint(e)",save: true,child: RelationPopUp(),)),
+                      function: () => showDialog(
+                          context: context,
+                          builder: (context) => BigPopUp(
+                                title: "Nouveau(lle) conjoint(e)",
+                                save: true,
+                                child: Relation(),
+                              )),
                     ),
                     Expanded(child: const Gap(0)),
                   ],
                 ),
                 Gap(30.h),
-                RelationList(list: ["","",],),
+                RelationList(
+                  list: [
+                    "",
+                    "",
+                  ],
+                ),
               ],
             ),
           ),
@@ -77,7 +99,10 @@ class _RelationsState extends State<Relations> {
             title: "Parents",
             child: Column(
               children: [
-                ParentsList(list: [""],qualite: "Biologiques",),
+                ParentsList(
+                  list: [""],
+                  qualite: "Biologiques",
+                ),
                 Gap(50.h),
                 Row(
                   children: [
@@ -85,13 +110,25 @@ class _RelationsState extends State<Relations> {
                     SimpleAppButon(
                       texte: "Ajouter des tuteurs",
                       icon: FluentIcons.circle_addition_solid,
-                      function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau tuteurs",save: true,child: ParentsPopUp(),)),
+                      function: () => showDialog(
+                          context: context,
+                          builder: (context) => BigPopUp(
+                                title: "Nouveau tuteurs",
+                                save: true,
+                                child: Parents(),
+                              )),
                     ),
                     Expanded(child: const Gap(0)),
                   ],
                 ),
                 Gap(30.h),
-                ParentsList(list: ["","",],qualite: "Tuteurs",),
+                ParentsList(
+                  list: [
+                    "",
+                    "",
+                  ],
+                  qualite: "Tuteurs",
+                ),
               ],
             ),
           ),
@@ -106,13 +143,27 @@ class _RelationsState extends State<Relations> {
                     SimpleAppButon(
                       texte: "Ajouter un(e) frère/sœur",
                       icon: FluentIcons.circle_addition_solid,
-                      function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Ajouter un(e) frère/sœur",save: true,child: RelationPopUp(),)),
+                      function: () => showDialog(
+                          context: context,
+                          builder: (context) => BigPopUp(
+                                title: "Ajouter un(e) frère/sœur",
+                                save: true,
+                                child: Relation(),
+                              )),
                     ),
                     Expanded(child: const Gap(0)),
                   ],
                 ),
                 Gap(30.h),
-                RelationList(list: ["","","","","",],),
+                RelationList(
+                  list: [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                  ],
+                ),
               ],
             ),
           ),
@@ -127,13 +178,24 @@ class _RelationsState extends State<Relations> {
                     SimpleAppButon(
                       texte: "Ajouter une relation",
                       icon: FluentIcons.circle_addition_solid,
-                      function: ()=>showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouvelle relation",save: true,child: RelationPopUp(),)),
+                      function: () => showDialog(
+                          context: context,
+                          builder: (context) => BigPopUp(
+                                title: "Nouvelle relation",
+                                save: true,
+                                child: Relation(),
+                              )),
                     ),
                     Expanded(child: const Gap(0)),
                   ],
                 ),
                 Gap(30.h),
-                RelationList(list: ["","",],),
+                RelationList(
+                  list: [
+                    "",
+                    "",
+                  ],
+                ),
               ],
             ),
           ),

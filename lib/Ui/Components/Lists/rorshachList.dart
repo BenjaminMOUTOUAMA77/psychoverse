@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/rorshachPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/rorshach.dart';
 import 'package:psychoverse/Ui/Components/Tiles/rorshachTile.dart';
 
 class RorshachList extends StatefulWidget {
@@ -22,7 +22,7 @@ class _RorshachListState extends State<RorshachList> {
             onTap: (){
               showDialog(
                 context: context,
-                builder: (context) => BigPopUp(title: "Rorsharch",delete: true,child: RorshachPopUp(),),
+                builder: (context) => BigPopUp(title: "Rorsharch",delete: true,child: Rorshach(),),
               );
             },
             child: Padding(

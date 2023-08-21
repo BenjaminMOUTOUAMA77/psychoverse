@@ -1,12 +1,14 @@
+import 'dart:io';
+
 import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:image_fade/image_fade.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/HomeProviders/sliderItemProvider.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/imagePlaceholder.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -124,29 +126,10 @@ class _QuoteSlideState extends State<QuoteSlide> {
                 ),
               ],
             ),
-            child: ImageFade(
-              width: double.infinity,
-              height: double.infinity,
-              image: AssetImage(widget.image),
-              // slow fade for newly loaded images:
-              duration: const Duration(milliseconds: 900),
-              syncDuration: const Duration(milliseconds: 150),
-              alignment: Alignment.center,
+            child: widget.image.isEmpty
+                ? const ImagePlaceholder()
+                : Image.file(File(widget.image),
               fit: BoxFit.cover,
-              placeholder: Container(
-                color: AppColors.grisLite,
-                alignment: Alignment.center,
-                child: Opacity(
-                  opacity: 0.5,
-                  child: SvgPicture.asset(AppIcons.logoSymbole, height: 250.h),
-                ),
-              ),
-              errorBuilder: (context, error) => Container(
-                color: AppColors.blanc,
-                alignment: Alignment.center,
-                child: SvgPicture.asset(AppIcons.logoSymbole,
-                    color: AppColors.primary, height: 20),
-              ),
             ),
           ),),
           Gap(15.w),

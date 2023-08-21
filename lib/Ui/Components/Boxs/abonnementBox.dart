@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/imagePlaceholder.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Tiles/attibutAbonnementTile.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
@@ -8,17 +11,17 @@ import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class AbonnementBox extends StatefulWidget {
-  String image;
+  String? image;
   String nom;
   String prix;
   List<AttributAbonnementTile> attributs;
   VoidCallback? start;
   AbonnementBox({
     Key? key,
-    this.image="",
-    this.nom="",
-    this.prix="",
-    this.attributs= const [],
+    this.image = "",
+    this.nom = "",
+    this.prix = "",
+    this.attributs = const [],
     this.start,
   }) : super(key: key);
 
@@ -43,16 +46,20 @@ class _AbonnementBoxState extends State<AbonnementBox> {
         children: [
           Container(
             height: 100.w + 200,
+            width: double.infinity,
+            clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 AppDesignEffects.shadow0,
               ],
-              image: DecorationImage(
-                image: AssetImage(widget.image),
-                fit: BoxFit.cover,
-              ),
             ),
+            child: widget.image != null
+                ? Image.file(
+                    File(widget.image!),
+                    fit: BoxFit.cover,
+                  )
+                : const ImagePlaceholder(),
           ),
           Gap(20.h),
           Padding(
@@ -108,7 +115,7 @@ class _AbonnementBoxState extends State<AbonnementBox> {
                     SimpleAppButon(
                       texte: "Commencer",
                       icon: FluentIcons.diamond_user,
-                      function: ()=>widget.start,
+                      function: () => widget.start,
                     ),
                   ],
                 ),

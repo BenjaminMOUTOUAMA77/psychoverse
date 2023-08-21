@@ -1,21 +1,22 @@
+import 'dart:io';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:image_fade/image_fade.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/imagePlaceholder.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/imagePopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/showImage.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
-import 'package:psychoverse/Ui/Utils/appImages.dart';
 
-class RorshachPopUp extends StatefulWidget {
-  const RorshachPopUp({Key? key}) : super(key: key);
+class Rorshach extends StatefulWidget {
+  const Rorshach({Key? key}) : super(key: key);
 
   @override
-  State<RorshachPopUp> createState() => _RorshachPopUpState();
+  State<Rorshach> createState() => _RorshachState();
 }
 
-class _RorshachPopUpState extends State<RorshachPopUp> {
+class _RorshachState extends State<Rorshach> {
+  String image= "";
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -24,7 +25,7 @@ class _RorshachPopUpState extends State<RorshachPopUp> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
-            onTap: ()=>showDialog(context: context, builder: (context)=>ImagePopUp(),),
+            onTap: ()=>showDialog(context: context, builder: (context)=>ShowImage(),),
             child: Container(
               width: double.infinity,
               height: 500.h,
@@ -39,29 +40,9 @@ class _RorshachPopUpState extends State<RorshachPopUp> {
                   ),
                 ],
               ),
-              child: ImageFade(
-                width: double.infinity,
-                height: double.infinity,
-                image: const AssetImage("assets/images/im4.jpg"),
-                // slow fade for newly loaded images:
-                duration: const Duration(milliseconds: 900),
-                syncDuration: const Duration(milliseconds: 150),
-                alignment: Alignment.center,
-                fit: BoxFit.cover,
-                placeholder: Container(
-                  color: AppColors.grisLite,
-                  alignment: Alignment.center,
-                  child: Opacity(
-                    opacity: 0.5,
-                    child: Image.asset(AppIcons.logoSymbole, height: 250.h),
-                  ),
-                ),
-                errorBuilder: (context, error) => Container(
-                  color: AppColors.blanc,
-                  alignment: Alignment.center,
-                  child: Image.asset(AppIcons.logoSymbole,
-                      color: AppColors.primary, height: 20),
-                ),
+              child: image.isEmpty
+                  ? const ImagePlaceholder()
+                  : Image.file(File(image),
               ),
             ),
           ),

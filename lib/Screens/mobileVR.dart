@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/adaptive.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
 import 'package:psychoverse/Ui/Components/Boxs/vrBox.dart';
@@ -86,16 +87,20 @@ class _MobileVRState extends State<MobileVR> {
                             ],
                           ),
                           Gap(30.h),
-                          TextForm(
+                          Adaptive(
+                            first: TextForm(
                               title: "Votre Identifiant mobile VR",
                               password: true,
                               onChanged: (value) {},
-                              onFieldSubmitted: (value) {}),
-                          TextForm(
+                              onFieldSubmitted: (value) {},
+                            ),
+                            second: TextForm(
                               title: "Votre Mot de passe mobile VR",
                               password: true,
                               onChanged: (value) {},
-                              onFieldSubmitted: (value) {}),
+                              onFieldSubmitted: (value) {},
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -113,13 +118,19 @@ class _MobileVRState extends State<MobileVR> {
                                 function: () => showDialog(
                                   context: context,
                                   builder: (context) => BigPopUp(
-                                    title: "Banque Générale des ERV Psychoverse",
+                                    title:
+                                        "Banque Générale des ERV Psychoverse",
                                     child: Column(
                                       children: [
                                         MakeSearchBar(
                                             withComboFilter: true,
                                             withToggleFilter: false,
-                                            comboFilterList: ["Tout", "Catégorie", "Nom","Code"],
+                                            comboFilterList: [
+                                              "Tout",
+                                              "Catégorie",
+                                              "Nom",
+                                              "Code"
+                                            ],
                                             textList: [
                                               "VR 1",
                                               "VR 2",
@@ -129,9 +140,13 @@ class _MobileVRState extends State<MobileVR> {
                                               "VR 6",
                                             ],
                                             onChanged: (
-                                                {toggleFilter = "", comboFilter = "", text = ""}) {},
+                                                {toggleFilter = "",
+                                                comboFilter = "",
+                                                text = ""}) {},
                                             onFieldSubmitted: (
-                                                {toggleFilter = "", comboFilter = "", text = ""}) {
+                                                {toggleFilter = "",
+                                                comboFilter = "",
+                                                text = ""}) {
                                               print(
                                                   "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
                                             }),
@@ -140,21 +155,26 @@ class _MobileVRState extends State<MobileVR> {
                                           child: SingleChildScrollView(
                                             child: VrList(
                                               list: vrList,
-                                              onTap: (index){
-                                                showDialog(context: context, builder: (contex)=>SmallPopUp(
-                                                  title: "Nom de la VR",
-                                                  saveTexte: "Ajouter à ma banque VR",
-                                                  save: true,
-                                                  saveFunction: (){
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: SizedBox(
-                                                    height: 350.h,
-                                                    child: VrBox(
-                                                      onTap: (){},
+                                              onTap: (index) {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (contex) =>
+                                                      SmallPopUp(
+                                                    title: "Nom de la VR",
+                                                    saveTexte:
+                                                        "Ajouter à ma banque VR",
+                                                    save: true,
+                                                    saveFunction: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: SizedBox(
+                                                      height: 350.h,
+                                                      child: VrBox(
+                                                        onTap: () {},
+                                                      ),
                                                     ),
                                                   ),
-                                                ),);
+                                                );
                                               },
                                             ),
                                           ),
@@ -181,7 +201,8 @@ class _MobileVRState extends State<MobileVR> {
                                     ),
                                   ),
                                   delete: true,
-                                  deleteTexte: "Retirer cette VR de ma banque VR",
+                                  deleteTexte:
+                                      "Retirer cette VR de ma banque VR",
                                   deleteFunction: () {
                                     Navigator.pop(context);
                                   },

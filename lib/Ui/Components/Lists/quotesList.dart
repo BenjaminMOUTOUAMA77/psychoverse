@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/quotePopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/quote.dart';
 import 'package:psychoverse/Ui/Components/Tiles/quoteTile.dart';
 
 class QuotesList extends StatefulWidget {
@@ -23,7 +23,7 @@ class _QuotesListState extends State<QuotesList> {
               onTap: (){
                 showDialog(
                   context: context,
-                  builder: (context) => BigPopUp(title: "Pensée",delete: true,child: QuotePopUp(),),
+                  builder: (context) => BigPopUp(title: "Pensée",delete: true,child: Quote(),),
                 );
               },
               child: Padding(

@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/imagePlaceholder.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -58,13 +59,7 @@ class _PatientBoxState extends State<PatientBox> {
                 ),
                 clipBehavior: Clip.hardEdge,
                 child: widget.image == null
-                    ? FadeInImage(
-                        placeholder: AssetImage("assets/images/LSFBlanc.png"),
-                        image: AssetImage(
-                          "assets/images/im8.jpg",
-                        ),
-                        fit: BoxFit.cover,
-                      )
+                    ? ImagePlaceholder()
                     : Image.file(
                         File(widget.image!.path!),
                   fit: BoxFit.cover,

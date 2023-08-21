@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
-import 'package:psychoverse/Ui/Components/Sections/seance.dart';
+import 'package:psychoverse/Ui/Components/PopUps/seance.dart';
 import 'package:psychoverse/Ui/Components/Tiles/simpleTile.dart';
 
 class SeanceList extends StatefulWidget {

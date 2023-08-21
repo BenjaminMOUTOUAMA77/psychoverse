@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/suiviPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/newSuivi.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
 import 'package:psychoverse/Ui/Components/Lists/suiviBoxList.dart';
 
@@ -43,7 +43,7 @@ class _SuivisListState extends State<SuivisList> {
                 texte: "Nouveau Suivi",
                 icon: FluentIcons.dependency_add,
                 function: () {
-                  showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Suivi",save: true,child: SuiviPopUp(),));
+                  showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Suivi",save: true,child: NewSuivi(),));
                 },
               ),
             ],

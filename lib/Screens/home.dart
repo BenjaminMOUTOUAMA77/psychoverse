@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
-import 'package:psychoverse/Ui/Components/Slides/quotesSlider.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/quotesSlider.dart';
 import 'package:psychoverse/Ui/Components/Menu/homeMenu.dart';
 import 'package:psychoverse/Providers/HomeProviders/sliderItemProvider.dart';
 

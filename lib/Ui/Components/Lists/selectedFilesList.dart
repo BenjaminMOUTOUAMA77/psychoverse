@@ -32,7 +32,7 @@ class _SelectedFilesListState extends State<SelectedFilesList> {
       },
       useParticularWidget: true,
       getWidget: (index){
-        return fileTile(file: widget.files[index],cancelFunction:(){
+        return FileTile(file: widget.files[index],cancelFunction:(){
           setState(() {
             widget.files.removeAt(index);
             widget.onChanged!(widget.files);

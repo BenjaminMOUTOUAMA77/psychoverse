@@ -10,7 +10,7 @@ import 'package:psychoverse/Screens/Architecture/Sections/identiteArchitecture.d
 import 'package:psychoverse/Screens/Architecture/Sections/suivisArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/testesArchitecture.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
-import 'package:psychoverse/Ui/Components/AppNav/appNavMenuPane.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/appNavMenuPane.dart';
 import 'package:psychoverse/Ui/Components/Buttons/togleButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/note.dart';

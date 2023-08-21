@@ -24,7 +24,7 @@ class _MakeHomeMenuState extends State<MakeHomeMenu> {
       HomeMenuButton(bgColor: AppColors.primary,writeColor: AppColors.blanc,title: 'Diagnostique',icon: AppIcons.diagnostic,screen: 7,),
       HomeMenuButton(bgColor: AppColors.rouge,writeColor: AppColors.blanc,title: 'Abonnement',icon: AppIcons.prices,screen: 8,),
       HomeMenuButton(bgColor: AppColors.primary,writeColor: AppColors.blanc,title: 'Mobile VR',icon: AppIcons.mobileVr,screen: 9,),
-      HomeMenuButton(bgColor: AppColors.rouge,writeColor: AppColors.blanc,title: 'Psychoverse',icon: AppIcons.logoSymbole,screen: 10,),
+      HomeMenuButton(bgColor: AppColors.rouge,writeColor: AppColors.blanc,title: 'Psychoverse',icon: AppIcons.logoSymboleV,screen: 10,),
       HomeMenuButton(bgColor: AppColors.blanc,writeColor: AppColors.primary,title: 'Mon Compte',icon: AppIcons.user,screen: 11,),
       HomeMenuButton(bgColor: AppColors.primary,writeColor: AppColors.blanc,title: 'À propos',icon: AppIcons.ap,screen: 13,),
     ];

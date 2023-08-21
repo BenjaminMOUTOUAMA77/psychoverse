@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/parentsPopUp.dart';
+import 'package:psychoverse/Ui/Components/PopUps/parents.dart';
 import 'package:psychoverse/Ui/Components/Tiles/parentsTile.dart';
 
 class ParentsList extends StatefulWidget {
@@ -24,7 +24,7 @@ class _ParentsListState extends State<ParentsList> {
               onTap: (){
                 showDialog(
                   context: context,
-                  builder: (context) => BigPopUp(title: "Parents "+widget.qualite,delete: true,child: ParentsPopUp(),),
+                  builder: (context) => BigPopUp(title: "Parents "+widget.qualite,delete: true,child: Parents(),),
                 );
               },
               child: Padding(

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/Ui/Components/Forms/phoneForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 
-class newPatient extends StatefulWidget {
+class newPersonne extends StatefulWidget {
   Function({
     String? nom,
     String? phoneNumber,
@@ -11,16 +11,16 @@ class newPatient extends StatefulWidget {
     String? contryCode,
     String? email,
   })? onChanged;
-  newPatient({
+  newPersonne({
     Key? key,
     this.onChanged,
   }) : super(key: key);
 
   @override
-  State<newPatient> createState() => _newPatientState();
+  State<newPersonne> createState() => _newPersonneState();
 }
 
-class _newPatientState extends State<newPatient> {
+class _newPersonneState extends State<newPersonne> {
   // Properties
   String? nom;
   String? phoneNumber;

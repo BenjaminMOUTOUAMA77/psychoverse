@@ -10,7 +10,7 @@ import 'package:psychoverse/Screens/Patients/DetailsSections/relations.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/rappelPatient.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/Suivi/mainSuivis.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/testes.dart';
-import 'package:psychoverse/Ui/Components/AppNav/appNavMenuPane.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/appNavMenuPane.dart';
 import 'package:psychoverse/Ui/Components/Buttons/togleButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/note.dart';

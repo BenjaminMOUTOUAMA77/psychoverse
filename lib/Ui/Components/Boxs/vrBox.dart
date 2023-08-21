@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/imagePlaceholder.dart';
 import 'package:psychoverse/Ui/Components/Buttons/smallButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/vrInfosDetails.dart';
@@ -9,7 +12,7 @@ import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class VrBox extends StatefulWidget {
-  String image;
+  String? image;
   String vrName;
   bool showStat;
   String stat;
@@ -59,11 +62,12 @@ class _VrBoxState extends State<VrBox> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     clipBehavior: Clip.hardEdge,
-                    child: FadeInImage(
-                      placeholder: AssetImage("assets/images/LSFBlanc.png"),
-                      image: AssetImage(widget.image),
-                      fit: BoxFit.cover,
-                    ),
+                    child: widget.image != null
+                        ? Image.file(
+                            File(widget.image!),
+                            fit: BoxFit.cover,
+                          )
+                        : const ImagePlaceholder(),
                   ),
                 ),
               ),
@@ -105,12 +109,17 @@ class _VrBoxState extends State<VrBox> {
                               textAlign: TextAlign.center,
                               overflow: TextOverflow.fade,
                             )
-                          : SmallAppButton(texte:"Détail",function: (){
-                            showDialog(context: context, builder: (context)=>BigPopUp(
-                              title: "Nom de la VR",
-                              child: VrInfosDetails(),
-                            ),);
-                      }),
+                          : SmallAppButton(
+                              texte: "Détail",
+                              function: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => BigPopUp(
+                                    title: "Nom de la VR",
+                                    child: VrInfosDetails(),
+                                  ),
+                                );
+                              }),
                     ],
                   ),
                   Gap(10.w),

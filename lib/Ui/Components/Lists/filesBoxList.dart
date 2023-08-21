@@ -27,7 +27,6 @@ class _FilesBoxListState extends State<FilesBoxList> {
         ),
         itemCount: widget.list!.length,
         itemBuilder: (BuildContext context, index) {
-          print(widget.list![index].path);
           return FileBox(file: widget.list![index],);
         },
       ),
