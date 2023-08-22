@@ -15,6 +15,7 @@ import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/comboBoxForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/progessionForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Components/Lists/filesBoxList.dart';
@@ -354,20 +355,70 @@ class _SuiviDetailState extends State<SuiviDetail> {
                       icon: FluentIcons.circle_addition_solid,
                       function: () => showDialog(
                         context: context,
-                        builder: (context) => SmallPopUp(
-                          title: "Ajouter une VR à ce suivi",
-                          child: SizedBox(
-                            height: 350.h,
-                            child: VrBox(
-                              vrName:
-                                  "edzedzedugzieugdized zeugdiegdize zedhizehdizhe",
-                            ),
+                        builder: (context) => BigPopUp(
+                          title:
+                          "Votre banque VR",
+                          child: Column(
+                            children: [
+                              MakeSearchBar(
+                                  withComboFilter: true,
+                                  withToggleFilter: false,
+                                  comboFilterList: [
+                                    "Tout",
+                                    "Catégorie",
+                                    "Nom",
+                                    "Code"
+                                  ],
+                                  textList: [
+                                    "VR 1",
+                                    "VR 2",
+                                    "VR 3",
+                                    "VR 4",
+                                    "VR 5",
+                                    "VR 6",
+                                  ],
+                                  onChanged: (
+                                      {toggleFilter = "",
+                                        comboFilter = "",
+                                        text = ""}) {},
+                                  onFieldSubmitted: (
+                                      {toggleFilter = "",
+                                        comboFilter = "",
+                                        text = ""}) {
+                                    print(
+                                        "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
+                                  }),
+                              Gap(30.h),
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  child: VrList(
+                                    list: vrList,
+                                    onTap: (index) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (contex) =>
+                                            SmallPopUp(
+                                              title: "Nom de la VR",
+                                              saveTexte:
+                                              "Ajouter à ce suivi",
+                                              save: true,
+                                              saveFunction: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: SizedBox(
+                                                height: 350.h,
+                                                child: VrBox(
+                                                  onTap: () {},
+                                                ),
+                                              ),
+                                            ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          save: true,
-                          saveTexte: "Ajouter",
-                          saveFunction: () {
-                            Navigator.pop(context);
-                          },
                         ),
                       ),
                     ),

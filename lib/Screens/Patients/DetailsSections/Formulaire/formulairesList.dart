@@ -60,7 +60,7 @@ class _FormulairesListState extends State<FormulairesList> {
                                 });
                               },
                             ),
-                          ));
+                          ),);
                 },
               ),
             ],

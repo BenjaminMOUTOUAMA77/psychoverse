@@ -20,6 +20,9 @@ class _ImagePlaceholderState extends State<ImagePlaceholder> {
       placeholderFit: BoxFit.cover,
       filterQuality: FilterQuality.high,
       placeholderFilterQuality: FilterQuality.high,
+      alignment: Alignment.center,
+      height: double.infinity,
+      width: double.infinity,
     );
   }
 }

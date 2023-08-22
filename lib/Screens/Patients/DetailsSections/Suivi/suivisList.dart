@@ -4,10 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
-import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/newSuivi.dart';
-import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
 import 'package:psychoverse/Ui/Components/Lists/suiviBoxList.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 
 class SuivisList extends StatefulWidget {
   final int uiKey;
@@ -43,7 +42,15 @@ class _SuivisListState extends State<SuivisList> {
                 texte: "Nouveau Suivi",
                 icon: FluentIcons.dependency_add,
                 function: () {
-                  showDialog(context: context, builder: (context)=>BigPopUp(title: "Nouveau Suivi",save: true,child: NewSuivi(),));
+                  showDialog(
+                    context: context,
+                    builder: (context) => SmallPopUp(
+                      title: "Nouveau Suivi",
+                      save: true,
+                      saveTexte: "Ouvrir un nouveau suivi",
+                      child:const  NewSuivi(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -51,8 +58,9 @@ class _SuivisListState extends State<SuivisList> {
         ),
         Gap(20.h),
         Expanded(
-          child:
-          SuiviBoxList(list: suivisList,),
+          child: SuiviBoxList(
+            list: suivisList,
+          ),
         ),
       ],
     );

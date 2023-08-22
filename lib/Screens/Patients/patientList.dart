@@ -74,7 +74,7 @@ class _PatientListState extends State<PatientList> {
                     context: context,
                     builder: (context) => SmallPopUp(
                       title: "Nouveau Dossier",
-                      child: newPersonne(),
+                      child: NewPersonne(),
                       save: true,
                       saveTexte: "Créer",
                       saveFunction: () {},
