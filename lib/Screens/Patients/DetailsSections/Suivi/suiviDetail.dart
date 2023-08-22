@@ -561,7 +561,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
                     context: context,
                     builder: (context) => MiddlePopUp(
                       title: "Séances",
-                      child: SeanceList(),
+                      child: SeanceList(list: ["Séance 1","Séance 2","Séance 3","Séance 4","Séance 5","Séance 6",],),
                     ),
                   ),
                 ),

@@ -118,6 +118,7 @@ class _TimeFormState extends State<TimeForm> {
                 ?AppTextStyle.formPlaceHolderStyleTexte: AppTextStyle.formStyleTexte,
           )
               : TimePicker(
+            hourFormat: HourFormat.HH,
             selected: selected,
             onChanged: (time) => setState(() => selected = time),
           ),

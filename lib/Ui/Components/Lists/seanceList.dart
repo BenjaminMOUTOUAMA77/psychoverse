@@ -6,7 +6,7 @@ import 'package:psychoverse/Ui/Components/Tiles/simpleTile.dart';
 
 class SeanceList extends StatefulWidget {
   List<String>? list;
-  SeanceList({Key? key,this.list}) : super(key: key);
+  SeanceList({Key? key, this.list}) : super(key: key);
 
   @override
   State<SeanceList> createState() => _SeanceListState();
@@ -15,33 +15,42 @@ class SeanceList extends StatefulWidget {
 class _SeanceListState extends State<SeanceList> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: widget.list != null ? widget.list!.map((item) {
-        return Builder(builder: (BuildContext context){
-          return GestureDetector(
-            onTap: (){
-              showDialog(
-                context: context,
-                builder: (context) => BigPopUp(
-                  title: item,
-                  delete:true,
-                  deleteTexte: "Retirer cette séance",
-                  deleteFunction: (){
-                    Navigator.pop(context);
+    return SingleChildScrollView(
+      child: Column(
+        children: widget.list != null
+            ? widget.list!.map((item) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => BigPopUp(
+                              title: item,
+                              delete: true,
+                              deleteTexte: "Retirer cette séance",
+                              deleteFunction: () {
+                                Navigator.pop(context);
+                              },
+                              child: SingleChildScrollView(child: Seance()),
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 50.w),
+                          child: SimpleTile(
+                            title: item,
+                          ),
+                        ),
+                      ),
+                    );
                   },
-                  child: SingleChildScrollView(child: Seance()),
-                ),
-              );
-            },
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50.w),
-              child: SimpleTile(
-                title: item,
-              ),
-            ),
-          );
-        },);
-      }).toList():[],
+                );
+              }).toList()
+            : [],
+      ),
     );
   }
 }

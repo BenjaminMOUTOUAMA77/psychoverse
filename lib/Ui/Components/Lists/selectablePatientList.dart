@@ -23,11 +23,10 @@ class SelectablePatientList extends StatefulWidget {
 }
 
 class _SelectablePatientListState extends State<SelectablePatientList> {
-  List<String>? selectedList;
-
+  List<String> selectedList=[];
   @override
   Widget build(BuildContext context) {
-    selectedList = widget.list;
+
     return ListView.builder(
       itemCount: widget.list!.length,
       itemBuilder: (context, index) {
