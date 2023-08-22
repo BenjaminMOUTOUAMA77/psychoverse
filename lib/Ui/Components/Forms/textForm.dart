@@ -87,8 +87,13 @@ class TextForm extends StatefulWidget {
 
 class _TextFormState extends State<TextForm> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     widget.value==null?null:widget.controller.value=TextEditingValue(text:widget.value.toString());
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+
     return AppFormBox(
       child: Column(
         children: [

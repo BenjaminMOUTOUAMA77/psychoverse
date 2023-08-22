@@ -21,7 +21,7 @@ class SuivisList extends StatefulWidget {
 
 class _SuivisListState extends State<SuivisList> {
   late ChangeSectionsProvider sections;
-  List<String> suivis = [
+  List<String> suivisList = [
     "Suivi 1",
     "Suivi 2",
     "Suivi 3",
@@ -49,44 +49,10 @@ class _SuivisListState extends State<SuivisList> {
             ],
           ),
         ),
-        suivis.length > 20
-            ? Column(
-                children: [
-                  MakeSearchBar(
-                      withComboFilter: true,
-                      withToggleFilter: true,
-                      comboFilterList: ["Nom", "Ville", "Numero dossier"],
-                      textList: [
-                        "Patient 1",
-                        "Patient 2",
-                        "Patient 3",
-                        "Patient 4",
-                        "Patient 5",
-                        "Patient 6",
-                      ],
-                      toggleFilterList: [
-                        "Tout",
-                        "En Cours",
-                        "En Pause",
-                        "Archivés",
-                      ],
-                      onChanged: (
-                          {toggleFilter = "",
-                          comboFilter = "",
-                          text = ""}) {},
-                      onFieldSubmitted: (
-                          {toggleFilter = "", comboFilter = "", text = ""}) {
-                        print(
-                            "Text = $text  |   ComboFilter = $comboFilter  |  ToggleFilter = $toggleFilter");
-                      }),
-                  Gap(70.h),
-                ],
-              )
-            : const Gap(0),
         Gap(20.h),
         Expanded(
           child:
-          SuiviBoxList(list: ["","","","","","","","","","","","","","","","","","",],),
+          SuiviBoxList(list: suivisList,),
         ),
       ],
     );

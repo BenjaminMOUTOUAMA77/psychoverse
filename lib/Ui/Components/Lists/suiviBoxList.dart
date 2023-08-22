@@ -8,11 +8,11 @@ import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class SuiviBoxList extends StatefulWidget {
-  List<String>? list;
+  List<String> list;
   int uiKey;
   int suiviUiKey;
   String texte;
-  SuiviBoxList({Key? key,this.list,this.uiKey=0,this.suiviUiKey=0,this.texte="Nom du Suivi"}) : super(key: key);
+  SuiviBoxList({Key? key,this.list=const [],this.uiKey=0,this.suiviUiKey=0,this.texte="Nom du Suivi"}) : super(key: key);
 
   @override
   State<SuiviBoxList> createState() => _SuiviBoxListState();
@@ -42,7 +42,7 @@ class _SuiviBoxListState extends State<SuiviBoxList> {
               ],
             ),
             child: Tooltip(
-              message: widget.texte,
+              message: widget.list[index],
               child: GestureDetector(
                 onTap: (){
                   setState(() {
@@ -61,7 +61,7 @@ class _SuiviBoxListState extends State<SuiviBoxList> {
                     children: [
                       Icon(FluentIcons.dataverse,size: 40.h,color: AppColors.rouge,),
                       Gap(15.h),
-                      Text(widget.texte,style: AppTextStyle.buttonStyleTexte.copyWith(color:AppColors.primary,fontWeight: FontWeight.w800),overflow: TextOverflow.ellipsis,),
+                      Text(widget.list[index],style: AppTextStyle.buttonStyleTexte.copyWith(color:AppColors.primary,fontWeight: FontWeight.w800),overflow: TextOverflow.ellipsis,),
                     ],
                   ),
                 ),

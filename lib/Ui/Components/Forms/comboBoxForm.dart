@@ -33,8 +33,12 @@ class ComboBoxForm extends StatefulWidget {
 class _ComboBoxFormState extends State<ComboBoxForm> {
   String? selected;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     selected=widget.selected;
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
     return AppFormBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

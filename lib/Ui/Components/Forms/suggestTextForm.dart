@@ -35,8 +35,13 @@ class SuggestTextForm extends StatefulWidget {
 class _SuggestTextFormState extends State<SuggestTextForm> {
   String? selected;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     selected=widget.value;
+    widget.controller = TextEditingController(text: selected);
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
     return AppFormBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

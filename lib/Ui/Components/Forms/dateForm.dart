@@ -13,7 +13,6 @@ class AppDateForm extends StatefulWidget {
   DateTime? value;
   bool readOnly;
   bool managers;
-
   Function(DateTime?)? onChanged;
   Function(DateTime?)? onFieldSubmitted;
 
@@ -33,8 +32,12 @@ class AppDateForm extends StatefulWidget {
 class _AppDateFormState extends State<AppDateForm> {
   DateTime? selected;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     selected=widget.value;
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
     return AppFormBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -30,8 +30,12 @@ class NumberTextForm extends StatefulWidget {
 class _NumberTextFormState extends State<NumberTextForm> {
   int? selected;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     selected=widget.value;
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
     return AppFormBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,9 +91,9 @@ class _NumberTextFormState extends State<NumberTextForm> {
                             size: 20.h,
                           ),
                           onPressed: () {
-                            widget.value=selected;
-                            widget.onFieldSubmitted!(widget.value);
                             setState(() {
+                              widget.value=selected;
+                              widget.onFieldSubmitted!(widget.value);
                               widget.readOnly = true;
                             });
                           },

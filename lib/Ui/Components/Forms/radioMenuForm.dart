@@ -34,8 +34,12 @@ class RadioMenuForm extends StatefulWidget {
 class _RadioMenuFormState extends State<RadioMenuForm> {
   String? selected;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     selected=widget.selected;
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
     return AppFormBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,8 +95,8 @@ class _RadioMenuFormState extends State<RadioMenuForm> {
                             size: 20.h,
                           ),
                           onPressed: () {
-                            widget.onFieldSubmitted!(widget.selected);
                             setState(() {
+                              widget.onFieldSubmitted!(widget.selected);
                               widget.readOnly = true;
                             });
                           },

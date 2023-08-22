@@ -3,7 +3,7 @@ import 'package:psychoverse/Ui/Utils/appImages.dart';
 
 class ImagePlaceholder extends StatefulWidget {
   final String image;
-  const ImagePlaceholder({Key? key, this.image = "assets/images/im7.jpg"})
+  const ImagePlaceholder({Key? key, this.image = "assets/images/im8.jpg"})
       : super(key: key);
 
   @override
@@ -17,7 +17,9 @@ class _ImagePlaceholderState extends State<ImagePlaceholder> {
       placeholder: AssetImage(AppImages.logoSymbole),
       image: AssetImage(widget.image),
       fit: BoxFit.cover,
-      placeholderFit: BoxFit.contain,
+      placeholderFit: BoxFit.cover,
+      filterQuality: FilterQuality.high,
+      placeholderFilterQuality: FilterQuality.high,
     );
   }
 }

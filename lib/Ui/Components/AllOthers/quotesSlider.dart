@@ -63,7 +63,7 @@ class _MakeQuotesSliderState extends State<MakeQuotesSlider> {
     List<Widget> getItems() => getQuotes().map((i) {
       return Builder(
         builder: (BuildContext context) {
-          return QuoteSlide(texte: i.texte, image: i.image, author: i.author);
+          return QuoteSlide(texte: i.texte, image: i.image!, author: i.author);
         },
       );
     }).toList();

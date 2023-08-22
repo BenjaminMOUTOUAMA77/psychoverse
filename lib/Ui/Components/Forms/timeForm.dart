@@ -10,7 +10,6 @@ class TimeForm extends StatefulWidget {
   final String title;
   String placeHolder;
   DateTime? value;
-  DateTime? selected;
   bool readOnly;
   bool managers;
 
@@ -24,7 +23,6 @@ class TimeForm extends StatefulWidget {
     this.managers=true,
     this.value,
     this.placeHolder="00:00",
-    this.selected,
     required this.onChanged,
     required this.onFieldSubmitted,
   }) : super(key: key);
@@ -34,6 +32,12 @@ class TimeForm extends StatefulWidget {
 }
 
 class _TimeFormState extends State<TimeForm> {
+  DateTime? selected;
+  @override
+  void initState() {
+    selected = widget.value;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return AppFormBox(
@@ -91,9 +95,9 @@ class _TimeFormState extends State<TimeForm> {
                             size: 20.h,
                           ),
                           onPressed: () {
-                            widget.value=widget.selected;
-                            widget.onFieldSubmitted(widget.value);
                             setState(() {
+                              widget.value=selected;
+                              widget.onFieldSubmitted(widget.value);
                               widget.readOnly = true;
                             });
                           },
@@ -114,8 +118,8 @@ class _TimeFormState extends State<TimeForm> {
                 ?AppTextStyle.formPlaceHolderStyleTexte: AppTextStyle.formStyleTexte,
           )
               : TimePicker(
-            selected: widget.selected,
-            onChanged: (time) => setState(() => widget.selected = time),
+            selected: selected,
+            onChanged: (time) => setState(() => selected = time),
           ),
         ],
       ),

@@ -42,7 +42,7 @@ class _FormulaireBoxListState extends State<FormulaireBoxList> {
               ],
             ),
             child: Tooltip(
-              message: widget.texte,
+              message: widget.list[index],
               child: GestureDetector(
                 onTap: (){
                   setState(() {
@@ -61,7 +61,7 @@ class _FormulaireBoxListState extends State<FormulaireBoxList> {
                     children: [
                       Icon(FluentIcons.company_directory,size: 40.h,color: AppColors.rouge,),
                       Gap(15.h),
-                      Text(widget.texte,style: AppTextStyle.buttonStyleTexte.copyWith(color:AppColors.primary,fontWeight: FontWeight.w800),overflow: TextOverflow.ellipsis,),
+                      Text(widget.list[index],style: AppTextStyle.buttonStyleTexte.copyWith(color:AppColors.primary,fontWeight: FontWeight.w800),overflow: TextOverflow.ellipsis,),
                     ],
                   ),
                 ),

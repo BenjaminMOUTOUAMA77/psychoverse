@@ -51,6 +51,7 @@ class _BigTextFormState extends State<BigTextForm> {
       document: Document.fromJson(jsonDecode(getData())),
       selection: TextSelection.collapsed(offset: 0),
     );
+
     return AppFormBox(
       child: Column(
         children: [

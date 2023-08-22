@@ -32,8 +32,12 @@ class ProgressionForm extends StatefulWidget {
 class _ProgressionFormState extends State<ProgressionForm> {
   double? selected;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     selected=widget.value;
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
     return AppFormBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,9 +92,9 @@ class _ProgressionFormState extends State<ProgressionForm> {
                                   size: 20.h,
                                 ),
                                 onPressed: () {
-                                  widget.value = selected;
-                                  widget.onFieldSubmitted!(widget.value);
                                   setState(() {
+                                    widget.value = selected;
+                                    widget.onFieldSubmitted!(widget.value);
                                     widget.readOnly = true;
                                   });
                                 },

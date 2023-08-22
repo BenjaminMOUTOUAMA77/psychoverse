@@ -11,7 +11,7 @@ class MultiCheckBoxMenuForm extends StatefulWidget {
   String placeHolder;
   bool readOnly;
   bool managers;
-  List<String>? list=[];
+  List<String>? list;
   Function(List<String>?)? onChanged;
   Function(List<String>?)? onFieldSubmitted;
 
@@ -21,7 +21,7 @@ class MultiCheckBoxMenuForm extends StatefulWidget {
     this.readOnly=true,
     this.managers=true,
     required this.selected,
-    this.placeHolder = "Slectionnez ici",
+    this.placeHolder = "_",
     required this.list,
     required this.onChanged,
     required this.onFieldSubmitted,
@@ -35,8 +35,12 @@ class MultiCheckBoxMenuForm extends StatefulWidget {
 class _MultiCheckBoxMenuFormState extends State<MultiCheckBoxMenuForm> {
   List<String>? selected;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     selected=widget.selected;
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
     return AppFormBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,7 +144,7 @@ class _MultiCheckBoxMenuFormState extends State<MultiCheckBoxMenuForm> {
                     )
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: selected!.map((i) {
+                  children: widget.list!.map((i) {
                     return Builder(
                       builder: (BuildContext context) {
                         return Padding(

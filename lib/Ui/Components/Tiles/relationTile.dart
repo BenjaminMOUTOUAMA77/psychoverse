@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/imagePlaceholder.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -13,6 +16,7 @@ class RelationTile extends StatefulWidget {
 }
 
 class _RelationTileState extends State<RelationTile> {
+  String? image;
   @override
   Widget build(BuildContext context) {
     return Tooltip(
@@ -32,18 +36,15 @@ class _RelationTileState extends State<RelationTile> {
             Container(
               height: 70.h,
               width: 70.h,
-              clipBehavior: Clip.antiAlias,
+              clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                 boxShadow: [
                   AppDesignEffects.shadow2,
                 ],
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/im1.jpg"),
-                ),
                 border: Border.all(width: 2, color: AppColors.grisLitePlus),
                 shape: BoxShape.circle,
               ),
+              child: image == null ? const ImagePlaceholder():Image.file(File(image!),fit: BoxFit.cover,),
             ),
             Gap(30.w),
             Column(
