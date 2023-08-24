@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Functions/initialisation.dart';
 import 'package:psychoverse/Providers/myAppPathProvider.dart';
@@ -10,18 +9,15 @@ import 'Providers/changeScreenProvider.dart';
 
 void main() async {
   initialisation();
-  initializeDateFormatting().then(
-    (_) => runApp(
+  runApp(
       MultiProvider(
         providers: [
-          ChangeNotifierProvider(
-              create: (_) => MainScreenPagesManagerProvider()),
+          ChangeNotifierProvider(create: (_) => MainScreenPagesManagerProvider()),
           ChangeNotifierProvider(create: (_) => MyAppPathProvider()),
         ],
         child: const MyApp(),
       ),
-    ),
-  );
+    );
 }
 
 class MyApp extends StatelessWidget {

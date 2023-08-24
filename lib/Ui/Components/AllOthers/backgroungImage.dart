@@ -17,7 +17,7 @@ class _MakeBackgroundImageState extends State<MakeBackgroundImage> {
       color: AppColors.blanc,
       child: Expanded(
         child: Opacity(
-          opacity: 0.015,
+          opacity: 0.01,
           child: FadeInImage(
             placeholder: AssetImage("assets/images/LSFBlanc.png"),
             image: AssetImage(AppImages.pattern,),
