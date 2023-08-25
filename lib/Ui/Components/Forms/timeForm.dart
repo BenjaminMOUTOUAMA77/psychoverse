@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:psychoverse/Functions/time.dart';
 import 'package:psychoverse/Ui/Components/Forms/zFormBox.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -113,7 +114,7 @@ class _TimeFormState extends State<TimeForm> {
 
           widget.readOnly
               ? Text(
-            widget.value==null?widget.placeHolder: DateFormat.jm(Localizations.localeOf(context).languageCode).format(widget.value as DateTime),
+            widget.value==null?widget.placeHolder: timeFormat(context, widget.value!),
             style: widget.value == null
                 ?AppTextStyle.formPlaceHolderStyleTexte: AppTextStyle.formStyleTexte,
           )

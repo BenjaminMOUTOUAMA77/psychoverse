@@ -107,7 +107,7 @@ class _MiddlePopUpState extends State<MiddlePopUp> {
                     ),
                   ),
                   Expanded(
-                    flex: 4,
+                    flex: 3,
                     child: Titre2(
                       title: widget.title,
                     ),
@@ -119,21 +119,18 @@ class _MiddlePopUpState extends State<MiddlePopUp> {
                       children: [
                         Tooltip(
                           message: widget.cancelTexte,
-                          child: SizedBox(
-                            width: 70,
-                            child: IconButton(
-                              style: ButtonStyle(
-                                elevation: ButtonState.all(1),
-                                backgroundColor: ButtonState.all(AppColors.rouge),
-                              ),
-                              icon: Icon(
-                                FluentIcons.cancel,
-                                color: AppColors.blanc,
-                                size: 30.h,
-                                weight: 100,
-                              ),
-                              onPressed:()=>Navigator.pop(context),
+                          child: IconButton(
+                            style: ButtonStyle(
+                              elevation: ButtonState.all(1),
+                              backgroundColor: ButtonState.all(AppColors.rouge),
                             ),
+                            icon: Icon(
+                              FluentIcons.cancel,
+                              color: AppColors.blanc,
+                              size: 30.h,
+                              weight: 100,
+                            ),
+                            onPressed:()=>Navigator.pop(context),
                           ),
                         ),
                       ],

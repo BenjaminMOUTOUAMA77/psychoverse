@@ -5,7 +5,7 @@ import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 import 'package:psychoverse/Ui/Components/Tiles/simpleTile.dart';
 
 class ListGenerator extends StatefulWidget {
-  List<String>? list;
+  List<String> list;
   String? popUpTitle;
   String? deleteTexte;
   String? formTexte;
@@ -18,7 +18,7 @@ class ListGenerator extends StatefulWidget {
   Function({String? value, int? index})? onSubmitted;
   ListGenerator(
       {Key? key,
-      this.list,
+      this.list=const [],
       this.popUpTitle,
       this.deleteTexte = "Supprimer",
       this.formTexte = "Désignation",
@@ -40,7 +40,7 @@ class _ListGeneratorState extends State<ListGenerator> {
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(
-        widget.list!.length,
+        widget.list.length,
         (i) => GestureDetector(
           onTap: () {
             widget.useParticularOntap
@@ -54,7 +54,7 @@ class _ListGeneratorState extends State<ListGenerator> {
                       deleteFunction: widget.deleteFunction!(i),
                       child: TextForm(
                         title: widget.formTexte!,
-                        value: widget.list![i],
+                        value: widget.list[i],
                         onChanged: (value) {
                           widget.onChanged!(value: value, index: i);
                         },
@@ -70,7 +70,7 @@ class _ListGeneratorState extends State<ListGenerator> {
             child: widget.useParticularWidget
                 ? widget.getWidget!(i)
                 : SimpleTile(
-                    title: widget.list![i],
+                    title: widget.list[i],
                     deleteTexte: widget.deleteTexte!,
                     deleteFunction: widget.deleteFunction!(i),
                   ),

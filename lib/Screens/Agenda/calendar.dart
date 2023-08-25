@@ -1,10 +1,16 @@
+import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 import 'package:psychoverse/Functions/time.dart';
+import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
+import 'package:psychoverse/Providers/changeScreenProvider.dart';
+import 'package:psychoverse/Ui/Components/Lists/zListGenerator.dart';
+import 'package:psychoverse/Ui/Components/PopUps/zMiddlePopUp.dart';
+import 'package:psychoverse/Ui/Components/Tiles/patientTile.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
-import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class Calendar extends StatefulWidget {
@@ -20,8 +26,15 @@ class _CalendarState extends State<Calendar> {
 
   MonthViewState monthView() => monthViewKey.currentState!;
 
+  late ChangeSectionsProvider sections;
+
+  DateTime selectedDay = now();
   @override
   Widget build(BuildContext context) {
+
+    sections = Provider.of<ChangeSectionsProvider>(context);
+    MainScreenPagesManagerProvider pagesManager = Provider.of<MainScreenPagesManagerProvider>(context);
+
     return Scaffold(
       body: MonthView(
         key: monthViewKey,
@@ -70,7 +83,7 @@ class _CalendarState extends State<Calendar> {
                 Expanded(
                   flex: 4,
                   child: Text(
-                    dateFormat(context, time),
+                    dateFormat(context, selectedDay),
                     style: AppTextStyle.buttonStyleTexte.copyWith(
                         fontSize: 15.sp + 10, fontWeight: FontWeight.w500),
                     textAlign: TextAlign.center,
@@ -86,6 +99,9 @@ class _CalendarState extends State<Calendar> {
                         child: IconButton(
                           onPressed: () {
                             monthView().animateToMonth(now());
+                            setState(() {
+                              selectedDay = now();
+                            });
                           },
                           icon: Icon(
                             Icons.event_repeat,
@@ -106,6 +122,7 @@ class _CalendarState extends State<Calendar> {
                               lastDate: lastDate(),
                             ).then((value) {
                               monthView().animateToMonth(value!);
+                              selectedDay = value;
                             });
                           },
                           icon: Icon(
@@ -134,28 +151,116 @@ class _CalendarState extends State<Calendar> {
           );
         },
         cellBuilder: (date, events, bool1, bool2) {
-          return Padding(
-            padding: EdgeInsets.all(15.h),
-            child: Badge(
-              textColor: AppColors.rouge,
-              backgroundColor: AppColors.blancGrise,
-              smallSize: 50,
-              largeSize: 50,
-              padding: EdgeInsets.all(10.h),
-              alignment: Alignment.center,
-              label: Text("45"),
-              child: Text(
-                date.day.toString(),
-                style: AppTextStyle.filedTexte.copyWith(
-                  fontSize: 12.sp + 10,
-                  color: DateTime(date.year, date.month, date.day) ==
-                      DateTime(now().year, now().month, now().day) || events.isNotEmpty
-                      ? AppColors.blanc
-                      : AppColors.primary,
+          return Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: isToday(date)
+                  ? AppColors.rouge
+                  : isSelectedDay(date, selectedDay)
+                      ? AppColors.primary
+                      : AppColors.blanc,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Opacity(
+              opacity: isSelectedMonth(date, selectedDay) ? 1 : 0.2,
+              child: AdaptiveLayout(
+                mediumLayout:  Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      date.day.toString(),
+                      style: AppTextStyle.filedTexte.copyWith(
+                        fontSize: 15.sp + 5,
+                        color: isToday(date) || isSelectedDay(date, selectedDay)
+                            ? AppColors.blanc
+                            : AppColors.primary,
+                      ),
+                    ),
+                    Gap(10.h),
+                    events.isNotEmpty? Container(
+                      padding: EdgeInsets.all(20.h),
+                      decoration: BoxDecoration(
+                        color: isToday(date) || isSelectedDay(date, selectedDay)
+                            ? AppColors.blanc
+                            : AppColors.rouge,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Text(
+                        events.length.toString(),
+                        style: AppTextStyle.filedTexte.copyWith(
+                            color: isToday(date) || isSelectedDay(date, selectedDay)
+                                ? AppColors.rouge
+                                :AppColors.blanc, fontSize: 10.sp + 5),
+                      ),
+                    ):const Gap(0),
+                  ],
+                ),
+                smallLayout: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      date.day.toString(),
+                      style: AppTextStyle.filedTexte.copyWith(
+                        fontSize: 15.sp + 5,
+                        color: isToday(date) || isSelectedDay(date, selectedDay)
+                            ? AppColors.blanc
+                            : AppColors.primary,
+                      ),
+                    ),
+                    Gap(10.w),
+                    events.isNotEmpty? Container(
+                      padding: EdgeInsets.all(20.h),
+                      decoration: BoxDecoration(
+                        color: isToday(date) || isSelectedDay(date, selectedDay)
+                            ? AppColors.blanc
+                            : AppColors.rouge,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Text(
+                        events.length.toString(),
+                        style: AppTextStyle.filedTexte.copyWith(
+                            color: isToday(date) || isSelectedDay(date, selectedDay)
+                                ? AppColors.rouge
+                                :AppColors.blanc, fontSize: 10.sp + 5),
+                      ),
+                    ):const Gap(0),
+                  ],
                 ),
               ),
             ),
           );
+        },
+        onCellTap: (events, date) {
+
+          List<String> patientList=[];
+
+          for(var item in events){
+            patientList.add(item.title);
+          }
+          setState(() {
+            selectedDay = date;
+            monthView().animateToMonth(selectedDay);
+            events.isNotEmpty? showDialog(
+              context: context,
+              builder: (context) => MiddlePopUp(
+                child: SingleChildScrollView(
+                  child: ListGenerator(
+                    list: patientList,
+                    useParticularWidget: true,
+                    useParticularOntap: true,
+                    getWidget: (index){
+                      return PatientTile(nom: patientList[index],time1: now(),time2: now(),);
+                    },
+                    onTap: (index){
+                      Navigator.pop(context);
+                      pagesManager.setPage(1);
+                    },
+
+                  ),
+                ),
+              ),
+            ):Null;
+          });
         },
       ),
     );
