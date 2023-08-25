@@ -18,9 +18,9 @@ class AbonnementBox extends StatefulWidget {
   VoidCallback? start;
   AbonnementBox({
     Key? key,
-    this.image = "",
-    this.nom = "",
-    this.prix = "",
+    this.image,
+    this.nom = "Nom abonnement",
+    this.prix = "200 000 USD",
     this.attributs = const [],
     this.start,
   }) : super(key: key);

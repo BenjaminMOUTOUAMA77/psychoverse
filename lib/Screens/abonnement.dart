@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/adaptive.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Boxs/abonnementBox.dart';
@@ -18,51 +18,6 @@ class Abonnement extends StatefulWidget {
 }
 
 class _AbonnementState extends State<Abonnement> {
-  AbonnementBox gratuit = AbonnementBox(
-    image: "assets/images/im3.jpg",
-    nom: "Plan gratruit",
-    prix: "0 fcfa",
-    attributs: [
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-    ],
-    start: () {},
-  );
-  AbonnementBox semestrielle = AbonnementBox(
-    image: "assets/images/im4.jpg",
-    nom: "Plan semestrielle",
-    prix: "20 mille fcfa",
-    attributs: [
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-    ],
-    start: () {},
-  );
-  AbonnementBox annuel = AbonnementBox(
-    image: "assets/images/im5.jpg",
-    nom: "Plan annuel",
-    prix: "35 mille fcfa",
-    attributs: [
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-      AttributAbonnementTile(),
-    ],
-    start: () {},
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -121,37 +76,49 @@ class _AbonnementState extends State<Abonnement> {
                     ),
                     AppContainer2(
                       title: "Plans d'abonnement",
-                      child: Column(
-                        children: [
-                          AdaptiveLayout(
-                            largeLayout: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: gratuit,
-                                ),
-                                Gap(20.w),
-                                Expanded(
-                                  child: semestrielle,
-                                ),
-                                Gap(20.w),
-                                Expanded(
-                                  child: annuel,
-                                ),
-                              ],
-                            ),
-                            smallLayout: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                gratuit,
-                                Gap(60.h),
-                                semestrielle,
-                                Gap(60.h),
-                                annuel,
-                              ],
-                            ),
-                          ),
-                        ],
+                      child: Adaptive(
+                        first: AbonnementBox(
+                          nom: "Plan gratruit",
+                          prix: "0 fcfa",
+                          attributs: [
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                          ],
+                          start: () {},
+                        ),
+                        second: AbonnementBox(
+                          nom: "Plan semestrielle",
+                          prix: "20 mille fcfa",
+                          attributs: [
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                          ],
+                          start: () {},
+                        ),
+                        third: AbonnementBox(
+                          nom: "Plan annuel",
+                          prix: "35 mille fcfa",
+                          attributs: [
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                            AttributAbonnementTile(),
+                          ],
+                          start: () {},
+                        ),
                       ),
                     ),
                   ],
