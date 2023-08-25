@@ -7,8 +7,8 @@ import 'package:psychoverse/Functions/pickFiles.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Providers/myAppPathProvider.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/adaptive.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer3.dart';
 import 'package:psychoverse/Ui/Components/Boxs/vrBox.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
@@ -25,7 +25,7 @@ import 'package:psychoverse/Ui/Components/PopUps/zMiddlePopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 import 'package:psychoverse/Ui/Components/Lists/vrNiveauList.dart';
 import 'package:psychoverse/Ui/Components/Lists/vrList.dart';
-import 'package:psychoverse/Ui/Components/PopUps/seance.dart';
+import 'package:psychoverse/Ui/Components/Blocs/seance.dart';
 import 'package:psychoverse/Ui/Components/Buttons/smallButton.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -181,7 +181,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
             ],
           ),
           Gap(20.h),
-          Bloc2(
+          AppContainer2(
             title: "À Propos",
             child: Column(
               children: [
@@ -241,7 +241,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Symptômes cognitifs, Comportementaux et affectifs",
             child: Column(
               children: [
@@ -257,7 +257,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Conséquences du problème",
             child: Column(
               children: [
@@ -273,7 +273,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Réaction de l'entourage",
             child: Column(
               children: [
@@ -281,7 +281,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Écris",
             child: Column(
               children: [
@@ -327,7 +327,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Suivis d'expériences de réalité virtuelle",
             child: Column(
               children: [
@@ -525,7 +525,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Séances",
             child: Column(
               children: [
@@ -547,7 +547,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
                     ),
                   ],
                 ),
-                Bloc3(
+                AppContainer3(
                   title: "Dernière séance",
                   child: Seance(
                     numero: -1,
@@ -568,7 +568,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Fichiers",
             child: Column(
               children: [

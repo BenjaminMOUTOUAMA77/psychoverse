@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/Formulaire/architectureFormulaireDetail.dart';
 import 'package:psychoverse/Screens/Architecture/Sections/Formulaire/architectureFormulaireList.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc11.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer4.dart';
 
 class ArchitectureFormulaires extends StatefulWidget {
   const ArchitectureFormulaires({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class _ArchitectureFormulairesState extends State<ArchitectureFormulaires> {
   @override
   Widget build(BuildContext context) {
     page =Provider.of<ArchitectureFormulairePagesManagerProvider>(context);
-    return Bloc11(
+    return AppContainer4(
       icon: FluentIcons.care_plan,
       title: "Formulaire",
       number: 10,

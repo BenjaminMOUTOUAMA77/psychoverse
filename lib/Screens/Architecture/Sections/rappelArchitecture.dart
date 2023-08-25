@@ -1,8 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc11.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer4.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 
@@ -16,13 +16,13 @@ class RappelArchitecture extends StatefulWidget {
 class _RappelArchitectureState extends State<RappelArchitecture> {
   @override
   Widget build(BuildContext context) {
-    return Bloc11(
+    return AppContainer4(
       icon: FluentIcons.skype_message,
       title: "Message rappel",
       number: 10,
       child: Column(
         children: [
-          Bloc2(
+          AppContainer2(
             title: "Email message rappel",
             child: Column(
               children: [
@@ -32,7 +32,7 @@ class _RappelArchitectureState extends State<RappelArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "SMS message rappel",
             child: Column(
               children: [

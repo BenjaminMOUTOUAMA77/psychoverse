@@ -1,8 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc11.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer4.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Components/Lists/zListGenerator.dart';
@@ -27,7 +27,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
 
   @override
   Widget build(BuildContext context) {
-    return Bloc11(
+    return AppContainer4(
       icon: FluentIcons.user_clapper,
       title: "Identité",
       number: 10,
@@ -40,7 +40,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Bloc2(
+                AppContainer2(
                   title: "Genre",
                   child: Column(
                     children: [
@@ -77,7 +77,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                     ],
                   ),
                 ),
-                Bloc2(
+                AppContainer2(
                   title: "Condition de résidence",
                   child: Column(
                     children: [
@@ -114,7 +114,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                     ],
                   ),
                 ),
-                Bloc2(
+                AppContainer2(
                   title: "Èthnie",
                   child: Column(
                     children: [
@@ -151,7 +151,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                     ],
                   ),
                 ),
-                Bloc2(
+                AppContainer2(
                   title: "Villes",
                   child: Column(
                     children: [
@@ -188,7 +188,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                     ],
                   ),
                 ),
-                Bloc2(
+                AppContainer2(
                   title: "Niveau d'étude",
                   child: Column(
                     children: [
@@ -225,7 +225,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                     ],
                   ),
                 ),
-                Bloc2(
+                AppContainer2(
                   title: "Professions",
                   child: Column(
                     children: [
@@ -262,7 +262,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                     ],
                   ),
                 ),
-                Bloc2(
+                AppContainer2(
                   title: "Réligions",
                   child: Column(
                     children: [
@@ -299,7 +299,7 @@ class _IdentiteArchitectureState extends State<IdentiteArchitecture> {
                     ],
                   ),
                 ),
-                Bloc2(
+                AppContainer2(
                   title: "Loisirs",
                   child: Column(
                     children: [

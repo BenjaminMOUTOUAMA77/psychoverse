@@ -6,7 +6,7 @@ import 'package:psychoverse/Providers/HomeProviders/sliderItemProvider.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/quote.dart';
+import 'package:psychoverse/Ui/Components/Blocs/quote.dart';
 import 'package:psychoverse/Ui/Components/Lists/quotesList.dart';
 
 class Quotes extends StatefulWidget {

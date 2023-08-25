@@ -1,10 +1,10 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer3.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/multiCheckBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
-import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer1.dart';
 
 class Historique extends StatefulWidget {
   final int uiKey;
@@ -20,7 +20,7 @@ class _HistoriqueState extends State<Historique> {
   List<String> marquantList = ["Marquant 1","Marquant 2","Marquant 3","Marquant 4"];
   @override
   Widget build(BuildContext context) {
-    return Bloc1(
+    return AppContainer1(
       uiKey: widget.uiKey,
       icon: FluentIcons.storyboard,
       title: "Historique",
@@ -28,7 +28,7 @@ class _HistoriqueState extends State<Historique> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Bloc2(
+          AppContainer2(
             title: "Antécédents",
             child: Column(
               children: [
@@ -40,11 +40,11 @@ class _HistoriqueState extends State<Historique> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Évènements de vie familiaux et/ou personnel",
             child: Column(
               children: [
-                Bloc3(
+                AppContainer3(
                   title: "Faits psychologiques",
                   child: Column(
                     children: [
@@ -55,7 +55,7 @@ class _HistoriqueState extends State<Historique> {
                     ],
                   ),
                 ),
-                Bloc3(
+                AppContainer3(
                   title: "Faits psychiatriques",
                   child: Column(
                     children: [
@@ -66,7 +66,7 @@ class _HistoriqueState extends State<Historique> {
                     ],
                   ),
                 ),
-                Bloc3(
+                AppContainer3(
                   title: "Faits sociaux marquants",
                   child: Column(
                     children: [

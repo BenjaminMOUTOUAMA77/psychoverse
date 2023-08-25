@@ -1,8 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc11.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer4.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
@@ -27,13 +27,13 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
   List<String> trameList = ["Trame 1","Trame 2","Trame 3","Trame 4",];
   @override
   Widget build(BuildContext context) {
-    return Bloc11(
+    return AppContainer4(
       icon: FluentIcons.care_plan,
       title: "Suivis",
       number: 10,
       child: Column(
         children: [
-          Bloc2(
+          AppContainer2(
             title: "Types de suivi",
             child: Column(
               children: [
@@ -70,7 +70,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Degré de manifestation",
             child: Column(
               children: [
@@ -107,7 +107,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Fréquence",
             child: Column(
               children: [
@@ -144,7 +144,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Évolutions",
             child: Column(
               children: [
@@ -181,7 +181,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Stratégie thérapeutique",
             child: Column(
               children: [
@@ -218,7 +218,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Analyses fonctionnelles",
             child: Column(
               children: [
@@ -255,7 +255,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Trames d'anamnèse",
             child: Column(
               children: [

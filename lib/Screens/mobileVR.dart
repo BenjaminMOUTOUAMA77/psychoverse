@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/adaptive.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Boxs/vrBox.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
@@ -46,7 +46,7 @@ class _MobileVRState extends State<MobileVR> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Bloc2(
+                    AppContainer2(
                       title: "Informations d'authentification",
                       child: Column(
                         children: [
@@ -104,7 +104,7 @@ class _MobileVRState extends State<MobileVR> {
                         ],
                       ),
                     ),
-                    Bloc2(
+                    AppContainer2(
                       title: "Votre banque VR",
                       child: Column(
                         children: [
@@ -213,7 +213,7 @@ class _MobileVRState extends State<MobileVR> {
                         ],
                       ),
                     ),
-                    Bloc2(
+                    AppContainer2(
                       title: "Information générale",
                       child: Column(
                         children: [

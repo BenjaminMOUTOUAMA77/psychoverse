@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Forms/radioMenuForm.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -30,7 +30,7 @@ class _SauvegardeState extends State<Sauvegarde> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Bloc2(
+                    AppContainer2(
                       title: "Paramètre de sauvegarde automatique",
                       child: Column(
                         children: [
@@ -52,7 +52,7 @@ class _SauvegardeState extends State<Sauvegarde> {
                         ],
                       ),
                     ),
-                    Bloc2(
+                    AppContainer2(
                       title: "Paramètre de sauvegarde Manuelle",
                       child: Column(
                         children: [
@@ -74,7 +74,7 @@ class _SauvegardeState extends State<Sauvegarde> {
                         ],
                       ),
                     ),
-                    Bloc2(
+                    AppContainer2(
                       title: "Information générale",
                       child: Column(
                         children: [

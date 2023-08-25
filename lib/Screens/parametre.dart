@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/changeScreenProvider.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Forms/switchForm.dart';
 
 class Parametre extends StatefulWidget {
@@ -28,7 +28,7 @@ class _ParametreState extends State<Parametre> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Bloc2(
+                    AppContainer2(
                       title: "Paramètre d'affichage",
                       child: Column(
                         children: [

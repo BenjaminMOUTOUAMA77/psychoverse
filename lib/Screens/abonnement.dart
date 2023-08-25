@@ -3,7 +3,7 @@ import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Boxs/abonnementBox.dart';
 import 'package:psychoverse/Ui/Components/Tiles/attibutAbonnementTile.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
@@ -76,7 +76,7 @@ class _AbonnementState extends State<Abonnement> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Bloc2(
+                    AppContainer2(
                       title: "Votre statut",
                       child: Column(
                         children: [
@@ -119,7 +119,7 @@ class _AbonnementState extends State<Abonnement> {
                         ],
                       ),
                     ),
-                    Bloc2(
+                    AppContainer2(
                       title: "Plans d'abonnement",
                       child: Column(
                         children: [

@@ -3,16 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
-class Bloc2 extends StatefulWidget {
+class AppContainer2 extends StatefulWidget {
   final String title;
   final Widget child;
-  const Bloc2({Key? key, this.title = "Title", required this.child})
+  const AppContainer2({Key? key, this.title = "Title", required this.child})
       : super(key: key);
   @override
-  State<Bloc2> createState() => _Bloc2State();
+  State<AppContainer2> createState() => _AppContainer2State();
 }
 
-class _Bloc2State extends State<Bloc2> {
+class _AppContainer2State extends State<AppContainer2> {
   IconData icon=FluentIcons.chevron_up;
   @override
   Widget build(BuildContext context) {

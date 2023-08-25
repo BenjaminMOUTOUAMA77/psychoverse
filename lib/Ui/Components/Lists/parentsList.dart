@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/adaptive.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/parents.dart';
+import 'package:psychoverse/Ui/Components/Blocs/parents.dart';
 import 'package:psychoverse/Ui/Components/Tiles/parentsTile.dart';
 
 class ParentsList extends StatefulWidget {

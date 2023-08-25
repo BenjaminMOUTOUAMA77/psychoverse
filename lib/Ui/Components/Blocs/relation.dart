@@ -11,7 +11,7 @@ import 'package:psychoverse/Ui/Components/Forms/numberTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/phoneForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/showImage.dart';
+import 'package:psychoverse/Ui/Components/Blocs/showImage.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class Relation extends StatefulWidget {

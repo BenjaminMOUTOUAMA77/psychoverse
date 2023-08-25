@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/adaptive.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/imagePlaceholder.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/multiCheckBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/dateForm.dart';
@@ -14,8 +14,8 @@ import 'package:psychoverse/Ui/Components/Forms/numberTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/phoneForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/showImage.dart';
-import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
+import 'package:psychoverse/Ui/Components/Blocs/showImage.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer1.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
@@ -67,12 +67,12 @@ class _IdentiteState extends State<Identite> {
 
   @override
   Widget build(BuildContext context) {
-    return Bloc1(
+    return AppContainer1(
       uiKey: widget.uiKey,
       icon: FluentIcons.user_clapper,
       title: "Identité",
       number: 10,
-      child: Bloc2(
+      child: AppContainer2(
         title: "Dossier 54",
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

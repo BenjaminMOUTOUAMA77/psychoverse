@@ -4,18 +4,18 @@ import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
-class Bloc3 extends StatefulWidget {
+class AppContainer3 extends StatefulWidget {
 
   final String title;
   final Widget? child;
 
-  const Bloc3({Key? key,this.title = "Title",this.child}) : super(key: key);
+  const AppContainer3({Key? key,this.title = "Title",this.child}) : super(key: key);
 
   @override
-  State<Bloc3> createState() => _Bloc3State();
+  State<AppContainer3> createState() => _AppContainer3State();
 }
 
-class _Bloc3State extends State<Bloc3> {
+class _AppContainer3State extends State<AppContainer3> {
   @override
   Widget build(BuildContext context) {
     return Padding(

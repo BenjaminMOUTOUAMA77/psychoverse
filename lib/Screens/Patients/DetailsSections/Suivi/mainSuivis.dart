@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Screens/Patients/DetailsSections/Suivi/suivis.dart';
-import 'package:psychoverse/Ui/Components/blocs/bloc1.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer1.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class MainSuivis extends StatefulWidget {
@@ -106,7 +106,7 @@ class _MainSuivisState extends State<MainSuivis> {
       addTab();
     }
 
-    return Bloc1(
+    return AppContainer1(
       uiKey: widget.uiKey,
       icon: FluentIcons.care_plan,
       title: "Suivis",

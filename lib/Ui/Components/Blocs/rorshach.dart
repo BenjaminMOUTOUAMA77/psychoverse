@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/imagePlaceholder.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
-import 'package:psychoverse/Ui/Components/PopUps/showImage.dart';
+import 'package:psychoverse/Ui/Components/Blocs/showImage.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class Rorshach extends StatefulWidget {

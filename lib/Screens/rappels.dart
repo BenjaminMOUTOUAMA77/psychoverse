@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/adaptive.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer3.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Buttons/smallButton.dart';
 import 'package:psychoverse/Ui/Components/Buttons/togleButton.dart';
@@ -47,7 +47,7 @@ class _RappelsState extends State<Rappels> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Bloc2(
+                    AppContainer2(
                       title: "Email Rappel",
                       child: Column(
                         children: [
@@ -174,7 +174,7 @@ class _RappelsState extends State<Rappels> {
                                           )
                                         : Gap(0),
                                     emailList.length > 0
-                                        ? Bloc3(
+                                        ? AppContainer3(
                                             title:
                                                 "Envoyer un mail à des destinataires cibles",
                                             child: Column(
@@ -237,7 +237,7 @@ class _RappelsState extends State<Rappels> {
                         ],
                       ),
                     ),
-                    Bloc2(
+                    AppContainer2(
                       title: "SMS Rappel",
                       child: Column(
                         children: [
@@ -365,7 +365,7 @@ class _RappelsState extends State<Rappels> {
                                           )
                                         : Gap(0),
                                     smsList.length > 0
-                                        ? Bloc3(
+                                        ? AppContainer3(
                                             title:
                                                 "Envoyer un sms à des destinataires ciblés",
                                             child: Column(

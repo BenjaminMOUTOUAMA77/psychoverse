@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/radioMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
@@ -127,7 +127,7 @@ class _ArchitectureFormulaireDetailState
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Bloc2(
+                AppContainer2(
                   title: "À Propos",
                   child: Column(
                     children: [
@@ -147,7 +147,7 @@ class _ArchitectureFormulaireDetailState
                     ],
                   ),
                 ),
-                Bloc2(
+                AppContainer2(
                   title: "Ossature",
                   child: AppReordableList(
                     list: lossature,

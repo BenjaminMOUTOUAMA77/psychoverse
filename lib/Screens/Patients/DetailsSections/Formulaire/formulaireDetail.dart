@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc3.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer3.dart';
 import 'package:psychoverse/Ui/Components/Forms/bigTextForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/multiCheckBoxMenuForm.dart';
 import 'package:psychoverse/Ui/Components/Forms/suggestTextForm.dart';
@@ -53,7 +53,7 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
               ],
             ),
             Gap(20.h),
-            Bloc2(
+            AppContainer2(
               title: "Section 1",
               child: Column(
                 children: [
@@ -62,7 +62,7 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
                   BigTextForm(onFieldSubmitted: (value) {}),
                   BigTextForm(onFieldSubmitted: (value) {}),
                   BigTextForm(onFieldSubmitted: (value) {}),
-                  Bloc3(
+                  AppContainer3(
                     child: Column(
                       children: [
                         TextForm(onChanged: (value){}, onFieldSubmitted: (value){}),
@@ -75,7 +75,7 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
                 ],
               ),
             ),
-            Bloc2(
+            AppContainer2(
               title: "Section 2",
               child: Column(
                 children: [
@@ -84,7 +84,7 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
                   BigTextForm(onFieldSubmitted: (value) {}),
                   BigTextForm(onFieldSubmitted: (value) {}),
                   BigTextForm(onFieldSubmitted: (value) {}),
-                  Bloc3(
+                  AppContainer3(
                     child: Column(
                       children: [
                         TextForm(onChanged: (value){}, onFieldSubmitted: (value){}),
@@ -97,7 +97,7 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
                 ],
               ),
             ),
-            Bloc2(
+            AppContainer2(
               title: "Section 3",
               child: Column(
                 children: [
@@ -106,7 +106,7 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
                   BigTextForm(onFieldSubmitted: (value) {}),
                   BigTextForm(onFieldSubmitted: (value) {}),
                   BigTextForm(onFieldSubmitted: (value) {}),
-                  Bloc3(
+                  AppContainer3(
                     child: Column(
                       children: [
                         TextForm(onChanged: (value){}, onFieldSubmitted: (value){}),
@@ -119,7 +119,7 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
                 ],
               ),
             ),
-            Bloc2(
+            AppContainer2(
               title: "Section 5",
               child: Column(
                 children: [
@@ -128,7 +128,7 @@ class _FormulaireDetailState extends State<FormulaireDetail> {
                   BigTextForm(onFieldSubmitted: (value) {}),
                   BigTextForm(onFieldSubmitted: (value) {}),
                   BigTextForm(onFieldSubmitted: (value) {}),
-                  Bloc3(
+                  AppContainer3(
                     child: Column(
                       children: [
                         TextForm(onChanged: (value){}, onFieldSubmitted: (value){}),

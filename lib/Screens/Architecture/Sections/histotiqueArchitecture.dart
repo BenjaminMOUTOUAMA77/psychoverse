@@ -1,8 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc11.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer4.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Components/Lists/zListGenerator.dart';
@@ -21,14 +21,14 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
   List<String> marquantList = ["Marquant 1", "Marquant 2", "Marquant 3", "Marquant 4"];
   @override
   Widget build(BuildContext context) {
-    return Bloc11(
+    return AppContainer4(
       icon: FluentIcons.storyboard,
       title: "Historique",
       number: 10,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Bloc2(
+          AppContainer2(
             title: "Faits psychologiques",
             child: Column(
               children: [
@@ -65,7 +65,7 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Faits psychiatriques",
             child: Column(
               children: [
@@ -102,7 +102,7 @@ class _HistoriqueArchitectureState extends State<HistoriqueArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Faits sociaux marquants",
             child: Column(
               children: [

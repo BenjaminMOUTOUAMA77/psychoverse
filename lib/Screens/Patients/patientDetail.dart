@@ -13,7 +13,7 @@ import 'package:psychoverse/Screens/Patients/DetailsSections/testes.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/appNavMenuPane.dart';
 import 'package:psychoverse/Ui/Components/Buttons/togleButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
-import 'package:psychoverse/Ui/Components/PopUps/note.dart';
+import 'package:psychoverse/Ui/Components/Blocs/note.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';

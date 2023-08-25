@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
-import 'package:psychoverse/Ui/Components/PopUps/newSuivi.dart';
+import 'package:psychoverse/Ui/Components/Blocs/newSuivi.dart';
 import 'package:psychoverse/Ui/Components/Lists/suiviBoxList.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 

@@ -1,8 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc11.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer4.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Components/Lists/zListGenerator.dart';
@@ -24,14 +24,14 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
 
   @override
   Widget build(BuildContext context) {
-    return Bloc11(
+    return AppContainer4(
       icon: FluentIcons.test_plan,
       title: "Testes",
       number: 10,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Bloc2(
+          AppContainer2(
             title: "Traits de parents",
             child: Column(
               children: [
@@ -69,7 +69,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Traits d'adultes",
             child: Column(
               children: [
@@ -106,7 +106,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Traits d'enfants",
             child: Column(
               children: [
@@ -143,7 +143,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Triangle de Karpman",
             child: Column(
               children: [
@@ -180,7 +180,7 @@ class _TextesArchitectureState extends State<TextesArchitecture> {
               ],
             ),
           ),
-          Bloc2(
+          AppContainer2(
             title: "Trais de personnalités",
             child: Column(
               children: [

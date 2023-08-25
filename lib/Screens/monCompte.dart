@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/adaptive.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
-import 'package:psychoverse/Ui/Components/Blocs/bloc2.dart';
+import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
@@ -29,7 +29,7 @@ class _MonCompteState extends State<MonCompte> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Bloc2(
+                    AppContainer2(
                       title: "Votre statut d'abonnement",
                       child: Column(
                         children: [
@@ -72,7 +72,7 @@ class _MonCompteState extends State<MonCompte> {
                         ],
                       ),
                     ),
-                    Bloc2(
+                    AppContainer2(
                       title: "Informations de d'authentification",
                       child: Column(
                         children: [

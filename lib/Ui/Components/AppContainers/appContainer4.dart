@@ -1,27 +1,27 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
+import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
 import 'package:psychoverse/Ui/Components/Titres/titre1.dart';
 
-class Bloc1 extends StatefulWidget {
-  int uiKey;
+class AppContainer4 extends StatefulWidget {
   final String title;
   final IconData? icon;
   final int number;
   final Widget? child;
-  Bloc1({Key? key,required this.uiKey,this.title = "Title", this.icon, this.number=0, this.child}) : super(key: key);
+  AppContainer4({Key? key,this.title = "Title", this.icon, this.number=0, this.child}) : super(key: key);
 
   @override
-  State<Bloc1> createState() => _Bloc1State();
+  State<AppContainer4> createState() => _AppContainer4State();
 }
 
-class _Bloc1State extends State<Bloc1> {
-  late ChangeSectionsProvider sections;
+class _AppContainer4State extends State<AppContainer4> {
+  late ChangeSectionsProviderArchitecture sections;
+  bool variable=true;
   @override
   Widget build(BuildContext context) {
-    sections = Provider.of<ChangeSectionsProvider>(context);
-    return sections.getMode(widget.uiKey)?Padding(
+    sections = Provider.of<ChangeSectionsProviderArchitecture>(context);
+    return sections.mode?Padding(
       padding: EdgeInsets.symmetric(vertical: 20.h),
       child: Column(
         children: [
