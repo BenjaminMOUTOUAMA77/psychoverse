@@ -5,7 +5,7 @@ import 'package:psychoverse/Screens/Architecture/architecture.dart';
 import 'package:psychoverse/Screens/Patients/mainPatient.dart';
 import 'package:psychoverse/Screens/aPropos.dart';
 import 'package:psychoverse/Screens/abonnement.dart';
-import 'package:psychoverse/Screens/agenda.dart';
+import 'package:psychoverse/Screens/Agenda/agenda.dart';
 import 'package:psychoverse/Screens/mobileVR.dart';
 import 'package:psychoverse/Screens/monCompte.dart';
 import 'package:psychoverse/Screens/parametre.dart';
