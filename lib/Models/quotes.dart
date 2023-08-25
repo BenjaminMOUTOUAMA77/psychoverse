@@ -1,8 +1,8 @@
 class Quote{
-  late int id;
-  late String texte;
-  late String? image;
-  late String author;
+  int id;
+  String texte;
+  String? image;
+  String author;
 
   get citation => texte;
 

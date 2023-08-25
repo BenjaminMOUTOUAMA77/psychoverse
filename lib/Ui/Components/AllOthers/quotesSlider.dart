@@ -27,23 +27,18 @@ class _MakeQuotesSliderState extends State<MakeQuotesSlider> {
     List<Quote> getQuotes() {
       return [
         Quote(
-            image: "assets/images/im2.jpg",
             texte:
             "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
         Quote(
-            image: "assets/images/im3.jpg",
             texte:
             "Jamais la psychologie ne pourra dire sur la folie la vérité, puisque c'est la folie qui détient la vérité de la psychologie."),
         Quote(
-            image: "assets/images/im4.jpg",
             texte:
             "La psychologie est la science qui vous apprend des choses que vous savez déjà en des termes que vous ne comprenez pas"),
         Quote(
-            image: "assets/images/im5.jpg",
             texte:
             "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
         Quote(
-            image: "assets/images/im6.jpg",
             texte:
             "La psychologie c'est l'art de faire croire aux autres que nous les comprenons"),
         Quote(
@@ -51,11 +46,9 @@ class _MakeQuotesSliderState extends State<MakeQuotesSlider> {
             texte:
             "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
         Quote(
-            image: "assets/images/im8.jpg",
             texte:
             "Ne fais pas de psychologie dans la colère, tu verrais trop juste"),
         Quote(
-            image: "assets/images/im1.jpg",
             texte:
             "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
       ];
@@ -63,7 +56,7 @@ class _MakeQuotesSliderState extends State<MakeQuotesSlider> {
     List<Widget> getItems() => getQuotes().map((i) {
       return Builder(
         builder: (BuildContext context) {
-          return QuoteSlide(texte: i.texte, image: i.image!, author: i.author);
+          return QuoteSlide(texte: i.texte, image: i.image, author: i.author);
         },
       );
     }).toList();
@@ -92,13 +85,13 @@ class _MakeQuotesSliderState extends State<MakeQuotesSlider> {
 
 class QuoteSlide extends StatefulWidget {
   final String texte;
-  final String image;
+  final String? image;
   final String author;
   const QuoteSlide(
       {Key? key,
-      required this.texte,
-      required this.image,
-      required this.author})
+      this.texte="Texte",
+      this.image,
+      this.author="Author"})
       : super(key: key);
 
   @override
@@ -126,9 +119,9 @@ class _QuoteSlideState extends State<QuoteSlide> {
                 ),
               ],
             ),
-            child: widget.image.isEmpty
+            child: widget.image==null
                 ? const ImagePlaceholder()
-                : Image.file(File(widget.image),
+                : Image.file(File(widget.image!),
               fit: BoxFit.cover,
             ),
           ),),

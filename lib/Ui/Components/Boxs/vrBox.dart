@@ -19,7 +19,7 @@ class VrBox extends StatefulWidget {
   VoidCallback? onTap;
   VrBox({
     Key? key,
-    this.image = "assets/images/im8.jpg",
+    this.image,
     this.vrName = "Nom de l'exp VR",
     this.showStat = false,
     this.stat = "0/0",
