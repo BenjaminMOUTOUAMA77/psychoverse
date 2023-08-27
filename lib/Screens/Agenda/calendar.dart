@@ -1,4 +1,3 @@
-import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -154,78 +153,42 @@ class _CalendarState extends State<Calendar> {
           return Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: isToday(date)
-                  ? AppColors.rouge
-                  : isSelectedDay(date, selectedDay)
-                      ? AppColors.primary
-                      : AppColors.blanc,
+              color: AppColors.blanc,
               borderRadius: BorderRadius.circular(5),
             ),
             child: Opacity(
-              opacity: isSelectedMonth(date, selectedDay) ? 1 : 0.2,
-              child: AdaptiveLayout(
-                mediumLayout:  Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      date.day.toString(),
-                      style: AppTextStyle.filedTexte.copyWith(
-                        fontSize: 15.sp + 5,
-                        color: isToday(date) || isSelectedDay(date, selectedDay)
-                            ? AppColors.blanc
-                            : AppColors.primary,
-                      ),
-                    ),
-                    Gap(10.h),
-                    events.isNotEmpty? Container(
-                      padding: EdgeInsets.all(20.h),
-                      decoration: BoxDecoration(
-                        color: isToday(date) || isSelectedDay(date, selectedDay)
-                            ? AppColors.blanc
-                            : AppColors.rouge,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Text(
-                        events.length.toString(),
+              opacity: isSelectedMonth(date, selectedDay) ? 1 : 0.5,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(Icons.arrow_right,size: 60.w,color: isToday(date) ? AppColors.rouge : isSelectedDay(date, selectedDay) ? AppColors.primary : Colors.transparent,),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        date.day.toString(),
                         style: AppTextStyle.filedTexte.copyWith(
-                            color: isToday(date) || isSelectedDay(date, selectedDay)
-                                ? AppColors.rouge
-                                :AppColors.blanc, fontSize: 10.sp + 5),
+                          fontSize: 15.sp + 5,
+                          color: AppColors.primary,
+                        ),
                       ),
-                    ):const Gap(0),
-                  ],
-                ),
-                smallLayout: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      date.day.toString(),
-                      style: AppTextStyle.filedTexte.copyWith(
-                        fontSize: 15.sp + 5,
-                        color: isToday(date) || isSelectedDay(date, selectedDay)
-                            ? AppColors.blanc
-                            : AppColors.primary,
-                      ),
-                    ),
-                    Gap(10.w),
-                    events.isNotEmpty? Container(
-                      padding: EdgeInsets.all(20.h),
-                      decoration: BoxDecoration(
-                        color: isToday(date) || isSelectedDay(date, selectedDay)
-                            ? AppColors.blanc
-                            : AppColors.rouge,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Text(
-                        events.length.toString(),
-                        style: AppTextStyle.filedTexte.copyWith(
-                            color: isToday(date) || isSelectedDay(date, selectedDay)
-                                ? AppColors.rouge
-                                :AppColors.blanc, fontSize: 10.sp + 5),
-                      ),
-                    ):const Gap(0),
-                  ],
-                ),
+                      Gap(10.w),
+                      events.isNotEmpty? Container(
+                        padding: EdgeInsets.all(20.w),
+                        decoration: BoxDecoration(
+                          color: isToday(date) ? AppColors.rouge : AppColors.primary,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          events.length.toString(),
+                          style: AppTextStyle.filedTexte.copyWith(
+                              color: AppColors.blanc, fontSize: 10.sp + 5),
+                        ),
+                      ):const Gap(0),
+                    ],
+                  ),
+                  Icon(Icons.arrow_left,size: 60.w,color: isToday(date) ? AppColors.rouge : isSelectedDay(date, selectedDay) ? AppColors.primary : Colors.transparent,),
+                ],
               ),
             ),
           );
