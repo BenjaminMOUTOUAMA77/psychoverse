@@ -26,6 +26,7 @@ class _HomeState extends State<Home> {
             child: Column(
               children: [
                 Expanded(child: const  MakeQuotesSlider(),),
+                Gap(100.h),
                 /*
                 Expanded(child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 250.w),

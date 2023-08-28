@@ -79,7 +79,7 @@ class _MakeQuotesSliderState extends State<MakeQuotesSlider> {
         pauseAutoPlayOnTouch: false,
         enlargeCenterPage: true,
         enlargeFactor: 0.5,
-        viewportFraction: 0.97,
+        viewportFraction: 1,
         onPageChanged: onSlide,
       ),
     );
@@ -111,9 +111,7 @@ class _QuoteSlideState extends State<QuoteSlide> {
             width: double.infinity,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  bottomLeft: Radius.circular(10)),
+              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10)),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.grisLite,
@@ -137,9 +135,7 @@ class _QuoteSlideState extends State<QuoteSlide> {
                 alignment: AlignmentDirectional.center,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      bottomRight: Radius.circular(10)),
+                  borderRadius: const BorderRadius.only(bottomRight: Radius.circular(10)),
                   color: getColor(),
                 ),
                 child: AdaptiveLayout(
