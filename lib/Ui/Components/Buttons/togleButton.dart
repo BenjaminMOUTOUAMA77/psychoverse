@@ -288,7 +288,7 @@ class _AppToggleMenuButtonState extends State<AppToggleMenuButton> {
                   width: 1,
                   strokeAlign: BorderSide.strokeAlignCenter),
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(7),
               ),
             ),
           ),
@@ -309,7 +309,7 @@ class _AppToggleMenuButtonState extends State<AppToggleMenuButton> {
                   width: 1,
                   strokeAlign: BorderSide.strokeAlignCenter),
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(7),
               ),
             ),
           ),

@@ -34,7 +34,7 @@ class _MainScreensManagerState extends State<MainScreensManager> {
           onChanged: (index) {
             pagesManager.setPage(index);
           },
-          header: Container(color: AppColors.blanc,padding: EdgeInsets.symmetric(vertical: 7),child: Image.asset(AppImages.logo),),
+          header: Container(color: AppColors.blanc,padding:const  EdgeInsets.symmetric(vertical: 7),child: Image.asset(AppImages.logo),),
           items: appNavMenu(pagesManager),
           footerItems: appDownMenu(pagesManager),
         ),

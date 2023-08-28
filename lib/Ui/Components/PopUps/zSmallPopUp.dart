@@ -50,7 +50,7 @@ class _SmallPopUpState extends State<SmallPopUp> {
               color: AppColors.blanc,
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
-                AppDesignEffects.shadow3,
+                AppDesignEffects.shadow1,
               ],
             ),
             clipBehavior: Clip.hardEdge,

@@ -24,19 +24,13 @@ class _HomeState extends State<Home> {
           const MakeBackgroundImage(),
           Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Gap(20.h),
-                Expanded(child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.w,),
-                  child: MakeQuotesSlider(),
-                ),),
-                Gap(10.h),
+                Expanded(child: const  MakeQuotesSlider(),),
+                /*
                 Expanded(child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 250.w),
                   child: const MakeHomeMenu(),
-                )),
+                )),*/
               ],
             ),
           ),

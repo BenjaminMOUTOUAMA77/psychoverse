@@ -43,7 +43,7 @@ class _MiddlePopUpState extends State<MiddlePopUp> {
           color: AppColors.blanc,
           borderRadius: BorderRadius.circular(10.r),
           boxShadow: [
-            AppDesignEffects.shadow3,
+            AppDesignEffects.shadow1,
           ],
         ),
         clipBehavior: Clip.hardEdge,

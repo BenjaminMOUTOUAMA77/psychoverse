@@ -20,6 +20,7 @@ class MakeQuotesSlider extends StatefulWidget {
   @override
   State<MakeQuotesSlider> createState() => _MakeQuotesSliderState();
 }
+
 class _MakeQuotesSliderState extends State<MakeQuotesSlider> {
   @override
   Widget build(BuildContext context) {
@@ -28,41 +29,43 @@ class _MakeQuotesSliderState extends State<MakeQuotesSlider> {
       return [
         Quote(
             texte:
-            "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
+                "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
         Quote(
             texte:
-            "Jamais la psychologie ne pourra dire sur la folie la vérité, puisque c'est la folie qui détient la vérité de la psychologie."),
+                "Jamais la psychologie ne pourra dire sur la folie la vérité, puisque c'est la folie qui détient la vérité de la psychologie."),
         Quote(
             texte:
-            "La psychologie est la science qui vous apprend des choses que vous savez déjà en des termes que vous ne comprenez pas"),
+                "La psychologie est la science qui vous apprend des choses que vous savez déjà en des termes que vous ne comprenez pas"),
         Quote(
             texte:
-            "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
+                "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
         Quote(
             texte:
-            "La psychologie c'est l'art de faire croire aux autres que nous les comprenons"),
-        Quote(
-            image: "assets/images/im7.jpg",
-            texte:
-            "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
+                "La psychologie c'est l'art de faire croire aux autres que nous les comprenons"),
         Quote(
             texte:
-            "Ne fais pas de psychologie dans la colère, tu verrais trop juste"),
+                "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
         Quote(
             texte:
-            "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
+                "Ne fais pas de psychologie dans la colère, tu verrais trop juste"),
+        Quote(
+            texte:
+                "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
       ];
     }
+
     List<Widget> getItems() => getQuotes().map((i) {
-      return Builder(
-        builder: (BuildContext context) {
-          return QuoteSlide(texte: i.texte, image: i.image, author: i.author);
-        },
-      );
-    }).toList();
+          return Builder(
+            builder: (BuildContext context) {
+              return QuoteSlide(
+                  texte: i.texte, image: i.image, author: i.author);
+            },
+          );
+        }).toList();
     void onSlide(int index, CarouselPageChangedReason changeReason) {
       sliderItem.set(index);
     }
+
     return CarouselSlider(
       items: getItems(),
       options: CarouselOptions(
@@ -88,29 +91,29 @@ class QuoteSlide extends StatefulWidget {
   final String? image;
   final String author;
   const QuoteSlide(
-      {Key? key,
-      this.texte="Texte",
-      this.image,
-      this.author="Author"})
+      {Key? key, this.texte = "Texte", this.image, this.author = "Author"})
       : super(key: key);
 
   @override
   State<QuoteSlide> createState() => _QuoteSlideState();
 }
+
 class _QuoteSlideState extends State<QuoteSlide> {
   @override
   Widget build(BuildContext context) {
-    ScrollController myScrolController=ScrollController(
+    ScrollController myScrolController = ScrollController(
       keepScrollOffset: false,
     );
     return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(child: Container(
+      children: [
+        Expanded(
+          child: Container(
             width: double.infinity,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10.r)),
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10)),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.grisLite,
@@ -119,89 +122,80 @@ class _QuoteSlideState extends State<QuoteSlide> {
                 ),
               ],
             ),
-            child: widget.image==null
+            child: widget.image == null
                 ? const ImagePlaceholder()
-                : Image.file(File(widget.image!),
-              fit: BoxFit.cover,
-            ),
-          ),),
-          Gap(15.w),
-          Expanded(child: Stack(
+                : Image.file(File(widget.image!), fit: BoxFit.cover),
+          ),
+        ),
+        Expanded(
+          child: Stack(
             alignment: AlignmentDirectional.center,
             children: [
-              SizedBox(
-                height: double.infinity,
-                width:double.infinity,
-                child: Acrylic(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                  ),
-                  blurAmount: 5,
-                  luminosityAlpha: 5,
-                  tint: AppColors.primary,
-                  elevation: 2,
-                  child: Container(
-                    padding: EdgeInsets.only(top: 50.h,bottom: 10.h, left: 70.w,right: 70.w),
-                    alignment: AlignmentDirectional.center,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                      color: Colors.transparent,
+              Container(
+                padding: EdgeInsets.only(
+                    top: 50.h, bottom: 10.h, left: 70.w, right: 70.w),
+                alignment: AlignmentDirectional.center,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      bottomRight: Radius.circular(10)),
+                  color: getColor(),
+                ),
+                child: AdaptiveLayout(
+                  smallLayout: SingleChildScrollView(
+                    controller: myScrolController,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "« ${widget.texte} »",
+                          softWrap: true,
+                          overflow: TextOverflow.fade,
+                          style: AppTextStyle.quoteTexte
+                              .copyWith(fontSize: 30.sp + 5),
+                          textAlign: TextAlign.justify,
+                        ),
+                        Gap(30.h),
+                        Text(
+                          widget.author,
+                          style: AppTextStyle.quoteTexte.copyWith(
+                              fontSize: 30.sp,
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.grisLite),
+                          textAlign: TextAlign.justify,
+                        ),
+                      ],
                     ),
-                    child: AdaptiveLayout(
-                      smallLayout: SingleChildScrollView(
-                        controller: myScrolController,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "« ${widget.texte} »",
-                              softWrap: true,
-                              overflow: TextOverflow.fade,
-                              style: AppTextStyle.quoteTexte.copyWith(fontSize: 30.sp+5),
-                              textAlign: TextAlign.justify,
-                            ),
-                            Gap(30.h),
-                            Text(
-                              widget.author,
-                              style: AppTextStyle.quoteTexte.copyWith(
-                                  fontSize: 30.sp,
-                                  fontWeight: FontWeight.w900,
-                                  color: AppColors.grisLite),
-                              textAlign: TextAlign.justify,
-                            ),
-                          ],
+                  ),
+                  mediumLayout: SingleChildScrollView(
+                    controller: myScrolController,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "« ${widget.texte} »",
+                          style:
+                              AppTextStyle.quoteTexte.copyWith(fontSize: 30.sp),
+                          textAlign: TextAlign.justify,
                         ),
-                      ),
-                      mediumLayout: SingleChildScrollView(
-                        controller: myScrolController,
-                        child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "« ${widget.texte} »",
-                            style: AppTextStyle.quoteTexte.copyWith(fontSize: 30.sp),
-                            textAlign: TextAlign.justify,
-                          ),
-                          Gap(40.h),
-                          Text(
-                            widget.author,
-                            style: AppTextStyle.quoteTexte.copyWith(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w900,
-                                color: AppColors.grisLite),
-                            textAlign: TextAlign.justify,
-                          ),
-                        ],
+                        Gap(40.h),
+                        Text(
+                          widget.author,
+                          style: AppTextStyle.quoteTexte.copyWith(
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.grisLite),
+                          textAlign: TextAlign.justify,
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ),
               ),
               Positioned(
-                height: 30.h,
-                top: 20.h,
+                height: 50.h,
+                top: 50.h,
                 child: Opacity(
                   opacity: 0.4,
                   child: Transform.rotate(
@@ -211,8 +205,9 @@ class _QuoteSlideState extends State<QuoteSlide> {
                 ),
               ),
             ],
-          ),),
-        ],
-      );
+          ),
+        ),
+      ],
+    );
   }
 }
