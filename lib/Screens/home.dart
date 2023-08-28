@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/quotesSlider.dart';
-import 'package:psychoverse/Ui/Components/Menu/homeMenu.dart';
 import 'package:psychoverse/Providers/HomeProviders/sliderItemProvider.dart';
 
 class Home extends StatefulWidget {
@@ -25,13 +24,8 @@ class _HomeState extends State<Home> {
           Center(
             child: Column(
               children: [
-                Expanded(child: const  MakeQuotesSlider(),),
+                const Expanded(child: MakeQuotesSlider(),),
                 Gap(100.h),
-                /*
-                Expanded(child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 250.w),
-                  child: const MakeHomeMenu(),
-                )),*/
               ],
             ),
           ),
