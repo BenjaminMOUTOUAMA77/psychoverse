@@ -109,17 +109,6 @@ class _QuoteSlideState extends State<QuoteSlide> {
         Expanded(
           child: Container(
             width: double.infinity,
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.grisLite,
-                  blurRadius: 1,
-                  spreadRadius: 0.5,
-                ),
-              ],
-            ),
             child: widget.image == null
                 ? const ImagePlaceholder()
                 : Image.file(File(widget.image!), fit: BoxFit.cover),
@@ -130,14 +119,10 @@ class _QuoteSlideState extends State<QuoteSlide> {
             alignment: AlignmentDirectional.center,
             children: [
               Container(
-                padding: EdgeInsets.only(
-                    top: 50.h, bottom: 10.h, left: 70.w, right: 70.w),
+                padding: EdgeInsets.only(top: 50.h, bottom: 10.h, left: 70.w, right: 70.w),
                 alignment: AlignmentDirectional.center,
                 width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(bottomRight: Radius.circular(10)),
-                  color: getColor(),
-                ),
+                color: getColor(),
                 child: AdaptiveLayout(
                   smallLayout: SingleChildScrollView(
                     controller: myScrolController,
