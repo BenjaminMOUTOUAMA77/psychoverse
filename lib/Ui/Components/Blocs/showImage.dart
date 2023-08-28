@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:open_file/open_file.dart';
 import 'package:psychoverse/Functions/pickFiles.dart';
+import 'package:psychoverse/Ui/Components/AllOthers/imagePlaceholder.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 
 class ShowImage extends StatefulWidget {
@@ -25,14 +26,7 @@ class _ShowImageState extends State<ShowImage> {
       alignment: Alignment.center,
       children: [
         widget.image == null
-            ? FadeInImage(
-                image: AssetImage(
-                  "assets/images/im7.jpg",
-                ),
-                placeholder: AssetImage(
-                  "assets/images/nuanceBlanc.png",
-                ),
-              )
+            ? const ImagePlaceholder()
             : Image.file(
                 File(widget.image!.path.toString()),
                 fit: BoxFit.contain,
