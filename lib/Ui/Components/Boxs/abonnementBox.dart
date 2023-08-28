@@ -91,10 +91,17 @@ class _AbonnementBoxState extends State<AbonnementBox> {
                     horizontal: 20.w,
                   ),
                   child: Container(
-                      color: AppColors.primary,
                       padding: EdgeInsets.symmetric(
                           horizontal: 20.w, vertical: 10.h),
                       alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        border: Border.symmetric(
+                          vertical: BorderSide(
+                            color: AppColors.blanc,
+                          ),
+                        ),
+                      ),
                       child: Text(
                         widget.prix,
                         style: AppTextStyle.buttonStyleTexte.copyWith(
