@@ -91,7 +91,7 @@ class _IdentiteState extends State<Identite> {
                               padding: EdgeInsets.only(right: 13.w),
                               child: Icon(
                                 FluentIcons.navigate_back,
-                                color: AppColors.rouge,
+                                color: AppColors.bleu,
                                 size: 25.h,
                               ),
                             ),
@@ -125,7 +125,7 @@ class _IdentiteState extends State<Identite> {
                                   ),
                                   Icon(
                                     FluentIcons.navigate_back_mirrored,
-                                    color: AppColors.rouge,
+                                    color: AppColors.bleu,
                                     size: 25.h,
                                   ),
                                 ],

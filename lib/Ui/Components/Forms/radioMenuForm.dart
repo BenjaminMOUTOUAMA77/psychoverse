@@ -132,7 +132,7 @@ class _RadioMenuFormState extends State<RadioMenuForm> {
                         },
                       style: RadioButtonThemeData(
                         checkedDecoration: ButtonState.all(BoxDecoration(
-                          color: AppColors.rouge,
+                          color: AppColors.bleu,
                           borderRadius: BorderRadius.circular(2.r+2),
                         )),
                         uncheckedDecoration: ButtonState.all(BoxDecoration(

@@ -122,7 +122,7 @@ class _MiddlePopUpState extends State<MiddlePopUp> {
                           child: IconButton(
                             style: ButtonStyle(
                               elevation: ButtonState.all(1),
-                              backgroundColor: ButtonState.all(AppColors.rouge),
+                              backgroundColor: ButtonState.all(AppColors.bleu),
                             ),
                             icon: Icon(
                               FluentIcons.cancel,

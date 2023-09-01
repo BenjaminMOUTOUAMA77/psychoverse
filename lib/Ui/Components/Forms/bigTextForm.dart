@@ -158,11 +158,11 @@ class _BigTextFormState extends State<BigTextForm> {
                         showAlignmentButtons: true,
                         showSmallButton: false,
                         showDirection: true,
-                        color: AppColors.rouge,
+                        color: AppColors.bleu,
                         iconTheme: QuillIconTheme(
                           iconSelectedColor: AppColors.blanc,
                           iconUnselectedColor: AppColors.gris,
-                          iconSelectedFillColor: AppColors.rouge,
+                          iconSelectedFillColor: AppColors.bleu,
                           iconUnselectedFillColor: Colors.transparent,
                           disabledIconColor: AppColors.blanc,
                           disabledIconFillColor: AppColors.grisLitePlus,

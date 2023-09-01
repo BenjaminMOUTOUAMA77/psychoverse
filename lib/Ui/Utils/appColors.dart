@@ -4,12 +4,10 @@ import 'package:fluent_ui/fluent_ui.dart';
 
 class AppColors{
   static Color primary = const Color(0xFF170038);
-  static Color rouge = const Color(0xFF3D0D85); // rouge E80050 // Bleu FF000068
+  static Color bleu = const Color(0xFF3D0D85); // rouge E80050 // Bleu FF000068
+  static Color jaune = const Color(0xFF7D00B8); // rouge E80050 // Bleu FF000068
   static Color blanc = const Color(0xFFFFFFFF);
   static Color noire = const Color(0xFF000000);
-  static Color bleu = const Color(0xFF0ED4E6);
-  static Color violet = const Color(0xFF2D006B);
-  static Color violetLite = const Color(0xFFDFC8FF);
 
   static Color grisTexte = const Color(0xFF333333);
   static Color gris = const Color(0xFF222222);
@@ -23,7 +21,7 @@ Color getColor(){
   if(nbr==0){
     return AppColors.primary;
   }else if(nbr==1){
-    return AppColors.rouge;
+    return AppColors.bleu;
   }else if(nbr==2){
     return AppColors.gris;
   }else{

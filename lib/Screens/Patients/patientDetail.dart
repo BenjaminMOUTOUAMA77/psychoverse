@@ -120,7 +120,7 @@ class _PatientDetailState extends State<PatientDetail> {
                       wrappedItem: CommandBarButton(
                         icon: Icon(
                           FluentIcons.chrome_back,
-                          color: AppColors.rouge,
+                          color: AppColors.bleu,
                         ),
                         label: const Text('Retour'),
                         onPressed: () {
@@ -137,7 +137,7 @@ class _PatientDetailState extends State<PatientDetail> {
                       wrappedItem: CommandBarButton(
                         icon: Icon(
                           FluentIcons.fabric_user_folder,
-                          color: AppColors.rouge,
+                          color: AppColors.bleu,
                         ),
                         label: const Text('TOUMOUDAGOU Jeanne'),
                         onPressed: () {},
@@ -152,7 +152,7 @@ class _PatientDetailState extends State<PatientDetail> {
                       wrappedItem: CommandBarButton(
                         icon: Icon(
                           FluentIcons.pdf,
-                          color: AppColors.rouge,
+                          color: AppColors.bleu,
                         ),
                         label: const Text('PDF'),
                         onPressed: () {},
@@ -167,7 +167,7 @@ class _PatientDetailState extends State<PatientDetail> {
                       wrappedItem: CommandBarButton(
                         icon: Icon(
                           FluentIcons.docs_logo_inverse,
-                          color: AppColors.rouge,
+                          color: AppColors.bleu,
                         ),
                         label: const Text('Word doc'),
                         onPressed: () {},
@@ -182,7 +182,7 @@ class _PatientDetailState extends State<PatientDetail> {
                       wrappedItem: CommandBarButton(
                         icon: Icon(
                           FluentIcons.page_data,
-                          color: AppColors.rouge,
+                          color: AppColors.bleu,
                         ),
                         label: const Text('BD'),
                         onPressed: () {},
@@ -198,7 +198,7 @@ class _PatientDetailState extends State<PatientDetail> {
                       wrappedItem: CommandBarButton(
                         icon: Icon(
                           FluentIcons.delete,
-                          color: AppColors.rouge,
+                          color: AppColors.bleu,
                         ),
                         label: const Text('Supprimer'),
                         onPressed: () {},
@@ -231,7 +231,7 @@ class _PatientDetailState extends State<PatientDetail> {
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.w, vertical: 10),
                     decoration: BoxDecoration(
-                      color: AppColors.rouge,
+                      color: AppColors.bleu,
                       borderRadius: BorderRadius.circular(5),
                       boxShadow: [
                         AppDesignEffects.shadow0,

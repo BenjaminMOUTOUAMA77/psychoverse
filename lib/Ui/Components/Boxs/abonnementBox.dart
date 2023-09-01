@@ -72,7 +72,7 @@ class _AbonnementBoxState extends State<AbonnementBox> {
                   children: [
                     Icon(
                       FluentIcons.diamond_solid,
-                      color: AppColors.rouge,
+                      color: AppColors.bleu,
                     ),
                     Gap(10.w),
                     Text(
@@ -86,7 +86,7 @@ class _AbonnementBoxState extends State<AbonnementBox> {
                 ),
                 Gap(10.w),
                 Container(
-                  color: AppColors.rouge,
+                  color: AppColors.bleu,
                   padding: EdgeInsets.symmetric(
                     horizontal: 20.w,
                   ),

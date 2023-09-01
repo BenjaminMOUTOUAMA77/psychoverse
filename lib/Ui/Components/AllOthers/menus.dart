@@ -23,7 +23,7 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
         icon: SizedBox(
           width: 30,
           child: SvgPicture.asset(AppIcons.home,
-              color: page.page == 0 ? AppColors.rouge : AppColors.primary,
+              color: page.page == 0 ? AppColors.bleu : AppColors.primary,
               height: 20),
         ),
         title: Text('Home', style: AppTextStyle.navBarTexte),
@@ -33,7 +33,7 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
         icon: SizedBox(
           width: 30,
           child: SvgPicture.asset(AppIcons.folder,
-              color: page.page == 1 ? AppColors.rouge : AppColors.primary,
+              color: page.page == 1 ? AppColors.bleu : AppColors.primary,
               height: 20),
         ),
         title: Text('Dossiers', style: AppTextStyle.navBarTexte),
@@ -43,7 +43,7 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
         icon: SizedBox(
           width: 30,
           child: SvgPicture.asset(AppIcons.architecture,
-              color: page.page == 2 ? AppColors.rouge : AppColors.primary,
+              color: page.page == 2 ? AppColors.bleu : AppColors.primary,
               height: 20),
         ),
         title: Text('Architecture', style: AppTextStyle.navBarTexte),
@@ -53,7 +53,7 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
         icon: SizedBox(
           width: 30,
           child: SvgPicture.asset(AppIcons.agenda,
-              color: page.page == 3 ? AppColors.rouge : AppColors.primary,
+              color: page.page == 3 ? AppColors.bleu : AppColors.primary,
               height: 20),
         ),
         title: Text('Agenda', style: AppTextStyle.navBarTexte),
@@ -63,7 +63,7 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
         icon: SizedBox(
           width: 30,
           child: SvgPicture.asset(AppIcons.mobileVr,
-              color: page.page == 4 ? AppColors.rouge : AppColors.primary,
+              color: page.page == 4 ? AppColors.bleu : AppColors.primary,
               height: 20),
         ),
         title: Text('Mobile VR', style: AppTextStyle.navBarTexte),
@@ -73,7 +73,7 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
         icon: SizedBox(
             width: 30,
             child: SvgPicture.asset(AppIcons.sms,
-                color: page.page == 5 ? AppColors.rouge : AppColors.primary,
+                color: page.page == 5 ? AppColors.bleu : AppColors.primary,
                 height: 20)),
         title: Text('Rappel', style: AppTextStyle.navBarTexte),
         body: const Rappels(),
@@ -82,7 +82,7 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
         icon: SizedBox(
           width: 30,
           child: SvgPicture.asset(AppIcons.save,
-              color: page.page == 6 ? AppColors.rouge : AppColors.primary,
+              color: page.page == 6 ? AppColors.bleu : AppColors.primary,
               height: 20),
         ),
         title: Text('Sauvegarde', style: AppTextStyle.navBarTexte),
@@ -92,7 +92,7 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
         icon: SizedBox(
           width: 30,
           child: SvgPicture.asset(AppIcons.quote,
-              color: page.page == 7 ? AppColors.rouge : AppColors.primary,
+              color: page.page == 7 ? AppColors.bleu : AppColors.primary,
               height: 20),
         ),
         title: Text('Quote', style: AppTextStyle.navBarTexte),
@@ -102,7 +102,7 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
         icon: SizedBox(
           width: 30,
           child: SvgPicture.asset(AppIcons.prices,
-              color: page.page == 8 ? AppColors.rouge : AppColors.primary,
+              color: page.page == 8 ? AppColors.bleu : AppColors.primary,
               height: 20),
         ),
         title: Text('Abonnements', style: AppTextStyle.navBarTexte),
@@ -112,7 +112,7 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
         icon: SizedBox(
           width: 30,
           child: SvgPicture.asset(AppIcons.logoSymboleV,
-              color: page.page == 9 ? AppColors.rouge : AppColors.primary,
+              color: page.page == 9 ? AppColors.bleu : AppColors.primary,
               height: 20),
         ),
         title: Text('Psychoverse', style: AppTextStyle.navBarTexte),
@@ -122,7 +122,7 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
         icon: SizedBox(
             width: 30,
             child: SvgPicture.asset(AppIcons.user,
-                color: page.page == 10 ? AppColors.rouge : AppColors.primary,
+                color: page.page == 10 ? AppColors.bleu : AppColors.primary,
                 height: 20)),
         title: Text('Mon Compte', style: AppTextStyle.navBarTexte),
         body: const MonCompte(),
@@ -134,7 +134,7 @@ List<PaneItem> appDownMenu(MainScreenPagesManagerProvider page) => [
             width: 30,
             child: Icon(FluentIcons.archive,
                 size: 23,
-                color: page.page == 11 ? AppColors.rouge : AppColors.primary)),
+                color: page.page == 11 ? AppColors.bleu : AppColors.primary)),
         title: Text('À Propos',
             style: AppTextStyle.navBarTexte.copyWith(color: AppColors.primary)),
         body: const APropos(),
@@ -144,7 +144,7 @@ List<PaneItem> appDownMenu(MainScreenPagesManagerProvider page) => [
             width: 30,
             child: Icon(FluentIcons.settings,
                 size: 23,
-                color: page.page == 12 ? AppColors.rouge : AppColors.primary)),
+                color: page.page == 12 ? AppColors.bleu : AppColors.primary)),
         title: Text('Paramètre',
             style: AppTextStyle.navBarTexte.copyWith(color: AppColors.primary)),
         body: const Parametre(),

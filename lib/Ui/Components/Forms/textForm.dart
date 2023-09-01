@@ -185,7 +185,7 @@ class _TextFormState extends State<TextForm> {
             inputFormatters: [
               TextInputFormatter.withFunction((oldValue, newValue) => newValue),
             ],
-            cursorColor: AppColors.rouge,
+            cursorColor: AppColors.bleu,
             placeholder: widget.placehholder,
             placeholderStyle: AppTextStyle.formPlaceHolderStyleTexte,
             unfocusedColor: Colors.transparent,
@@ -206,7 +206,7 @@ class _TextFormState extends State<TextForm> {
                     child: Icon(
                       widget.getIcon(),
                       size: 25.h,
-                      color: AppColors.rouge,
+                      color: AppColors.bleu,
                     ),
                   ),
                 ],
@@ -218,7 +218,7 @@ class _TextFormState extends State<TextForm> {
                   widget.showPassword=!widget.showPassword;
                 });
               },
-              icon: Icon(widget.showPassword? FluentIcons.visually_impaired: FluentIcons.red_eye,color: widget.showPassword?AppColors.rouge:AppColors.gris,size: 30.h,),
+              icon: Icon(widget.showPassword? FluentIcons.visually_impaired: FluentIcons.red_eye,color: widget.showPassword?AppColors.bleu:AppColors.gris,size: 30.h,),
             ):null,
           ),
         ],

@@ -59,7 +59,7 @@ class _SuiviBoxListState extends State<SuiviBoxList> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(FluentIcons.dataverse,size: 40.h,color: AppColors.rouge,),
+                      Icon(FluentIcons.dataverse,size: 40.h,color: AppColors.bleu,),
                       Gap(15.h),
                       Text(widget.list[index],style: AppTextStyle.buttonStyleTexte.copyWith(color:AppColors.primary,fontWeight: FontWeight.w800),overflow: TextOverflow.ellipsis,),
                     ],

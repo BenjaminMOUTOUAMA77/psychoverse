@@ -133,9 +133,9 @@ class _ComboBoxFormState extends State<ComboBoxForm> {
                                   widget.onChanged!(value);
                                 },
                           icon: Icon(FluentIcons.chevron_down_small),
-                          iconEnabledColor: AppColors.rouge,
+                          iconEnabledColor: AppColors.bleu,
                           iconDisabledColor: AppColors.gris,
-                          focusColor: AppColors.rouge,
+                          focusColor: AppColors.bleu,
                           isExpanded: true,
                           placeholder: Text(widget.placeHolder),
                         ),

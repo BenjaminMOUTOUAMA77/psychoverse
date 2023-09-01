@@ -184,7 +184,7 @@ class _PhoneFormState extends State<PhoneForm> {
               });
             },
             validator: (value) {},
-            cursorColor: AppColors.rouge,
+            cursorColor: AppColors.bleu,
             placeholder: widget.placehholder,
             placeholderStyle: AppTextStyle.formPlaceHolderStyleTexte,
             unfocusedColor: Colors.transparent,
@@ -203,7 +203,7 @@ class _PhoneFormState extends State<PhoneForm> {
                     child: Icon(
                       FluentIcons.cell_phone,
                       size: 25.h,
-                      color: AppColors.rouge,
+                      color: AppColors.bleu,
                     ),
                   ),
                   _selectedCountry?.flag == null

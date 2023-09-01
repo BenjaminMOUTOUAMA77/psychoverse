@@ -15,7 +15,7 @@ class _AppProgressRingState extends State<AppProgressRing> {
     return Padding(
       padding: EdgeInsets.all(5.h),
       child: ProgressRing(
-        activeColor: AppColors.rouge,
+        activeColor: AppColors.bleu,
       ),
     );
   }

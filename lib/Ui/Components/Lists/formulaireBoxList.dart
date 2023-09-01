@@ -59,7 +59,7 @@ class _FormulaireBoxListState extends State<FormulaireBoxList> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(FluentIcons.company_directory,size: 40.h,color: AppColors.rouge,),
+                      Icon(FluentIcons.company_directory,size: 40.h,color: AppColors.bleu,),
                       Gap(15.h),
                       Text(widget.list[index],style: AppTextStyle.buttonStyleTexte.copyWith(color:AppColors.primary,fontWeight: FontWeight.w800),overflow: TextOverflow.ellipsis,),
                     ],

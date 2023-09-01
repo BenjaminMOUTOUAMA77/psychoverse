@@ -55,7 +55,7 @@ class _FormulaireReordableListState extends State<FormulaireReordableList> {
             child: Icon(
               FluentIcons.delete,
               size: 25.h,
-              color: AppColors.rouge,
+              color: AppColors.bleu,
             ),
           ),
         ],

@@ -32,7 +32,7 @@ class _FileTileState extends State<FileTile> {
         ),
         child: Row(
           children: [
-            Icon(getFileIcon(widget.file.extension.toString().toLowerCase()),color: AppColors.rouge,size: 30.h,),
+            Icon(getFileIcon(widget.file.extension.toString().toLowerCase()),color: AppColors.bleu,size: 30.h,),
             Gap(20.h),
             Expanded(
               child: Text(widget.file.name,overflow: TextOverflow.ellipsis,style: AppTextStyle.bigFilledTexte.copyWith(fontWeight: FontWeight.bold),),
@@ -40,7 +40,7 @@ class _FileTileState extends State<FileTile> {
             Gap(20.h),
             Text(FileSize.getSize(widget.file.size).toString(),style: AppTextStyle.filedTexte,),
             Gap(10.w),
-            Tooltip(message: widget.cancelTexte,child: IconButton(icon: Icon(FluentIcons.cancel,size: 20.h,color: AppColors.rouge,), onPressed:widget.cancelFunction))
+            Tooltip(message: widget.cancelTexte,child: IconButton(icon: Icon(FluentIcons.cancel,size: 20.h,color: AppColors.bleu,), onPressed:widget.cancelFunction))
           ],
         ),
       ),

@@ -94,7 +94,7 @@ class _ArchitectureState extends State<Architecture> {
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10),
                       decoration: BoxDecoration(
-                        color: AppColors.rouge,
+                        color: AppColors.bleu,
                         borderRadius: BorderRadius.circular(5),
                         boxShadow: [
                           AppDesignEffects.shadow0,

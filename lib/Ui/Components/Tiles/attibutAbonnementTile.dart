@@ -21,11 +21,11 @@ class _AttributAbonnementTileState extends State<AttributAbonnementTile> {
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: Row(
         children: [
-          Icon(widget.icon,color: AppColors.rouge,),
+          Icon(widget.icon,color: AppColors.bleu,),
           Gap(20.w),
           Expanded(child: Text(widget.texte,style: AppTextStyle.filedTexte,)),
           Gap(20.w),
-          widget.active?Icon(FluentIcons.skype_check,color: Colors.green,):Icon(FluentIcons.cancel,color: AppColors.rouge,),
+          widget.active?Icon(FluentIcons.skype_check,color: Colors.green,):Icon(FluentIcons.cancel,color: AppColors.bleu,),
         ],
       ),
     );

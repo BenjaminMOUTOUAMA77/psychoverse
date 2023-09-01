@@ -41,7 +41,7 @@ class _SwitchFormState extends State<SwitchForm> {
             shape: BoxShape.circle,
           ),),
           checkedDecoration: ButtonState.all(BoxDecoration(
-            color: AppColors.rouge,
+            color: AppColors.bleu,
             borderRadius: BorderRadius.circular(20),
           ),),
           uncheckedDecoration: ButtonState.all(BoxDecoration(

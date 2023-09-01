@@ -46,7 +46,7 @@ class _ShowImageState extends State<ShowImage> {
                     child: IconButton(
                       style: ButtonStyle(
                         elevation: ButtonState.all(1),
-                        backgroundColor: ButtonState.all(AppColors.rouge),
+                        backgroundColor: ButtonState.all(AppColors.bleu),
                       ),
                       icon: Icon(
                         FluentIcons.picture_position,
@@ -67,7 +67,7 @@ class _ShowImageState extends State<ShowImage> {
                     child: IconButton(
                       style: ButtonStyle(
                         elevation: ButtonState.all(1),
-                        backgroundColor: ButtonState.all(AppColors.rouge),
+                        backgroundColor: ButtonState.all(AppColors.bleu),
                       ),
                       icon: Icon(
                         FluentIcons.edit_photo,
@@ -106,7 +106,7 @@ class _ShowImageState extends State<ShowImage> {
                       ),
                       icon: Icon(
                         FluentIcons.cancel,
-                        color: AppColors.rouge,
+                        color: AppColors.bleu,
                         size: 30.h,
                         weight: 100,
                       ),

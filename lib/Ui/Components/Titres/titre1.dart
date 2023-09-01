@@ -22,8 +22,8 @@ class _Titre1State extends State<Titre1> {
       height: 100.h,
       padding: EdgeInsets.symmetric(horizontal: 50.w,vertical: 10.h),
       decoration: BoxDecoration(
-        color: AppColors.rouge,
-        borderRadius: BorderRadius.circular(3),
+        color: AppColors.bleu,
+        borderRadius: BorderRadius.circular(4),
         border: AppDesignEffects.BorderAll1,
       ),
       child: Row(
