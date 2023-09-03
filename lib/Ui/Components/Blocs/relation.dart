@@ -52,8 +52,8 @@ class _RelationState extends State<Relation> {
                 child: image.isEmpty
                     ? const ImagePlaceholder()
                     : Image.file(
-                  File(image),
-                ),
+                        File(image),
+                      ),
               ),
             ),
             second: Column(
@@ -145,16 +145,21 @@ class _RelationState extends State<Relation> {
                 onFieldSubmitted: (value) {}),
           ),
           SuggestTextForm(
-              title: "Réligion",
-              list: [
-                "Analphabet",
-                "Maternelle",
-                "CEP",
-                "Doctorat",
-                "Mater",
-              ],
-              onChanged: (value) {},
-              onFieldSubmitted: (value) {}),
+            title: "Réligion",
+            list: [
+              "Analphabet",
+              "Maternelle",
+              "CEP",
+              "Doctorat",
+              "Mater",
+            ],
+            onChanged: (value) {},
+            onFieldSubmitted: (value) {},
+          ),
+          Adaptive(
+            first: BigTextForm(title: "Qualités", onFieldSubmitted: (value) {}),
+            second: BigTextForm(title: "Défauts", onFieldSubmitted: (value) {}),
+          ),
           BigTextForm(title: "Commentaire", onFieldSubmitted: (value) {}),
           const Gap(30),
         ],

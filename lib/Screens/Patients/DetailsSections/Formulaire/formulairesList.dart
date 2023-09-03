@@ -69,6 +69,8 @@ class _FormulairesListState extends State<FormulairesList> {
         Gap(20.h),
         Expanded(
           child: FormulaireBoxList(
+            uiKey: widget.uiKey,
+            formulaireUiKey: widget.formulaireUiKey,
             list: formulairesList,
           ),
         ),

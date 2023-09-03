@@ -17,39 +17,39 @@ class MainSuivis extends StatefulWidget {
 class _MainSuivisState extends State<MainSuivis> {
   late ChangeSectionsProvider sections;
   List<String> suivis = [
-    "Suivi 1",
-    "Suivi 2",
-    "Suivi 3",
-    "Suivi 4",
-    "Suivi 5",
-    "Suivi 1",
-    "Suivi 2",
-    "Suivi 3",
-    "Suivi 4",
-    "Suivi 5",
+    "Problème 1",
+    "Problème 2",
+    "Problème 3",
+    "Problème 4",
+    "Problème 5",
+    "Problème 1",
+    "Problème 2",
+    "Problème 3",
+    "Problème 4",
+    "Problème 5",
   ];
 
   @override
   Widget build(BuildContext context) {
     sections = Provider.of<ChangeSectionsProvider>(context);
 
-    Tab generateTab(int index, int suiviUiKey) {
+    Tab generateTab(int index, int tabSuiviUiKey) {
       late Tab tab;
       tab = Tab(
         icon: Icon(
           FluentIcons.arrange_send_backward,
           color: AppColors.grisLite,
         ),
-        text: Text('Suivi $index'),
-        semanticLabel: 'Suivi #$index',
+        text: Text('Problème $index'),
+        semanticLabel: 'Problème #$index',
         body: Suivis(
           uiKey: widget.uiKey,
-          suiviUiKey: suiviUiKey,
+          suiviUiKey: tabSuiviUiKey,
         ),
         onClosed: () {
           void closeFunction() {
             if (sections.getSuiviCurrentIndex(widget.uiKey) > 0) {
-              if (sections.findSuiviIndex(suiviUiKey, widget.uiKey) <=
+              if (sections.findSuiviIndex(tabSuiviUiKey, widget.uiKey) <=
                   sections.getSuiviCurrentIndex(widget.uiKey)) {
                 sections.setSuiviCurrentIndex(
                     sections.getSuiviCurrentIndex(widget.uiKey) - 1,
@@ -57,11 +57,11 @@ class _MainSuivisState extends State<MainSuivis> {
               }
             } else {
               if(sections.getSuiviTabs(widget.uiKey).length==1){
-                sections.setSuiviPage(0, widget.uiKey, suiviUiKey);
+                sections.setSuiviPage(0, widget.uiKey, tabSuiviUiKey);
               }
             }
             sections.removeSuiviTab(tab, widget.uiKey);
-            sections.removeSuiviUi(widget.uiKey, suiviUiKey);
+            sections.removeSuiviUi(widget.uiKey, tabSuiviUiKey);
           }
 
           if (this.mounted) {
@@ -109,7 +109,7 @@ class _MainSuivisState extends State<MainSuivis> {
     return AppContainer1(
       uiKey: widget.uiKey,
       icon: FluentIcons.care_plan,
-      title: "Suivis",
+      title: "Problèmes",
       number: 10,
       child: SizedBox(
         width: double.infinity,

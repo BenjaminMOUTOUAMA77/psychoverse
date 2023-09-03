@@ -29,7 +29,7 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
   Widget build(BuildContext context) {
     return AppContainer4(
       icon: FluentIcons.care_plan,
-      title: "Suivis",
+      title: "Problèmes",
       number: 10,
       child: Column(
         children: [
@@ -298,6 +298,31 @@ class _SuivisArchitectureState extends State<SuivisArchitecture> {
                   popUpTitle: "Trame d'anamnèse",
                   deleteFunction: (index){},
                   onSubmitted: ({value,index}){},
+                  useParticularOntap: true,
+                  onTap: (value){
+                    showDialog(
+                      context: context,
+                      builder: (context) => BigPopUp(
+                        title: "Trame d'anamnèse",
+                        save: true,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              TextForm(
+                                title: "Nom de la trame" ,
+                                onChanged: (value){},
+                                onFieldSubmitted: (value){},
+                              ),
+                              BigTextForm(
+                                title: "Ossature de la trame",
+                                onFieldSubmitted: (value) {},
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

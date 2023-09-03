@@ -21,7 +21,7 @@ class _FilesBoxListState extends State<FilesBoxList> {
         padding: EdgeInsets.symmetric(horizontal: 30.w),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 200,
-          childAspectRatio: 3.6 / 4,
+          childAspectRatio: 3.4 / 4,
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
         ),

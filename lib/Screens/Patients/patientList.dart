@@ -32,7 +32,7 @@ class _PatientListState extends State<PatientList> {
             decoration: BoxDecoration(
               color: AppColors.blancGrise,
               boxShadow: [
-                AppDesignEffects.shadow2,
+                AppDesignEffects.shadow0,
               ],
             ),
             child: MakeSearchBar(

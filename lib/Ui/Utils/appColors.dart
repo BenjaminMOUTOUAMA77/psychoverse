@@ -3,9 +3,8 @@ import 'dart:math';
 import 'package:fluent_ui/fluent_ui.dart';
 
 class AppColors{
-  static Color primary = const Color(0xFF170038);
-  static Color bleu = const Color(0xFF3D0D85); // rouge E80050 // Bleu FF000068
-  static Color jaune = const Color(0xFF7D00B8); // rouge E80050 // Bleu FF000068
+  static Color primary = const Color(0xFF36104C); //170038
+  static Color secondary = const Color(0xFF800E5A);  // Bleu 3D0D85// Bleu FF000068
   static Color blanc = const Color(0xFFFFFFFF);
   static Color noire = const Color(0xFF000000);
 
@@ -21,7 +20,7 @@ Color getColor(){
   if(nbr==0){
     return AppColors.primary;
   }else if(nbr==1){
-    return AppColors.bleu;
+    return AppColors.secondary;
   }else if(nbr==2){
     return AppColors.gris;
   }else{

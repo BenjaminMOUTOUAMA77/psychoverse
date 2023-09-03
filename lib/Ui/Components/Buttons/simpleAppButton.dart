@@ -24,7 +24,7 @@ class _SimpleAppButonState extends State<SimpleAppButon> {
         padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 12.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
-          color: AppColors.bleu,
+          color: AppColors.primary,
           boxShadow: [
             AppDesignEffects.shadow1,
           ],

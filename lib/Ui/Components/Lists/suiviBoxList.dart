@@ -11,8 +11,7 @@ class SuiviBoxList extends StatefulWidget {
   List<String> list;
   int uiKey;
   int suiviUiKey;
-  String texte;
-  SuiviBoxList({Key? key,this.list=const [],this.uiKey=0,this.suiviUiKey=0,this.texte="Nom du Suivi"}) : super(key: key);
+  SuiviBoxList({Key? key,this.list=const [],this.uiKey=0,this.suiviUiKey=0}) : super(key: key);
 
   @override
   State<SuiviBoxList> createState() => _SuiviBoxListState();
@@ -22,6 +21,7 @@ class _SuiviBoxListState extends State<SuiviBoxList> {
   @override
   Widget build(BuildContext context) {
     ChangeSectionsProvider page = Provider.of<ChangeSectionsProvider>(context) ;
+
     return GridView.builder(
         padding: EdgeInsets.symmetric(horizontal: 30.w,vertical: 10.h),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -35,7 +35,7 @@ class _SuiviBoxListState extends State<SuiviBoxList> {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 20.w,),
             decoration: BoxDecoration(
-              color: getColor().withOpacity(0.7),
+              color: getColor(),
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 AppDesignEffects.shadow1,
@@ -46,6 +46,7 @@ class _SuiviBoxListState extends State<SuiviBoxList> {
               child: GestureDetector(
                 onTap: (){
                   setState(() {
+                    debugPrint(" Key :  ${widget.suiviUiKey} ");
                     page.setSuiviPage(1, widget.uiKey, widget.suiviUiKey);
                   });
                 },
@@ -59,7 +60,7 @@ class _SuiviBoxListState extends State<SuiviBoxList> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(FluentIcons.dataverse,size: 40.h,color: AppColors.bleu,),
+                      Icon(FluentIcons.dataverse,size: 40.h,color: AppColors.secondary,),
                       Gap(15.h),
                       Text(widget.list[index],style: AppTextStyle.buttonStyleTexte.copyWith(color:AppColors.primary,fontWeight: FontWeight.w800),overflow: TextOverflow.ellipsis,),
                     ],

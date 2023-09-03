@@ -53,7 +53,7 @@ class _MobileVRState extends State<MobileVR> {
                           Column(
                             children: [
                               Container(
-                                color: AppColors.bleu,
+                                color: AppColors.secondary,
                                 padding: EdgeInsets.symmetric(
                                     vertical: 20.h, horizontal: 20.w),
                                 alignment: Alignment.center,

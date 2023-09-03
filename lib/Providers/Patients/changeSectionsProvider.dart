@@ -211,13 +211,13 @@ class PatientUi{
   );
 
   //Suivis Attributes
-  static int theSuiviKey=0;
+  int theSuiviKey = 0;
   late int suiviCurrentIndex=0;
   late List<Tab> suiviTabs = [];
   static List<SuiviUi> suivisUis=[];
 
   //Suivis Attributes
-  static int theFormulaireKey=-1;
+  int theFormulaireKey=0;
   late int formulaireCurrentIndex=0;
   late List<Tab> formulairesTabs = [];
   static List<FormulaireUi> formulairesUis=[];
@@ -266,7 +266,7 @@ class PatientUi{
 
   List<FormulaireUi> getFormulaireUis()=>formulairesUis;
   int addFormulaireUi(){
-    formulairesUis.add(FormulaireUi(key: theFormulaireKey));
+    formulairesUis.add(FormulaireUi(key: theFormulaireKey,formulaireId: 0));
     theFormulaireKey++;
     return theFormulaireKey -1;
   }
@@ -300,5 +300,5 @@ class FormulaireUi{
   PageController formulairePage=PageController(
     initialPage: 0,
   );
-  FormulaireUi({required this.key,this.formulaireId=0});
+  FormulaireUi({required this.key,required this.formulaireId});
 }

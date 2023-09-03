@@ -52,7 +52,7 @@ class _SimpleTileState extends State<SimpleTile> {
             child: IconButton(
               icon: Icon(
                 FluentIcons.delete,
-                color: AppColors.bleu,
+                color: AppColors.secondary,
               ),
               onPressed: widget.deleteFunction,
             ),

@@ -21,44 +21,45 @@ class SuivisList extends StatefulWidget {
 class _SuivisListState extends State<SuivisList> {
   late ChangeSectionsProvider sections;
   List<String> suivisList = [
-    "Suivi 1",
-    "Suivi 2",
-    "Suivi 3",
-    "Suivi 4",
-    "Suivi 5",
+    "Problème 1",
+    "Problème 2",
+    "Problème 3",
+    "Problème 4",
+    "Problème 5",
   ];
   @override
   Widget build(BuildContext context) {
     sections = Provider.of<ChangeSectionsProvider>(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SimpleAppButon(
-                texte: "Nouveau Suivi",
-                icon: FluentIcons.dependency_add,
-                function: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => SmallPopUp(
-                      title: "Nouveau Suivi",
-                      save: true,
-                      saveTexte: "Ouvrir un nouveau suivi",
-                      child:const  NewSuivi(),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
+        Gap(40.h),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SimpleAppButon(
+              texte: "Nouveau Problème",
+              icon: FluentIcons.dependency_add,
+              function: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => SmallPopUp(
+                    title: "Nouveau Problème",
+                    save: true,
+                    saveTexte: "Ouvrir un nouveau Problème",
+                    child:const  NewSuivi(),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
         Gap(20.h),
         Expanded(
           child: SuiviBoxList(
+            uiKey: widget.uiKey,
+            suiviUiKey: widget.suiviUiKey,
             list: suivisList,
           ),
         ),

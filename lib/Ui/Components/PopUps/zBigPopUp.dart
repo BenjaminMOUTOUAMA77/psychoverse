@@ -164,7 +164,7 @@ class _BigPopUpState extends State<BigPopUp> {
                             child: IconButton(
                               style: ButtonStyle(
                                 elevation: ButtonState.all(1),
-                                backgroundColor: ButtonState.all(AppColors.bleu),
+                                backgroundColor: ButtonState.all(AppColors.secondary),
                               ),
                               icon: Icon(
                                 FluentIcons.cancel,

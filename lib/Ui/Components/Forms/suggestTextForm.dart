@@ -147,7 +147,7 @@ class _SuggestTextFormState extends State<SuggestTextForm> {
               ),
             ),
             unfocusedColor: Colors.transparent,
-            cursorColor: AppColors.bleu,
+            cursorColor: AppColors.secondary,
             placeholder: widget.placeHolder,
             clearButtonEnabled: false,
             placeholderStyle: AppTextStyle.formPlaceHolderStyleTexte,

@@ -106,7 +106,7 @@ class _ArchitectureFormulaireDetailState
             IconButton(
                 icon: Icon(
                   FluentIcons.navigate_back,
-                  color: AppColors.bleu,
+                  color: AppColors.secondary,
                   size: 40.h,
                 ),
                 onPressed: () {

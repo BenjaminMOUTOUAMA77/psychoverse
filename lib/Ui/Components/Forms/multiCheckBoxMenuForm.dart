@@ -127,7 +127,7 @@ class _MultiCheckBoxMenuFormState extends State<MultiCheckBoxMenuForm> {
                                 children: [
                                   Icon(
                                     FluentIcons.verified_brand_solid,
-                                    color: AppColors.bleu,
+                                    color: AppColors.secondary,
                                     size: 20.h,
                                   ),
                                   Gap(20.w),
@@ -163,7 +163,7 @@ class _MultiCheckBoxMenuFormState extends State<MultiCheckBoxMenuForm> {
                             content: Text(i,style: AppTextStyle.filedTexte,),
                             style: CheckboxThemeData(
                               checkedDecoration: ButtonState.all(BoxDecoration(
-                                color: AppColors.bleu,
+                                color: AppColors.secondary,
                                 borderRadius: BorderRadius.circular(2.r+2),
                               )),
                               uncheckedDecoration: ButtonState.all(BoxDecoration(

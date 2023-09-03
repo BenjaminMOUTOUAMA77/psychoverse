@@ -120,7 +120,7 @@ class _NumberTextFormState extends State<NumberTextForm> {
             },
             mode: SpinButtonPlacementMode.compact,
             clearButton: false,
-            cursorColor: AppColors.bleu,
+            cursorColor: AppColors.secondary,
             highlightColor: Colors.transparent,
             placeholder: widget.placeHolder,
             placeholderStyle: AppTextStyle.formPlaceHolderStyleTexte,

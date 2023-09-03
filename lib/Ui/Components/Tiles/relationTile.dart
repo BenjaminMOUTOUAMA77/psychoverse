@@ -61,7 +61,7 @@ class _RelationTileState extends State<RelationTile> {
                     Icon(
                       FluentIcons.link12,
                       size: 25.h,
-                      color: AppColors.bleu,
+                      color: AppColors.secondary,
                     ),
                     Gap(20.w),
                     Text(

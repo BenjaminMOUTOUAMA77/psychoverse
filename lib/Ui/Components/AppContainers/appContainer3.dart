@@ -25,9 +25,9 @@ class _AppContainer3State extends State<AppContainer3> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(FluentIcons.power_automate_logo,color: AppColors.bleu,size: 30.h,),
+              Icon(FluentIcons.power_automate_logo,color: AppColors.secondary,size: 30.h,),
               Gap(30.w),
-              Text(widget.title,style: AppTextStyle.bigFilledTexte.copyWith(color: AppColors.primary, fontSize: 10.h+16,fontWeight: FontWeight.w900),),
+              Expanded(child: Text(widget.title,style: AppTextStyle.bigFilledTexte.copyWith(color: AppColors.primary, fontSize: 10.h+16,fontWeight: FontWeight.w900),)),
             ],
           ),
           Padding(

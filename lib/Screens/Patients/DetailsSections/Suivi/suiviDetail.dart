@@ -164,7 +164,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
               IconButton(
                   icon: Icon(
                     FluentIcons.navigate_back,
-                    color: AppColors.bleu,
+                    color: AppColors.secondary,
                     size: 40.h,
                   ),
                   onPressed: () {
@@ -172,7 +172,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
                   }),
               Gap(40.w),
               Text(
-                "Suivi de ...",
+                "Problème ...",
                 style: AppTextStyle.buttonStyleTexte.copyWith(
                   color: AppColors.primary,
                   fontSize: 20.sp + 10,
@@ -187,7 +187,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
               children: [
                 Adaptive(
                   first: TextForm(
-                    title: "Pseudonyme",
+                    title: "Nom du Problème",
                     onChanged: (value) {},
                     onFieldSubmitted: (value) {},
                   ),
@@ -198,7 +198,24 @@ class _SuiviDetailState extends State<SuiviDetail> {
                       onFieldSubmitted: (value) {}),
                 ),
                 TextForm(
-                  title: "Sujet",
+                  title: "Demande du patient",
+                  onChanged: (value) {},
+                  onFieldSubmitted: (value) {},
+                ),
+                SuggestTextForm(
+                    title: "Plan thérapeutique / Approche psychothérapeutique",
+                    list: typeList,
+                    onChanged: (value) {},
+                    onFieldSubmitted: (value) {}),
+              ],
+            ),
+          ),
+          AppContainer2(
+            title: "Anamnèse",
+            child: Column(
+              children: [
+                TextForm(
+                  title: "Sujet du problème",
                   onChanged: (value) {},
                   onFieldSubmitted: (value) {},
                 ),
@@ -234,55 +251,56 @@ class _SuiviDetailState extends State<SuiviDetail> {
                   ),
                 ),
                 ProgressionForm(
-                  title: "Implication",
+                  title: "Implication du patient",
                   onChanged: (value) {},
                   onFieldSubmitted: (value) {},
+                ),
+                AppContainer3(
+                  title: "Symptômes cognitifs, Comportementaux et affectifs",
+                  child: Column(
+                    children: [
+                      BigTextForm(
+                          title: "Impression personnel sur le problème",
+                          onFieldSubmitted: (value) {}),
+                      BigTextForm(
+                          title: "Impact sur le comportement",
+                          onFieldSubmitted: (value) {}),
+                      BigTextForm(
+                          title: "Impact sur la vie affective",
+                          onFieldSubmitted: (value) {}),
+                    ],
+                  ),
+                ),
+                AppContainer3(
+                  title: "Conséquences du problème",
+                  child: Column(
+                    children: [
+                      BigTextForm(
+                          title: "Avantages tirés du problème",
+                          onFieldSubmitted: (value) {}),
+                      BigTextForm(
+                          title: "Pertes engendrés par le problème",
+                          onFieldSubmitted: (value) {}),
+                      BigTextForm(
+                          title: "Impact sur la vie affective",
+                          onFieldSubmitted: (value) {}),
+                    ],
+                  ),
+                ),
+                AppContainer3(
+                  title: "Réaction de l'entourage",
+                  child: Column(
+                    children: [
+                      BigTextForm(title: "Entourage", onFieldSubmitted: (value) {}),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
+
           AppContainer2(
-            title: "Symptômes cognitifs, Comportementaux et affectifs",
-            child: Column(
-              children: [
-                BigTextForm(
-                    title: "Impression personnel sur le problème",
-                    onFieldSubmitted: (value) {}),
-                BigTextForm(
-                    title: "Impact sur le comportement",
-                    onFieldSubmitted: (value) {}),
-                BigTextForm(
-                    title: "Impact sur la vie affective",
-                    onFieldSubmitted: (value) {}),
-              ],
-            ),
-          ),
-          AppContainer2(
-            title: "Conséquences du problème",
-            child: Column(
-              children: [
-                BigTextForm(
-                    title: "Avantages tirés du problème",
-                    onFieldSubmitted: (value) {}),
-                BigTextForm(
-                    title: "Pertes engendrés par le problème",
-                    onFieldSubmitted: (value) {}),
-                BigTextForm(
-                    title: "Impact sur la vie affective",
-                    onFieldSubmitted: (value) {}),
-              ],
-            ),
-          ),
-          AppContainer2(
-            title: "Réaction de l'entourage",
-            child: Column(
-              children: [
-                BigTextForm(title: "Entourage", onFieldSubmitted: (value) {}),
-              ],
-            ),
-          ),
-          AppContainer2(
-            title: "Écris",
+            title: "Suivi",
             child: Column(
               children: [
                 Adaptive(
@@ -299,26 +317,42 @@ class _SuiviDetailState extends State<SuiviDetail> {
                     onFieldSubmitted: (value) {},
                   ),
                 ),
-                BigTextForm(
-                  title: "Objectif du travail",
+                TextForm(
+                  title: "Objectif thérapeutique",
+                  onChanged: (value) {},
                   onFieldSubmitted: (value) {},
                 ),
                 BigTextForm(
-                  title: "Hypothèse",
+                  title: "Analyse psychologique",
                   onFieldSubmitted: (value) {},
                 ),
                 BigTextForm(
-                  title: "WICS",
+                  title: "Hypothèse diagnostique",
                   onFieldSubmitted: (value) {},
                 ),
-                ComboBoxForm(
-                    title: "Trame d'Anamnèse",
-                    list: trameList,
-                    onChanged: (value) {},
-                    onFieldSubmitted: (value) {}),
                 BigTextForm(
-                  title: "Anamnèse",
+                  title: "Objectif thérapeutique",
                   onFieldSubmitted: (value) {},
+                ),
+                BigTextForm(
+                  title: "Résumé",
+                  onFieldSubmitted: (value) {},
+                ),
+                AppContainer3(
+                  title: "Anamnèse spécial",
+                  child: Column(
+                    children: [
+                      ComboBoxForm(
+                          title: "Trame d'Anamnèse",
+                          list: trameList,
+                          onChanged: (value) {},
+                          onFieldSubmitted: (value) {}),
+                      BigTextForm(
+                        title: "Anamnèse",
+                        onFieldSubmitted: (value) {},
+                      ),
+                    ],
+                  ),
                 ),
                 BigTextForm(
                   title: "Compte rendu",

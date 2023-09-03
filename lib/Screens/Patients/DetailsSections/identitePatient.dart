@@ -91,7 +91,7 @@ class _IdentiteState extends State<Identite> {
                               padding: EdgeInsets.only(right: 13.w),
                               child: Icon(
                                 FluentIcons.navigate_back,
-                                color: AppColors.bleu,
+                                color: AppColors.secondary,
                                 size: 25.h,
                               ),
                             ),
@@ -125,7 +125,7 @@ class _IdentiteState extends State<Identite> {
                                   ),
                                   Icon(
                                     FluentIcons.navigate_back_mirrored,
-                                    color: AppColors.bleu,
+                                    color: AppColors.secondary,
                                     size: 25.h,
                                   ),
                                 ],
@@ -315,6 +315,10 @@ class _IdentiteState extends State<Identite> {
                     onChanged: (value) {},
                     onFieldSubmitted: (value) {},
                   ),
+                ),
+                Adaptive(
+                  first: BigTextForm(title: "Qualités", onFieldSubmitted: (value) {}),
+                  second: BigTextForm(title: "Défauts", onFieldSubmitted: (value) {}),
                 ),
                 BigTextForm(title: "Commentaire", onFieldSubmitted: (value) {}),
                 const Gap(30),

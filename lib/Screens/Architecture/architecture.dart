@@ -40,7 +40,7 @@ class _ArchitectureState extends State<Architecture> {
         body: HistoriqueArchitecture(),
       ),
       AppNavMenuPane(
-        title: "Suivis",
+        title: "Problèmes",
         body: SuivisArchitecture(),
       ),
       AppNavMenuPane(
@@ -94,7 +94,7 @@ class _ArchitectureState extends State<Architecture> {
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10),
                       decoration: BoxDecoration(
-                        color: AppColors.bleu,
+                        color: AppColors.primary,
                         borderRadius: BorderRadius.circular(5),
                         boxShadow: [
                           AppDesignEffects.shadow0,

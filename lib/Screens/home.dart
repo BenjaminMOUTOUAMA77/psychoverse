@@ -25,7 +25,6 @@ class _HomeState extends State<Home> {
             child: Column(
               children: [
                 const Expanded(child: MakeQuotesSlider(),),
-                Gap(100.h),
               ],
             ),
           ),

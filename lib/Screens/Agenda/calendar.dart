@@ -161,7 +161,7 @@ class _CalendarState extends State<Calendar> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.arrow_right,size: 60.w,color: isToday(date) ? AppColors.jaune : isSelectedDay(date, selectedDay) ? AppColors.primary : Colors.transparent,),
+                  Icon(Icons.arrow_right,size: 60.w,color: isToday(date) ? AppColors.secondary : isSelectedDay(date, selectedDay) ? AppColors.primary : Colors.transparent,),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -176,7 +176,7 @@ class _CalendarState extends State<Calendar> {
                       events.isNotEmpty? Container(
                         padding: EdgeInsets.all(20.w),
                         decoration: BoxDecoration(
-                          color: isToday(date) ? AppColors.jaune : AppColors.primary,
+                          color: isToday(date) ? AppColors.secondary : AppColors.primary,
                           shape: BoxShape.circle,
                         ),
                         child: Text(
@@ -187,7 +187,7 @@ class _CalendarState extends State<Calendar> {
                       ):const Gap(0),
                     ],
                   ),
-                  Icon(Icons.arrow_left,size: 60.w,color: isToday(date) ? AppColors.jaune : isSelectedDay(date, selectedDay) ? AppColors.primary : Colors.transparent,),
+                  Icon(Icons.arrow_left,size: 60.w,color: isToday(date) ? AppColors.secondary : isSelectedDay(date, selectedDay) ? AppColors.primary : Colors.transparent,),
                 ],
               ),
             ),

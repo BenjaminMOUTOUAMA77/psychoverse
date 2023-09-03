@@ -34,7 +34,7 @@ class _MonCompteState extends State<MonCompte> {
                       child: Column(
                         children: [
                           Container(
-                            color: AppColors.bleu,
+                            color: AppColors.secondary,
                             padding: EdgeInsets.symmetric(
                                 vertical: 20.h, horizontal: 20.w),
                             alignment: Alignment.center,

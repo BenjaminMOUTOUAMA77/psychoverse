@@ -39,7 +39,7 @@ class _AppContainer2State extends State<AppContainer2> {
         ),
         header: Text(widget.title,style: AppTextStyle.buttonStyleTexte.copyWith(fontWeight: FontWeight.bold,color: AppColors.primary, fontSize: 8.sp+10),),
         content: widget.child,
-        contentBackgroundColor: AppColors.blancGrise.withOpacity(0.2),
+        contentBackgroundColor:AppColors.blancGrise.withOpacity(0.2),
       ),
     );
   }

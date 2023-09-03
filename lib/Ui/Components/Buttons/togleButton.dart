@@ -151,7 +151,7 @@ class _MakeToggleMenuState extends State<MakeToggleMenu> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
               decoration: BoxDecoration(
-                color: AppColors.bleu,
+                color: AppColors.primary,
                 borderRadius: BorderRadius.circular(10.r),
               ),
               child: Row(
@@ -243,7 +243,7 @@ class _AppToggleButtonState extends State<AppToggleButton> {
               EdgeInsets.symmetric(horizontal: 15.w + 10, vertical: 5.h + 3)),
           textStyle: ButtonState.all(
               TextStyle(color: AppColors.blanc, fontSize: 7.sp + 10)),
-          backgroundColor: ButtonState.all(AppColors.jaune),
+          backgroundColor: ButtonState.all(AppColors.secondary),
         ),
       ),
       checked: widget.checked,
@@ -319,7 +319,7 @@ class _AppToggleMenuButtonState extends State<AppToggleMenuButton> {
               color: AppColors.blanc,
               fontSize: 7.sp + 10,
               fontWeight: FontWeight.bold)),
-          backgroundColor: ButtonState.all(AppColors.jaune),
+          backgroundColor: ButtonState.all(AppColors.secondary),
         ),
       ),
       checked: widget.checked,

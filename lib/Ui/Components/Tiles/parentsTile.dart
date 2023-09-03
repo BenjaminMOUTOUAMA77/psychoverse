@@ -62,7 +62,7 @@ class _ParentsTileState extends State<ParentsTile> {
                     Icon(
                       FluentIcons.link12,
                       size: 25.h,
-                      color: AppColors.bleu,
+                      color: AppColors.secondary,
                     ),
                     Gap(20.w),
                     Text(

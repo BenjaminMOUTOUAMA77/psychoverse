@@ -11,8 +11,7 @@ class FormulaireBoxList extends StatefulWidget {
   List<String> list;
   int uiKey;
   int formulaireUiKey;
-  String texte;
-  FormulaireBoxList({Key? key,this.list=const[],this.uiKey=0,this.formulaireUiKey=0,this.texte="Nom du Suivi Nom du Suivi"}) : super(key: key);
+  FormulaireBoxList({Key? key,this.list=const[],this.uiKey=0,this.formulaireUiKey=0}) : super(key: key);
 
   @override
   State<FormulaireBoxList> createState() => _FormulaireBoxListState();
@@ -35,7 +34,7 @@ class _FormulaireBoxListState extends State<FormulaireBoxList> {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 20.w,),
             decoration: BoxDecoration(
-              color: getColor().withOpacity(0.7),
+              color: getColor(),
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 AppDesignEffects.shadow1,
@@ -46,6 +45,7 @@ class _FormulaireBoxListState extends State<FormulaireBoxList> {
               child: GestureDetector(
                 onTap: (){
                   setState(() {
+                    debugPrint("key : ${widget.formulaireUiKey}");
                     page.setFormulairePage(1, widget.uiKey, widget.formulaireUiKey);
                   });
                 },
@@ -59,7 +59,7 @@ class _FormulaireBoxListState extends State<FormulaireBoxList> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(FluentIcons.company_directory,size: 40.h,color: AppColors.bleu,),
+                      Icon(FluentIcons.company_directory,size: 40.h,color: AppColors.secondary,),
                       Gap(15.h),
                       Text(widget.list[index],style: AppTextStyle.buttonStyleTexte.copyWith(color:AppColors.primary,fontWeight: FontWeight.w800),overflow: TextOverflow.ellipsis,),
                     ],

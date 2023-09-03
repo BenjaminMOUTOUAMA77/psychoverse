@@ -23,7 +23,7 @@ class _Titre2State extends State<Titre2> {
           height:40.h,
           width: 10.w,
           decoration: BoxDecoration(
-            color: AppColors.bleu,
+            color: AppColors.secondary,
             borderRadius: BorderRadius.circular(20.r+20),
           ),
         ),
@@ -59,7 +59,7 @@ class _Titre2State extends State<Titre2> {
           height:40.h,
           width: 10.w,
           decoration: BoxDecoration(
-            color: AppColors.bleu,
+            color: AppColors.secondary,
             borderRadius: BorderRadius.circular(20.r+20),
           ),
         ),
