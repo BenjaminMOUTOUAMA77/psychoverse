@@ -33,7 +33,7 @@ class _VrListState extends State<VrList> {
             return VrBox(
               showStat: widget.showStat,
               stat: widget.stat,
-              vrName: "VR name ",
+              vrName: widget.list[index],
               onTap: (){
                 widget.onTap!(index);
               },

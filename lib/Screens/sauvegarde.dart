@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
-import 'package:psychoverse/Ui/Components/Forms/radioMenuForm.dart';
+import 'package:psychoverse/Ui/Components/Forms/switchForm.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
@@ -15,9 +15,7 @@ class Sauvegarde extends StatefulWidget {
 }
 
 class _SauvegardeState extends State<Sauvegarde> {
-  bool sauvAuto = false;
   bool sauvManuelle = false;
-  bool sauv = false;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -31,46 +29,10 @@ class _SauvegardeState extends State<Sauvegarde> {
                 child: Column(
                   children: [
                     AppContainer2(
-                      title: "Paramètre de sauvegarde automatique",
+                      title: "Paramètre de sauvegarde automatique sur le cloud",
                       child: Column(
                         children: [
-                          RadioMenuForm(
-                              selected: sauvAuto ? "Activé" : "Désactivé",
-                              title: "Sauvegarde automatique",
-                              list: ["Désactivé", "Activé"],
-                              onChanged: (value) {},
-                              onFieldSubmitted: (value) {
-                                setState(() {
-                                  if (value == "Activé" && sauv==true) {
-                                    sauvAuto = true;
-                                    sauvManuelle = false;
-                                  } else {
-                                    sauvAuto = false;
-                                  }
-                                });
-                              }),
-                        ],
-                      ),
-                    ),
-                    AppContainer2(
-                      title: "Paramètre de sauvegarde Manuelle",
-                      child: Column(
-                        children: [
-                          RadioMenuForm(
-                              selected: sauvManuelle ? "Activé" : "Désactivé",
-                              title: "Sauvegarde Manuelle",
-                              list: ["Désactivé", "Activé"],
-                              onChanged: (value) {},
-                              onFieldSubmitted: (value) {
-                                setState(() {
-                                  if (value == "Activé" && sauv==true) {
-                                    sauvManuelle = true;
-                                    sauvAuto = false;
-                                  } else {
-                                    sauvManuelle = false;
-                                  }
-                                });
-                              }),
+                          SwitchForm(isChecked: sauvManuelle,checkedTexte: "Activé",unCheckedTexte: "Désactivé",onChanged: (value){sauvManuelle=value;},),
                         ],
                       ),
                     ),
@@ -110,29 +72,12 @@ class _SauvegardeState extends State<Sauvegarde> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 40.w,vertical: 20.h),
                             child: Text(
-                              "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.Where can I get some?There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+                              "Cher utilisateur,\n\n Comprendre la différence entre la sauvegarde locale et en ligne est essentiel pour la sécurité de vos données et la tranquillité d'esprit. Permettez-moi de vous expliquer clairement ces deux concepts :\n\n 1. Sauvegarde Locale :\nLa sauvegarde locale fait référence à la copie de vos données sur un support de stockage physique, tel qu'un disque dur externe, une clé USB ou même votre propre ordinateur. Cela signifie que vos fichiers et informations sont enregistrés localement, généralement à un endroit que vous contrôlez directement.\n\n Avantages :\n- Vous avez un accès rapide à vos données, car elles se trouvent sur votre appareil ou à proximité.- Vous avez un contrôle total sur la sauvegarde et la récupération de vos données.\n\n Inconvénients :\n1- Les risques de perte de données dus à des pannes matérielles ou des catastrophes locales (comme un incendie ou un vol) sont réels. - Vous devez prendre soin de maintenir régulièrement vos sauvegardes locales.\n 2. Sauvegarde en Ligne :\n La sauvegarde en ligne implique le stockage de vos données sur des serveurs distants, gérés par des fournisseurs de services cloud. Vos fichiers sont accessibles via Internet à partir de n'importe quel appareil connecté.\n\n Avantages :\n - Vos données sont sécurisées à distance, ce qui les protège contre les accidents locaux. - Vous pouvez accéder à vos sauvegardes à partir de n'importe où, à condition d'avoir une connexion Internet.\n\n Inconvénients :\n - Vous dépendez de la disponibilité et de la fiabilité du fournisseur de services cloud. - Certaines solutions de stockage en ligne peuvent entraîner des frais supplémentaires en fonction de la quantité de données que vous sauvegardez. \n \n\n En résumé, la sauvegarde locale est idéale pour un accès rapide et un contrôle direct, mais comporte des risques locaux. La sauvegarde en ligne offre une protection contre les catastrophes locales et l'accès à distance, mais elle dépend d'un fournisseur tiers. Il est souvent judicieux d'utiliser une combinaison des deux pour une stratégie de sauvegarde robuste.",
                               style: AppTextStyle.filedTexte,
                               textAlign: TextAlign.justify,
                             ),
                           ),
                           Gap(20.h),
-                          RadioMenuForm(
-                              selected: sauv ? "Activé" : "Désactivé",
-                              title: "Sauvegarde",
-                              list: ["Désactivé", "Activé"],
-                              onChanged: (value) {},
-                              onFieldSubmitted: (value) {
-                                setState(() {
-                                  if (value == "Activé") {
-                                    sauv = true;
-                                    sauvManuelle = true;
-                                  } else {
-                                    sauvManuelle = false;
-                                    sauvAuto = false;
-                                    sauv = false;
-                                  }
-                                });
-                              }),
                         ],
                       ),
                     ),

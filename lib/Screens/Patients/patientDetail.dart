@@ -139,7 +139,7 @@ class _PatientDetailState extends State<PatientDetail> {
                           FluentIcons.fabric_user_folder,
                           color: AppColors.secondary,
                         ),
-                        label: const Text('TOUMOUDAGOU Jeanne'),
+                        label: const Text('Jospin Crispin'),
                         onPressed: () {},
                       ),
                     ),

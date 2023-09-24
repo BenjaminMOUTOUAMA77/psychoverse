@@ -339,7 +339,7 @@ class _SuiviDetailState extends State<SuiviDetail> {
                   onFieldSubmitted: (value) {},
                 ),
                 AppContainer3(
-                  title: "Anamnèse spécial",
+                  title: "Anamnèse 2 (opt)",
                   child: Column(
                     children: [
                       ComboBoxForm(

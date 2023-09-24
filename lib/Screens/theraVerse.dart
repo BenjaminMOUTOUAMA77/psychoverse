@@ -14,19 +14,19 @@ import 'package:psychoverse/Ui/Components/Lists/vrList.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
-class MobileVR extends StatefulWidget {
-  const MobileVR({Key? key}) : super(key: key);
+class TheraVerse extends StatefulWidget {
+  const TheraVerse({Key? key}) : super(key: key);
 
   @override
-  State<MobileVR> createState() => _MobileVRState();
+  State<TheraVerse> createState() => _TheraVerseState();
 }
 
-class _MobileVRState extends State<MobileVR> {
+class _TheraVerseState extends State<TheraVerse> {
   List<String> vrList = [
-    "Vr 1",
-    "Vr 1",
-    "Vr 1",
-    "Vr 1",
+    "TERV-TSPT",
+    "TERV-TOC",
+    "TERV-TAG",
+    "TERV-TS",
     "Vr 1",
     "Vr 1",
     "Vr 1",
@@ -47,7 +47,7 @@ class _MobileVRState extends State<MobileVR> {
                 child: Column(
                   children: [
                     AppContainer2(
-                      title: "Informations d'authentification",
+                      title: "Vos informations d'authentification TheraVerse",
                       child: Column(
                         children: [
                           Column(
@@ -78,7 +78,7 @@ class _MobileVRState extends State<MobileVR> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "Vous avez donc accès à toutes des expériences de réalité virtuelle disponibles sur Mobile VR",
+                                    "Vous avez donc accès à TheraVerse pour expérimenter les TERV de votre Banque VR",
                                     style: AppTextStyle.filedTexte,
                                     textAlign: TextAlign.center,
                                   ),
@@ -131,14 +131,7 @@ class _MobileVRState extends State<MobileVR> {
                                               "Nom",
                                               "Code"
                                             ],
-                                            textList: [
-                                              "VR 1",
-                                              "VR 2",
-                                              "VR 3",
-                                              "VR 4",
-                                              "VR 5",
-                                              "VR 6",
-                                            ],
+                                            textList: vrList,
                                             onChanged: (
                                                 {toggleFilter = "",
                                                 comboFilter = "",

@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Functions/initialisation.dart';
 import 'package:psychoverse/Providers/myAppPathProvider.dart';
+import 'package:psychoverse/Screens/connexion.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/screens/mainScreensManager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const MainScreensManager(),
+      child: const Connexion(),
     );
   }
 }

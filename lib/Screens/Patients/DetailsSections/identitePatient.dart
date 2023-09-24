@@ -102,7 +102,7 @@ class _IdentiteState extends State<Identite> {
                             ),
                           ),
                           Text(
-                            "20 Mai 2023 ",
+                            "20 Juin 2023 ",
                             style: AppTextStyle.bigFilledTexte
                                 .copyWith(fontWeight: FontWeight.w900),
                           ),
@@ -119,7 +119,7 @@ class _IdentiteState extends State<Identite> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "20 Juin 2023 ",
+                                    "26 Octobre 2023 ",
                                     style: AppTextStyle.bigFilledTexte
                                         .copyWith(fontWeight: FontWeight.w900),
                                   ),
@@ -139,7 +139,7 @@ class _IdentiteState extends State<Identite> {
                                       .copyWith(fontSize: 15.sp),
                                 ),
                                 Text(
-                                  "20 Juin 2023 ",
+                                  "26 Octobre 2023 ",
                                   style: AppTextStyle.bigFilledTexte
                                       .copyWith(fontWeight: FontWeight.w900),
                                 ),

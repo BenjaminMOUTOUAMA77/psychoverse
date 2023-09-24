@@ -6,7 +6,7 @@ import 'package:psychoverse/Screens/Patients/mainPatient.dart';
 import 'package:psychoverse/Screens/aPropos.dart';
 import 'package:psychoverse/Screens/abonnement.dart';
 import 'package:psychoverse/Screens/Agenda/agenda.dart';
-import 'package:psychoverse/Screens/mobileVR.dart';
+import 'package:psychoverse/Screens/theraVerse.dart';
 import 'package:psychoverse/Screens/monCompte.dart';
 import 'package:psychoverse/Screens/parametre.dart';
 import 'package:psychoverse/Screens/psychoVerse.dart';
@@ -66,8 +66,8 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
               color: page.page == 4 ? AppColors.secondary : AppColors.primary,
               height: 20),
         ),
-        title: Text('Mobile VR', style: AppTextStyle.navBarTexte),
-        body: const MobileVR(),
+        title: Text('TheraVerse', style: AppTextStyle.navBarTexte),
+        body: const TheraVerse(),
       ),
       PaneItem(
         icon: SizedBox(

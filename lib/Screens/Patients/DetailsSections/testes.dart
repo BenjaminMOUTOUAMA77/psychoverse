@@ -65,20 +65,10 @@ class _TestesState extends State<Testes> {
             ),
           ),
           AppContainer2(
-            title: "Jeux Psychologique",
+            title: "Structure de personnalité",
             child: Column(
               children: [
-                BigTextForm(title: "Description", onFieldSubmitted: (value) {}),
-                BigTextForm(title: "Résultat", onFieldSubmitted: (value) {}),
-              ],
-            ),
-          ),
-          AppContainer2(
-            title: "Trais de personnalité",
-            child: Column(
-              children: [
-                MultiCheckBoxMenuForm(title: "Trait", selected: [],list: personnaliteList,onChanged: (value){},onFieldSubmitted: (value){},),
-                SuggestTextForm(title: "Autre", list: ["Addition","Longue maladie","Traumatisme spécifique","Deuil","Échec","Chirurgie",],onChanged: (value){}, onFieldSubmitted: (value){}),
+                MultiCheckBoxMenuForm(title: "Trait de personnalité", selected: [],list: personnaliteList,onChanged: (value){},onFieldSubmitted: (value){},),
                 BigTextForm(
                     title: "Commentaire", onFieldSubmitted: (value) {}),
               ],
