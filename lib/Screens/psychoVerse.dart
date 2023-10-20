@@ -1,9 +1,11 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
+
 
 class PsychoVerse extends StatefulWidget {
   const PsychoVerse({Key? key}) : super(key: key);
@@ -30,6 +32,7 @@ class _PsychoVerseState extends State<PsychoVerse> {
                       child: Column(
                         children: [
                           Gap(20.h),
+                          SvgPicture.asset("assets/images/lSFBlanc.svg"),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 40.w,vertical: 20.h),
                             child: Text(

@@ -10,7 +10,8 @@ import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class Connexion extends StatefulWidget {
-  const Connexion({Key? key}) : super(key: key);
+  bool firstTime;
+  Connexion({Key? key,this.firstTime=true}) : super(key: key);
 
   @override
   State<Connexion> createState() => _ConnexionState();
@@ -97,13 +98,19 @@ class _ConnexionState extends State<Connexion> {
                           SimpleAppButon(
                             texte: "Valider",
                             icon: FluentIcons.lookup_entities,
-                            function: () => Navigator.push(
-                              context,
-                              FluentPageRoute(
-                                builder: (BuildContext context) =>
+                            function: (){
+                              if(widget.firstTime){
+                                Navigator.push(
+                                  context,
+                                  FluentPageRoute(
+                                    builder: (BuildContext context) =>
                                     const MainScreensManager(),
-                              ),
-                            ),
+                                  ),
+                                );
+                              }else{
+                                Navigator.pop(context);
+                              }
+                            },
                           ),
                         ],
                       ),

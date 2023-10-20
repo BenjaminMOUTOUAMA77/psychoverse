@@ -115,8 +115,9 @@ class _MainFormulaireState extends State<MainFormulaire> {
         child: TabView(
           tabs: sections.getFormulaireTabs(widget.uiKey),
           currentIndex: sections.getFormulaireCurrentIndex(widget.uiKey),
-          onChanged: (index) =>
-              sections.setFormulaireCurrentIndex(index, widget.uiKey),
+          onChanged: (index) => setState(() {
+            sections.setFormulaireCurrentIndex(index, widget.uiKey);
+          }),
           tabWidthBehavior: TabWidthBehavior.equal,
           closeButtonVisibility: CloseButtonVisibilityMode.onHover,
           showScrollButtons: true,

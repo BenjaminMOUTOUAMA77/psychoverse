@@ -36,9 +36,10 @@ class _MiddlePopUpState extends State<MiddlePopUp> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 500.w, vertical: 30.h),
+      padding: EdgeInsets.symmetric(vertical: 30.h,horizontal:400.w - 100),
       child: Container(
         padding: EdgeInsets.only(bottom: 10.h),
+        width: 500,
         decoration: BoxDecoration(
           color: AppColors.blanc,
           borderRadius: BorderRadius.circular(10.r),

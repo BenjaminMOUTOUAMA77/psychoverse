@@ -37,11 +37,11 @@ class _SmallPopUpState extends State<SmallPopUp> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: 800.w - 200,
+        horizontal: 800.w - 250,
       ),
       child: Column(
         children: [
-          Expanded(child: Gap(0),),
+          const Expanded(child: Gap(0),),
           Container(
             width: double.infinity,
             alignment: Alignment.center,
@@ -157,7 +157,7 @@ class _SmallPopUpState extends State<SmallPopUp> {
               ],
             ),
           ),
-          Expanded(child: Gap(0),),
+          const Expanded(child: Gap(0),),
         ],
       ),
     );

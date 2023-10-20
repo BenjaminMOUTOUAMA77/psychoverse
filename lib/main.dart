@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const Connexion(),
+      child: Connexion(),
     );
   }
 }

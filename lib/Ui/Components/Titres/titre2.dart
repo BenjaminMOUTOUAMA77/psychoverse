@@ -21,7 +21,7 @@ class _Titre2State extends State<Titre2> {
         Expanded(child: Gap(1.w)),
         Container(
           height:40.h,
-          width: 10.w,
+          width: 8,
           decoration: BoxDecoration(
             color: AppColors.secondary,
             borderRadius: BorderRadius.circular(20.r+20),
@@ -57,7 +57,7 @@ class _Titre2State extends State<Titre2> {
         Gap(10.w),
         Container(
           height:40.h,
-          width: 10.w,
+          width: 8,
           decoration: BoxDecoration(
             color: AppColors.secondary,
             borderRadius: BorderRadius.circular(20.r+20),

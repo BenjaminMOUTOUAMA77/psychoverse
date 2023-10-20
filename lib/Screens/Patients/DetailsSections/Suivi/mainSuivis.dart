@@ -117,7 +117,9 @@ class _MainSuivisState extends State<MainSuivis> {
         child: TabView(
           tabs: sections.getSuiviTabs(widget.uiKey),
           currentIndex: sections.getSuiviCurrentIndex(widget.uiKey),
-          onChanged: (index) => sections.setSuiviCurrentIndex(index, widget.uiKey),
+          onChanged: (index) => setState(() {
+            sections.setSuiviCurrentIndex(index, widget.uiKey);
+          }),
           tabWidthBehavior: TabWidthBehavior.equal,
           closeButtonVisibility: CloseButtonVisibilityMode.onHover,
           showScrollButtons: true,

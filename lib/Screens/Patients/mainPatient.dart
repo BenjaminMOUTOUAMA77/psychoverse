@@ -103,7 +103,9 @@ class _MainPatientState extends State<MainPatient> {
     return TabView(
       tabs: sections.getTabs(),
       currentIndex: sections.getCurrentIndex(),
-      onChanged: (index) => sections.setCurrentIndex(index),
+      onChanged: (index) => setState(() {
+        sections.setCurrentIndex(index);
+      }),
       tabWidthBehavior: TabWidthBehavior.equal,
       closeButtonVisibility: CloseButtonVisibilityMode.onHover,
       showScrollButtons: true,
