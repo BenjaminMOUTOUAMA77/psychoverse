@@ -37,7 +37,7 @@ List<PaneItem> appNavMenu(MainScreenPagesManagerProvider page) => [
               height: 20),
         ),
         title: Text('Dossiers', style: AppTextStyle.navBarTexte),
-        body: const MainPatient(),
+        body: MainPatient(),
       ),
       PaneItem(
         icon: SizedBox(

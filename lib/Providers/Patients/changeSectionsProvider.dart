@@ -21,13 +21,11 @@ class ChangeSectionsProvider extends ChangeNotifier{
   int getCurrentIndex()=>currentIndex;
   setCurrentIndex(int value) {
     currentIndex=value;
-    notifyListeners();
   }
 
   List<Tab> getTabs()=>tabs;
   addTab(Tab value){
     tabs.add(value);
-    notifyListeners();
   }
   insertTab(int index,Tab element){
     tabs.insert(index, element);
@@ -48,7 +46,6 @@ class ChangeSectionsProvider extends ChangeNotifier{
   List<PatientUi> get thePatientUiList => patientUiList;
   int addPatientUi(){
     patientUiList.add(PatientUi(key: theKey));
-    notifyListeners();
     theKey++;
     return theKey -1;
   }
@@ -109,13 +106,11 @@ class ChangeSectionsProvider extends ChangeNotifier{
   int getSuiviCurrentIndex(int key)=>patientUiList[findIndex(key)].suiviCurrentIndex;
   setSuiviCurrentIndex(int value,int key) {
     patientUiList[findIndex(key)].suiviCurrentIndex=value;
-    notifyListeners();
   }
 
   List<Tab> getSuiviTabs(int key)=>patientUiList[findIndex(key)].suiviTabs;
   addSuiviTab(Tab value,int key){
     patientUiList[findIndex(key)].suiviTabs.add(value);
-    notifyListeners();
   }
   insertSuiviTab(int index,Tab element,int key){
     patientUiList[findIndex(key)].suiviTabs.insert(index, element);
@@ -162,13 +157,11 @@ class ChangeSectionsProvider extends ChangeNotifier{
   int getFormulaireCurrentIndex(int key)=>patientUiList[findIndex(key)].formulaireCurrentIndex;
   setFormulaireCurrentIndex(int value,int key) {
     patientUiList[findIndex(key)].formulaireCurrentIndex=value;
-    notifyListeners();
   }
 
   List<Tab> getFormulaireTabs(int key)=>patientUiList[findIndex(key)].formulairesTabs;
   addFormulaireTab(Tab value,int key){
     patientUiList[findIndex(key)].formulairesTabs.add(value);
-    notifyListeners();
   }
   insertFormulaireTab(int index,Tab element,int key){
     patientUiList[findIndex(key)].formulairesTabs.insert(index, element);

@@ -2,11 +2,13 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Functions/initialisation.dart';
 import 'package:psychoverse/Providers/myAppPathProvider.dart';
+import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
+import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
+import 'package:psychoverse/Providers/changeScreenProvider.dart';
+import 'package:psychoverse/Providers/HomeProviders/sliderItemProvider.dart';
 import 'package:psychoverse/Screens/connexion.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
-import 'package:psychoverse/screens/mainScreensManager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'Providers/changeScreenProvider.dart';
 
 void main() async {
   initialisation();
@@ -15,6 +17,10 @@ void main() async {
         providers: [
           ChangeNotifierProvider(create: (_) => MainScreenPagesManagerProvider()),
           ChangeNotifierProvider(create: (_) => MyAppPathProvider()),
+          ChangeNotifierProvider(create: (_) => ChangeSectionsProvider()),
+          ChangeNotifierProvider(create: (_) => ChangeSectionsProviderArchitecture()),
+          ChangeNotifierProvider(create: (_) => ArchitectureFormulairePagesManagerProvider()),
+          ChangeNotifierProvider(create: (_) => SliderItemProvider()),
         ],
         child: const MyApp(),
       ),

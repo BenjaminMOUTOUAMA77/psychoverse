@@ -107,7 +107,7 @@ class _QuoteSlideState extends State<QuoteSlide> {
     return Row(
       children: [
         Expanded(
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
             child: widget.image == null
                 ? const ImagePlaceholder()

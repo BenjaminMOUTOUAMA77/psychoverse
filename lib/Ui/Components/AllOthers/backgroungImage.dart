@@ -15,17 +15,7 @@ class _MakeBackgroundImageState extends State<MakeBackgroundImage> {
       height: double.infinity,
       width: double.infinity,
       color: AppColors.blanc,
-      child: Expanded(
-        child: Opacity(
-          opacity: 0.01,
-          child: FadeInImage(
-            placeholder: AssetImage("assets/images/LSFBlanc.png"),
-            image: AssetImage(AppImages.pattern,),
-            fit: BoxFit.cover,
-            placeholderFit: BoxFit.fill,
-          ),
-        ),
-      ),
+      child: Image.asset(AppImages.pattern,opacity: const AlwaysStoppedAnimation(0.01),),
     );
   }
 }
