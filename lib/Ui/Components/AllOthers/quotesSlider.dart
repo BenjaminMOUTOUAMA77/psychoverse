@@ -12,8 +12,8 @@ import 'package:psychoverse/Ui/Components/AllOthers/imagePlaceholder.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appImages.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
-import 'package:psychoverse/models/quotes.dart';
 import 'dart:math';
+import '../../../Models/quote.dart';
 
 class MakeQuotesSlider extends StatefulWidget {
   const MakeQuotesSlider({Key? key}) : super(key: key);
@@ -27,30 +27,27 @@ class _MakeQuotesSliderState extends State<MakeQuotesSlider> {
     SliderItemProvider sliderItem = Provider.of<SliderItemProvider>(context);
     List<Quote> getQuotes() {
       return [
-        Quote(
-            texte:
+        Quote(id: "",
+            citation:
                 "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
-        Quote(
-            texte:
+        Quote(id: "",
+            citation:
                 "Jamais la psychologie ne pourra dire sur la folie la vérité, puisque c'est la folie qui détient la vérité de la psychologie."),
-        Quote(
-            texte:
+        Quote(id: "",
+            citation:
                 "La psychologie est la science qui vous apprend des choses que vous savez déjà en des termes que vous ne comprenez pas"),
-        Quote(
-            texte:
+        Quote(id: "",
+            citation:
                 "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
-        Quote(
-            texte:
+        Quote(id: "",
+            citation:
                 "La psychologie c'est l'art de faire croire aux autres que nous les comprenons"),
-        Quote(
-            texte:
+        Quote(id: "",
+            citation:
                 "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
-        Quote(
-            texte:
+        Quote(id: "",citation:
                 "Ne fais pas de psychologie dans la colère, tu verrais trop juste"),
-        Quote(
-            texte:
-                "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
+        Quote(id: "",citation: "Seuls les psychologues inventent des mots pour les choses qui n'existent pas !"),
       ];
     }
 
@@ -58,7 +55,7 @@ class _MakeQuotesSliderState extends State<MakeQuotesSlider> {
           return Builder(
             builder: (BuildContext context) {
               return QuoteSlide(
-                  texte: i.texte, image: i.image, author: i.author);
+                  texte: i.citation!, image: i.image, author: i.auteur!);
             },
           );
         }).toList();

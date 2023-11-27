@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
+import 'package:psychoverse/Ui/Components/Titres/pageTitle.dart';
 
 
 class APropos extends StatefulWidget {
@@ -25,6 +26,7 @@ class _AProposState extends State<APropos> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    PageTitle(title: "À Propos",icon: FluentIcons.waffle_office365,),
                     AppContainer2(
                       title: "Paramètre de sauvegarde automatique",
                       child: Column(

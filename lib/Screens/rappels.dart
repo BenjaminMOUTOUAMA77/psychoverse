@@ -14,6 +14,7 @@ import 'package:psychoverse/Ui/Components/Forms/searchBar.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 import 'package:psychoverse/Ui/Components/Lists/selectablePatientList.dart';
+import 'package:psychoverse/Ui/Components/Titres/pageTitle.dart';
 
 class Rappels extends StatefulWidget {
   const Rappels({Key? key}) : super(key: key);
@@ -47,6 +48,7 @@ class _RappelsState extends State<Rappels> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    PageTitle(title: "Rappels",icon: FluentIcons.skype_message,),
                     AppContainer2(
                       title: "Email Rappel",
                       child: Column(

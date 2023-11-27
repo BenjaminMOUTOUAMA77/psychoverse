@@ -15,5 +15,4 @@ class MainScreenPagesManagerProvider extends ChangeNotifier{
     _displayMode=displayMode;
     notifyListeners();
   }
-
 }

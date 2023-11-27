@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
+import 'package:psychoverse/Ui/Components/Titres/pageTitle.dart';
 
 
 class PsychoVerse extends StatefulWidget {
@@ -27,6 +28,7 @@ class _PsychoVerseState extends State<PsychoVerse> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    PageTitle(title: "Psychodesk",icon: FluentIcons.cloud_import_export,),
                     AppContainer2(
                       title: "Information générale",
                       child: Column(

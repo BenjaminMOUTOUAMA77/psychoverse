@@ -27,57 +27,54 @@ class PatientBox extends StatefulWidget {
 class _PatientBoxState extends State<PatientBox> {
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
-      style: ButtonStyle(
-        backgroundColor:
-            ButtonState.all(AppColors.blancGrise.withOpacity(0.15)),
-        border:
-            ButtonState.all(BorderSide(width: 0, color: Colors.transparent)),
-      ),
-      onPressed: widget.onTap,
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.all(3),
-            decoration: BoxDecoration(
-              color: getColor(),
-              boxShadow: [
-                AppDesignEffects.shadow2,
-              ],
-              shape: BoxShape.circle,
-            ),
-            child: Container(
-              padding: EdgeInsets.all(3),
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.blanc,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
-                color: AppColors.blanc,
+                color: getColor(),
+                boxShadow: [
+                  AppDesignEffects.shadow2,
+                ],
                 shape: BoxShape.circle,
               ),
               child: Container(
-                height: 200.h,
+                padding: const EdgeInsets.all(3),
                 decoration: BoxDecoration(
+                  color: AppColors.blanc,
                   shape: BoxShape.circle,
                 ),
-                clipBehavior: Clip.hardEdge,
-                child: widget.image == null
-                    ? ImagePlaceholder()
-                    : Image.file(
-                        File(widget.image!.path!),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.center,
-                      ),
+                child: Container(
+                  height: 180.h,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  clipBehavior: Clip.hardEdge,
+                  child: widget.image == null
+                      ? ImagePlaceholder()
+                      : Image.file(
+                          File(widget.image!.path!),
+                    fit: BoxFit.cover,
+                    alignment: Alignment.center,
+                        ),
+                ),
               ),
             ),
-          ),
-          Gap(10.h),
-          Expanded(
-            child: Text(
+            Text(
               widget.nom,
               style: AppTextStyle.buttonStyleTexte.copyWith(
                   color: AppColors.noire, fontWeight: FontWeight.w600),
               overflow: TextOverflow.ellipsis,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

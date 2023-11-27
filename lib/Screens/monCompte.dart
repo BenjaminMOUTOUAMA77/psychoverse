@@ -8,6 +8,7 @@ import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
+import 'package:psychoverse/Ui/Components/Titres/pageTitle.dart';
 
 class MonCompte extends StatefulWidget {
   const MonCompte({Key? key}) : super(key: key);
@@ -29,6 +30,7 @@ class _MonCompteState extends State<MonCompte> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    PageTitle(title: "Ce Profil",icon: FluentIcons.player_settings,),
                     AppContainer2(
                       title: "Votre statut d'abonnement",
                       child: Column(

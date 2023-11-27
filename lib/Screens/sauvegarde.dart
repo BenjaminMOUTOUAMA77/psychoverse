@@ -6,6 +6,7 @@ import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Forms/switchForm.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
+import 'package:psychoverse/Ui/Components/Titres/pageTitle.dart';
 
 class Sauvegarde extends StatefulWidget {
   const Sauvegarde({Key? key}) : super(key: key);
@@ -28,6 +29,7 @@ class _SauvegardeState extends State<Sauvegarde> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    PageTitle(title: "Sauvegarde",icon: FluentIcons.cloud_import_export,),
                     AppContainer2(
                       title: "Paramètre de sauvegarde automatique sur le cloud",
                       child: Column(

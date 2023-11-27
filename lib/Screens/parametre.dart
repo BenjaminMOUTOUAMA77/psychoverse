@@ -6,6 +6,7 @@ import 'package:psychoverse/Providers/changeScreenProvider.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
 import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
 import 'package:psychoverse/Ui/Components/Forms/switchForm.dart';
+import 'package:psychoverse/Ui/Components/Titres/pageTitle.dart';
 
 class Parametre extends StatefulWidget {
   const Parametre({Key? key}) : super(key: key);
@@ -28,6 +29,7 @@ class _ParametreState extends State<Parametre> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    PageTitle(title: "Paramètre",icon: FluentIcons.default_settings,),
                     AppContainer2(
                       title: "Paramètre d'affichage",
                       child: Column(

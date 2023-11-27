@@ -9,6 +9,7 @@ import 'package:psychoverse/Ui/Components/Tiles/attibutAbonnementTile.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 import 'package:intl/intl.dart';
+import 'package:psychoverse/Ui/Components/Titres/pageTitle.dart';
 
 class Abonnement extends StatefulWidget {
   const Abonnement({Key? key}) : super(key: key);
@@ -31,6 +32,7 @@ class _AbonnementState extends State<Abonnement> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    PageTitle(title: "Abonnement",icon: FluentIcons.diamond_user,),
                     AppContainer2(
                       title: "Votre statut",
                       child: Column(

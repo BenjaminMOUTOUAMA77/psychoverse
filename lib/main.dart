@@ -1,14 +1,15 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:psychoverse/Functions/initialisation.dart';
+import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Providers/myAppPathProvider.dart';
 import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
-import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Providers/changeScreenProvider.dart';
 import 'package:psychoverse/Providers/HomeProviders/sliderItemProvider.dart';
 import 'package:psychoverse/Screens/connexion.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 void main() async {
   initialisation();
@@ -19,7 +20,6 @@ void main() async {
           ChangeNotifierProvider(create: (_) => MyAppPathProvider()),
           ChangeNotifierProvider(create: (_) => ChangeSectionsProvider()),
           ChangeNotifierProvider(create: (_) => ChangeSectionsProviderArchitecture()),
-          ChangeNotifierProvider(create: (_) => ArchitectureFormulairePagesManagerProvider()),
           ChangeNotifierProvider(create: (_) => SliderItemProvider()),
         ],
         child: const MyApp(),
@@ -45,12 +45,13 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return FluentApp(
           debugShowCheckedModeBanner: false,
-          title: 'Psychoverse',
+          title: 'Psychodesk',
           // You can use the library anywhere in the app even in theme
           theme: FluentThemeData(
             activeColor: AppColors.primary,
             accentColor: Colors.purple,
             fontFamily: "BeVietnamPro",
+            navigationPaneTheme: NavigationPaneThemeData(backgroundColor: AppColors.blancGrise),
           ),
           color: AppColors.primary,
           home: child,

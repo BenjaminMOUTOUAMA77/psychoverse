@@ -52,6 +52,10 @@ dependencies:
   file_sizes: ^1.0.6
   path_provider: ^2.0.15
   calendar_view: ^1.0.4
+  supabase_flutter: ^1.10.25
+  flutter_dotenv: ^5.1.0
+  powersync: ^0.4.1
+  path: ^1.8.3
 
 dev_dependencies:
   flutter_test:

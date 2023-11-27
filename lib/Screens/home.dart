@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:psychoverse/Screens/connexion.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/backgroungImage.dart';
@@ -11,7 +12,11 @@ class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
 }
+
 class _HomeState extends State<Home> {
+  bool synched = true;
+  bool connected = true;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -21,7 +26,9 @@ class _HomeState extends State<Home> {
         const Center(
           child: Column(
             children: [
-              Expanded(child: MakeQuotesSlider(),),
+              Expanded(
+                child: MakeQuotesSlider(),
+              ),
             ],
           ),
         ),
@@ -32,7 +39,7 @@ class _HomeState extends State<Home> {
               children: [
                 const Expanded(child: Gap(0)),
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 10),
                   decoration: BoxDecoration(
                     color: AppColors.blancGrise,
                     boxShadow: [
@@ -40,16 +47,92 @@ class _HomeState extends State<Home> {
                     ],
                     borderRadius: BorderRadius.circular(60),
                   ),
+                  alignment: Alignment.center,
                   child: Row(
                     children: [
-                      IconButton(
-                        icon: const Icon(FluentIcons.a_t_p_logo, size: 30),
-                        onPressed: () => Navigator.push(
-                          context,
-                          FluentPageRoute(
-                            builder: (BuildContext context) =>
-                            Connexion(firstTime: false,),
+                      Tooltip(
+                        message: "Vérouiller",
+                        child: IconButton(
+                          icon: Icon(
+                            FluentIcons.authenticator_app,
+                            size: 26,
+                            color: AppColors.primary,
                           ),
+                          onPressed: () => Navigator.push(
+                            context,
+                            FluentPageRoute(
+                              builder: (BuildContext context) => Connexion(
+                                firstTime: false,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const Gap(5),
+                      Icon(
+                        FluentIcons.gripper_dots_vertical,
+                        color: AppColors.grisLite,
+                      ),
+                      const Gap(5),
+                      Tooltip(
+                        message: "7 rendez-vous aujourd'hui",
+                        child: IconButton(
+                          icon: Icon(
+                            FluentIcons.calendar_mirrored,
+                            size: 26,
+                            color: AppColors.secondary,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ),
+                      const Gap(5),
+                      Icon(
+                        FluentIcons.gripper_dots_vertical,
+                        color: AppColors.grisLite,
+                      ),
+                      const Gap(5),
+                      Tooltip(
+                        message: synched
+                            ? "Sauvegarde complèté"
+                            : "Sauvegarde incomplète",
+                        child: IconButton(
+                          icon: synched
+                              ? Icon(
+                                  FluentIcons.to_do_logo_inverse,
+                                  size: 26,
+                                  color: AppColors.primary,
+                                )
+                              : Icon(
+                                  FluentIcons.cloud_not_synced,
+                                  size: 26,
+                                  color: AppColors.primary,
+                                ),
+                          onPressed: () {},
+                        ),
+                      ),
+                      const Gap(5),
+                      Icon(
+                        FluentIcons.gripper_dots_vertical,
+                        color: AppColors.grisLite,
+                      ),
+                      const Gap(5),
+                      Tooltip(
+                        message: synched
+                            ? "Vous êtes Connecté !"
+                            : "Vous êtes hors ligne !",
+                        child: IconButton(
+                          icon: synched
+                              ? Icon(
+                            FluentIcons.offline_one_drive_parachute,
+                            size: 26,
+                            color: AppColors.primary,
+                          )
+                              : Icon(
+                            FluentIcons.offline_one_drive_parachute_disabled,
+                            size: 26,
+                            color: AppColors.primary,
+                          ),
+                          onPressed: () {},
                         ),
                       ),
                     ],
@@ -58,7 +141,7 @@ class _HomeState extends State<Home> {
                 const Expanded(child: Gap(0)),
               ],
             ),
-            const Gap(10),
+            Gap(50.h),
           ],
         ),
       ],

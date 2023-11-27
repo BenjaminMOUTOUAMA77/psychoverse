@@ -11,6 +11,7 @@ import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zSmallPopUp.dart';
 import 'package:psychoverse/Ui/Components/Lists/vrList.dart';
+import 'package:psychoverse/Ui/Components/Titres/pageTitle.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
@@ -46,6 +47,7 @@ class _TheraVerseState extends State<TheraVerse> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    PageTitle(title: "TheraVerse",icon: FluentIcons.view_in_a_r,),
                     AppContainer2(
                       title: "Vos informations d'authentification TheraVerse",
                       child: Column(

@@ -28,7 +28,7 @@ class _ArchitectureFormulairesState extends State<ArchitectureFormulaires> {
           pageSnapping: false,
           controller: page.getPage(),
           onPageChanged: (value){page.setPage(value);},
-          children: <Widget>[
+          children: [
             ArchitectureFormulaireList(),
             ArchitectureFormulaireDetail(),
           ],

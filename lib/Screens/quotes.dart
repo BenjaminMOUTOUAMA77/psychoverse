@@ -8,6 +8,7 @@ import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/PopUps/zBigPopUp.dart';
 import 'package:psychoverse/Ui/Components/Blocs/quote.dart';
 import 'package:psychoverse/Ui/Components/Lists/quotesList.dart';
+import 'package:psychoverse/Ui/Components/Titres/pageTitle.dart';
 
 class Quotes extends StatefulWidget {
   const Quotes({Key? key}) : super(key: key);
@@ -28,6 +29,7 @@ class _QuotesState extends State<Quotes> {
           const MakeBackgroundImage(),
           Column(
             children: [
+              PageTitle(title: "Quotes",icon: FluentIcons.right_double_quote,),
               Gap(50.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
