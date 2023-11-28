@@ -1,3 +1,4 @@
+import 'package:powersync/sqlite3.dart' as sqlite;
 class Personne {
   String? id;
   String? nom;
@@ -20,7 +21,7 @@ class Personne {
   String? asm_id;
 
   Personne(
-      this.id,
+      {this.id,
       this.nom,
       this.im_profil,
       this.genre,
@@ -38,5 +39,29 @@ class Personne {
       this.qualites,
       this.defauts,
       this.commentaire,
-      this.asm_id);
+      this.asm_id});
+
+  factory Personne.fromRow(sqlite.Row row) {
+    return Personne(
+      id: row['id'],
+      nom: row['nom'],
+      im_profil: row['im_profil'],
+      genre: row['genre'],
+      email: row['email'],
+      tel: row['tel'],
+      addresse: row['addresse'],
+      ethnie: row['ethnie'],
+      date_naissance: row['date_naissance'],
+      lieu_naissance: row['lieu_naissance'],
+      religion: row['religion'],
+      condition_residence: row['condition_residence'],
+      niv_etude: row['niv_etude'],
+      profession: row['profession'],
+      situation_matrimoniale: row['situation_matrimoniale'],
+      qualites: row['qualites'],
+      defauts: row['defauts'],
+      commentaire: row['commentaire'],
+      asm_id: row['asm_id'],
+    );
+  }
 }
