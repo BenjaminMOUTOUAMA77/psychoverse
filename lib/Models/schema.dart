@@ -614,6 +614,12 @@ const schema = Schema([
     Column.text('asm_id')
   ]),
 
+  /////////////////////////////////////////////////////////////////////////////////
+  Table.localOnly('file_manager', [
+    Column.text('id'),
+    Column.text('online_file'),
+    Column.text('offline_file'),
+  ]),
 
 
 ]);

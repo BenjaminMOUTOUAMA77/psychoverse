@@ -6,6 +6,7 @@ import 'package:psychoverse/Providers/myAppPathProvider.dart';
 import 'package:psychoverse/Providers/ArchitectureProvider/changeScreenProviderArchitecture.dart';
 import 'package:psychoverse/Providers/changeScreenProvider.dart';
 import 'package:psychoverse/Providers/HomeProviders/sliderItemProvider.dart';
+import 'package:psychoverse/Providers/userProvider.dart';
 import 'package:psychoverse/Screens/connexion.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +17,7 @@ void main() async {
   runApp(
       MultiProvider(
         providers: [
+          ChangeNotifierProvider(create: (_) => UserProvider()),
           ChangeNotifierProvider(create: (_) => MainScreenPagesManagerProvider()),
           ChangeNotifierProvider(create: (_) => MyAppPathProvider()),
           ChangeNotifierProvider(create: (_) => ChangeSectionsProvider()),

@@ -1,7 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 import 'package:psychoverse/Functions/dbConnexion.dart';
+import 'package:psychoverse/Providers/userProvider.dart';
 import 'package:psychoverse/Screens/mainScreensManager.dart';
 import 'package:psychoverse/Ui/Components/Buttons/simpleAppButton.dart';
 import 'package:psychoverse/Ui/Components/Buttons/smallButton.dart';
@@ -38,6 +40,7 @@ class _ConnexionState extends State<Connexion> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider account = Provider.of<UserProvider>(context);
     return Stack(
       alignment: Alignment.center,
       children: [
