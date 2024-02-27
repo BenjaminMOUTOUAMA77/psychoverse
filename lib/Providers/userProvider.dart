@@ -3,12 +3,12 @@ import 'package:psychoverse/Models/asm.dart';
 import 'package:psychoverse/Models/users.dart';
 
 class UserProvider extends ChangeNotifier{
-  static Users _user=Users();
+  static App_users _user=App_users();
   static Asm _asm=Asm();
 
-  Users get user => _user;
+  App_users get user => _user;
 
-  set user(Users value) {
+  set user(App_users value) {
     _user = value;
     notifyListeners();
   }

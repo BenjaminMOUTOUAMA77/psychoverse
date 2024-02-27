@@ -10,7 +10,9 @@ const schema = Schema([
     Column.text('telephone'),
     Column.text('im_profil'),
     Column.text('user_type'),
-    Column.text('bucket_id')
+    Column.text('bucket_id'),
+    Column.text('is_local_user'),
+    Column.text('validate_status')
   ]),
   Table('abonnement', [
     Column.text('created_at'),
@@ -616,9 +618,14 @@ const schema = Schema([
 
   /////////////////////////////////////////////////////////////////////////////////
   Table.localOnly('file_manager', [
-    Column.text('id'),
+    Column.text('created_at'),
     Column.text('online_file'),
     Column.text('offline_file'),
+  ]),
+  Table.localOnly('my_users', [
+    Column.text('created_at'),
+    Column.text('user_id'),
+    Column.text('is_local')
   ]),
 
 

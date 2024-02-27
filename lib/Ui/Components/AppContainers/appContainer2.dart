@@ -32,14 +32,14 @@ class _AppContainer2State extends State<AppContainer2> {
           }
         },
         icon: Icon(icon,color: AppColors.grisLite.withOpacity(0.3),),
-        headerBackgroundColor: ButtonState.all(AppColors.blancGrise),
+        headerBackgroundColor: ButtonState.all(AppColors.blancGrise.withOpacity(0.2)),
         leading: Icon(
           FluentIcons.starburst,
           color: AppColors.primary,
         ),
         header: Text(widget.title,style: AppTextStyle.buttonStyleTexte.copyWith(fontWeight: FontWeight.bold,color: AppColors.primary, fontSize: 8.sp+10),),
         content: widget.child,
-        contentBackgroundColor:AppColors.blancGrise.withOpacity(0.2),
+        contentBackgroundColor:AppColors.blancGrise.withOpacity(0.1),
       ),
     );
   }

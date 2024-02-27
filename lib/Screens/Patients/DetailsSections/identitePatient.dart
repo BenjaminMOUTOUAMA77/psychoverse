@@ -4,6 +4,7 @@ import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:psychoverse/Models/personne.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/adaptive.dart';
 import 'package:psychoverse/Ui/Components/AllOthers/imagePlaceholder.dart';
 import 'package:psychoverse/Ui/Components/AppContainers/appContainer2.dart';
@@ -21,7 +22,8 @@ import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 
 class Identite extends StatefulWidget {
   final int uiKey;
-  const Identite({Key? key, this.uiKey = 0}) : super(key: key);
+  Personne? personne;
+  Identite({Key? key, this.uiKey = 0,this.personne}) : super(key: key);
 
   @override
   State<Identite> createState() => _IdentiteState();
@@ -139,7 +141,7 @@ class _IdentiteState extends State<Identite> {
                                       .copyWith(fontSize: 15.sp),
                                 ),
                                 Text(
-                                  "26 Octobre 2023 ",
+                                  "26 Octobre 2024 ",
                                   style: AppTextStyle.bigFilledTexte
                                       .copyWith(fontWeight: FontWeight.w900),
                                 ),

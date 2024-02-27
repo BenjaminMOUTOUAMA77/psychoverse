@@ -57,10 +57,9 @@ class _PatientBoxState extends State<PatientBox> {
                     shape: BoxShape.circle,
                   ),
                   clipBehavior: Clip.hardEdge,
-                  child: widget.image == null
+                  child: widget.image == "null"
                       ? ImagePlaceholder()
-                      : Image.file(
-                          File(widget.image!.path!),
+                      : Image.file(File(widget.image!.path!),
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
                         ),

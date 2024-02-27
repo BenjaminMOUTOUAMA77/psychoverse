@@ -15,8 +15,8 @@ import 'package:psychoverse/Models/formulaire_patient.dart';
 import 'package:psychoverse/Models/global_files.dart';
 import 'package:psychoverse/Models/loisir_patient.dart';
 import 'package:psychoverse/Models/my_files.dart';
-import 'package:psychoverse/Models/of_users.dart';
 import 'package:psychoverse/Models/file_manager.dart';
+import 'package:psychoverse/Models/my_users.dart';
 import 'package:psychoverse/Models/patient.dart';
 import 'package:psychoverse/Models/patient_type_fait_autre.dart';
 import 'package:psychoverse/Models/patient_type_fait_commentaire.dart';
@@ -42,6 +42,64 @@ import 'package:psychoverse/Models/users.dart';
 import 'package:psychoverse/Models/variables.dart';
 
 class dbq {
+  //************************************************************************************************************//
+//************************************************************************************************************//
+//                            My_USERS
+//************************************************************************************************************//
+  //************************************************************************************************************//
+  // my_users
+  static Stream<List<My_users>> watchAllMy_users() {
+    String sql = "SELECT * FROM my_users ORDER BY created_at DESC";
+    return db.watch(sql).map((result) {
+      return result.map((row) => My_users.fromRow(row)).toList();
+    });
+  }
+
+  static Future<List<My_users>> getAllMy_users() async {
+    String sql = "SELECT * FROM my_users ORDER BY created_at DESC";
+    return await db.getAll(sql).then((result) {
+      return result.map((row) => My_users.fromRow(row)).toList();
+    });
+  }
+
+  static Future<My_users> getMy_users(My_users my_users) async {
+    String sql = "SELECT * FROM my_users WHERE id=?";
+    return await db
+        .get(sql, [my_users.id]).then((row) => My_users.fromRow(row));
+  }
+
+  static Future<String> createMy_users(My_users my_users, bool isLocal) async {
+    String theId = uuid.v4();
+    String sql =
+        "INSERT INTO my_users(id,created_at,user_id,is_local) VALUES(?,?,?,?)";
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
+      my_users.user_id,
+      my_users.is_local.toString(),
+    ]);
+  return theId;
+  }
+
+  static Future<void> updateMy_users(
+      String ancien_my_usersId, My_users new_my_users, bool isLocal) async {
+    String sql = "UPDATE my_users SET id=?,user_id=?,is_local=? WHERE id = ?";
+    await db.execute(sql, [
+      new_my_users.id,
+      new_my_users.user_id,
+      new_my_users.is_local.toString(),
+      ancien_my_usersId
+    ]);
+  }
+
+  static Future<void> deleteMy_users(My_users my_users, bool isLocal) async {
+    String sql = "DELETE FROM my_users WHERE id=?";
+    await db.execute(sql, [my_users.id]);
+  }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   static dynamic getNum_dossier(bool isLocal, String asm_id) async {
     String sql = "";
     if (isLocal) {
@@ -56,13 +114,17 @@ class dbq {
   /////////// file_manager *******************************************************************************************////////////
 
   static Stream<List<File_manager>> watchAllFile_manager() {
-    return db.watch("SELECT * FROM file_manager").map((result) {
+    return db
+        .watch("SELECT * FROM file_manager ORDER BY created_at DESC")
+        .map((result) {
       return result.map((row) => File_manager.fromRow(row)).toList();
     });
   }
 
   static Future<List<File_manager>> getAllFile_manager() async {
-    return await db.getAll("SELECT * FROM file_manager").then((result) {
+    return await db
+        .getAll("SELECT * FROM file_manager ORDER BY created_at DESC")
+        .then((result) {
       return result.map((row) => File_manager.fromRow(row)).toList();
     });
   }
@@ -72,172 +134,137 @@ class dbq {
         [file_manager.id]).then((row) => File_manager.fromRow(row));
   }
 
-  static Future<File_manager> createFile_manager(
-      File_manager file_manager) async {
-    return await db.execute(
-        "INSERT INTO file_manager(id,online_file,offline_file) VALUES(?,?,?)", [
-      uuid,
-      file_manager.online_file,
-      file_manager.offline_file,
-    ]).then((result) {
-      return result.map((row) => File_manager.fromRow(row)).toList().single;
-    });
+  static Future<String> createFile_manager(File_manager file_manager) async {
+    String theId = uuid.v4();
+    await db.execute(
+        "INSERT INTO file_manager(id,created_at,online_file,offline_file) VALUES(?,?,?,?)",
+        [
+          theId,
+          DateTime.now().toString(),
+          file_manager.online_file,
+          file_manager.offline_file,
+        ]);
+  return theId;
   }
 
-  static Future<File_manager> updateFile_manager(
+  static Future<void> updateFile_manager(
       String ancien_file_managerId, File_manager new_file_manager) async {
-    return await db.execute(
-        "UPDATE file_manager id=?,online_file=?,offline_file=? WHERE id = ?", [
-      new_file_manager.id,
-      new_file_manager.online_file,
-      new_file_manager.offline_file,
-      ancien_file_managerId
-    ]).then((result) {
-      return result.map((row) => File_manager.fromRow(row)).toList().single;
-    });
+    await db.execute(
+        "UPDATE file_manager SET id=?,online_file=?,offline_file=? WHERE id = ?",
+        [
+          new_file_manager.id,
+          new_file_manager.online_file,
+          new_file_manager.offline_file,
+          ancien_file_managerId
+        ]);
   }
 
-  static Future<File_manager> deleteFile_manager(
-      File_manager file_manager) async {
-    return await db
-        .execute("DELETE FROM file_manager WHERE id=?", [file_manager.id]).then(
-            (result) {
-      return result.map((row) => File_manager.fromRow(row)).toList().single;
-    });
+  static Future<void> deleteFile_manager(File_manager file_manager) async {
+    await db.execute("DELETE FROM file_manager WHERE id=?", [file_manager.id]);
   }
 
   //************************************************************************************************************//
 //************************************************************************************************************//
 //                            USERS
 //************************************************************************************************************//
-//************************************************************************************************************//
-//************************************************************************************************************//
-  // Off_users Table  operations
-  static Stream<List<Off_users>> watchAllOffUsers() {
-    return db.watch("SELECT * FROM local_users").map((result) {
-      return result.map((row) => Off_users.fromRow(row)).toList();
-    });
-  }
-
-  static Future<List<Off_users>> getAllOffUsers() async {
-    return await db.getAll("SELECT * FROM local_users").then((result) {
-      return result.map((row) => Off_users.fromRow(row)).toList();
-    });
-  }
-
-  static Future<Off_users> getOffUser(Off_users off_user) async {
-    return await db.get("SELECT * FROM local_users WHERE id=?",
-        [off_user.id]).then((row) => Off_users.fromRow(row));
-  }
-
-  static Future<Off_users> createOffUser(Off_users off_user) async {
-    return await db.execute(
-        "INSERT INTO local_users(id,created_at,nom, prenom, email,password, telephone, im_profil, user_type, bucket_id,is_local_user,validate_status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
-        [
-          uuid,
-          DateTime.now(),
-          off_user.nom,
-          off_user.email,
-          off_user.password,
-          off_user.telephone,
-          off_user.im_profil,
-          off_user.user_type,
-          off_user.bucket_id,
-          off_user.is_local_user.toString(),
-          off_user.validate_status.toString()
-        ]).then((result) {
-      return result.map((row) => Off_users.fromRow(row)).toList().single;
-    });
-  }
-
-  static Future<Off_users> updateOffUser(
-      String ancienOff_userId, Off_users new_off_user) async {
-    return await db.execute(
-        "UPDATE local_users id=?,nom=?, prenom=?, email=?,password=?, telephone=?, im_profil=?, user_type=?, bucket_id=?,is_local_user=?,validate_status=? WHERE id = ?",
-        [
-          new_off_user.id,
-          new_off_user.email,
-          new_off_user.password,
-          new_off_user.telephone,
-          new_off_user.im_profil,
-          new_off_user.user_type,
-          new_off_user.bucket_id,
-          new_off_user.is_local_user.toString(),
-          new_off_user.validate_status.toString(),
-          ancienOff_userId
-        ]).then((result) {
-      return result.map((row) => Off_users.fromRow(row)).toList().single;
-    });
-  }
-
-  static Future<Off_users> deleteOffUser(Off_users off_user) async {
-    return await db.execute(
-        "DELETE FROM local_users WHERE id=?", [off_user.id]).then((result) {
-      return result.map((row) => Off_users.fromRow(row)).toList().single;
-    });
-  }
-
-//************************************************************************************************************//
   //************************************************************************************************************//
   // users Table  operations
-  static Stream<List<Users>> watchAllUsers() {
-    return db.watch("SELECT * FROM users").map((result) {
-      return result.map((row) => Users.fromRow(row)).toList();
+  static Stream<List<App_users>> watchAllUsers(bool isLocal) {
+    String sql = "";
+    if (isLocal) {
+      sql = "SELECT * FROM local_users ORDER BY created_at DESC";
+    } else {
+      sql = "SELECT * FROM users ORDER BY created_at DESC";
+    }
+    return db.watch(sql).map((result) {
+      return result.map((row) => App_users.fromRow(row)).toList();
     });
   }
 
-  static Future<List<Users>> getAllUsers() async {
-    return await db.getAll("SELECT * FROM users").then((result) {
-      return result.map((row) => Users.fromRow(row)).toList();
+  static Future<List<App_users>> getAllUsers(bool isLocal) async {
+    String sql = "";
+    if (isLocal) {
+      sql = "SELECT * FROM local_users ORDER BY created_at DESC";
+    } else {
+      sql = "SELECT * FROM users ORDER BY created_at DESC";
+    }
+    return await db.getAll(sql).then((result) {
+      return result.map((row) => App_users.fromRow(row)).toList();
     });
   }
 
-  static Future<Users> getUser(Users user) async {
-    return await db.get("SELECT * FROM users WHERE id=?", [user.id]).then(
-        (row) => Users.fromRow(row));
+  static Future<App_users> getUser(App_users user, bool isLocal) async {
+    String sql = "";
+    if (isLocal) {
+      sql = "SELECT * FROM local_users WHERE id=?";
+    } else {
+      sql = "SELECT * FROM users WHERE id=?";
+    }
+    return await db.get(sql, [user.id]).then((row) => App_users.fromRow(row));
   }
 
-  static Future<Users> createUser(Users user) async {
-    return await db.execute(
-        "INSERT INTO users(id,created_at,nom, prenom, email,password, telephone, im_profil, user_type, bucket_id,is_local_user,validate_status) VALUES(?,?,?,?,?,?,?,?,?,?)",
-        [
-          uuid,
-          DateTime.now(),
-          user.nom,
-          user.email,
-          user.password,
-          user.telephone,
-          user.im_profil,
-          user.user_type,
-          user.bucket_id
-        ]).then((result) {
-      return result.map((row) => Users.fromRow(row)).toList().single;
-    });
+  static Future<String> createUser(App_users user, bool isLocal) async {
+    String theId = uuid.v4();
+    String sql = "";
+    if (isLocal) {
+      sql =
+          "INSERT INTO local_users(id,created_at,nom, prenom, email,password, telephone, im_profil, user_type, bucket_id,is_local_user,validate_status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+    } else {
+      sql =
+          "INSERT INTO users(id,created_at,nom, prenom, email,password, telephone, im_profil, user_type, bucket_id,is_local_user,validate_status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+    }
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
+      user.nom,
+      user.prenom,
+      user.email,
+      user.password,
+      user.telephone,
+      user.im_profil,
+      user.user_type,
+      user.bucket_id,
+      user.is_local_user.toString(),
+      user.validate_status.toString()
+    ]);
+  return theId;
   }
 
-  static Future<Users> updateUser(String ancienUserId, Users new_user) async {
-    return await db.execute(
-        "UPDATE users id=?,nom=?, prenom=?, email=?,password=?, telephone=?, im_profil=?, user_type=?, bucket_id=? WHERE id = ?",
-        [
-          new_user.id,
-          new_user.nom,
-          new_user.email,
-          new_user.password,
-          new_user.telephone,
-          new_user.im_profil,
-          new_user.user_type,
-          new_user.bucket_id,
-          ancienUserId
-        ]).then((result) {
-      return result.map((row) => Users.fromRow(row)).toList().single;
-    });
+  static Future<void> updateUser(
+      String ancienUserId, App_users new_user, bool isLocal) async {
+    String sql = "";
+    if (isLocal) {
+      sql =
+          "UPDATE local_users SET id=?,nom=?, prenom=?, email=?,password=?, telephone=?, im_profil=?, user_type=?, bucket_id=? WHERE id = ?";
+    } else {
+      sql =
+          "UPDATE users SET id=?,nom=?, prenom=?, email=?,password=?, telephone=?, im_profil=?, user_type=?, bucket_id=? WHERE id = ?";
+    }
+    await db.execute(sql, [
+      new_user.id,
+      new_user.nom,
+      new_user.email,
+      new_user.password,
+      new_user.telephone,
+      new_user.im_profil,
+      new_user.user_type,
+      new_user.bucket_id,
+      ancienUserId
+    ]);
   }
 
-  static Future<Users> deleteUser(Users user) async {
-    return await db
-        .execute("DELETE FROM users WHERE id=?", [user.id]).then((result) {
-      return result.map((row) => Users.fromRow(row)).toList().single;
-    });
+  static Future<void> deleteUser(App_users user, bool isLocal) async {
+    String sql = "";
+    if (isLocal) {
+      sql = "DELETE FROM local_users WHERE id=?";
+    } else {
+      sql = "DELETE FROM users WHERE id=?";
+    }
+    await db.execute(sql, [user.id]);
+    deleteAsm(Asm(id: user.id), isLocal);
+    await db.execute("DELETE FROM my_users WHERE user_id=?", [user.id]);
+    print("User deleted");
+
   }
 
 //************************************************************************************************************//
@@ -250,9 +277,9 @@ class dbq {
   static Stream<List<Abonnement>> watchAllAbonnements(bool isLocal) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_abonnement";
+      sql = "SELECT * FROM local_abonnement ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM abonnement";
+      sql = "SELECT * FROM abonnement ORDER BY created_at DESC";
     }
     return db.watch(sql).map((result) {
       return result.map((row) => Abonnement.fromRow(row)).toList();
@@ -262,9 +289,9 @@ class dbq {
   static Future<List<Abonnement>> getAllAbonnements(bool isLocal) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_abonnement";
+      sql = "SELECT * FROM local_abonnement ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM abonnement";
+      sql = "SELECT * FROM abonnement ORDER BY created_at DESC";
     }
     return await db.getAll(sql).then((result) {
       return result.map((row) => Abonnement.fromRow(row)).toList();
@@ -283,8 +310,9 @@ class dbq {
         .get(sql, [abonnement.id]).then((row) => Abonnement.fromRow(row));
   }
 
-  static Future<Abonnement> createAbonnement(
+  static Future<String> createAbonnement(
       Abonnement abonnement, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -293,37 +321,35 @@ class dbq {
       sql =
           "INSERT INTO abonnement(id,created_at,nom, image, prix) VALUES(?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       abonnement.nom,
       abonnement.image,
       abonnement.prix
-    ]).then((result) {
-      return result.map((row) => Abonnement.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Abonnement> updateAbonnement(
+  static Future<void> updateAbonnement(
       String ancienAbonnementId, Abonnement newAbonnement, bool isLocal) async {
     String sql = "";
     if (isLocal) {
-      sql = "UPDATE local_abonnement id=?,nom=?, image=?, prix=? WHERE id = ?";
+      sql =
+          "UPDATE local_abonnement SET id=?,nom=?, image=?, prix=? WHERE id = ?";
     } else {
-      sql = "UPDATE abonnement id=?,nom=?, image=?, prix=? WHERE id = ?";
+      sql = "UPDATE abonnement SET id=?,nom=?, image=?, prix=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       newAbonnement.id,
       newAbonnement.nom,
       newAbonnement.image,
       newAbonnement.prix,
       ancienAbonnementId
-    ]).then((result) {
-      return result.map((row) => Abonnement.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Abonnement> deleteAbonnement(
+  static Future<void> deleteAbonnement(
       Abonnement abonnement, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -331,9 +357,7 @@ class dbq {
     } else {
       sql = "DELETE FROM abonnement WHERE id=?";
     }
-    return await db.execute(sql, [abonnement.id]).then((result) {
-      return result.map((row) => Abonnement.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [abonnement.id]);
   }
 
 //************************************************************************************************************//
@@ -348,9 +372,9 @@ class dbq {
   static Stream<List<Fonctionnalite>> watchAllFonctionnalites(bool isLocal) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_fonctionnalite";
+      sql = "SELECT * FROM local_fonctionnalite ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM fonctionnalite";
+      sql = "SELECT * FROM fonctionnalite ORDER BY created_at DESC";
     }
     return db.watch(sql).map((result) {
       return result.map((row) => Fonctionnalite.fromRow(row)).toList();
@@ -361,9 +385,9 @@ class dbq {
       bool isLocal) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_fonctionnalite";
+      sql = "SELECT * FROM local_fonctionnalite ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM fonctionnalite";
+      sql = "SELECT * FROM fonctionnalite ORDER BY created_at DESC";
     }
     return await db.getAll(sql).then((result) {
       return result.map((row) => Fonctionnalite.fromRow(row)).toList();
@@ -382,8 +406,9 @@ class dbq {
         sql, [fonctionnalite.id]).then((row) => Fonctionnalite.fromRow(row));
   }
 
-  static Future<Fonctionnalite> createFonctionnalite(
+  static Future<String> createFonctionnalite(
       Fonctionnalite fonctionnalite, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -392,38 +417,34 @@ class dbq {
       sql =
           "INSERT INTO fonctionnalite(id,created_at, nom, abonnement_id) VALUES(?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       fonctionnalite.nom,
       fonctionnalite.abonnement_id
-    ]).then((result) {
-      return result.map((row) => Fonctionnalite.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Fonctionnalite> updateFonctionnalite(
-      String ancienFonctionnaliteId,
-      Fonctionnalite new_fonctionnalite,
-      bool isLocal) async {
+  static Future<void> updateFonctionnalite(String ancienFonctionnaliteId,
+      Fonctionnalite new_fonctionnalite, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_fonctionnalite id=?, nom=?, abonnement_id=? WHERE id = ?";
+          "UPDATE local_fonctionnalite SET id=?, nom=?, abonnement_id=? WHERE id = ?";
     } else {
-      sql = "UPDATE fonctionnalite id=?,nom=?, abonnement_id=? WHERE id = ?";
+      sql =
+          "UPDATE fonctionnalite SET id=?,nom=?, abonnement_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_fonctionnalite.id,
       new_fonctionnalite.nom,
       new_fonctionnalite.abonnement_id,
       ancienFonctionnaliteId
-    ]).then((result) {
-      return result.map((row) => Fonctionnalite.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Fonctionnalite> deleteFonctionnalite(
+  static Future<void> deleteFonctionnalite(
       Fonctionnalite fonctionnalite, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -431,9 +452,7 @@ class dbq {
     } else {
       sql = "DELETE FROM fonctionnalite WHERE id=?";
     }
-    return await db.execute(sql, [fonctionnalite.id]).then((result) {
-      return result.map((row) => Fonctionnalite.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [fonctionnalite.id]);
   }
 
 //************************************************************************************************************//
@@ -448,9 +467,9 @@ class dbq {
   static Stream<List<Global_files>> watchAllGlobal_files(bool isLocal) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_global_files";
+      sql = "SELECT * FROM local_global_files ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM global_files";
+      sql = "SELECT * FROM global_files ORDER BY created_at DESC";
     }
     return db.watch(sql).map((result) {
       return result.map((row) => Global_files.fromRow(row)).toList();
@@ -460,9 +479,9 @@ class dbq {
   static Future<List<Global_files>> getAllGlobal_files(bool isLocal) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_global_files";
+      sql = "SELECT * FROM local_global_files ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM global_files";
+      sql = "SELECT * FROM global_files ORDER BY created_at DESC";
     }
     return await db.getAll(sql).then((result) {
       return result.map((row) => Global_files.fromRow(row)).toList();
@@ -481,8 +500,9 @@ class dbq {
         .get(sql, [global_files.id]).then((row) => Global_files.fromRow(row));
   }
 
-  static Future<Global_files> createGlobal_files(
+  static Future<String> createGlobal_files(
       Global_files global_files, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -491,41 +511,38 @@ class dbq {
       sql =
           "INSERT INTO global_files(id,created_at, name,size, extension, path) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       global_files.name,
       global_files.size,
       global_files.extension,
       global_files.path,
-    ]).then((result) {
-      return result.map((row) => Global_files.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Global_files> updateGlobal_file(String ancienGlobal_fileId,
+  static Future<void> updateGlobal_file(String ancienGlobal_fileId,
       Global_files new_global_files, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_global_files id=?, name=?,size=?, extension=?, path=? WHERE id = ?";
+          "UPDATE local_global_files SET id=?, name=?,size=?, extension=?, path=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE global_files id=?, name=?,size=?, extension=?, path=? WHERE id = ?";
+          "UPDATE global_files SET id=?, name=?,size=?, extension=?, path=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_global_files.id,
       new_global_files.name,
       new_global_files.size,
       new_global_files.extension,
       new_global_files.path,
       ancienGlobal_fileId
-    ]).then((result) {
-      return result.map((row) => Global_files.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Global_files> deleteGlobal_file(
+  static Future<void> deleteGlobal_file(
       Global_files global_files, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -533,9 +550,7 @@ class dbq {
     } else {
       sql = "DELETE FROM global_files WHERE id=?";
     }
-    return await db.execute(sql, [global_files.id]).then((result) {
-      return result.map((row) => Global_files.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [global_files.id]);
   }
 
 //************************************************************************************************************//
@@ -550,9 +565,9 @@ class dbq {
   static Stream<List<Terv>> watchAllTervs(bool isLocal) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_terv";
+      sql = "SELECT * FROM local_terv ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM terv";
+      sql = "SELECT * FROM terv ORDER BY created_at DESC";
     }
     return db.watch(sql).map((result) {
       return result.map((row) => Terv.fromRow(row)).toList();
@@ -562,9 +577,9 @@ class dbq {
   static Future<List<Terv>> getAllTervs(bool isLocal) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_terv";
+      sql = "SELECT * FROM local_terv ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM terv";
+      sql = "SELECT * FROM terv ORDER BY created_at DESC";
     }
     return await db.getAll(sql).then((result) {
       return result.map((row) => Terv.fromRow(row)).toList();
@@ -581,7 +596,8 @@ class dbq {
     return await db.get(sql, [terv.id]).then((row) => Terv.fromRow(row));
   }
 
-  static Future<Terv> createTerv(Terv terv, bool isLocal) async {
+  static Future<String> createTerv(Terv terv, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -590,9 +606,9 @@ class dbq {
       sql =
           "INSERT INTO terv(id,created_at, nom,image, description, phobies,plan, prix, reserve) VALUES(?,?,?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       terv.nom,
       terv.image,
       terv.description,
@@ -600,22 +616,21 @@ class dbq {
       terv.plan,
       terv.prix.toString(),
       terv.reserve.toString(),
-    ]).then((result) {
-      return result.map((row) => Terv.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Terv> updateTerv(
+  static Future<void> updateTerv(
       String ancienTervId, Terv new_terv, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_terv id=?, nom=?,image=?, description=?, phobies=?,plan=?, prix=?, reserve=? WHERE id = ?";
+          "UPDATE local_terv SET id=?, nom=?,image=?, description=?, phobies=?,plan=?, prix=?, reserve=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE terv  id=?, nom=?,image=?, description=?, phobies=?,plan=?, prix=?, reserve=? WHERE id = ?";
+          "UPDATE terv SET  id=?, nom=?,image=?, description=?, phobies=?,plan=?, prix=?, reserve=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_terv.id,
       new_terv.nom,
       new_terv.image,
@@ -625,21 +640,17 @@ class dbq {
       new_terv.prix.toString(),
       new_terv.reserve.toString(),
       ancienTervId
-    ]).then((result) {
-      return result.map((row) => Terv.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Terv> deleteTerv(Terv terv, bool isLocal) async {
+  static Future<void> deleteTerv(Terv terv, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_terv WHERE id=?";
     } else {
       sql = "DELETE FROM terv WHERE id=?";
     }
-    return await db.execute(sql, [terv.id]).then((result) {
-      return result.map((row) => Terv.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [terv.id]);
   }
 
 //************************************************************************************************************//
@@ -654,9 +665,11 @@ class dbq {
       bool isLocal, String terv_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_terv_niveau WHERE terv_id=?";
+      sql =
+          "SELECT * FROM local_terv_niveau WHERE terv_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM terv_niveau WHERE terv_id=?";
+      sql =
+          "SELECT * FROM terv_niveau WHERE terv_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [terv_id]).map((result) {
       return result.map((row) => Terv_niveau.fromRow(row)).toList();
@@ -667,9 +680,11 @@ class dbq {
       bool isLocal, String terv_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_terv_niveau WHERE terv_id=?";
+      sql =
+          "SELECT * FROM local_terv_niveau WHERE terv_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM terv_niveau WHERE terv_id=?";
+      sql =
+          "SELECT * FROM terv_niveau WHERE terv_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [terv_id]).then((result) {
       return result.map((row) => Terv_niveau.fromRow(row)).toList();
@@ -687,8 +702,9 @@ class dbq {
     return await db.get(sql, [terv.id]).then((row) => Terv_niveau.fromRow(row));
   }
 
-  static Future<Terv_niveau> createTerv_niveau(
+  static Future<String> createTerv_niveau(
       Terv_niveau terv_niveau, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -697,31 +713,30 @@ class dbq {
       sql =
           "INSERT INTO terv_niveau(id,created_at, nom, rang, description,plan, image,terv_id) VALUES(?,?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       terv_niveau.nom,
       terv_niveau.rang.toString(),
       terv_niveau.description,
       terv_niveau.plan,
       terv_niveau.image,
       terv_niveau.terv_id,
-    ]).then((result) {
-      return result.map((row) => Terv_niveau.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Terv_niveau> updateTerv_niveau(
+  static Future<void> updateTerv_niveau(
       String ancienTervId, Terv_niveau new_terv_niveau, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_terv_niveau id=?, nom=?, rang=?, description=?,plan=?, image=?,terv_id=? WHERE id = ?";
+          "UPDATE local_terv_niveau SET id=?, nom=?, rang=?, description=?,plan=?, image=?,terv_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE terv_niveau  id=?, nom=?, rang=?, description=?,plan=?, image=?,terv_id=? WHERE id = ?";
+          "UPDATE terv_niveau SET  id=?, nom=?, rang=?, description=?,plan=?, image=?,terv_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_terv_niveau.id,
       new_terv_niveau.nom,
       new_terv_niveau.rang.toString(),
@@ -730,12 +745,10 @@ class dbq {
       new_terv_niveau.image,
       new_terv_niveau.terv_id,
       ancienTervId
-    ]).then((result) {
-      return result.map((row) => Terv_niveau.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Terv_niveau> deleteTerv_niveau(
+  static Future<void> deleteTerv_niveau(
       Terv_niveau terv_niveau, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -743,9 +756,7 @@ class dbq {
     } else {
       sql = "DELETE FROM terv_niveau WHERE id=?";
     }
-    return await db.execute(sql, [terv_niveau.id]).then((result) {
-      return result.map((row) => Terv_niveau.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [terv_niveau.id]);
   }
 
 //************************************************************************************************************//
@@ -761,9 +772,11 @@ class dbq {
       bool isLocal, String terv_niv_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_terv_expterv_exp WHERE terv_niv_id=?";
+      sql =
+          "SELECT * FROM local_terv_expterv_exp WHERE terv_niv_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM terv_expterv_exp WHERE terv_niv_id=?";
+      sql =
+          "SELECT * FROM terv_expterv_exp WHERE terv_niv_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [terv_niv_id]).map((result) {
       return result.map((row) => Terv_exp.fromRow(row)).toList();
@@ -774,9 +787,11 @@ class dbq {
       bool isLocal, String terv_niv_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_terv_exp WHERE terv_niv_id=?";
+      sql =
+          "SELECT * FROM local_terv_exp WHERE terv_niv_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM terv_exp WHERE terv_niv_id=?";
+      sql =
+          "SELECT * FROM terv_exp WHERE terv_niv_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [terv_niv_id]).then((result) {
       return result.map((row) => Terv_exp.fromRow(row)).toList();
@@ -794,8 +809,8 @@ class dbq {
         .get(sql, [terv_exp.id]).then((row) => Terv_exp.fromRow(row));
   }
 
-  static Future<Terv_exp> createTerv_exp(
-      Terv_exp terv_exp, bool isLocal) async {
+  static Future<String> createTerv_exp(Terv_exp terv_exp, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -804,31 +819,30 @@ class dbq {
       sql =
           "INSERT INTO terv_exp(id,created_at,nom, description,exp_link, vr_type, image, terv_niv_id) VALUES(?,?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       terv_exp.nom,
       terv_exp.description,
       terv_exp.exp_link,
       terv_exp.vr_type,
       terv_exp.image,
       terv_exp.terv_niv_id,
-    ]).then((result) {
-      return result.map((row) => Terv_exp.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Terv_exp> updateTerv_exp(
+  static Future<void> updateTerv_exp(
       String ancienTervExpId, Terv_exp new_terv_exp, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_terv_exp id=?,nom=?, description=?,exp_link=?, vr_type=?, image=?, terv_niv_id=? WHERE id = ?";
+          "UPDATE local_terv_exp SET id=?,nom=?, description=?,exp_link=?, vr_type=?, image=?, terv_niv_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE terv_exp  id=?,nom=?, description=?,exp_link=?, vr_type=?, image=?, terv_niv_id=? WHERE id = ?";
+          "UPDATE terv_exp SET  id=?,nom=?, description=?,exp_link=?, vr_type=?, image=?, terv_niv_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_terv_exp.id,
       new_terv_exp.nom,
       new_terv_exp.description,
@@ -837,22 +851,17 @@ class dbq {
       new_terv_exp.image,
       new_terv_exp.terv_niv_id,
       ancienTervExpId
-    ]).then((result) {
-      return result.map((row) => Terv_exp.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Terv_exp> deleteTerv_exp(
-      Terv_exp terv_exp, bool isLocal) async {
+  static Future<void> deleteTerv_exp(Terv_exp terv_exp, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_terv_exp WHERE id=?";
     } else {
       sql = "DELETE FROM terv_exp WHERE id=?";
     }
-    return await db.execute(sql, [terv_exp.id]).then((result) {
-      return result.map((row) => Terv_exp.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [terv_exp.id]);
   }
 
 //************************************************************************************************************//
@@ -869,10 +878,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_analyse_fonctionnelle WHERE asm_id=? OR is_global=true";
+          "SELECT * FROM local_analyse_fonctionnelle WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM analyse_fonctionnelle WHERE asm_id=? OR is_global=true";
+          "SELECT * FROM analyse_fonctionnelle WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Analyse_fonctionnelle.fromRow(row)).toList();
@@ -884,10 +893,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_analyse_fonctionnelle WHERE asm_id=? OR is_global=true";
+          "SELECT * FROM local_analyse_fonctionnelle WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM analyse_fonctionnelle WHERE asm_id=? OR is_global=true";
+          "SELECT * FROM analyse_fonctionnelle WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Analyse_fonctionnelle.fromRow(row)).toList();
@@ -906,8 +915,9 @@ class dbq {
         (row) => Analyse_fonctionnelle.fromRow(row));
   }
 
-  static Future<Analyse_fonctionnelle> createAnalyse_fonctionnelle(
+  static Future<String> createAnalyse_fonctionnelle(
       Analyse_fonctionnelle analyse_fonctionnelle, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -916,49 +926,38 @@ class dbq {
       sql =
           "INSERT INTO analyse_fonctionnelle(id,created_at, nom, description, asm_id, is_global) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       analyse_fonctionnelle.nom,
       analyse_fonctionnelle.description,
       analyse_fonctionnelle.asm_id,
       analyse_fonctionnelle.is_global.toString(),
-    ]).then((result) {
-      return result
-          .map((row) => Analyse_fonctionnelle.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Analyse_fonctionnelle> updateAnalyse_fonctionnelle(
-      String ancienTervExpId,
-      Analyse_fonctionnelle new_analyse_fonctionnelle,
-      bool isLocal) async {
+  static Future<void> updateAnalyse_fonctionnelle(String ancienTervExpId,
+      Analyse_fonctionnelle new_analyse_fonctionnelle, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_analyse_fonctionnelle id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE local_analyse_fonctionnelle SET id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE analyse_fonctionnelle  id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE analyse_fonctionnelle SET  id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_analyse_fonctionnelle.id,
       new_analyse_fonctionnelle.nom,
       new_analyse_fonctionnelle.description,
       new_analyse_fonctionnelle.asm_id,
       new_analyse_fonctionnelle.is_global.toString(),
       ancienTervExpId
-    ]).then((result) {
-      return result
-          .map((row) => Analyse_fonctionnelle.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
   }
 
-  static Future<Analyse_fonctionnelle> deleteAnalyse_fonctionnelle(
+  static Future<void> deleteAnalyse_fonctionnelle(
       Analyse_fonctionnelle analyse_fonctionnelle, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -966,12 +965,7 @@ class dbq {
     } else {
       sql = "DELETE FROM analyse_fonctionnelle WHERE id=?";
     }
-    return await db.execute(sql, [analyse_fonctionnelle.id]).then((result) {
-      return result
-          .map((row) => Analyse_fonctionnelle.fromRow(row))
-          .toList()
-          .single;
-    });
+    await db.execute(sql, [analyse_fonctionnelle.id]);
   }
 
 //************************************************************************************************************//
@@ -988,10 +982,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_fait WHERE (asm_id=? AND type=?) OR (is_global=true AND type=?)";
+          "SELECT * FROM local_fait WHERE (asm_id=? AND type=?) OR (is_global=true AND type=? ORDER BY created_at DESC)";
     } else {
       sql =
-          "SELECT * FROM fait WHERE (asm_id=? AND type=?) OR (is_global=true AND type=?)";
+          "SELECT * FROM fait WHERE (asm_id=? AND type=?) OR (is_global=true AND type=? ORDER BY created_at DESC)";
     }
     return db.watch(sql, parameters: [asm_id, type, type]).map((result) {
       return result.map((row) => Fait.fromRow(row)).toList();
@@ -1003,10 +997,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_fait WHERE (asm_id=? AND type=?) OR (is_global=true AND type=?)";
+          "SELECT * FROM local_fait WHERE (asm_id=? AND type=?) OR (is_global=true AND type=? ORDER BY created_at DESC)";
     } else {
       sql =
-          "SELECT * FROM fait WHERE (asm_id=? AND type=?) OR (is_global=true AND type=?)";
+          "SELECT * FROM fait WHERE (asm_id=? AND type=?) OR (is_global=true AND type=? ORDER BY created_at DESC)";
     }
     return await db.getAll(sql, [asm_id, type, type]).then((result) {
       return result.map((row) => Fait.fromRow(row)).toList();
@@ -1023,7 +1017,8 @@ class dbq {
     return await db.get(sql, [fait.id]).then((row) => Fait.fromRow(row));
   }
 
-  static Future<Fait> createFait(Fait fait, bool isLocal) async {
+  static Future<String> createFait(Fait fait, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -1032,50 +1027,45 @@ class dbq {
       sql =
           "INSERT INTO fait(id, created_at,type, nom, asm_id, is_global) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       fait.type,
       fait.nom,
       fait.asm_id,
       fait.is_global.toString(),
-    ]).then((result) {
-      return result.map((row) => Fait.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Fait> updateFait(
+  static Future<void> updateFait(
       String ancien_fait_Id, Fait new_fait, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_fait id=?,type=?, nom=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE local_fait SET id=?,type=?, nom=?, asm_id=?, is_global=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE fait id=?,type=?, nom=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE fait SET id=?,type=?, nom=?, asm_id=?, is_global=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_fait.id,
       new_fait.type,
       new_fait.nom,
       new_fait.asm_id,
       new_fait.is_global.toString(),
       ancien_fait_Id
-    ]).then((result) {
-      return result.map((row) => Fait.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Fait> deleteFait(Fait fait, bool isLocal) async {
+  static Future<void> deleteFait(Fait fait, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_fait WHERE id=?";
     } else {
       sql = "DELETE FROM fait WHERE id=?";
     }
-    return await db.execute(sql, [fait.id]).then((result) {
-      return result.map((row) => Fait.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [fait.id]);
   }
 
 //************************************************************************************************************//
@@ -1091,9 +1081,11 @@ class dbq {
       bool isLocal, String asm_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_formulaire WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM local_formulaire WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM formulaire WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM formulaire WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Formulaire.fromRow(row)).toList();
@@ -1104,9 +1096,11 @@ class dbq {
       bool isLocal, String asm_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_formulaire WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM local_formulaire WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM formulaire WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM formulaire WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Formulaire.fromRow(row)).toList();
@@ -1125,8 +1119,9 @@ class dbq {
         .get(sql, [formulaire.id]).then((row) => Formulaire.fromRow(row));
   }
 
-  static Future<Formulaire> createFormulaire(
+  static Future<String> createFormulaire(
       Formulaire formulaire, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -1135,31 +1130,30 @@ class dbq {
       sql =
           "INSERT INTO formulaire(id,created_at, nom, description,inclusion,modele, asm_id,is_global) VALUES(?,?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       formulaire.nom,
       formulaire.description,
       formulaire.inclusion.toString(),
       formulaire.modele,
       formulaire.asm_id,
       formulaire.is_global.toString(),
-    ]).then((result) {
-      return result.map((row) => Formulaire.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Formulaire> updateFormulaire(String ancien_formulaire_Id,
+  static Future<void> updateFormulaire(String ancien_formulaire_Id,
       Formulaire new_formulaire, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_formulaire id=?,type=?, nom=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE local_formulaire SET id=?,type=?, nom=?, asm_id=?, is_global=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE formulaire id=?,type=?, nom=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE formulaire SET id=?,type=?, nom=?, asm_id=?, is_global=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_formulaire.id,
       new_formulaire.nom,
       new_formulaire.description,
@@ -1168,12 +1162,10 @@ class dbq {
       new_formulaire.asm_id,
       new_formulaire.is_global.toString(),
       ancien_formulaire_Id
-    ]).then((result) {
-      return result.map((row) => Formulaire.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Formulaire> deleteFormulaire(
+  static Future<void> deleteFormulaire(
       Formulaire formulaire, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -1181,9 +1173,7 @@ class dbq {
     } else {
       sql = "DELETE FROM formulaire WHERE id=?";
     }
-    return await db.execute(sql, [formulaire.id]).then((result) {
-      return result.map((row) => Formulaire.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [formulaire.id]);
   }
 
 //************************************************************************************************************//
@@ -1200,10 +1190,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_variables WHERE (asm_id=? AND type=?) OR (is_global=true AND type=?)";
+          "SELECT * FROM local_variables WHERE (asm_id=? AND type=?) OR (is_global=true AND type=?) ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM variables WHERE (asm_id=? AND type=?) OR (is_global=true AND type=?)";
+          "SELECT * FROM variables WHERE (asm_id=? AND type=?) OR (is_global=true AND type=?) ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id, type, type]).map((result) {
       return result.map((row) => Variables.fromRow(row)).toList();
@@ -1215,17 +1205,17 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_variables WHERE (asm_id=? AND type=?) OR (is_global=true AND type=?)";
+          "SELECT * FROM local_variables WHERE (asm_id=? AND type=?) OR (is_global=true AND type=?) ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM variables WHERE (asm_id=? AND type=?) OR (is_global=true AND type=?)";
+          "SELECT * FROM variables WHERE (asm_id=? AND type=?) OR (is_global=true AND type=?) ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id, type, type]).then((result) {
       return result.map((row) => Variables.fromRow(row)).toList();
     });
   }
 
-  static Future<Variables> getVariable(
+  static Future<Variables?> getVariable(
       Variables variables, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -1237,8 +1227,8 @@ class dbq {
         .get(sql, [variables.id]).then((row) => Variables.fromRow(row));
   }
 
-  static Future<Variables> createVariable(
-      Variables variables, bool isLocal) async {
+  static Future<String> createVariable(Variables variables, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -1247,51 +1237,45 @@ class dbq {
       sql =
           "INSERT INTO variables(id,created_at, nom,type, asm_id, is_global) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       variables.nom,
       variables.type,
       variables.asm_id,
       variables.is_global.toString(),
-    ]).then((result) {
-      return result.map((row) => Variables.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Variables> updateVariable(
+  static Future<void> updateVariable(
       String ancien_variables_Id, Variables new_variables, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_variables id=?, nom=?,type=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE local_variables SET id=?, nom=?,type=?, asm_id=?, is_global=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE variables id=?, nom=?,type=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE variables SET id=?, nom=?,type=?, asm_id=?, is_global=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_variables.id,
       new_variables.nom,
       new_variables.type,
       new_variables.asm_id,
       new_variables.is_global.toString(),
       ancien_variables_Id
-    ]).then((result) {
-      return result.map((row) => Variables.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Variables> deleteVariable(
-      Variables variables, bool isLocal) async {
+  static Future<void> deleteVariable(Variables variables, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_variables WHERE id=?";
     } else {
       sql = "DELETE FROM variables WHERE id=?";
     }
-    return await db.execute(sql, [variables.id]).then((result) {
-      return result.map((row) => Variables.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [variables.id]);
   }
 
 //************************************************************************************************************//
@@ -1306,9 +1290,9 @@ class dbq {
   static Stream<List<Quote>> watchAllQuote(bool isLocal, String asm_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_quote WHERE asm_id=?";
+      sql = "SELECT * FROM local_quote WHERE asm_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM quote WHERE asm_id=?";
+      sql = "SELECT * FROM quote WHERE asm_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Quote.fromRow(row)).toList();
@@ -1318,9 +1302,9 @@ class dbq {
   static Future<List<Quote>> getAllQuote(bool isLocal, String asm_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_quote WHERE asm_id=?";
+      sql = "SELECT * FROM local_quote WHERE asm_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM quote WHERE asm_id=?";
+      sql = "SELECT * FROM quote WHERE asm_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Quote.fromRow(row)).toList();
@@ -1337,7 +1321,8 @@ class dbq {
     return await db.get(sql, [quote.id]).then((row) => Quote.fromRow(row));
   }
 
-  static Future<Quote> createQuote(Quote quote, bool isLocal) async {
+  static Future<String> createQuote(Quote quote, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -1346,50 +1331,45 @@ class dbq {
       sql =
           "INSERT INTO quote(id, created_at,citation , auteur, image, asm_id,is_global) VALUES(?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      uuid.v4(),
+      DateTime.now().toString(),
       quote.auteur,
       quote.image,
       quote.asm_id,
       quote.is_global.toString(),
-    ]).then((result) {
-      return result.map((row) => Quote.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Quote> updateQuote(
+  static Future<void> updateQuote(
       String ancien_quote_Id, Quote new_quote, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_quote id=?,citation =?, auteur=?, image=?, asm_id=?,is_global=? WHERE id = ?";
+          "UPDATE local_quote SET id=?,citation =?, auteur=?, image=?, asm_id=?,is_global=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE quote id=?,citation =?, auteur=?, image=?, asm_id=?,is_global=? WHERE id = ?";
+          "UPDATE quote SET id=?,citation =?, auteur=?, image=?, asm_id=?,is_global=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_quote.id,
       new_quote.auteur,
       new_quote.image,
       new_quote.asm_id,
       new_quote.is_global.toString(),
       ancien_quote_Id
-    ]).then((result) {
-      return result.map((row) => Quote.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Quote> deleteQuote(Quote quote, bool isLocal) async {
+  static Future<void> deleteQuote(Quote quote, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_quote WHERE id=?";
     } else {
       sql = "DELETE FROM quote WHERE id=?";
     }
-    return await db.execute(sql, [quote.id]).then((result) {
-      return result.map((row) => Quote.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [quote.id]);
   }
 
 //************************************************************************************************************//
@@ -1405,9 +1385,11 @@ class dbq {
       bool isLocal, String asm_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_rorsharch WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM local_rorsharch WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM rorsharch WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM rorsharch WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Rorsharch.fromRow(row)).toList();
@@ -1418,9 +1400,11 @@ class dbq {
       bool isLocal, String asm_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_rorsharch WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM local_rorsharch WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM rorsharch WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM rorsharch WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Rorsharch.fromRow(row)).toList();
@@ -1439,8 +1423,8 @@ class dbq {
         .get(sql, [rorsharch.id]).then((row) => Rorsharch.fromRow(row));
   }
 
-  static Future<Rorsharch> createRorsharch(
-      Rorsharch rorsharch, bool isLocal) async {
+  static Future<String> createRorsharch(Rorsharch rorsharch, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -1449,51 +1433,45 @@ class dbq {
       sql =
           "INSERT INTO rorsharch(id,created_at, nom, im,asm_id, is_global) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       rorsharch.nom,
       rorsharch.im,
       rorsharch.asm_id,
       rorsharch.is_global.toString(),
-    ]).then((result) {
-      return result.map((row) => Rorsharch.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Rorsharch> updateRorsharch(
+  static Future<void> updateRorsharch(
       String ancien_rorsharch_Id, Rorsharch new_rorsharch, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_rorsharch id=?, nom=?, im=?,asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE local_rorsharch SET id=?, nom=?, im=?,asm_id=?, is_global=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE rorsharch id=?, nom=?, im=?,asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE rorsharch SET id=?, nom=?, im=?,asm_id=?, is_global=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_rorsharch.id,
       new_rorsharch.nom,
       new_rorsharch.im,
       new_rorsharch.asm_id,
       new_rorsharch.is_global.toString(),
       ancien_rorsharch_Id
-    ]).then((result) {
-      return result.map((row) => Rorsharch.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Rorsharch> deleteRorsharch(
-      Rorsharch rorsharch, bool isLocal) async {
+  static Future<void> deleteRorsharch(Rorsharch rorsharch, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_rorsharch WHERE id=?";
     } else {
       sql = "DELETE FROM rorsharch WHERE id=?";
     }
-    return await db.execute(sql, [rorsharch.id]).then((result) {
-      return result.map((row) => Rorsharch.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [rorsharch.id]);
   }
 
 //************************************************************************************************************//
@@ -1509,9 +1487,11 @@ class dbq {
       bool isLocal, String asm_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_simple_test WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM local_simple_test WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM simple_test WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM simple_test WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Simple_test.fromRow(row)).toList();
@@ -1522,9 +1502,11 @@ class dbq {
       bool isLocal, String asm_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_simple_test WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM local_simple_test WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM simple_test WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM simple_test WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Simple_test.fromRow(row)).toList();
@@ -1543,8 +1525,9 @@ class dbq {
         .get(sql, [simple_test.id]).then((row) => Simple_test.fromRow(row));
   }
 
-  static Future<Simple_test> createSimple_test(
+  static Future<String> createSimple_test(
       Simple_test simple_test, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -1553,41 +1536,38 @@ class dbq {
       sql =
           "INSERT INTO simple_test(id,created_at, nom, modele, asm_id, is_global) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       simple_test.nom,
       simple_test.modele,
       simple_test.asm_id,
       simple_test.is_global.toString(),
-    ]).then((result) {
-      return result.map((row) => Simple_test.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Simple_test> updateSimple_test(String ancien_simple_test_Id,
+  static Future<void> updateSimple_test(String ancien_simple_test_Id,
       Simple_test new_simple_test, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_simple_test id=?, nom=?, modele=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE local_simple_test SET id=?, nom=?, modele=?, asm_id=?, is_global=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE simple_test id=?, nom=?, modele=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE simple_test SET id=?, nom=?, modele=?, asm_id=?, is_global=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_simple_test.id,
       new_simple_test.nom,
       new_simple_test.modele,
       new_simple_test.asm_id,
       new_simple_test.is_global.toString(),
       ancien_simple_test_Id
-    ]).then((result) {
-      return result.map((row) => Simple_test.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Simple_test> deleteSimple_test(
+  static Future<void> deleteSimple_test(
       Simple_test simple_test, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -1595,9 +1575,7 @@ class dbq {
     } else {
       sql = "DELETE FROM simple_test WHERE id=?";
     }
-    return await db.execute(sql, [simple_test.id]).then((result) {
-      return result.map((row) => Simple_test.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [simple_test.id]);
   }
 
 //************************************************************************************************************//
@@ -1614,10 +1592,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_strategie_therapeutique WHERE asm_id=? OR is_global=true";
+          "SELECT * FROM local_strategie_therapeutique WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM strategie_therapeutique WHERE asm_id=? OR is_global=true";
+          "SELECT * FROM strategie_therapeutique WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Strategie_therapeutique.fromRow(row)).toList();
@@ -1629,10 +1607,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_strategie_therapeutique WHERE asm_id=? OR is_global=true";
+          "SELECT * FROM local_strategie_therapeutique WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM strategie_therapeutique WHERE asm_id=? OR is_global=true";
+          "SELECT * FROM strategie_therapeutique WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Strategie_therapeutique.fromRow(row)).toList();
@@ -1651,8 +1629,9 @@ class dbq {
         (row) => Strategie_therapeutique.fromRow(row));
   }
 
-  static Future<Strategie_therapeutique> createStrategie_therapeutique(
+  static Future<String> createStrategie_therapeutique(
       Strategie_therapeutique strategie_therapeutique, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -1661,49 +1640,40 @@ class dbq {
       sql =
           "INSERT INTO strategie_therapeutique(id,created_at, nom, description, asm_id, is_global) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       strategie_therapeutique.nom,
       strategie_therapeutique.description,
       strategie_therapeutique.asm_id,
       strategie_therapeutique.is_global.toString(),
-    ]).then((result) {
-      return result
-          .map((row) => Strategie_therapeutique.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Strategie_therapeutique> updateStrategie_therapeutique(
+  static Future<void> updateStrategie_therapeutique(
       String ancien_strategie_therapeutique_Id,
       Strategie_therapeutique new_strategie_therapeutique,
       bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_strategie_therapeutique id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE local_strategie_therapeutique SET id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE strategie_therapeutique id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE strategie_therapeutique SET id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_strategie_therapeutique.id,
       new_strategie_therapeutique.nom,
       new_strategie_therapeutique.description,
       new_strategie_therapeutique.asm_id,
       new_strategie_therapeutique.is_global.toString(),
       ancien_strategie_therapeutique_Id
-    ]).then((result) {
-      return result
-          .map((row) => Strategie_therapeutique.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
   }
 
-  static Future<Strategie_therapeutique> deleteStrategie_therapeutique(
+  static Future<void> deleteStrategie_therapeutique(
       Strategie_therapeutique strategie_therapeutique, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -1711,12 +1681,7 @@ class dbq {
     } else {
       sql = "DELETE FROM strategie_therapeutique WHERE id=?";
     }
-    return await db.execute(sql, [strategie_therapeutique.id]).then((result) {
-      return result
-          .map((row) => Strategie_therapeutique.fromRow(row))
-          .toList()
-          .single;
-    });
+    await db.execute(sql, [strategie_therapeutique.id]);
   }
 
 //************************************************************************************************************//
@@ -1733,9 +1698,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_trame_anamnese WHERE asm_id=? OR is_global=true";
+          "SELECT * FROM local_trame_anamnese WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM trame_anamnese WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM trame_anamnese WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Trame_anamnese.fromRow(row)).toList();
@@ -1747,9 +1713,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_trame_anamnese WHERE asm_id=? OR is_global=true";
+          "SELECT * FROM local_trame_anamnese WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM trame_anamnese WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM trame_anamnese WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Trame_anamnese.fromRow(row)).toList();
@@ -1768,8 +1735,9 @@ class dbq {
         sql, [trame_anamnese.id]).then((row) => Trame_anamnese.fromRow(row));
   }
 
-  static Future<Trame_anamnese> createTrame_anamnese(
+  static Future<String> createTrame_anamnese(
       Trame_anamnese trame_anamnese, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -1778,32 +1746,29 @@ class dbq {
       sql =
           "INSERT INTO trame_anamnese(id,created_at, nom,description, modele, asm_id,is_global) VALUES(?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       trame_anamnese.nom,
       trame_anamnese.description,
       trame_anamnese.modele,
       trame_anamnese.asm_id,
       trame_anamnese.is_global.toString(),
-    ]).then((result) {
-      return result.map((row) => Trame_anamnese.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Trame_anamnese> updateTrame_anamnese(
-      String ancien_trame_anamnese_Id,
-      Trame_anamnese new_trame_anamnese,
-      bool isLocal) async {
+  static Future<void> updateTrame_anamnese(String ancien_trame_anamnese_Id,
+      Trame_anamnese new_trame_anamnese, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_trame_anamnese id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE local_trame_anamnese SET id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE trame_anamnese id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE trame_anamnese SET id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_trame_anamnese.id,
       new_trame_anamnese.nom,
       new_trame_anamnese.description,
@@ -1811,12 +1776,10 @@ class dbq {
       new_trame_anamnese.asm_id,
       new_trame_anamnese.is_global.toString(),
       ancien_trame_anamnese_Id
-    ]).then((result) {
-      return result.map((row) => Trame_anamnese.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Trame_anamnese> deleteTrame_anamnese(
+  static Future<void> deleteTrame_anamnese(
       Trame_anamnese trame_anamnese, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -1824,9 +1787,7 @@ class dbq {
     } else {
       sql = "DELETE FROM trame_anamnese WHERE id=?";
     }
-    return await db.execute(sql, [trame_anamnese.id]).then((result) {
-      return result.map((row) => Trame_anamnese.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [trame_anamnese.id]);
   }
 
 //************************************************************************************************************//
@@ -1842,9 +1803,11 @@ class dbq {
       bool isLocal, String asm_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_type_suivi WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM local_type_suivi WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM type_suivi WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM type_suivi WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Type_suivi.fromRow(row)).toList();
@@ -1855,9 +1818,11 @@ class dbq {
       bool isLocal, String asm_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_type_suivi WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM local_type_suivi WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM type_suivi WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM type_suivi WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Type_suivi.fromRow(row)).toList();
@@ -1876,8 +1841,9 @@ class dbq {
         .get(sql, [type_suivi.id]).then((row) => Type_suivi.fromRow(row));
   }
 
-  static Future<Type_suivi> createType_suivi(
+  static Future<String> createType_suivi(
       Type_suivi type_suivi, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -1886,41 +1852,38 @@ class dbq {
       sql =
           "INSERT INTO type_suivi(id,created_at, nom,description, asm_id,is_global) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       type_suivi.nom,
       type_suivi.description,
       type_suivi.asm_id,
       type_suivi.is_global.toString(),
-    ]).then((result) {
-      return result.map((row) => Type_suivi.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Type_suivi> updateType_suivi(String ancien_type_suivi_Id,
+  static Future<void> updateType_suivi(String ancien_type_suivi_Id,
       Type_suivi new_type_suivi, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_type_suivi id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE local_type_suivi SET id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE type_suivi id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
+          "UPDATE type_suivi SET id=?, nom=?, description=?, asm_id=?, is_global=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_type_suivi.id,
       new_type_suivi.nom,
       new_type_suivi.description,
       new_type_suivi.asm_id,
       new_type_suivi.is_global.toString(),
       ancien_type_suivi_Id
-    ]).then((result) {
-      return result.map((row) => Type_suivi.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Type_suivi> deleteType_suivi(
+  static Future<void> deleteType_suivi(
       Type_suivi type_suivi, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -1928,9 +1891,7 @@ class dbq {
     } else {
       sql = "DELETE FROM type_suivi WHERE id=?";
     }
-    return await db.execute(sql, [type_suivi.id]).then((result) {
-      return result.map((row) => Type_suivi.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [type_suivi.id]);
   }
 
 //************************************************************************************************************//
@@ -1947,9 +1908,11 @@ class dbq {
       bool isLocal, String asm_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_achat_terv WHERE acheteur_id=?";
+      sql =
+          "SELECT * FROM local_achat_terv WHERE acheteur_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM achat_terv WHERE acheteur_id=?";
+      sql =
+          "SELECT * FROM achat_terv WHERE acheteur_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Achat_terv.fromRow(row)).toList();
@@ -1960,9 +1923,11 @@ class dbq {
       bool isLocal, String asm_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_achat_terv WHERE acheteur_id=?";
+      sql =
+          "SELECT * FROM local_achat_terv WHERE acheteur_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM achat_terv WHERE acheteur_id=?";
+      sql =
+          "SELECT * FROM achat_terv WHERE acheteur_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Achat_terv.fromRow(row)).toList();
@@ -1981,8 +1946,9 @@ class dbq {
         .get(sql, [achat_terv.id]).then((row) => Achat_terv.fromRow(row));
   }
 
-  static Future<Achat_terv> createAchat_terv(
+  static Future<String> createAchat_terv(
       Achat_terv achat_terv, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -1991,35 +1957,33 @@ class dbq {
       sql =
           "INSERT INTO achat_terv(id,created_at,terv_id,acheteur_id) VALUES(?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       achat_terv.terv_id,
       achat_terv.acheteur_id,
-    ]).then((result) {
-      return result.map((row) => Achat_terv.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Achat_terv> updateAchat_terv(String ancien_achat_terv_Id,
+  static Future<void> updateAchat_terv(String ancien_achat_terv_Id,
       Achat_terv new_achat_terv, bool isLocal) async {
     String sql = "";
     if (isLocal) {
-      sql = "UPDATE local_achat_terv id=?,terv_id=?,acheteur_id=? WHERE id = ?";
+      sql =
+          "UPDATE local_achat_terv SET id=?,terv_id=?,acheteur_id=? WHERE id = ?";
     } else {
-      sql = "UPDATE achat_terv id=?,terv_id=?,acheteur_id=? WHERE id = ?";
+      sql = "UPDATE achat_terv SET id=?,terv_id=?,acheteur_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_achat_terv.id,
       new_achat_terv.terv_id,
       new_achat_terv.acheteur_id,
       ancien_achat_terv_Id
-    ]).then((result) {
-      return result.map((row) => Achat_terv.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Achat_terv> deleteAchat_terv(
+  static Future<void> deleteAchat_terv(
       Achat_terv achat_terv, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -2027,9 +1991,7 @@ class dbq {
     } else {
       sql = "DELETE FROM achat_terv WHERE id=?";
     }
-    return await db.execute(sql, [achat_terv.id]).then((result) {
-      return result.map((row) => Achat_terv.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [achat_terv.id]);
   }
 
 //************************************************************************************************************//
@@ -2046,9 +2008,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_terv_exp_patient WHERE asm_id=? OR is_global=true";
+          "SELECT * FROM local_terv_exp_patient WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM terv_exp_patient WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM terv_exp_patient WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Terv_exp_patient.fromRow(row)).toList();
@@ -2060,9 +2023,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_terv_exp_patient WHERE asm_id=? OR is_global=true";
+          "SELECT * FROM local_terv_exp_patient WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM terv_exp_patient WHERE asm_id=? OR is_global=true";
+      sql =
+          "SELECT * FROM terv_exp_patient WHERE asm_id=? OR is_global=true ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Terv_exp_patient.fromRow(row)).toList();
@@ -2081,8 +2045,9 @@ class dbq {
         .get(sql, [type_suivi.id]).then((row) => Terv_exp_patient.fromRow(row));
   }
 
-  static Future<Terv_exp_patient> createTerv_exp_patient(
+  static Future<String> createTerv_exp_patient(
       Terv_exp_patient terv_exp_patient, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -2091,33 +2056,30 @@ class dbq {
       sql =
           "INSERT INTO terv_exp_patient(id,created_at, terv_exp_id, terv_suivi_id, commentaire,score, asm_id, User_id) VALUES(?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       terv_exp_patient.terv_exp_id,
       terv_exp_patient.terv_suivi_id,
       terv_exp_patient.commentaire,
       terv_exp_patient.score.toString(),
       terv_exp_patient.asm_id,
       terv_exp_patient.user_id,
-    ]).then((result) {
-      return result.map((row) => Terv_exp_patient.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Terv_exp_patient> updateTerv_exp_patient(
-      String ancien_terv_exp_patient_Id,
-      Terv_exp_patient new_terv_exp_patient,
-      bool isLocal) async {
+  static Future<void> updateTerv_exp_patient(String ancien_terv_exp_patient_Id,
+      Terv_exp_patient new_terv_exp_patient, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_terv_exp_patient id=?, terv_exp_id=?, terv_suivi_id=?, commentaire=?,score=?, asm_id=?, User_id=? WHERE id = ?";
+          "UPDATE local_terv_exp_patient SET id=?, terv_exp_id=?, terv_suivi_id=?, commentaire=?,score=?, asm_id=?, User_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE terv_exp_patient id=?, terv_exp_id=?, terv_suivi_id=?, commentaire=?,score=?, asm_id=?, User_id=? WHERE id = ?";
+          "UPDATE terv_exp_patient SET id=?, terv_exp_id=?, terv_suivi_id=?, commentaire=?,score=?, asm_id=?, User_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_terv_exp_patient.id,
       new_terv_exp_patient.terv_exp_id,
       new_terv_exp_patient.terv_suivi_id,
@@ -2125,12 +2087,10 @@ class dbq {
       new_terv_exp_patient.score.toString(),
       new_terv_exp_patient.asm_id,
       ancien_terv_exp_patient_Id
-    ]).then((result) {
-      return result.map((row) => Terv_exp_patient.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Terv_exp_patient> deleteTerv_exp_patient(
+  static Future<void> deleteTerv_exp_patient(
       Terv_exp_patient terv_exp_patient, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -2138,9 +2098,7 @@ class dbq {
     } else {
       sql = "DELETE FROM terv_exp_patient WHERE id=?";
     }
-    return await db.execute(sql, [terv_exp_patient.id]).then((result) {
-      return result.map((row) => Terv_exp_patient.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [terv_exp_patient.id]);
   }
 
 //************************************************************************************************************//
@@ -2156,9 +2114,9 @@ class dbq {
   static Stream<List<Asm>> watchAllAsm(bool isLocal) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_asm";
+      sql = "SELECT * FROM local_asm ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM asm";
+      sql = "SELECT * FROM asm ORDER BY created_at DESC";
     }
     return db.watch(sql).map((result) {
       return result.map((row) => Asm.fromRow(row)).toList();
@@ -2168,9 +2126,9 @@ class dbq {
   static Future<List<Asm>> getAllAsm(bool isLocal) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_asm";
+      sql = "SELECT * FROM local_asm ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM asm";
+      sql = "SELECT * FROM asm ORDER BY created_at DESC";
     }
     return await db.getAll(sql).then((result) {
       return result.map((row) => Asm.fromRow(row)).toList();
@@ -2187,7 +2145,7 @@ class dbq {
     return await db.get(sql, [asm.id]).then((row) => Asm.fromRow(row));
   }
 
-  static Future<Asm> createAsm(Asm asm, bool isLocal) async {
+  static Future<String> createAsm(Asm asm, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
@@ -2196,31 +2154,30 @@ class dbq {
       sql =
           "INSERT INTO asm(id,created_at, email_objet, email_message, sauv_donnees, sauv_patient_donnees, abonnement, fin_abonnement) VALUES(?,?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      asm.id,
+      DateTime.now().toString(),
       asm.email_objet,
       asm.email_message,
       asm.sauv_donnees.toString(),
       asm.sauv_patient_donnees.toString(),
       asm.abonnement,
       asm.fin_abonnement.toString(),
-    ]).then((result) {
-      return result.map((row) => Asm.fromRow(row)).toList().single;
-    });
+    ]);
+  return asm.id!;
   }
 
-  static Future<Asm> updateAsm(
+  static Future<void> updateAsm(
       String ancien_asm_Id, Asm new_asm, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_asm id=?, email_objet=?, email_message=?, sauv_donnees=?, sauv_patient_donnees=?, abonnement=?, fin_abonnement=? WHERE id = ?";
+          "UPDATE local_asm SET id=?, email_objet=?, email_message=?, sauv_donnees=?, sauv_patient_donnees=?, abonnement=?, fin_abonnement=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE asm id=?, email_objet=?, email_message=?, sauv_donnees=?, sauv_patient_donnees=?, abonnement=?, fin_abonnement=? WHERE id = ?";
+          "UPDATE asm SET id=?, email_objet=?, email_message=?, sauv_donnees=?, sauv_patient_donnees=?, abonnement=?, fin_abonnement=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_asm.id,
       new_asm.email_objet,
       new_asm.email_message,
@@ -2229,21 +2186,17 @@ class dbq {
       new_asm.abonnement,
       new_asm.fin_abonnement.toString(),
       ancien_asm_Id
-    ]).then((result) {
-      return result.map((row) => Asm.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Asm> deleteAsm(Asm asm, bool isLocal) async {
+  static Future<void> deleteAsm(Asm asm, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_asm WHERE id=?";
     } else {
       sql = "DELETE FROM asm WHERE id=?";
     }
-    return await db.execute(sql, [asm.id]).then((result) {
-      return result.map((row) => Asm.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [asm.id]);
   }
 
 //************************************************************************************************************//
@@ -2260,9 +2213,11 @@ class dbq {
       bool isLocal, String asm_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_probleme_files WHERE asm_id=?";
+      sql =
+          "SELECT * FROM local_probleme_files WHERE asm_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM probleme_files WHERE asm_id=?";
+      sql =
+          "SELECT * FROM probleme_files WHERE asm_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Probleme_files.fromRow(row)).toList();
@@ -2273,9 +2228,11 @@ class dbq {
       bool isLocal, String asm_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_probleme_files WHERE asm_id=?";
+      sql =
+          "SELECT * FROM local_probleme_files WHERE asm_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM probleme_files WHERE asm_id=? ";
+      sql =
+          "SELECT * FROM probleme_files WHERE asm_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Probleme_files.fromRow(row)).toList();
@@ -2294,8 +2251,9 @@ class dbq {
         .get(sql, [type_suivi.id]).then((row) => Probleme_files.fromRow(row));
   }
 
-  static Future<Probleme_files> createProbleme_files(
+  static Future<String> createProbleme_files(
       Probleme_files probleme_files, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -2304,32 +2262,29 @@ class dbq {
       sql =
           "INSERT INTO probleme_files(id, created_at,commentaire, probleme_id, patient_id, asm_id, file_id) VALUES(?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       probleme_files.commentaire,
       probleme_files.probleme_id,
       probleme_files.patient_id,
       probleme_files.asm_id,
       probleme_files.file_id,
-    ]).then((result) {
-      return result.map((row) => Probleme_files.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Probleme_files> updateProbleme_files(
-      String ancien_probleme_files_Id,
-      Probleme_files new_probleme_files,
-      bool isLocal) async {
+  static Future<void> updateProbleme_files(String ancien_probleme_files_Id,
+      Probleme_files new_probleme_files, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_probleme_files id=?,commentaire=?, probleme_id=?, patient_id=?, asm_id=?, file_id=? WHERE id = ?";
+          "UPDATE local_probleme_files SET id=?,commentaire=?, probleme_id=?, patient_id=?, asm_id=?, file_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE probleme_files  id=?,commentaire=?, probleme_id=?, patient_id=?, asm_id=?, file_id=? WHERE id = ?";
+          "UPDATE probleme_files SET  id=?,commentaire=?, probleme_id=?, patient_id=?, asm_id=?, file_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_probleme_files.id,
       new_probleme_files.commentaire,
       new_probleme_files.probleme_id,
@@ -2337,12 +2292,10 @@ class dbq {
       new_probleme_files.asm_id,
       new_probleme_files.file_id,
       ancien_probleme_files_Id
-    ]).then((result) {
-      return result.map((row) => Probleme_files.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Probleme_files> deleteProbleme_files(
+  static Future<void> deleteProbleme_files(
       Probleme_files probleme_files, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -2350,9 +2303,7 @@ class dbq {
     } else {
       sql = "DELETE FROM probleme_files WHERE id=?";
     }
-    return await db.execute(sql, [probleme_files.id]).then((result) {
-      return result.map((row) => Probleme_files.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [probleme_files.id]);
   }
 
 //************************************************************************************************************//
@@ -2368,9 +2319,10 @@ class dbq {
   static Stream<List<My_files>> watchAllMy_files(bool isLocal, String asm_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_my_files WHERE user_id=?";
+      sql =
+          "SELECT * FROM local_my_files WHERE user_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM my_files WHERE user_id=?";
+      sql = "SELECT * FROM my_files WHERE user_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => My_files.fromRow(row)).toList();
@@ -2381,16 +2333,17 @@ class dbq {
       bool isLocal, String asm_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_my_files WHERE user_id=?";
+      sql =
+          "SELECT * FROM local_my_files WHERE user_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM my_files WHERE user_id=? ";
+      sql = "SELECT * FROM my_files WHERE user_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => My_files.fromRow(row)).toList();
     });
   }
 
-  static Future<My_files> getMy_files(My_files type_suivi, bool isLocal) async {
+  static Future<My_files> getMy_files(My_files my_file, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "SELECT * FROM local_my_files WHERE id=?";
@@ -2398,11 +2351,11 @@ class dbq {
       sql = "SELECT * FROM my_files WHERE id=?";
     }
     return await db
-        .get(sql, [type_suivi.id]).then((row) => My_files.fromRow(row));
+        .get(sql, [my_file.id]).then((row) => My_files.fromRow(row));
   }
 
-  static Future<My_files> createMy_files(
-      My_files my_files, bool isLocal) async {
+  static Future<String> createMy_files(My_files my_files, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -2411,52 +2364,46 @@ class dbq {
       sql =
           "INSERT INTO my_files(id, created_at,name, size, extension, path,user_id) VALUES(?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       my_files.name,
       my_files.size.toString(),
       my_files.extension,
       my_files.path,
       my_files.user_id,
-    ]).then((result) {
-      return result.map((row) => My_files.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<My_files> updateMy_files(
+  static Future<void> updateMy_files(
       String ancien_my_files_Id, My_files new_my_files, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_my_files id=?,name=?, size=?, extension=?, path=?,user_id=? WHERE id = ?";
+          "UPDATE local_my_files SET id=?,name=?, size=?, extension=?, path=?,user_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE my_files  id=?,name=?, size=?, extension=?, path=?,user_id=? WHERE id = ?";
+          "UPDATE my_files SET  id=?,name=?, size=?, extension=?, path=?,user_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_my_files.name,
       new_my_files.size.toString(),
       new_my_files.extension,
       new_my_files.path,
       new_my_files.user_id,
       ancien_my_files_Id
-    ]).then((result) {
-      return result.map((row) => My_files.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<My_files> deleteMy_files(
-      My_files my_files, bool isLocal) async {
+  static Future<void> deleteMy_files(My_files my_files, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_my_files WHERE id=?";
     } else {
       sql = "DELETE FROM my_files WHERE id=?";
     }
-    return await db.execute(sql, [my_files.id]).then((result) {
-      return result.map((row) => My_files.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [my_files.id]);
   }
 
 //************************************************************************************************************//
@@ -2472,9 +2419,10 @@ class dbq {
   static Stream<List<Patient>> watchAllPatient(bool isLocal, String asm_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_patient WHERE asm_id=?";
+      sql =
+          "SELECT * FROM local_patient WHERE asm_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM patient WHERE asm_id=?";
+      sql = "SELECT * FROM patient WHERE asm_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Patient.fromRow(row)).toList();
@@ -2485,9 +2433,10 @@ class dbq {
       bool isLocal, String asm_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_patient WHERE asm_id=?";
+      sql =
+          "SELECT * FROM local_patient WHERE asm_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM patient WHERE asm_id=? ";
+      sql = "SELECT * FROM patient WHERE asm_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Patient.fromRow(row)).toList();
@@ -2504,7 +2453,8 @@ class dbq {
     return await db.get(sql, [patient.id]).then((row) => Patient.fromRow(row));
   }
 
-  static Future<Patient> createPatient(Patient patient, bool isLocal) async {
+  static Future<String> createPatient(Patient patient, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -2513,9 +2463,9 @@ class dbq {
       sql =
           "INSERT INTO patient(id,created_at, num_dossier, ordre_naissance_pere,ordre_naissance_mere, brouillon,antecedent_juridique, antecedent_naissance,antecedent_enfance, antecedent_adolescence, antecedent_adulte, asm_id, user_id,statut) VALUES(?,?,?,?,?,?,??,?,?,?,?,?,?,)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      patient.id,
+      DateTime.now().toString(),
       patient.num_dossier.toString(),
       patient.ordre_naissance_pere.toString(),
       patient.ordre_naissance_mere.toString(),
@@ -2527,22 +2477,21 @@ class dbq {
       patient.antecedent_adulte,
       patient.asm_id,
       patient.statut,
-    ]).then((result) {
-      return result.map((row) => Patient.fromRow(row)).toList().single;
-    });
+    ]);
+  return patient.id!;
   }
 
-  static Future<Patient> updatePatient(
+  static Future<void> updatePatient(
       String ancien_patient_Id, Patient new_patient, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_patient id=?, num_dossier=?, ordre_naissance_pere=?,ordre_naissance_mere=?, brouillon=?,antecedent_juridique=?, antecedent_naissance=?,antecedent_enfance=?, antecedent_adolescence=?, antecedent_adulte=?, asm_id=?, user_id,statut=? WHERE id = ?";
+          "UPDATE local_patient SET id=?, num_dossier=?, ordre_naissance_pere=?,ordre_naissance_mere=?, brouillon=?,antecedent_juridique=?, antecedent_naissance=?,antecedent_enfance=?, antecedent_adolescence=?, antecedent_adulte=?, asm_id=?, user_id,statut=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE patient  id=?, num_dossier=?, ordre_naissance_pere=?,ordre_naissance_mere=?, brouillon=?,antecedent_juridique=?, antecedent_naissance=?,antecedent_enfance=?, antecedent_adolescence=?, antecedent_adulte=?, asm_id=?, user_id,statut=? WHERE id = ?";
+          "UPDATE patient SET  id=?, num_dossier=?, ordre_naissance_pere=?,ordre_naissance_mere=?, brouillon=?,antecedent_juridique=?, antecedent_naissance=?,antecedent_enfance=?, antecedent_adolescence=?, antecedent_adulte=?, asm_id=?, user_id,statut=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_patient.num_dossier.toString(),
       new_patient.ordre_naissance_pere.toString(),
       new_patient.ordre_naissance_mere.toString(),
@@ -2555,21 +2504,17 @@ class dbq {
       new_patient.asm_id,
       new_patient.statut,
       ancien_patient_Id
-    ]).then((result) {
-      return result.map((row) => Patient.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Patient> deletePatient(Patient patient, bool isLocal) async {
+  static Future<void> deletePatient(Patient patient, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_patient WHERE id=?";
     } else {
       sql = "DELETE FROM patient WHERE id=?";
     }
-    return await db.execute(sql, [patient.id]).then((result) {
-      return result.map((row) => Patient.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [patient.id]);
   }
 
 //************************************************************************************************************//
@@ -2587,10 +2532,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_terv_suivi WHERE asm_id=? AND probleme_id=? AND patient_id=?";
+          "SELECT * FROM local_terv_suivi WHERE asm_id=? AND probleme_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM terv_suivi WHERE asm_id=? AND probleme_id=? AND patient_id=?";
+          "SELECT * FROM terv_suivi WHERE asm_id=? AND probleme_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id, probleme_id, patient_id]).map(
         (result) {
@@ -2603,10 +2548,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_terv_suivi WHERE asm_id=? AND probleme_id=? AND patient_id=?";
+          "SELECT * FROM local_terv_suivi WHERE asm_id=? AND probleme_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM terv_suivi WHERE asm_id=? AND probleme_id=? AND patient_id=?";
+          "SELECT * FROM terv_suivi WHERE asm_id=? AND probleme_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Terv_suivi.fromRow(row)).toList();
@@ -2625,8 +2570,9 @@ class dbq {
         .get(sql, [terv_suivi.id]).then((row) => Terv_suivi.fromRow(row));
   }
 
-  static Future<Terv_suivi> createTerv_suivi(
+  static Future<String> createTerv_suivi(
       Terv_suivi terv_suivi, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -2635,41 +2581,38 @@ class dbq {
       sql =
           "INSERT INTO terv_suivi(id,created_at, terv_id,asm_id,probleme_id, user_id, patient_id) VALUES(?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       terv_suivi.asm_id,
       terv_suivi.probleme_id,
       terv_suivi.user_id,
       terv_suivi.patient_id,
-    ]).then((result) {
-      return result.map((row) => Terv_suivi.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Terv_suivi> updateTerv_suivi(String ancien_terv_suivi_Id,
+  static Future<void> updateTerv_suivi(String ancien_terv_suivi_Id,
       Terv_suivi new_terv_suivi, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_terv_suivi id=?, terv_id=?,asm_id=?,probleme_id=?, user_id=?, patient_id=? WHERE id = ?";
+          "UPDATE local_terv_suivi SET id=?, terv_id=?,asm_id=?,probleme_id=?, user_id=?, patient_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE terv_suivi  id=?, terv_id=?,asm_id=?,probleme_id=?, user_id=?, patient_id=? WHERE id = ?";
+          "UPDATE terv_suivi SET  id=?, terv_id=?,asm_id=?,probleme_id=?, user_id=?, patient_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_terv_suivi.id,
       new_terv_suivi.asm_id,
       new_terv_suivi.probleme_id,
       new_terv_suivi.user_id,
       new_terv_suivi.patient_id,
       ancien_terv_suivi_Id
-    ]).then((result) {
-      return result.map((row) => Terv_suivi.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Terv_suivi> deleteTerv_suivi(
+  static Future<void> deleteTerv_suivi(
       Terv_suivi terv_suivi, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -2677,9 +2620,7 @@ class dbq {
     } else {
       sql = "DELETE FROM probleme_files WHERE id=?";
     }
-    return await db.execute(sql, [terv_suivi.id]).then((result) {
-      return result.map((row) => Terv_suivi.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [terv_suivi.id]);
   }
 
 //************************************************************************************************************//
@@ -2698,10 +2639,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_terv_suivi_niveau_interdit WHERE asm_id=? AND terv_suivi_id=?";
+          "SELECT * FROM local_terv_suivi_niveau_interdit WHERE asm_id=? AND terv_suivi_id=? ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM terv_suivi_niveau_interdit WHERE asm_id=? AND terv_suivi_id=?";
+          "SELECT * FROM terv_suivi_niveau_interdit WHERE asm_id=? AND terv_suivi_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id, terv_suivi_id]).map((result) {
       return result
@@ -2716,10 +2657,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_terv_suivi_niveau_interdit WHERE asm_id=? AND terv_suivi_id=?";
+          "SELECT * FROM local_terv_suivi_niveau_interdit WHERE asm_id=? AND terv_suivi_id=? ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM terv_suivi_niveau_interdit WHERE asm_id=? AND terv_suivi_id=? ";
+          "SELECT * FROM terv_suivi_niveau_interdit WHERE asm_id=? AND terv_suivi_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result
@@ -2741,9 +2682,10 @@ class dbq {
         (row) => Terv_suivi_niveau_interdit.fromRow(row));
   }
 
-  static Future<Terv_suivi_niveau_interdit> createTerv_suivi_niveau_interdit(
+  static Future<String> createTerv_suivi_niveau_interdit(
       Terv_suivi_niveau_interdit terv_suivi_niveau_interdit,
       bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -2752,49 +2694,40 @@ class dbq {
       sql =
           "INSERT INTO terv_suivi_niveau_interdit(id,created_at,terv_niv_id, terv_suivi_id,asm_id, user_id) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       terv_suivi_niveau_interdit.terv_niv_id,
       terv_suivi_niveau_interdit.terv_suivi_id,
       terv_suivi_niveau_interdit.asm_id,
       terv_suivi_niveau_interdit.user_id,
-    ]).then((result) {
-      return result
-          .map((row) => Terv_suivi_niveau_interdit.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Terv_suivi_niveau_interdit> updateTerv_suivi_niveau_interdit(
+  static Future<void> updateTerv_suivi_niveau_interdit(
       String ancien_terv_suivi_niveau_interdit_Id,
       Terv_suivi_niveau_interdit new_terv_suivi_niveau_interdit,
       bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_terv_suivi_niveau_interdit id=?,terv_niv_id=?, terv_suivi_id=?,asm_id=?, user_id=? WHERE id = ?";
+          "UPDATE local_terv_suivi_niveau_interdit SET id=?,terv_niv_id=?, terv_suivi_id=?,asm_id=?, user_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE terv_suivi_niveau_interdit  id=?,terv_niv_id=?, terv_suivi_id=?,asm_id=?, user_id=? WHERE id = ?";
+          "UPDATE terv_suivi_niveau_interdit SET  id=?,terv_niv_id=?, terv_suivi_id=?,asm_id=?, user_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_terv_suivi_niveau_interdit.id,
       new_terv_suivi_niveau_interdit.terv_niv_id,
       new_terv_suivi_niveau_interdit.terv_suivi_id,
       new_terv_suivi_niveau_interdit.asm_id,
       new_terv_suivi_niveau_interdit.user_id,
       ancien_terv_suivi_niveau_interdit_Id
-    ]).then((result) {
-      return result
-          .map((row) => Terv_suivi_niveau_interdit.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
   }
 
-  static Future<Terv_suivi_niveau_interdit> deleteTerv_suivi_niveau_interdit(
+  static Future<void> deleteTerv_suivi_niveau_interdit(
       Terv_suivi_niveau_interdit terv_suivi_niveau_interdit,
       bool isLocal) async {
     String sql = "";
@@ -2803,13 +2736,7 @@ class dbq {
     } else {
       sql = "DELETE FROM terv_suivi_niveau_interdit WHERE id=?";
     }
-    return await db
-        .execute(sql, [terv_suivi_niveau_interdit.id]).then((result) {
-      return result
-          .map((row) => Terv_suivi_niveau_interdit.fromRow(row))
-          .toList()
-          .single;
-    });
+    await db.execute(sql, [terv_suivi_niveau_interdit.id]);
   }
 
 //************************************************************************************************************//
@@ -2825,9 +2752,11 @@ class dbq {
       bool isLocal, String asm_id, String patient_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_couple WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM local_couple WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM couple WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM couple WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id, patient_id]).map((result) {
       return result.map((row) => Couple.fromRow(row)).toList();
@@ -2838,9 +2767,11 @@ class dbq {
       bool isLocal, String asm_id, String patient_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_couple WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM local_couple WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM couple WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM couple WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id, patient_id]).then((result) {
       return result.map((row) => Couple.fromRow(row)).toList();
@@ -2857,7 +2788,8 @@ class dbq {
     return await db.get(sql, [couple.id]).then((row) => Couple.fromRow(row));
   }
 
-  static Future<Couple> createCouple(Couple couple, bool isLocal) async {
+  static Future<String> createCouple(Couple couple, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -2866,31 +2798,30 @@ class dbq {
       sql =
           "INSERT INTO couple(id,created_at,nbre_enfant,situation_matrimoniale,model_matrimonial,commentaire,patient_id,asm_id,conjoint_id) VALUES(?,?,?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       couple.nbre_enfant.toString(),
       couple.model_matrimonial,
       couple.commentaire,
       couple.patient_id,
       couple.asm_id,
       couple.conjoint_id,
-    ]).then((result) {
-      return result.map((row) => Couple.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Couple> updateCouple(
+  static Future<void> updateCouple(
       String ancien_couple_Id, Couple new_couple, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_couple id=?,nbre_enfant=?,situation_matrimoniale=?,model_matrimonial=?,commentaire=?,patient_id=?,asm_id=?,conjoint_id=? WHERE id = ?";
+          "UPDATE local_couple SET id=?,nbre_enfant=?,situation_matrimoniale=?,model_matrimonial=?,commentaire=?,patient_id=?,asm_id=?,conjoint_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE couple  id=?,nbre_enfant=?,situation_matrimoniale=?,model_matrimonial=?,commentaire=?,patient_id=?,asm_id=?,conjoint_id=? WHERE id = ?";
+          "UPDATE couple SET  id=?,nbre_enfant=?,situation_matrimoniale=?,model_matrimonial=?,commentaire=?,patient_id=?,asm_id=?,conjoint_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_couple.id,
       new_couple.nbre_enfant.toString(),
       new_couple.model_matrimonial,
@@ -2899,21 +2830,17 @@ class dbq {
       new_couple.asm_id,
       new_couple.conjoint_id,
       ancien_couple_Id
-    ]).then((result) {
-      return result.map((row) => Couple.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Couple> deleteCouple(Couple couple, bool isLocal) async {
+  static Future<void> deleteCouple(Couple couple, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_couple WHERE id=?";
     } else {
       sql = "DELETE FROM couple WHERE id=?";
     }
-    return await db.execute(sql, [couple.id]).then((result) {
-      return result.map((row) => Couple.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [couple.id]);
   }
 
 //************************************************************************************************************//
@@ -2930,10 +2857,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_fait_patient,fait WHERE asm_id=? AND patient_id=? AND fait.type=? AND local_fait_patient.fait_id=fait.id";
+          "SELECT * FROM local_fait_patient,fait WHERE asm_id=? AND patient_id=? AND fait.type=? AND local_fait_patient.fait_id=fait.id ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM local_fait_patient,fait WHERE asm_id=? AND patient_id=? AND fait.type=? AND local_fait_patient.fait_id=fait.id";
+          "SELECT * FROM local_fait_patient,fait WHERE asm_id=? AND patient_id=? AND fait.type=? AND local_fait_patient.fait_id=fait.id ORDER BY created_at DESC";
     }
     return db
         .watch(sql, parameters: [asm_id, patient_id, type_fait]).map((result) {
@@ -2946,10 +2873,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_fait_patient,fait WHERE asm_id=? AND patient_id=? AND fait.type=? AND local_fait_patient.fait_id=fait.id";
+          "SELECT * FROM local_fait_patient,fait WHERE asm_id=? AND patient_id=? AND fait.type=? AND local_fait_patient.fait_id=fait.id ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM local_fait_patient,fait WHERE asm_id=? AND patient_id=? AND fait.type=? AND local_fait_patient.fait_id=fait.id";
+          "SELECT * FROM local_fait_patient,fait WHERE asm_id=? AND patient_id=? AND fait.type=? AND local_fait_patient.fait_id=fait.id ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id, patient_id, type_fait]).then((result) {
       return result.map((row) => Fait_patient.fromRow(row)).toList();
@@ -2968,8 +2895,9 @@ class dbq {
         .get(sql, [couple.id]).then((row) => Fait_patient.fromRow(row));
   }
 
-  static Future<Fait_patient> createFait_patient(
+  static Future<String> createFait_patient(
       Fait_patient fait_patient, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -2978,39 +2906,36 @@ class dbq {
       sql =
           "INSERT INTO fait_patient(id,created_at, fait_id, patient_id, asm_id) VALUES(?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       fait_patient.fait_id,
       fait_patient.patient_id,
       fait_patient.asm_id,
-    ]).then((result) {
-      return result.map((row) => Fait_patient.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Fait_patient> updateFait_patient(String ancien_fait_patient_Id,
+  static Future<void> updateFait_patient(String ancien_fait_patient_Id,
       Fait_patient new_fait_patient, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_fait_patient id=?, fait_id=?, patient_id=?, asm_id=? WHERE id = ?";
+          "UPDATE local_fait_patient SET id=?, fait_id=?, patient_id=?, asm_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE fait_patient  id=?, fait_id=?, patient_id=?, asm_id=? WHERE id = ?";
+          "UPDATE fait_patient SET  id=?, fait_id=?, patient_id=?, asm_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_fait_patient.id,
       new_fait_patient.fait_id,
       new_fait_patient.patient_id,
       new_fait_patient.asm_id,
       ancien_fait_patient_Id
-    ]).then((result) {
-      return result.map((row) => Fait_patient.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Fait_patient> deleteFait_patient(
+  static Future<void> deleteFait_patient(
       Fait_patient fait_patient, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -3018,9 +2943,7 @@ class dbq {
     } else {
       sql = "DELETE FROM fait_patient WHERE id=?";
     }
-    return await db.execute(sql, [fait_patient.id]).then((result) {
-      return result.map((row) => Fait_patient.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [fait_patient.id]);
   }
 
 //************************************************************************************************************//
@@ -3038,9 +2961,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_formulaire_patient WHERE asm_id=? AND patient_id=?";
+          "SELECT * FROM local_formulaire_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM formulaire_patient WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM formulaire_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id, patient_id]).map((result) {
       return result.map((row) => Formulaire_patient.fromRow(row)).toList();
@@ -3052,9 +2976,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_formulaire_patient WHERE asm_id=?  AND patient_id=?";
+          "SELECT * FROM local_formulaire_patient WHERE asm_id=?  AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM formulaire_patient WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM formulaire_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id, patient_id]).then((result) {
       return result.map((row) => Formulaire_patient.fromRow(row)).toList();
@@ -3073,8 +2998,9 @@ class dbq {
         (row) => Formulaire_patient.fromRow(row));
   }
 
-  static Future<Formulaire_patient> createFormulaire_patient(
+  static Future<String> createFormulaire_patient(
       Formulaire_patient formulaire_patient, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -3083,49 +3009,40 @@ class dbq {
       sql =
           "INSERT INTO formulaire_patient(id,created_at, contenu, formulaire_id, patient_id,asm_id) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       formulaire_patient.contenu,
       formulaire_patient.formulaire_id,
       formulaire_patient.patient_id,
       formulaire_patient.asm_id,
-    ]).then((result) {
-      return result
-          .map((row) => Formulaire_patient.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Formulaire_patient> updateFormulaire_patient(
+  static Future<void> updateFormulaire_patient(
       String ancien_formulaire_patient_Id,
       Formulaire_patient new_formulaire_patient,
       bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_formulaire_patient id=?, contenu=?, formulaire_id=?, patient_id=?,asm_id=? WHERE id = ?";
+          "UPDATE local_formulaire_patient SET id=?, contenu=?, formulaire_id=?, patient_id=?,asm_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE formulaire_patient  id=?, contenu=?, formulaire_id=?, patient_id=?,asm_id=? WHERE id = ?";
+          "UPDATE formulaire_patient SET  id=?, contenu=?, formulaire_id=?, patient_id=?,asm_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_formulaire_patient.id,
       new_formulaire_patient.contenu,
       new_formulaire_patient.formulaire_id,
       new_formulaire_patient.patient_id,
       new_formulaire_patient.asm_id,
       ancien_formulaire_patient_Id
-    ]).then((result) {
-      return result
-          .map((row) => Formulaire_patient.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
   }
 
-  static Future<Formulaire_patient> deleteFormulaire_patient(
+  static Future<void> deleteFormulaire_patient(
       Formulaire_patient formulaire_patient, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -3133,12 +3050,7 @@ class dbq {
     } else {
       sql = "DELETE FROM formulaire_patient WHERE id=?";
     }
-    return await db.execute(sql, [formulaire_patient.id]).then((result) {
-      return result
-          .map((row) => Formulaire_patient.fromRow(row))
-          .toList()
-          .single;
-    });
+    await db.execute(sql, [formulaire_patient.id]);
   }
 
 //************************************************************************************************************//
@@ -3156,9 +3068,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_loisir_patient WHERE asm_id=? AND patient_id=?";
+          "SELECT * FROM local_loisir_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM loisir_patient WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM loisir_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id, patient_id]).map((result) {
       return result.map((row) => Loisir_patient.fromRow(row)).toList();
@@ -3170,9 +3083,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_loisir_patient WHERE asm_id=? AND patient_id=?";
+          "SELECT * FROM local_loisir_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM loisir_patient WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM loisir_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id, patient_id]).then((result) {
       return result.map((row) => Loisir_patient.fromRow(row)).toList();
@@ -3191,8 +3105,9 @@ class dbq {
         sql, [loisir_patient.id]).then((row) => Loisir_patient.fromRow(row));
   }
 
-  static Future<Loisir_patient> createLoisir_patient(
+  static Future<String> createLoisir_patient(
       Loisir_patient loisir_patient, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -3201,41 +3116,36 @@ class dbq {
       sql =
           "INSERT INTO loisir_patient(id,created_at, loisir_id, asm_id,patient_id) VALUES(?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       loisir_patient.loisir_id,
       loisir_patient.asm_id,
       loisir_patient.patient_id,
-    ]).then((result) {
-      return result.map((row) => Loisir_patient.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Loisir_patient> updateLoisir_patient(
-      String ancien_loisir_patient_Id,
-      Loisir_patient new_loisir_patient,
-      bool isLocal) async {
+  static Future<void> updateLoisir_patient(String ancien_loisir_patient_Id,
+      Loisir_patient new_loisir_patient, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_loisir_patient id=?, contenu=?, formulaire_id=?, patient_id=?,asm_id=? WHERE id = ?";
+          "UPDATE local_loisir_patient SET id=?, contenu=?, formulaire_id=?, patient_id=?,asm_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE loisir_patient  id=?, contenu=?, formulaire_id=?, patient_id=?,asm_id=? WHERE id = ?";
+          "UPDATE loisir_patient SET  id=?, contenu=?, formulaire_id=?, patient_id=?,asm_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_loisir_patient.id,
       new_loisir_patient.loisir_id,
       new_loisir_patient.asm_id,
       new_loisir_patient.patient_id,
       ancien_loisir_patient_Id
-    ]).then((result) {
-      return result.map((row) => Loisir_patient.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Loisir_patient> deleteLoisir_patient(
+  static Future<void> deleteLoisir_patient(
       Loisir_patient loisir_patient, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -3243,9 +3153,7 @@ class dbq {
     } else {
       sql = "DELETE FROM loisir_patient WHERE id=?";
     }
-    return await db.execute(sql, [loisir_patient.id]).then((result) {
-      return result.map((row) => Loisir_patient.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [loisir_patient.id]);
   }
 
 //************************************************************************************************************//
@@ -3260,9 +3168,10 @@ class dbq {
   static Stream<List<Personne>> watchAllPersonne(bool isLocal, String asm_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_personne WHERE asm_id=?";
+      sql =
+          "SELECT * FROM local_personne WHERE asm_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM personne WHERE asm_id=?";
+      sql = "SELECT * FROM personne WHERE asm_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id]).map((result) {
       return result.map((row) => Personne.fromRow(row)).toList();
@@ -3273,9 +3182,10 @@ class dbq {
       bool isLocal, String asm_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_personne WHERE asm_id=?";
+      sql =
+          "SELECT * FROM local_personne WHERE asm_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM personne WHERE asm_id=? ";
+      sql = "SELECT * FROM personne WHERE asm_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id]).then((result) {
       return result.map((row) => Personne.fromRow(row)).toList();
@@ -3293,8 +3203,8 @@ class dbq {
         .get(sql, [personne.id]).then((row) => Personne.fromRow(row));
   }
 
-  static Future<Personne> createPersonne(
-      Personne personne, bool isLocal) async {
+  static Future<String> createPersonne(Personne personne, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -3303,9 +3213,9 @@ class dbq {
       sql =
           "INSERT INTO personne(id, created_at,nom, im_profil,genre, email,tel, addresse, ethnie, date_naissance, lieu_naissance, religion, condition_residence, niv_etude, profession, situation_matrimoniale, qualites,defauts,commentaire, asm_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       personne.nom,
       personne.im_profil,
       personne.genre,
@@ -3324,22 +3234,21 @@ class dbq {
       personne.defauts,
       personne.commentaire,
       personne.asm_id,
-    ]).then((result) {
-      return result.map((row) => Personne.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Personne> updatePersonne(
+  static Future<void> updatePersonne(
       String ancien_personne_Id, Personne new_personne, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_personne id=?,nom=?, im_profil=?,genre=?, email=?,tel=?, addresse=?, ethnie=?, date_naissance=?, lieu_naissance=?, religion=?, condition_residence=?, niv_etude=?, profession=?, situation_matrimoniale=?, qualites=?,defauts=?,commentaire=? asm_id=? WHERE id = ?";
+          "UPDATE local_personne SET id=?,nom=?, im_profil=?,genre=?, email=?,tel=?, addresse=?, ethnie=?, date_naissance=?, lieu_naissance=?, religion=?, condition_residence=?, niv_etude=?, profession=?, situation_matrimoniale=?, qualites=?,defauts=?,commentaire=? asm_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE personne  id=?,nom=?, im_profil=?,genre=?, email=?,tel=?, addresse=?, ethnie=?, date_naissance=?, lieu_naissance=?, religion=?, condition_residence=?, niv_etude=?, profession=?, situation_matrimoniale=?, qualites=?,defauts=?,commentaire=? WHERE id = ?";
+          "UPDATE personne SET  id=?,nom=?, im_profil=?,genre=?, email=?,tel=?, addresse=?, ethnie=?, date_naissance=?, lieu_naissance=?, religion=?, condition_residence=?, niv_etude=?, profession=?, situation_matrimoniale=?, qualites=?,defauts=?,commentaire=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_personne.id,
       new_personne.nom,
       new_personne.im_profil,
@@ -3360,22 +3269,17 @@ class dbq {
       new_personne.commentaire,
       new_personne.asm_id,
       ancien_personne_Id
-    ]).then((result) {
-      return result.map((row) => Personne.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Personne> deletePersonne(
-      Personne personne, bool isLocal) async {
+  static Future<void> deletePersonne(Personne personne, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_personne WHERE id=?";
     } else {
       sql = "DELETE FROM personne WHERE id=?";
     }
-    return await db.execute(sql, [personne.id]).then((result) {
-      return result.map((row) => Personne.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [personne.id]);
   }
 
 //************************************************************************************************************//
@@ -3392,9 +3296,11 @@ class dbq {
       bool isLocal, String asm_id, String patient_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_relation WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM local_relation WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM relation WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM relation WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id, patient_id]).map((result) {
       return result.map((row) => Relation.fromRow(row)).toList();
@@ -3405,9 +3311,11 @@ class dbq {
       bool isLocal, String asm_id, String patient_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_relation WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM local_relation WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM relation WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM relation WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id, patient_id]).then((result) {
       return result.map((row) => Relation.fromRow(row)).toList();
@@ -3425,8 +3333,8 @@ class dbq {
         .get(sql, [relation.id]).then((row) => Relation.fromRow(row));
   }
 
-  static Future<Relation> createRelation(
-      Relation relation, bool isLocal) async {
+  static Future<String> createRelation(Relation relation, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -3435,51 +3343,45 @@ class dbq {
       sql =
           "INSERT INTO relation(id,created_at, lien,patient_id, personne_relation_id,asm_id) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       relation.lien,
       relation.patient_id,
       relation.personne_relation_id,
       relation.asm_id,
-    ]).then((result) {
-      return result.map((row) => Relation.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Relation> updateRelation(
+  static Future<void> updateRelation(
       String ancien_relation_Id, Relation new_relation, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_relationt id=?, lien,patient_id=?, personne_relation_id=?,asm_id=? WHERE id = ?";
+          "UPDATE local_relationt SET id=?, lien,patient_id=?, personne_relation_id=?,asm_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE relation  id=?, lien,patient_id=?, personne_relation_id=?,asm_id=? WHERE id = ?";
+          "UPDATE relation SET  id=?, lien,patient_id=?, personne_relation_id=?,asm_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_relation.id,
       new_relation.lien,
       new_relation.patient_id,
       new_relation.personne_relation_id,
       new_relation.asm_id,
       ancien_relation_Id
-    ]).then((result) {
-      return result.map((row) => Relation.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Relation> deleteRelation(
-      Relation relation, bool isLocal) async {
+  static Future<void> deleteRelation(Relation relation, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_relation WHERE id=?";
     } else {
       sql = "DELETE FROM relation WHERE id=?";
     }
-    return await db.execute(sql, [relation.id]).then((result) {
-      return result.map((row) => Relation.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [relation.id]);
   }
 
 //************************************************************************************************************//
@@ -3496,9 +3398,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_rorsharch_patient WHERE asm_id=? AND patient_id=?";
+          "SELECT * FROM local_rorsharch_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM rorsharch_patient WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM rorsharch_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id, patient_id]).map((result) {
       return result.map((row) => Rorsharch_patient.fromRow(row)).toList();
@@ -3510,9 +3413,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_rorsharch_patient WHERE asm_id=? AND patient_id=?";
+          "SELECT * FROM local_rorsharch_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM rorsharch_patient WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM rorsharch_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id, patient_id]).then((result) {
       return result.map((row) => Rorsharch_patient.fromRow(row)).toList();
@@ -3531,8 +3435,9 @@ class dbq {
         (row) => Rorsharch_patient.fromRow(row));
   }
 
-  static Future<Rorsharch_patient> createRorsharch_patient(
+  static Future<String> createRorsharch_patient(
       Rorsharch_patient rorsharch_patient, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -3541,49 +3446,40 @@ class dbq {
       sql =
           "INSERT INTO rorsharch_patient(id,created_at,resultat,rorsharch_id, patient_id, asm_id) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       rorsharch_patient.resultat,
       rorsharch_patient.rorsharch_id,
       rorsharch_patient.patient_id,
       rorsharch_patient.asm_id,
-    ]).then((result) {
-      return result
-          .map((row) => Rorsharch_patient.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Rorsharch_patient> updateRorsharch_patient(
+  static Future<void> updateRorsharch_patient(
       String ancien_rorsharch_patient_Id,
       Rorsharch_patient new_rorsharch_patient,
       bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_rorsharch_patient id=?, resultat=?,rorsharch_id=?, patient_id=?, asm_id=? WHERE id = ?";
+          "UPDATE local_rorsharch_patient SET id=?, resultat=?,rorsharch_id=?, patient_id=?, asm_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE rorsharch_patient  id=?, resultat=?,rorsharch_id=?, patient_id=?, asm_id=? WHERE id = ?";
+          "UPDATE rorsharch_patient SET  id=?, resultat=?,rorsharch_id=?, patient_id=?, asm_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_rorsharch_patient.id,
       new_rorsharch_patient.resultat,
       new_rorsharch_patient.rorsharch_id,
       new_rorsharch_patient.patient_id,
       new_rorsharch_patient.asm_id,
       ancien_rorsharch_patient_Id
-    ]).then((result) {
-      return result
-          .map((row) => Rorsharch_patient.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
   }
 
-  static Future<Rorsharch_patient> deleteRorsharch_patient(
+  static Future<void> deleteRorsharch_patient(
       Rorsharch_patient rorsharch_patient, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -3591,12 +3487,7 @@ class dbq {
     } else {
       sql = "DELETE FROM rorsharch_patient WHERE id=?";
     }
-    return await db.execute(sql, [rorsharch_patient.id]).then((result) {
-      return result
-          .map((row) => Rorsharch_patient.fromRow(row))
-          .toList()
-          .single;
-    });
+    await db.execute(sql, [rorsharch_patient.id]);
   }
 
 //************************************************************************************************************//
@@ -3612,9 +3503,11 @@ class dbq {
       bool isLocal, String asm_id, String patient_id) {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_seance WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM local_seance WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM seance WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM seance WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id, patient_id]).map((result) {
       return result.map((row) => Seance.fromRow(row)).toList();
@@ -3625,9 +3518,11 @@ class dbq {
       bool isLocal, String asm_id, String patient_id) async {
     String sql = "";
     if (isLocal) {
-      sql = "SELECT * FROM local_seance WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM local_seance WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM seance WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM seance WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id, patient_id]).then((result) {
       return result.map((row) => Seance.fromRow(row)).toList();
@@ -3644,7 +3539,8 @@ class dbq {
     return await db.get(sql, [seance.id]).then((row) => Seance.fromRow(row));
   }
 
-  static Future<Seance> createSeance(Seance seance, bool isLocal) async {
+  static Future<String> createSeance(Seance seance, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -3653,9 +3549,9 @@ class dbq {
       sql =
           "INSERT INTO seance(id,created_at, h_debut,h_fin, date_seance, activites_eff, h_debut_f,h_fin_f, date_seance_f,activites_f,probleme_id, patient_id, asm_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       seance.h_debut.toString(),
       seance.h_fin.toString(),
       seance.date_seance.toString(),
@@ -3667,22 +3563,21 @@ class dbq {
       seance.probleme_id,
       seance.patient_id,
       seance.asm_id,
-    ]).then((result) {
-      return result.map((row) => Seance.fromRow(row)).toList().single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Seance> updateSeance(
+  static Future<void> updateSeance(
       String ancien_seance_Id, Seance new_seance, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_seance id=?, h_debut=?,h_fin=?, date_seance=?, activites_eff=?, h_debut_f=?,h_fin_f=?, date_seance_f=?,activites_f=?,probleme_id=?, patient_id=?, asm_id=? WHERE id = ?";
+          "UPDATE local_seance SET id=?, h_debut=?,h_fin=?, date_seance=?, activites_eff=?, h_debut_f=?,h_fin_f=?, date_seance_f=?,activites_f=?,probleme_id=?, patient_id=?, asm_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE seance  id=?, h_debut=?,h_fin=?, date_seance=?, activites_eff=?, h_debut_f=?,h_fin_f=?, date_seance_f=?,activites_f=?,probleme_id=?, patient_id=?, asm_id=? WHERE id = ?";
+          "UPDATE seance SET  id=?, h_debut=?,h_fin=?, date_seance=?, activites_eff=?, h_debut_f=?,h_fin_f=?, date_seance_f=?,activites_f=?,probleme_id=?, patient_id=?, asm_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_seance.id,
       new_seance.h_debut.toString(),
       new_seance.h_fin.toString(),
@@ -3696,21 +3591,17 @@ class dbq {
       new_seance.patient_id,
       new_seance.asm_id,
       ancien_seance_Id
-    ]).then((result) {
-      return result.map((row) => Seance.fromRow(row)).toList().single;
-    });
+    ]);
   }
 
-  static Future<Seance> deleteSeance(Seance seance, bool isLocal) async {
+  static Future<void> deleteSeance(Seance seance, bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_seance WHERE id=?";
     } else {
       sql = "DELETE FROM seance WHERE id=?";
     }
-    return await db.execute(sql, [seance.id]).then((result) {
-      return result.map((row) => Seance.fromRow(row)).toList().single;
-    });
+    await db.execute(sql, [seance.id]);
   }
 
 //************************************************************************************************************//
@@ -3727,9 +3618,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_simple_test_patient WHERE asm_id=? AND patient_id=?";
+          "SELECT * FROM local_simple_test_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM simple_test_patient WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM simple_test_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id, patient_id]).map((result) {
       return result.map((row) => Simple_test_patient.fromRow(row)).toList();
@@ -3741,9 +3633,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_simple_test_patient WHERE asm_id=? AND patient_id=?";
+          "SELECT * FROM local_simple_test_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     } else {
-      sql = "SELECT * FROM simple_test_patient WHERE asm_id=? AND patient_id=?";
+      sql =
+          "SELECT * FROM simple_test_patient WHERE asm_id=? AND patient_id=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id, patient_id]).then((result) {
       return result.map((row) => Simple_test_patient.fromRow(row)).toList();
@@ -3762,8 +3655,9 @@ class dbq {
         (row) => Simple_test_patient.fromRow(row));
   }
 
-  static Future<Simple_test_patient> createSimple_test_patient(
+  static Future<String> createSimple_test_patient(
       Simple_test_patient simple_test_patient, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -3772,32 +3666,28 @@ class dbq {
       sql =
           "INSERT INTO simple_test_patient(id,created_at,resultat, test_id, pastient_id, asm_id) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       simple_test_patient.resultat,
       simple_test_patient.test_id,
       simple_test_patient.pastient_id,
       simple_test_patient.asm_id,
-    ]).then((result) {
-      return result
-          .map((row) => Simple_test_patient.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Simple_test_patient> updateSimple_test_patient(
+  static Future<void> updateSimple_test_patient(
       String ancien_simple_test_patient_Id,
       Simple_test_patient new_simple_test_patient,
       bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_simple_test_patient id=?,resultat=?, test_id=?, pastient_id=? asm_id=? WHERE id = ?";
+          "UPDATE local_simple_test_patient SET id=?,resultat=?, test_id=?, pastient_id=? asm_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE simple_test_patient  id=?,resultat=?, test_id=?, pastient_id=? asm_id=? WHERE id = ?";
+          "UPDATE simple_test_patient SET  id=?,resultat=?, test_id=?, pastient_id=? asm_id=? WHERE id = ?";
     }
     return await db.execute(sql, [
       new_simple_test_patient.id,
@@ -3810,11 +3700,11 @@ class dbq {
       return result
           .map((row) => Simple_test_patient.fromRow(row))
           .toList()
-          .single;
+          .firstOrNull;
     });
   }
 
-  static Future<Simple_test_patient> deleteSimple_test_patient(
+  static Future<void> deleteSimple_test_patient(
       Simple_test_patient simple_test_patient, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -3822,12 +3712,7 @@ class dbq {
     } else {
       sql = "DELETE FROM simple_test_patient WHERE id=?";
     }
-    return await db.execute(sql, [simple_test_patient.id]).then((result) {
-      return result
-          .map((row) => Simple_test_patient.fromRow(row))
-          .toList()
-          .single;
-    });
+    await db.execute(sql, [simple_test_patient.id]);
   }
 
 //************************************************************************************************************//
@@ -3844,10 +3729,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_patient_type_fait_autre WHERE asm_id=? AND patient_id=? AND type=?";
+          "SELECT * FROM local_patient_type_fait_autre WHERE asm_id=? AND patient_id=? AND type=? ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM patient_type_fait_autre WHERE asm_id=? AND patient_id=? AND type=?";
+          "SELECT * FROM patient_type_fait_autre WHERE asm_id=? AND patient_id=? AND type=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id, patient_id, type]).map((result) {
       return result.map((row) => Patient_type_fait_autre.fromRow(row)).toList();
@@ -3859,10 +3744,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_patient_type_fait_autre WHERE asm_id=? AND patient_id=? AND type=?";
+          "SELECT * FROM local_patient_type_fait_autre WHERE asm_id=? AND patient_id=? AND type=? ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM patient_type_fait_autre WHERE asm_id=? AND patient_id=? AND type=?";
+          "SELECT * FROM patient_type_fait_autre WHERE asm_id=? AND patient_id=? AND type=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id, patient_id, type]).then((result) {
       return result.map((row) => Patient_type_fait_autre.fromRow(row)).toList();
@@ -3881,8 +3766,9 @@ class dbq {
         (row) => Patient_type_fait_autre.fromRow(row));
   }
 
-  static Future<Patient_type_fait_autre> createPatient_type_fait_autre(
+  static Future<String> createPatient_type_fait_autre(
       Patient_type_fait_autre patient_type_fait_autre, bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -3891,49 +3777,40 @@ class dbq {
       sql =
           "INSERT INTO patient_type_fait_autre(id,created_at,nom, type_fait, patient_id,asm_id) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       patient_type_fait_autre.nom,
       patient_type_fait_autre.type_fait,
       patient_type_fait_autre.patient_id,
       patient_type_fait_autre.asm_id,
-    ]).then((result) {
-      return result
-          .map((row) => Patient_type_fait_autre.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
+  return theId;
   }
 
-  static Future<Patient_type_fait_autre> updatePatient_type_fait_autre(
+  static Future<void> updatePatient_type_fait_autre(
       String ancien_patient_type_fait_autre_Id,
       Patient_type_fait_autre new_patient_type_fait_autre,
       bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_patient_type_fait_autre id=?,resultat=?, test_id=?, pastient_id=? asm_id=? WHERE id = ?";
+          "UPDATE local_patient_type_fait_autre SET id=?,resultat=?, test_id=?, pastient_id=? asm_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE patient_type_fait_autre  id=?,resultat=?, test_id=?, pastient_id=? asm_id=? WHERE id = ?";
+          "UPDATE patient_type_fait_autre SET  id=?,resultat=?, test_id=?, pastient_id=? asm_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_patient_type_fait_autre.id,
       new_patient_type_fait_autre.nom,
       new_patient_type_fait_autre.type_fait,
       new_patient_type_fait_autre.patient_id,
       new_patient_type_fait_autre.asm_id,
       ancien_patient_type_fait_autre_Id
-    ]).then((result) {
-      return result
-          .map((row) => Patient_type_fait_autre.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
   }
 
-  static Future<Patient_type_fait_autre> deletePatient_type_fait_autre(
+  static Future<void> deletePatient_type_fait_autre(
       Patient_type_fait_autre patient_type_fait_autre, bool isLocal) async {
     String sql = "";
     if (isLocal) {
@@ -3941,12 +3818,7 @@ class dbq {
     } else {
       sql = "DELETE FROM patient_type_fait_autre WHERE id=?";
     }
-    return await db.execute(sql, [patient_type_fait_autre.id]).then((result) {
-      return result
-          .map((row) => Patient_type_fait_autre.fromRow(row))
-          .toList()
-          .single;
-    });
+    await db.execute(sql, [patient_type_fait_autre.id]);
   }
 
 //************************************************************************************************************//
@@ -3964,10 +3836,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_patient_type_fait_commentaire WHERE asm_id=? AND patient_id=? AND type=?";
+          "SELECT * FROM local_patient_type_fait_commentaire WHERE asm_id=? AND patient_id=? AND type=? ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM patient_type_fait_commentaire WHERE asm_id=? AND patient_id=? AND type=?";
+          "SELECT * FROM patient_type_fait_commentaire WHERE asm_id=? AND patient_id=? AND type=? ORDER BY created_at DESC";
     }
     return db.watch(sql, parameters: [asm_id, patient_id, type]).map((result) {
       return result
@@ -3982,10 +3854,10 @@ class dbq {
     String sql = "";
     if (isLocal) {
       sql =
-          "SELECT * FROM local_patient_type_fait_commentaire WHERE asm_id=? AND patient_id=? AND type=?";
+          "SELECT * FROM local_patient_type_fait_commentaire WHERE asm_id=? AND patient_id=? AND type=? ORDER BY created_at DESC";
     } else {
       sql =
-          "SELECT * FROM patient_type_fait_commentaire WHERE asm_id=? AND patient_id=? AND type=?";
+          "SELECT * FROM patient_type_fait_commentaire WHERE asm_id=? AND patient_id=? AND type=? ORDER BY created_at DESC";
     }
     return await db.getAll(sql, [asm_id, patient_id, type]).then((result) {
       return result
@@ -4007,10 +3879,10 @@ class dbq {
         (row) => Patient_type_fait_commentaire.fromRow(row));
   }
 
-  static Future<Patient_type_fait_commentaire>
-      createPatient_type_fait_commentaire(
-          Patient_type_fait_commentaire patient_type_fait_commentaire,
-          bool isLocal) async {
+  static Future<String> createPatient_type_fait_commentaire(
+      Patient_type_fait_commentaire patient_type_fait_commentaire,
+      bool isLocal) async {
+    String theId = uuid.v4();
     String sql = "";
     if (isLocal) {
       sql =
@@ -4019,66 +3891,49 @@ class dbq {
       sql =
           "INSERT INTO patient_patient_type_fait_commentaire(id, created_at,commentaire, type_fait_id, patient_id, asm_id) VALUES(?,?,?,?,?,?)";
     }
-    return await db.execute(sql, [
-      uuid,
-      DateTime.now(),
+    await db.execute(sql, [
+      theId,
+      DateTime.now().toString(),
       patient_type_fait_commentaire.commentaire,
       patient_type_fait_commentaire.type_fait_id,
       patient_type_fait_commentaire.patient_id,
       patient_type_fait_commentaire.asm_id,
-    ]).then((result) {
-      return result
-          .map((row) => Patient_type_fait_commentaire.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
+    return theId;
   }
 
-  static Future<Patient_type_fait_commentaire>
-      updatePatient_type_fait_commentaire(
-          String ancien_patient_type_fait_commentaire_Id,
-          Patient_type_fait_commentaire new_patient_type_fait_commentaire,
-          bool isLocal) async {
+  static Future<void> updatePatient_type_fait_commentaire(
+      String ancien_patient_type_fait_commentaire_Id,
+      Patient_type_fait_commentaire new_patient_type_fait_commentaire,
+      bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql =
-          "UPDATE local_patient_type_fait_commentaire id=?,commentaire=?, type_fait_id=?, patient_id=?, asm_id=? WHERE id = ?";
+          "UPDATE local_patient_type_fait_commentaire SET id=?,commentaire=?, type_fait_id=?, patient_id=?, asm_id=? WHERE id = ?";
     } else {
       sql =
-          "UPDATE patient_type_fait_commentaire  id=?,commentaire=?, type_fait_id=?, patient_id=?, asm_id=? WHERE id = ?";
+          "UPDATE patient_type_fait_commentaire SET  id=?,commentaire=?, type_fait_id=?, patient_id=?, asm_id=? WHERE id = ?";
     }
-    return await db.execute(sql, [
+    await db.execute(sql, [
       new_patient_type_fait_commentaire.id,
       new_patient_type_fait_commentaire.commentaire,
       new_patient_type_fait_commentaire.type_fait_id,
       new_patient_type_fait_commentaire.patient_id,
       new_patient_type_fait_commentaire.asm_id,
       ancien_patient_type_fait_commentaire_Id
-    ]).then((result) {
-      return result
-          .map((row) => Patient_type_fait_commentaire.fromRow(row))
-          .toList()
-          .single;
-    });
+    ]);
   }
 
-  static Future<Patient_type_fait_commentaire>
-      deletePatient_type_fait_commentaire(
-          Patient_type_fait_commentaire patient_type_fait_commentaire,
-          bool isLocal) async {
+  static Future<void> deletePatient_type_fait_commentaire(
+      Patient_type_fait_commentaire patient_type_fait_commentaire,
+      bool isLocal) async {
     String sql = "";
     if (isLocal) {
       sql = "DELETE FROM local_patient_type_fait_commentaire WHERE id=?";
     } else {
       sql = "DELETE FROM patient_type_fait_commentaire WHERE id=?";
     }
-    return await db
-        .execute(sql, [patient_type_fait_commentaire.id]).then((result) {
-      return result
-          .map((row) => Patient_type_fait_commentaire.fromRow(row))
-          .toList()
-          .single;
-    });
+    await db.execute(sql, [patient_type_fait_commentaire.id]);
   }
 
 //************************************************************************************************************//

@@ -7,6 +7,7 @@ import 'package:adaptive_layout/adaptive_layout.dart';
 
 initialisation() async{
   WidgetsFlutterBinding.ensureInitialized();
+  openDatabase();
 
   await windowManager.ensureInitialized();
   WindowOptions windowOptions = WindowOptions(
@@ -29,7 +30,5 @@ initialisation() async{
   );
 
   createAppFolders();
-
-  openDatabase();
 
 }

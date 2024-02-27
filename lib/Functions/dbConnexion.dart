@@ -22,6 +22,7 @@ Future<Session> supabaseSignIn(String email,String password) async {
 }
 Future<String> getDataBasePath() async {
   final dir = await getApplicationSupportDirectory();
+  print(dir.toString());
   return join(dir.path, 'psychoverse.db');
 }
 bool isLoggedIn(){
@@ -33,15 +34,20 @@ openDatabase() async {
   // Setup the database.
   db = PowerSyncDatabase(schema: schema, path: await getDataBasePath());
   await db.initialize();
+  print('Etat de la base de donnees : '+db.currentStatus.toString());
+  print('DB Schema : '+db.schema.toString());
+  //makeConnection("benjaminmoutouama9@gmail.com", "MyPassWord");
 }
 
 makeConnection(String email,String password) async {
-  await dotenv.load(fileName: '.env');
+  //await dotenv.load(fileName: '.env');
+
   await Supabase.initialize(
-    url: dotenv.env['SUPABASE_URL']!,
-    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
+    url: "https://lddckstftiiawmsxqkps.supabase.co",
+    anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZGNrc3RmdGlpYXdtc3hxa3BzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA0MzI5NjMsImV4cCI6MjAxNjAwODk2M30.4GCzjKoxUsDbk3eTpWSf0ID8gZquyShd9Fy8ja6gEF4",
   );
   supabaseSignIn(email,password);
+
   SupabaseConnector? currentConnector;
   if(isLoggedIn()){
     currentConnector=SupabaseConnector(db);

@@ -1,11 +1,13 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:psychoverse/Models/personne.dart';
 import 'package:psychoverse/Providers/Patients/changeSectionsProvider.dart';
 import 'package:psychoverse/Ui/Components/Boxs/patientBox.dart';
+import 'package:file_picker/file_picker.dart';
 
 class PatientBoxList extends StatefulWidget {
-  List<String> list;
+  List<Personne> list;
   int uiKey;
   PatientBoxList({Key? key,this.list = const[],this.uiKey=0}) : super(key: key);
 
@@ -28,7 +30,8 @@ class _PatientBoxListState extends State<PatientBoxList> {
         itemCount: widget.list.length,
         itemBuilder: (BuildContext context, index) {
           return PatientBox(
-            nom: widget.list[index],
+            nom: widget.list[index].nom!,
+            image: PlatformFile(name: "df",size: 345,path: widget.list[index].im_profil),
             onTap: (){page.setPage(1, widget.uiKey);},
           );
         }
