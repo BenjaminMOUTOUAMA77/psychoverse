@@ -77,7 +77,7 @@ class _AsmBoxListState extends State<AsmBoxList> {
         const Gap(10),
         Text("Aucun profil créé",style: AppTextStyle.buttonStyleTexte.copyWith(color: AppColors.grisTexte),),
       ],
-    ):  GridView.builder(
+    ): GridView.builder(
                 clipBehavior: Clip.antiAlias,
                 padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(

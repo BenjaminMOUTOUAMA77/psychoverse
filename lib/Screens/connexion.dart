@@ -20,6 +20,7 @@ import 'package:psychoverse/Ui/Components/Forms/textForm.dart';
 import 'package:psychoverse/Ui/Components/Lists/asmBoxList.dart';
 import 'package:psychoverse/Ui/Utils/appColors.dart';
 import 'package:psychoverse/Ui/Utils/appDesignEffects.dart';
+import 'package:psychoverse/Ui/Utils/appImages.dart';
 import 'package:psychoverse/Ui/Utils/appTexteStyle.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
 
@@ -43,41 +44,25 @@ class _ConnexionState extends State<Connexion> {
   String? emailSignIn = "";
   String? passwordSignIn = "";
 
-  late Stream<List<My_users>> my_users = (() {
-    late final StreamController<List<My_users>> controller;
-    controller = StreamController<List<My_users>>(
-      onListen: () async {
-        await Future<void>.delayed(const Duration(seconds: 1));
-        controller.add([]);
-        await Future<void>.delayed(const Duration(seconds: 1));
-        await controller.close();
-      },
-    );
-    return controller.stream;
-  })();
-
   List<App_users> app_Users = [];
   List<String> ids = [];
-
   App_users actuelle_app_user = App_users();
   Asm actuelle_asm = Asm();
 
-  initUsers() async {
-    my_users = await dbq.watchAllMy_users();
-  }
-
-  initApp_User(List<My_users> list) async {
-    //app_Users = [];
-    for (var a in list) {
-      App_users newUser =
-          await dbq.getUser(App_users(id: a.user_id), a.is_local!);
-      if (!ids.contains(a.user_id)) {
-        ids.add(a.user_id!);
-        app_Users.add(newUser);
+  initApp_User(List<My_users>? list) async {
+    if(list!=null){
+      for (var a in list) {
+        App_users newUser =
+        await dbq.getUser(App_users(id: a.user_id), a.is_local!);
+        if (!ids.contains(a.user_id)) {
+          setState(() {
+            ids.add(a.user_id!);
+            app_Users.add(newUser);
+          });
+        }
       }
     }
   }
-
   signUpUser() async {
     if (signUpType == true) {
     } else {
@@ -96,13 +81,10 @@ class _ConnexionState extends State<Connexion> {
           ),
           !signUpType);
       App_users? new_App_user =
-          await dbq.getUser(App_users(id: new_User_id), true);
+      await dbq.getUser(App_users(id: new_User_id), true);
       await dbq.createMy_users(
           My_users(user_id: new_User_id, is_local: true), true);
-      String email_object = "Suivi Psychologique " +
-          new_App_user.prenom! +
-          " " +
-          new_App_user.nom!;
+      String email_object = "Suivi Psychologique ${new_App_user.prenom!} ${new_App_user.nom!}";
       String email_message = "";
       await dbq.createAsm(
           Asm(
@@ -123,7 +105,7 @@ class _ConnexionState extends State<Connexion> {
               ),
               const Gap(5),
               Text(
-                new_App_user.prenom! + " " + new_App_user.nom!,
+                "${new_App_user.prenom!} ${new_App_user.nom!}",
                 style: AppTextStyle.buttonStyleTexte
                     .copyWith(color: AppColors.blanc),
               ),
@@ -141,27 +123,23 @@ class _ConnexionState extends State<Connexion> {
 
   @override
   Widget build(BuildContext context) {
-    initUsers();
     UserProvider account = Provider.of<UserProvider>(context);
     return Stack(
       alignment: Alignment.center,
       children: [
         Container(
           width: double.infinity,
-          height: double.infinity,
-          color: AppColors.grisLite,
-          child: Opacity(
-            opacity: 0.1,
-            child: Image.asset(
-              "assets/images/pattern.png",
-              fit: BoxFit.cover,
-            ),
+          color: AppColors.blanc,
+          child: Image.asset(
+            width : double.infinity,
+            fit:BoxFit.cover,
+            AppImages.pattern,
+            opacity: const AlwaysStoppedAnimation(0.05),
           ),
         ),
         SingleChildScrollView(
           child: section == 0
               ? Container(
-                  height: 900.h,
                   width: 500.w + 500,
                   decoration: BoxDecoration(
                     color: AppColors.blancGrise,
@@ -194,77 +172,99 @@ class _ConnexionState extends State<Connexion> {
                         ),
                       ),
                       Gap(30.h),
-                      Expanded(
-                        child: StreamBuilder<List<My_users>>(
-                          initialData: [],
-                          stream: my_users,
-                          builder: (BuildContext context,
-                              AsyncSnapshot<List<My_users>> snapshot) {
-                            initUsers();
-                            AsmBoxList children;
-                            if (snapshot.hasError) {
-                              children = AsmBoxList(
-                                error: true,
-                                list: [],
+                      SizedBox(
+                        height: 300.h,
+                        child: Expanded(
+                          child: StreamBuilder<List<My_users>>(
+                            stream: dbq.watchAllMy_users(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<List<My_users>> snapshot) {
+                              print("=========================================================");
+                              print("=====================COMPILATION====================================");
+                              print("=========================================================");
+                              print("My Users : ${snapshot.data}");
+                              initApp_User(snapshot.data);
+                              print("::::::::::::::::::::::::::::::::::::::::::::");
+                              print("My App_Users : $app_Users");
+                              AsmBoxList theChildrens = AsmBoxList(
+                                list: app_Users,
+                                onTap: () {
+                                  setState(() {
+                                    section = 1;
+                                  });
+                                },
                               );
-                            } else {
-                              initUsers();
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.none:
-                                  children = AsmBoxList(
-                                    error: true,
-                                    list: [],
-                                  );
-                                  break;
-                                case ConnectionState.waiting:
-                                  children = AsmBoxList(
-                                    waiting: true,
-                                    list: [],
-                                  );
-                                  break;
-                                case ConnectionState.active:
-                                  {
-                                    initApp_User(snapshot.data!);
-                                    children = AsmBoxList(
-                                      list: app_Users,
-                                      onTap: () {
-                                        setState(() {
-                                          section = 1;
-                                        });
-                                      },
+                              print("::::::::::::::::::::::::::::::::::::::::::::");
+                              print("TheChildreens : $theChildrens");
+                              if (snapshot.hasError) {
+                                theChildrens = AsmBoxList(
+                                  error: true,
+                                  list: [],
+                                );
+                              } else {
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.none:
+                                    theChildrens = AsmBoxList(
+                                      error: true,
+                                      list: [],
                                     );
-                                  }
-                                  break;
-                                case ConnectionState.done:
-                                  {
-                                    initApp_User(snapshot.data!);
-                                    children = AsmBoxList(
-                                      list: app_Users,
-                                      onTap: () {
-                                        setState(() {
-                                          section = 1;
-                                        });
-                                      },
-                                    );
-                                  }
-                                  break;
-                                default:
-                                  {
-                                    initApp_User(snapshot.data!);
-                                    children = AsmBoxList(
-                                      list: app_Users,
-                                      onTap: () {
-                                        setState(() {
-                                          section = 1;
-                                        });
-                                      },
-                                    );
-                                  }
+                                    break;
+                                  case ConnectionState.waiting:
+                                    {
+                                      theChildrens = AsmBoxList(
+                                        waiting: true,
+                                        list: app_Users,
+                                        onTap: () {
+                                          setState(() {
+                                            section = 1;
+                                          });
+                                        },
+                                      );
+                                    }
+                                    break;
+                                  case ConnectionState.active:
+                                    {
+                                      theChildrens = AsmBoxList(
+                                        list: app_Users,
+                                        onTap: () {
+                                          setState(() {
+                                            section = 1;
+                                          });
+                                        },
+                                      );
+                                    }
+                                    break;
+                                  case ConnectionState.done:
+                                    {
+                                      theChildrens = AsmBoxList(
+                                        list: app_Users,
+                                        onTap: () {
+                                          setState(() {
+                                            section = 1;
+                                          });
+                                        },
+                                      );
+                                    }
+                                    break;
+                                  default:
+                                    {
+                                      theChildrens = AsmBoxList(
+                                        list: app_Users,
+                                        onTap: () {
+                                          setState(() {
+                                            section = 1;
+                                          });
+                                        },
+                                      );
+                                    }
+                                }
                               }
-                            }
-
-                            return children;
-                          },
+                              print("=========================================================");
+                              print("=====================FIN====================================");
+                              print("=========================================================");
+                              return theChildrens;
+                            },
+                          ),
                         ),
                       ),
                       Gap(40.h),
@@ -280,7 +280,7 @@ class _ConnexionState extends State<Connexion> {
                 )
               : section == 1
                   ? Container(
-                      height: 650.h,
+                      height: 500.h,
                       width: 500.w + 500,
                       decoration: BoxDecoration(
                         color: AppColors.blancGrise,
@@ -382,8 +382,9 @@ class _ConnexionState extends State<Connexion> {
                             decoration: BoxDecoration(
                               color: AppColors.primary,
                               borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10)),
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                              ),
                               boxShadow: [
                                 AppDesignEffects.shadow2,
                               ],
@@ -453,9 +454,9 @@ class _ConnexionState extends State<Connexion> {
                               SimpleAppButon(
                                 texte: "Valider",
                                 icon: FluentIcons.lookup_entities,
-                                function: () async {
-                                  signUpUser();
+                                function: (){
                                   setState(() {
+                                    signUpUser();
                                     section = 0;
                                   });
                                 },

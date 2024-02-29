@@ -20,11 +20,13 @@ Future<Session> supabaseSignIn(String email,String password) async {
   );
   return res.session!;
 }
+
 Future<String> getDataBasePath() async {
   final dir = await getApplicationSupportDirectory();
   print(dir.toString());
   return join(dir.path, 'psychoverse.db');
 }
+
 bool isLoggedIn(){
   return Supabase.instance.client.auth.currentSession?.accessToken != null;
 }
@@ -64,7 +66,8 @@ makeConnection(String email,String password) async {
     }else if(event==AuthChangeEvent.tokenRefreshed){
       currentConnector?.prefetchCredentials();
     }
-  });
+  }
+  );
 }
 
 class SupabaseConnector extends PowerSyncBackendConnector{
